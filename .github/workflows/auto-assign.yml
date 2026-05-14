@@ -1,0 +1,11 @@
+name: Auto Assign Test
+on:
+    issues:
+        types: [opened]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Say hello
+              run: echo "Workflow funcionando!"
