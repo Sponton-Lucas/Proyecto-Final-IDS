@@ -5,7 +5,6 @@ on:
 
 permissions:
     issues: write
-    projects: write
 
 jobs:
     assign:
