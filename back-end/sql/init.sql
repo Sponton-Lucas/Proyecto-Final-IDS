@@ -16,3 +16,10 @@ CREATE TABLE IF NOT EXISTS servicios_extra (
     nombre_servicio VARCHAR(100) NOT NULL,
     precio INT DEFAULT 0
 );
+
+CREATE TABLE IF NOT EXISTS resenas (
+    id_resenas INT AUTO_INCREMENT PRIMARY KEY,
+    mensaje VARCHAR(200),
+    usuario_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+);
