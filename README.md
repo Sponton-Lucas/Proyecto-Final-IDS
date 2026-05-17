@@ -1,6 +1,6 @@
 # ¡Proyecto-Final-IDS!
 
-# Database Setup (PostgreSQL)
+# Database Setup
 
 1. Se actualizo init.sql para crear la base de datos y el usuario siguiendo los siguientes pasos:
     a) Instalar MySQL
