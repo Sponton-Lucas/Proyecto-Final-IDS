@@ -1,2 +1,13 @@
 #BASE DE DATOS
-CREATE DATABASE IF NOT EXISTS restaurant_db;
+CREATE DATABASE IF NOT EXISTS tp_final;
+
+USE tp_final;
+
+#USUARIO MYSQL
+CREATE USER 'caidaSiu'@'localhost'
+IDENTIFIED BY '1234';
+
+GRANT ALL PRIVILEGES
+ON tp_final.*
+TO 'caidaSiu'@'localhost';
+FLUSH PRIVILEGES;
