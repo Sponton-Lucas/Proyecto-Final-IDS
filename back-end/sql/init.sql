@@ -1,8 +1,3 @@
-#BASE DE DATOS
-CREATE DATABASE IF NOT EXISTS tp_final;
-
-USE tp_final;
-
 #USUARIO MYSQL
 CREATE USER 'caidaSiu'@'localhost'
 IDENTIFIED BY '1234';
