@@ -1,11 +1,3 @@
-#USUARIO MYSQL
-CREATE USER 'caidaSiu'@'localhost'
-IDENTIFIED BY '1234';
-
-GRANT ALL PRIVILEGES
-ON restaurant_db.*
-TO 'caidaSiu'@'localhost';
-FLUSH PRIVILEGES;
 #BASE DE DATOS
 CREATE DATABASE IF NOT EXISTS restaurant_db;
 USE restaurant_db;
@@ -33,3 +25,11 @@ CREATE TABLE IF NOT EXISTS resenas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
+#USUARIO MYSQL
+CREATE USER 'caidaSiu'@'localhost'
+IDENTIFIED BY '1234';
+
+GRANT ALL PRIVILEGES
+ON restaurant_db.*
+TO 'caidaSiu'@'localhost';
+FLUSH PRIVILEGES;
