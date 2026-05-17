@@ -25,6 +25,16 @@ CREATE TABLE IF NOT EXISTS resenas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS reservas (
+    id_reservas INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    cantidad_personas INT NOT NULL,
+    estado VARCHAR(20) DEFAULT 'pendiente',
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+);
+
 #USUARIO MYSQL
 CREATE USER 'caidaSiu'@'localhost'
 IDENTIFIED BY '1234';
