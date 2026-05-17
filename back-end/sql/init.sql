@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS tp_final;
-USE tp_final;
-
+#BASE DE DATOS
+CREATE DATABASE IF NOT EXISTS restaurant_db;
+USE restaurant_db;
 
 #TABLAS
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -24,3 +24,4 @@ CREATE TABLE IF NOT EXISTS resenas (
     usuario_id INT,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
+
