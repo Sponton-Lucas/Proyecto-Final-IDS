@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS tp_final;
-USE tp_final;
+CREATE DATABASE IF NOT EXISTS restaurante_db;
+USE restaurante_db;
 
 
 #TABLAS
@@ -24,3 +24,20 @@ CREATE TABLE IF NOT EXISTS resenas (
     usuario_id INT,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS postres (
+    id_postre INT AUTO_INCREMENT PRIMARY KEY,
+    precio INT DEFAULT 0,
+    nombre VARCHAR(50) NOT NULL,
+    es_vegano BOOLEAN DEFAULT FALSE,
+    es_celiaco BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS bebidas (
+    id_postre INT AUTO_INCREMENT PRIMARY KEY,
+    precio INT DEFAULT 0,
+    nombre VARCHAR(50) NOT NULL,
+    es_alcoholica BOOLEAN DEFAULT FALSE
+);
+
+
