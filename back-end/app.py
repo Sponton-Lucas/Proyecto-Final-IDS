@@ -31,6 +31,24 @@ def delete_servicio_extra(id):
     else:
         return jsonify({'error': 'servicio no eliminado'}), 404
 
+@app.route('/servicios_extra', methods=['POST'])
+def post_servicios_extra():
+    servicio = request.get_json()
+    if not servicio:
+        return jsonify({'error': 'body vacio'}), 400
+    if ("precio" not in servicio) or ("nombre_servicio" not in servicio):
+        return jsonify({'error': 'body incompleto'}), 400
+    precio = servicio.get("precio")
+    nombre_servicio = servicio.get("nombre_servicio")
+    if (not precio) or (not nombre_servicio):
+        return jsonify({'error': 'los campos no pueden estar vacios'}), 400
+    servicio_nuevo = db.post_servicio_extra(nombre_servicio, precio)
+    if servicio_nuevo:
+        return jsonify({'message': 'se creo correctamente la nueva bebida'}), 200
+    else:
+        return jsonify({'error': 'No se pudo crear correctamente la nueva bebida'}), 400
+
+
 @app.route('/bebidas', methods=['POST'])
 def post_bebidas():
     bebida = request.get_json()

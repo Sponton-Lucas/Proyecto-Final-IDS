@@ -48,8 +48,6 @@ CREATE TABLE IF NOT EXISTS comida_principal (
     es_celiaco BOOLEAN DEFAULT FALSE
 );
 
-
-
 CREATE TABLE IF NOT EXISTS reservas (
     id_reservas INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
@@ -59,6 +57,9 @@ CREATE TABLE IF NOT EXISTS reservas (
     estado VARCHAR(20) DEFAULT 'pendiente',
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
+
+
+
 
 #USUARIO MYSQL
 CREATE USER 'caidaSiu'@'localhost'

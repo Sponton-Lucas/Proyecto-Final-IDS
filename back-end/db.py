@@ -61,6 +61,20 @@ def delete_servicio_extra(id):
         cursor.close()
         coneccion.close()  
 
+def post_servicio_extra(nombre_servicio, precio):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            'INSERT INTO servicios_extra (nombre_servicio, precio) VALUES (%s, %s)',
+            (nombre_servicio, precio,)
+        )
+        coneccion.commit()
+        return True
+    finally:
+        cursor.close()
+        coneccion.close()
+
 def post_bebida(precio, nombre, es_alcoholica):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
