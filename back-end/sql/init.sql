@@ -40,4 +40,13 @@ CREATE TABLE IF NOT EXISTS bebidas (
     es_alcoholica BOOLEAN DEFAULT FALSE
 );
 
+CREATE TABLE IF NOT EXISTS comida_principal (
+    id_plato INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_plato VARCHAR(100) NOT NULL, 
+    precio INT DEFAULT 0, 
+    es_vegano BOOLEAN DEFAULT FALSE,
+    es_celiaco BOOLEAN DEFAULT FALSE
+);
+
+
 

@@ -67,4 +67,3 @@ def put_postre(id, precio, nombre, es_vegano, es_celiaco):
     finally:
         cursor.close()
         coneccion.close()  
-
