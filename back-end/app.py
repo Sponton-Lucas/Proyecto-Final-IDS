@@ -81,7 +81,16 @@ def put_postres(id):
     if actualizar_postre:
         return jsonify({'message':'postre actualizado'}), 200
     else:
-        return jsonify({'error': 'no se pudo actualizar correctamente'}), 404    
+        return jsonify({'error': 'no se pudo actualizar correctamente'}), 404   
+
+@app.route('/postres/<int:id>', methods=['DELETE'])
+def delete_postres(id):
+    eliminar_postre = db.delete_postre(id)
+    
+    if eliminar_postre:
+        return jsonify({'message': 'postre eliminado'}), 200
+    else:
+        return jsonify({'error': 'no se pudo eliminar correctamente o no existe'}), 404 
     
 @app.route('/resenas', methods=['POST'])
 def post_resena():

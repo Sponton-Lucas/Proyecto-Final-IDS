@@ -107,6 +107,23 @@ def put_postre(id, precio, nombre, es_vegano, es_celiaco):
         cursor.close()
         coneccion.close()  
 
+def delete_postre(id):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    
+    try:
+        cursor.execute('SELECT * FROM postres WHERE id = %s', (id,))
+        postre = cursor.fetchone()
+        if not postre:
+            return False
+        else:
+            cursor.execute('DELETE FROM postres WHERE id = %s', (id,))
+            coneccion.commit()
+            return True
+    finally:
+        cursor.close()
+        coneccion.close()
+
 def post_resena(mensaje, usuario_id):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
