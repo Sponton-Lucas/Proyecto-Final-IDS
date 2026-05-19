@@ -149,6 +149,27 @@ def post_resena(mensaje, usuario_id):
         cursor.close()
         coneccion.close()
 
+def patch_resena(id, mensaje, usuario_id):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try: 
+        cursor.execute('SELECT * FROM resenas WHERE id_resenas = %s', (id,))
+        resena = cursor.fetchone()
+        if not resena:
+            return False
+        else:
+            nuevo_mensaje = mensaje if mensaje is not None else resena["mensaje"]
+            nuevo_usuario_id = usuario_id if usuario_id is not None else resena["usuario_id"]
+            cursor.execute(
+            'UPDATE resenas SET mensaje = %s, usuario_id = %s WHERE id_resenas = %s',
+            (nuevo_mensaje, nuevo_usuario_id, id,)
+        )
+            coneccion.commit()
+            return True
+    finally:
+        cursor.close()
+        coneccion.close()
+
 def delete_comida_principal(id):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)

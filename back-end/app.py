@@ -22,7 +22,6 @@ def get_servicios_extra(id):
     else:
         return jsonify({'error': 'servicio no encontrado'}), 404
 
-
 @app.route('/servicios_extra/<int:id>', methods=['DELETE'])
 def delete_servicio_extra(id):
     borrado = db.delete_servicio_extra(id)
@@ -109,7 +108,8 @@ def delete_postres(id):
         return jsonify({'message': 'postre eliminado'}), 200
     else:
         return jsonify({'error': 'no se pudo eliminar correctamente o no existe'}), 404 
-    
+
+
 @app.route('/resenas', methods=['POST'])
 def post_resena():
     data = request.get_json()
@@ -118,6 +118,20 @@ def post_resena():
         return jsonify({'message': 'Reseña creada'}), 200
     else:
         return jsonify({'error': 'Reseña no creada'}), 400
+
+@app.route('/resenas/<int:id>', methods=['PATCH'])
+def patch_resenas(id):
+    resena = request.get_json()
+    if not resena:
+        return jsonify({'error':'body vacio'}), 400
+    mensaje = resena.get("mensaje")
+    usuario_id = resena.get("usuario_id")
+    actualizar_resena = db.patch_resena(id, mensaje, usuario_id)
+    if actualizar_resena:
+        return jsonify({'message':'reseña actualizada'}), 200
+    else:
+        return jsonify({'error': 'no se pudo actualizar correctamente'}), 404
+
 
 @app.route('/comida-principal/<int:id>', methods=['DELETE'])
 def delete_comida_principal(id):
