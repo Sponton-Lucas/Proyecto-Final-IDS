@@ -1,11 +1,21 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
 import db
 
 comida_principal_bp = Blueprint('comida_principal', __name__)
 
-#GET
+@comida_principal_bp.route('/comida_principal', methods=['GET'])
+def get_comida_principal():
+    comida_principal = db.get_comida_principal()
+    if not comida_principal:
+        return jsonify({"error": "No hay categorias cargadas por el momento"}), 404
+    return jsonify(comida_principal), 200
 
-#GET ID
+@comida_principal_bp.route('/comida_principal/<int:id>', methdos=['GET'])
+def get_comida_principal(id):
+    comida_principal = db.get_comida_principal_id(id)
+    if not comida_principal: 
+        return jsonify({"error": "No existe la comida por el id buscado"}), 404
+    return jsonify(comida_principal), 200
 
 #POST
 

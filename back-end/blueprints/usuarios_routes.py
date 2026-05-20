@@ -19,7 +19,21 @@ def crear_usuario():
     return jsonify(resultado), 201
 
 #PUT
-
+@usuarios_bp.route('/usuarios/<int:id>', methods=['PUT'])
+def usuarios_id(id):
+    usuarios = request.get_json()
+    if ("nombre_apellido" not in usuarios) or ("email" not in usuarios) or ("telefono" not in usuarios):
+        return jsonify({"error": "faltan campos por completar"}), 400
+    nombre_apellido = usuarios.get("nombre_apellido")
+    email = usuarios.get("email")
+    telefono = usuarios.get("telefono")
+    if (not nombre_apellido or not email or not telefono):
+        return jsonify({"error": "Los campos no pueden estar incompletos"}), 404 
+    actualiza_usuario = db.put_usuarios(id, nombre_apellido, email, telefono)
+    if actualiza_usuario:
+        return jsonify({"message": "Campos actualizados con exito"}), 200
+    return jsonify({"error": "No se pudo actualizar los campos, intente de nuevo"}), 200
+    
 #PATCH
 
 #DELETE

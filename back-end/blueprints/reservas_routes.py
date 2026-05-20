@@ -35,3 +35,9 @@ def crear_reserva():
 #PATCH
 
 #DELETE
+@reservas_bp.route('/reservas/<int:id>', methods=['DELETE'])
+def delete_reserva(id):
+    reserva = db.delete_reserva(id)
+    if not reserva:
+        return jsonify({"error" "No se encontro la reserva por el id buscado"}), 404
+    return jsonify({"mensage": "Reserva eliminada"}), 201
