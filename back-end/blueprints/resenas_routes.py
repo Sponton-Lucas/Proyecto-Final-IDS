@@ -4,9 +4,22 @@ import db
 resenas_bp = Blueprint('resenas', __name__)
 
 #GET
+@resenas_bp.route('/resenas', methods=['GET'])
+def get_resenas():
+    resenas = db.get_resenas()
+    if not resenas: 
+        return jsonify({"error": "No hay reseñas cargadas"}), 404
+    return jsonify(resenas), 200
 
 #GET ID
-
+@resenas_bp.route('/reservas/<int:id>', methods=['GET'])
+def get_reserva(id):
+    reserva = db.get_resenas(id)
+    if reserva:
+        return jsonify(reserva), 200
+    else:
+        return jsonify({"error": "reseña no encontrada"}), 404
+    
 #POST
 @resenas_bp.route('/resenas', methods=['POST'])
 def post_resena():

@@ -283,18 +283,18 @@ def crear_usuario(datos):
         cursor.close()
         coneccion.close()
 
-def get_reservas():
+def get_resenas():
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute("SELECT * FROM reservas")
+        cursor.execute("SELECT * FROM resenas")
         reservas = cursor.fetchall()
         return reservas
     finally:
         cursor.close()
         coneccion.close()
 
-def get_reserva(id):
+def get_resena(id):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
