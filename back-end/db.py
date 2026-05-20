@@ -203,3 +203,17 @@ def put_reserva(id, usuario_id, fecha, hora, cantidad_personas, estado):
     finally:
         cursor.close()
         coneccion.close()
+
+def crear_usuario(nombre_apellido, email, telefono, contrasenia, es_admin):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "INSERT INTO usuarios (nombre_apellido, email, telefono, contrasenia, es_admin) VALUES (%s, %s, %s, %s, %s)",
+            (nombre_apellido, email, telefono, contrasenia, es_admin)
+        )
+        coneccion.commit()
+        return {"mensaje": "Usuario creado exitosamente"}
+    finally:
+        cursor.close()
+        coneccion.close()
