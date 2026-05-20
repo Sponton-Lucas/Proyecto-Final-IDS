@@ -409,3 +409,20 @@ def patch_bebidas(id, datos):
     finally:
         cursor.close()
         coneccion.close()
+
+def delete_resena(id_resena):
+    conexion = get_db_connection()
+    cursor = conexion.cursor(dictionary=True)
+    try:
+        cursor.execute('SELECT * FROM resenas WHERE id_resenas = %s', (id_resena,))
+        resena = cursor.fetchone()
+        if not resena:
+            return False
+        else:
+            cursor.execute('DELETE FROM resenas WHERE id_resenas = %s', (id_resena,))
+            conexion.commit()
+            return True
+    finally:
+        cursor.close()
+        conexion.close()
+

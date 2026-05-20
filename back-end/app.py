@@ -213,5 +213,13 @@ def put_reservas(id):
     else:
         return jsonify({'error':'no se pudo actualizar correctamente'}), 404
 
+@app.route('/resenas/<int:id_resena>', methods=['DELETE'])
+ def delete_resena(id_resena):
+     borrado = db.delete_resena(id_resena)
+     if borrado:
+         return jsonify({'message': 'Reseña eliminada'}), 200
+     else:
+         return jsonify({'error': 'Reseña no encontrada'}), 404
+
 if __name__ == '__main__':
 	app.run(port=5000, debug=True)  
