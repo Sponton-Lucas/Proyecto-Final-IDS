@@ -5,3 +5,4 @@ def delete_resena(id):
         return jsonify({'message': 'Reseña eliminada'}), 200
     else:
         return jsonify({'error': 'Reseña no encontrada'}), 404
+

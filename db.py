@@ -1,11 +1,16 @@
 def delete_resena(id):
-    conexion = get_db_connection()
-    cursor = conexion.cursor()
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute("DELETE FROM resenas WHERE id_resenas = %s", (id,))
-        conexion.commit()
-        return cursor.rowcount > 0
+        cursor.execute('SELECT * FROM resenas WHERE id_resenas = %s', (id,))
+        resena = cursor.fetchone()
+        if not resena:
+            return False
+        else:
+            cursor.execute('DELETE FROM resenas WHERE id_resenas = %s', (id,))
+            coneccion.commit()
+            return True
     finally:
         cursor.close()
-        conexion.close()
+        coneccion.close()
 
