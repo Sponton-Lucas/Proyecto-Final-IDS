@@ -23,3 +23,10 @@ def crear_usuario():
 #PATCH
 
 #DELETE
+@usuarios_bp.route('/usuarios/<int:id_usuario>', methods=['DELETE'])
+def borrar_usuario(id_usuario):
+    borrado = db.delete_usuario(id_usuario)
+    if borrado:
+        return '', 204
+    else:
+        return jsonify({"message": "No existe el usuario"}), 404

@@ -580,3 +580,23 @@ def patch_reserva(id_reservas, usuario_id=None, fecha=None, hora=None, cantidad_
     finally:
         cursor.close()
         coneccion.close()
+
+
+def delete_usuario(id_usuario):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        sql = """
+        DELETE FROM usuarios 
+        WHERE id_usuario = %s
+        """
+        cursor.execute(sql, (id_usuario,))
+        filas_afectadas = cursor.rowcount
+        coneccion.commit()
+        return filas_afectadas > 0
+    except Exception as e:
+        print(f"Error al eliminar el usuario: {e}")
+        return False
+    finally:
+        cursor.close()
+        coneccion.close()
