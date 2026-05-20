@@ -358,3 +358,14 @@ def crear_reserva(datos):
     finally:
         cursor.close()
         coneccion.close()
+
+def get_postres():
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM postres")
+        postres = cursor.fetchall()
+        return postres
+    finally:
+        cursor.close()
+        coneccion.close()
