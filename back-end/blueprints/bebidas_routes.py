@@ -4,6 +4,14 @@ import db
 bebidas_bp = Blueprint('bebidas', __name__)
 
 #GET
+@bebidas_bp.route('/bebidas', methods=['GET'])
+def obtener_bebidas():
+    bebidas = db.get_bebidas()
+
+    if bebidas:
+        return jsonify(bebidas), 200
+    else:
+        return '', 204
 
 #GET ID
 

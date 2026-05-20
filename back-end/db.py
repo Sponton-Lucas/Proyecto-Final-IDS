@@ -528,3 +528,15 @@ def patch_servicio_extra(id, datos):
     finally:
         cursor.close()
         conexion.close()
+
+
+def get_bebidas():
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM bebidas")
+        bebidas = cursor.fetchall()
+        return bebidas
+    finally:
+        cursor.close()
+        coneccion.close()

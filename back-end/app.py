@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 import db
 
+from blueprints.bebidas_routes import bebidas_bp
+
 app = Flask(__name__)
 
 @app.route('/usuarios', methods=['GET'])
@@ -237,5 +239,12 @@ def patch_servicio_extra_route(id_servicio):
     
     return jsonify(resultado), 200
 
+
+#Registrar los blueprints
+
+app.register_blueprint(bebidas_bp)
+
 if __name__ == '__main__':
 	app.run(port=5000, debug=True)  
+
+
