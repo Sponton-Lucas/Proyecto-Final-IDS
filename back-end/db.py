@@ -247,3 +247,24 @@ def update_resena(id, datos):
     finally:
         cursor.close()
         coneccion.close()
+
+def patch_comida_principal(id, datos):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM comida_principal WHERE id_plato = %s", (id,))
+        plato = cursor.fetchone()
+        if not plato:
+            return {"mensaje": "Plato no encontrado"}
+        else:
+            nuevo_nombre = datos.get('nombre_plato', plato['nombre_plato'])
+            nuevo_precio = datos.get('precio', plato['precio'])
+            cursor.execute(
+                "UPDATE comida_principal SET nombre_plato = %s, precio = %s WHERE id_plato = %s",
+                (nuevo_nombre, nuevo_precio, id)
+            )
+            coneccion.commit()
+            return {"mensaje": "Plato actualizado exitosamente"}
+    finally:
+        cursor.close()
+        coneccion.close()
