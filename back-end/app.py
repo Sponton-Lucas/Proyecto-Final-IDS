@@ -82,7 +82,16 @@ def put_bebida(id):
     else:
         return jsonify({'error': 'Bebida no encontrada'}), 404
     
-
+@app.route('/bebidas/<int:d>', methods=['DELETE'])
+def delete_bebida(id):
+    eliminar_bebida= db.delete_bebida(id)
+    
+    if eliminar_bebida:
+        return jsonify({'message': 'bebida eliminada'}),200
+    else:
+        return jsonify({'error': 'No se pudo eliminar correctamente o no existe'})404
+    
+    
 @app.route('/postres/<int:id>', methods=['PUT'])
 def put_postres(id):
     postre = request.get_json()
@@ -99,6 +108,7 @@ def put_postres(id):
         return jsonify({'message':'postre actualizado'}), 200
     else:
         return jsonify({'error': 'no se pudo actualizar correctamente'}), 404   
+
 
 @app.route('/postres/<int:id>', methods=['DELETE'])
 def delete_postres(id):

@@ -104,6 +104,24 @@ def put_bebida(id, precio, nombre, es_alcoholica):
         cursor.close()
         coneccion.close()
 
+def delete_bebida(id):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+
+    try:
+        cursor.execute("SELECT * FROM bebidas WHERE id_bebidas = %s", (id,))
+        bebida = cursor.fetchone()
+
+        if not bebida:
+            return False
+        else:
+            cursor.execute(("DELETE FROM bebidas WHERE id_bebidas = %s", (id,)))
+            cursor.commit()
+            return True
+    finally:
+        cursor.close()
+        coneccion.close()
+    
 def put_postre(id, precio, nombre, es_vegano, es_celiaco):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)

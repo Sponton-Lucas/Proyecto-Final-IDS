@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS postres (
 );
 
 CREATE TABLE IF NOT EXISTS bebidas (
-    id_postre INT AUTO_INCREMENT PRIMARY KEY,
+    id_bebidas INT AUTO_INCREMENT PRIMARY KEY,
     precio INT DEFAULT 0,
     nombre VARCHAR(50) NOT NULL,
     es_alcoholica BOOLEAN DEFAULT FALSE
