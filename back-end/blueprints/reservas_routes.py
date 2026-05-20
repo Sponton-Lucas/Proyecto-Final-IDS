@@ -34,4 +34,26 @@ def crear_reserva():
 
 #PATCH
 
+@reservas_bp.route('/reservas/<int:id_reservas>', methods=['PATCH'])
+def modificar_reserva(id_reservas):
+    datos = request.get_json()
+    if not datos:
+        return jsonify({"error": "Datos no proporcionados."}), 400
+    if ('usuario_id' not in datos) and ('fecha' not in datos) and ('hora' not in datos) and ('cantidad_personas' not in datos) and ('"estado' not in datos):
+        return jsonify({"message": "Al menos un campo (usuario_id, fecha, hora, cantidad_personas) debe ser proporcionado"}), 400
+    
+    usuario_id = datos.get("usuario_id")
+    fecha = datos.get("fecha")
+    hora = datos.get("hora")
+    cantidad_personas = datos.get("cantidad_personas")
+    estado = datos.get("estado", "pendiente")
+
+    reserva_modificada = db.patch_reserva(id_reservas, usuario_id, fecha, hora, cantidad_personas, estado)
+    if reserva_modificada:
+        return '', 204
+    else:
+        return jsonify({"message": "No se pudo modificar la reserva."}), 400
+
+
+
 #DELETE

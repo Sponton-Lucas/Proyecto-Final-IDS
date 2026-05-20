@@ -555,3 +555,28 @@ def post_plato(nombre_plato, precio, es_vegano, es_celiaco):
     finally:
         cursor.close()
         coneccion.close()
+
+def patch_reserva(id_reservas, usuario_id=None, fecha=None, hora=None, cantidad_personas=None, estado=None):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM reservas WHERE id_reservas = %s", (id_reservas,))
+        reserva = cursor.fetchone()
+        if not reserva:
+            return False
+        else:
+            sql = """
+            UPDATE reservas 
+            SET usuario_id = COALESCE(%s, usuario_id),
+                    fecha = COALESCE(%s, fecha),
+                    hora = COALESCE(%s, hora),
+                    cantidad_personas = COALESCE(%s, cantidad_personas),
+                    estado = COALESCE(%s, estado)
+            WHERE id_reservas = %s
+            """
+            cursor.execute(sql, (usuario_id, fecha, hora, cantidad_personas, estado, id_reservas))
+            coneccion.commit()
+            return True
+    finally:
+        cursor.close()
+        coneccion.close()
