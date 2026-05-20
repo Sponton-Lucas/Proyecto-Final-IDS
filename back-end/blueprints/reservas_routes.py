@@ -21,7 +21,15 @@ def get_reserva(id):
         return jsonify({"error": "Reserva no encontrada"}), 404
 
 #POST
-
+@reservas_bp.route('/reservas', methods=['POST'])
+def crear_reserva():
+    datos = request.get_json()
+    if not datos:
+        return jsonify({"error": "Datos no proporcionados"}), 400
+    if 'usuario_id' not in datos or 'fecha' not in datos or 'hora' not in datos or 'cantidad_personas' not in datos:
+        return jsonify({"error": "Todos los campos son requeridos"}), 400
+    resultado = db.crear_reserva(datos)
+    return jsonify(resultado), 201
 #PUT
 
 #PATCH
