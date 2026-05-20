@@ -30,10 +30,12 @@ def crear_comida():
         else:
             return jsonify({"message": "No se pudo crear el plato."}), 400
 
-
-
-
 #PUT
+@comida_principal_bp.route('/comida_principal/<int:id_plato>', methods=['PUT'])
+def put_comida_principal(id_plato):
+    datos = request.get_json()
+    resultado = db.put_comida_principal(id_plato, datos)
+    return jsonify(resultado), 200
 
 #PATCH
 @comida_principal_bp.route('/comida_principal/<int:id>', methods=['PATCH'])
@@ -47,3 +49,10 @@ def patch_comida_principal(id):
     return jsonify(resultado), 200
 
 #DELETE
+@comida_principal_bp.route('/comida-principal/<int:id>', methods=['DELETE'])
+def delete_comida_principal(id):
+    borrado = db.delete_comida_principal(id)
+    if borrado:
+        return jsonify({'message': 'Plato eliminado'}), 200
+    else:
+        return jsonify({'error': 'Plato no encontrado'}), 404 

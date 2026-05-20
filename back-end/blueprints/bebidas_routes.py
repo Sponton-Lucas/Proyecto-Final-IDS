@@ -16,8 +16,40 @@ def obtener_bebidas():
 #GET ID
 
 #POST
+@bebidas_bp.route('/bebidas', methods=['POST'])
+def post_bebidas():
+    bebida = request.get_json()
+    if not bebida:
+        return jsonify({'error': 'body vacio'}), 400
+    if ("precio" not in bebida) or ("nombre" not in bebida) or ("es_alcoholica" not in bebida):
+        return jsonify({'error': 'body incompleto'}), 400
+    precio = bebida.get("precio")
+    nombre = bebida.get("nombre")
+    es_alcoholica = bebida.get("es_alcoholica")
+    if (not precio) or (not nombre):
+        return jsonify({'error': 'los campos no pueden estar vacios'}), 400
+    bebida_nueva = db.post_bebida(precio, nombre, es_alcoholica)
+    if bebida_nueva:
+        return jsonify({'message': 'se creo correctamente la nueva bebida'}), 200
+    else:
+        return jsonify({'error': 'No se pudo crear correctamente la nueva bebida'}), 400
 
 #PUT
+@bebidas_bp.route('/bebidas/<int:id>', methods=['PUT'])
+def put_bebida(id):
+    bebida = request.get_json()
+    if ("precio" not in bebida) or ("nombre" not in bebida) or ("es_alcoholica" not in bebida):
+        return jsonify({'error': 'body incompleto'}), 400
+    precio = bebida.get("precio")
+    nombre = bebida.get("nombre")
+    es_alcoholica = bebida.get("es_alcoholica")
+    if (not precio) or (not nombre):
+        return jsonify({'error': 'los campos no pueden estar vacios'}), 400
+    bebida_actualizada = db.put_bebida(id, precio, nombre, es_alcoholica)
+    if bebida_actualizada:
+        return jsonify({'message': 'Bebida actualizada'}), 200
+    else:
+        return jsonify({'error': 'Bebida no encontrada'}), 404
 
 #PATCH
 @bebidas_bp.route('/bebidas/<int:id>', methods=['PATCH'])
@@ -31,3 +63,11 @@ def patch_bebidas(id):
     return jsonify(resultado), 200
 
 #DELETE
+@bebidas_bp.route('/bebidas/<int:d>', methods=['DELETE'])
+def delete_bebida(id):
+    eliminar_bebida= db.delete_bebida(id)
+    
+    if eliminar_bebida:
+        return jsonify({'message': 'bebida eliminada'}),200
+    else:
+        return jsonify({'error': 'No se pudo eliminar correctamente o no existe'}),404
