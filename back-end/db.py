@@ -217,3 +217,14 @@ def crear_usuario(nombre_apellido, email, telefono, contrasenia, es_admin):
     finally:
         cursor.close()
         coneccion.close()
+
+def get_reservas():
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM reservas")
+        reservas = cursor.fetchall()
+        return reservas
+    finally:
+        cursor.close()
+        coneccion.close()
