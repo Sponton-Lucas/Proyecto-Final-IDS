@@ -8,6 +8,23 @@ def get_usuarios():
     usuarios = db.get_usuarios()
     return jsonify(usuarios)
 
+@app.route('/usuarios/<int:id>', methods=['PATCH'])
+def patch_usuario(id):
+    data_usuario = request.get_json()
+
+    nombre_apellido = data_usuario.get('nombre_apellido')
+    email = data_usuario.get('email')
+    telefono = data_usuario.get('telefono')
+    contrasenia = data_usuario.get('contrasenia')
+    es_admin = data_usuario.get('es_admin')
+
+    resultado = patch_usuario(id, nombre_apellido, email, telefono, contrasenia, es_admin)
+
+    if resultado:
+        return jsonify({'mensaje' : 'Usuario actualizado correctamente'}), 200
+    else:
+        return jsonify({'error: Usuario no encontrado'}), 400
+
 
 @app.route('/servicios_extra', methods=['GET'])
 def get_servicios():
@@ -19,6 +36,14 @@ def get_servicios_extra(id):
     servicio = db.get_servicio_extra(id)
     if servicio:
         return jsonify(servicio)
+    else:
+        return jsonify({'error': 'servicio no encontrado'}), 404
+    
+@app.route('/reservas/' , methods=['GET'])
+def get_reservas():
+    reserva = db.get_reserva()
+    if reserva:
+        return jsonify(reserva)
     else:
         return jsonify({'error': 'servicio no encontrado'}), 404
 
@@ -82,7 +107,34 @@ def put_bebida(id):
     else:
         return jsonify({'error': 'Bebida no encontrada'}), 404
     
-
+@app.route('/bebidas/<int:d>', methods=['DELETE'])
+def delete_bebida(id):
+    eliminar_bebida= db.delete_bebida(id)
+    
+    if eliminar_bebida:
+        return jsonify({'message': 'bebida eliminada'}),200
+    else:
+        return jsonify({'error': 'No se pudo eliminar correctamente o no existe'}),404
+    
+@app.route('/postres', methods=['POST'])
+def post_postres():
+    postre = request.get_json()
+    if not postre:
+        return jsonify({'error': 'body vacio'}), 400
+    if ("precio" not in postre) or ("nombre" not in postre ) or ("es_vegano" not in postre) or ("es_celiaco" not in postre):
+        return jsonify({'error': 'body incompleto'}), 400
+    precio = postre.get("precio")
+    nombre = postre.get("nombre")
+    es_vegano = postre.get("es_vegano")
+    es_celiaco = postre.get("es_celiaco")
+    if (not precio) or (not nombre):
+        return jsonify({'error': 'los campos no pueden estar vacios'}), 400
+    postre_nuevo = db.post_bebida(precio, nombre, es_vegano, es_celiaco)
+    if postre_nuevo:
+        return jsonify({'message': 'se creo correctamente el postre nuevo'}), 200
+    else:
+        return jsonify({'error': 'No se pudo crear correctamente el postre nuevo'}), 400
+    
 @app.route('/postres/<int:id>', methods=['PUT'])
 def put_postres(id):
     postre = request.get_json()
@@ -99,6 +151,7 @@ def put_postres(id):
         return jsonify({'message':'postre actualizado'}), 200
     else:
         return jsonify({'error': 'no se pudo actualizar correctamente'}), 404   
+
 
 @app.route('/postres/<int:id>', methods=['DELETE'])
 def delete_postres(id):
@@ -159,6 +212,30 @@ def put_reservas(id):
         return jsonify({'message':'reserva actualizada'}), 200
     else:
         return jsonify({'error':'no se pudo actualizar correctamente'}), 404
+
+@app.route('/resenas/<int:id_resena>', methods=['DELETE'])
+ def delete_resena(id_resena):
+     borrado = db.delete_resena(id_resena)
+     if borrado:
+         return jsonify({'message': 'Reseña eliminada'}), 200
+     else:
+         return jsonify({'error': 'Reseña no encontrada'}), 404
+
+@app.route('/comida_principal/<int:id_plato>', methods=['PUT'])
+def put_comida_principal(id_plato):
+    datos = request.get_json()
+    
+    resultado = db.put_comida_principal(id_plato, datos)
+    
+    return jsonify(resultado), 200
+
+@app.route('/servicios_extra/<int:id_servicio>', methods=['PATCH'])
+def patch_servicio_extra_route(id_servicio):
+    datos = request.get_json()
+    
+    resultado = db.patch_servicio_extra(id_servicio, datos)
+    
+    return jsonify(resultado), 200
 
 if __name__ == '__main__':
 	app.run(port=5000, debug=True)  
