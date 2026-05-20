@@ -22,6 +22,31 @@ def get_usuarios():
         cursor.close()
         coneccion.close()
 
+
+def patch_usuario(id, nombre_apellido, email, telefono, contrasenia, es_admin):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try: 
+        cursor.execute("SELECT * FROM usuarios WHERE id_usuario = %s", (id,))
+        usuario = cursor.fetchone()
+        if not usuario:
+            return False
+        else:
+            nuevo_nombre_apellido = nombre_apellido if nombre_apellido is not None else usuario["nombre_apellido"]
+            nuevo_email = email if email is not None else usuario["email"]
+            nuevo_telefono = telefono if telefono is not None else usuario["telefono"]
+            nueva_contrasenia = contrasenia if contrasenia is not None else usuario["contrasenia"]
+            nuevo_es_admin = es_admin if es_admin is not None else usuario["es_admin"]
+            cursor.execute(
+                "UPDATE resenas SET nombre_apellido = %s, email = %s, telefono = %s, contrasenia = %s, es_admin = %s WHERE id_usuario = %s",
+                (nuevo_nombre_apellido, nuevo_email, nuevo_telefono, nueva_contrasenia, nuevo_es_admin, id,)
+            )
+            coneccion.commit()
+            return True
+    finally:
+        cursor.close()
+        coneccion.close()
+
 def get_servicios_extra():
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
@@ -43,6 +68,17 @@ def get_servicio_extra(id):
     finally:
         cursor.close()
         coneccion.close()   
+
+def get_reservas():
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute('SELECT * FROM reservas')
+        reservas = cursor.fetchall()
+        return reservas
+    finally:
+        cursor.close()
+        coneccion.close()
 
 def delete_servicio_extra(id):
     coneccion = get_db_connection()
@@ -138,6 +174,17 @@ def put_postre(id, precio, nombre, es_vegano, es_celiaco):
     finally:
         cursor.close()
         coneccion.close()  
+
+def post_postre(precio, nombre, es_vegano, es_celiaco):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("INSERT INTO postres (precio, nombre, es_vegano, es_celiaco) VALUES (%s, %s, %s, %s)", (precio, nombre, es_vegano, es_celiaco))
+        coneccion.commit()
+        return True
+    finally:
+        cursor.close()
+        coneccion.close()
 
 def delete_postre(id):
     coneccion = get_db_connection()
