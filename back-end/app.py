@@ -229,6 +229,13 @@ def put_comida_principal(id_plato):
     
     return jsonify(resultado), 200
 
+@app.route('/servicios_extra/<int:id_servicio>', methods=['PATCH'])
+def patch_servicio_extra_route(id_servicio):
+    datos = request.get_json()
+    
+    resultado = db.patch_servicio_extra(id_servicio, datos)
+    
+    return jsonify(resultado), 200
 
 if __name__ == '__main__':
 	app.run(port=5000, debug=True)  
