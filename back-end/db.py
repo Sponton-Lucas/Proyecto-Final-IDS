@@ -204,13 +204,13 @@ def put_reserva(id, usuario_id, fecha, hora, cantidad_personas, estado):
         cursor.close()
         coneccion.close()
 
-def crear_usuario(nombre_apellido, email, telefono, contrasenia, es_admin):
+def crear_usuario(datos):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
         cursor.execute(
             "INSERT INTO usuarios (nombre_apellido, email, telefono, contrasenia, es_admin) VALUES (%s, %s, %s, %s, %s)",
-            (nombre_apellido, email, telefono, contrasenia, es_admin)
+            (datos['nombre_apellido'], datos['email'], datos['telefono'], datos['contrasenia'], datos.get('es_admin', False))
         )
         coneccion.commit()
         return {"mensaje": "Usuario creado exitosamente"}
@@ -225,6 +225,25 @@ def get_reservas():
         cursor.execute("SELECT * FROM reservas")
         reservas = cursor.fetchall()
         return reservas
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def update_resena(id, datos):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM resenas WHERE id_resenas = %s", (id,))
+        resena = cursor.fetchone()
+        if not resena:
+            return {"mensaje": "Reseña no encontrada"}
+        else:
+            cursor.execute(
+                "UPDATE resenas SET mensaje = %s WHERE id_resenas = %s",
+                (datos['mensaje'], id)
+            )
+            coneccion.commit()
+            return {"mensaje": "Reseña actualizada exitosamente"}
     finally:
         cursor.close()
         coneccion.close()
