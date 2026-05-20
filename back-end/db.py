@@ -344,3 +344,17 @@ def patch_comida_principal(id, datos):
     finally:
         cursor.close()
         coneccion.close()
+
+def crear_reserva(datos):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "INSERT INTO reservas (usuario_id, fecha, hora, cantidad_personas) VALUES (%s, %s, %s, %s)", #no inserto nada en estado para que quede pendiente por default
+            (datos['usuario_id'], datos['fecha'], datos['hora'], datos['cantidad_personas'],)
+        )
+        coneccion.commit()
+        return {"mensaje": "Reserva creada exitosamente"}
+    finally:
+        cursor.close()
+        coneccion.close()
