@@ -11,9 +11,13 @@ resenas_bp = Blueprint('resenas', __name__)
 
 #PUT
 @resenas_bp.route('/resenas/<int:id>', methods=['PUT'])
-def actualizar_resena(id):
+def put_resena(id):
     datos = request.get_json()
-    resultado = db.actualizar_resena(id, datos)
+    if not datos:
+        return jsonify({"error": "Datos no proporcionados"}), 400
+    if 'mensaje' not in datos:
+        return jsonify({"error": "Falta el mensaje de la reseña"}), 400
+    resultado = db.put_resena(id, datos)
     return jsonify(resultado), 200
 
 #PATCH

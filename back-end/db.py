@@ -229,7 +229,18 @@ def get_reservas():
         cursor.close()
         coneccion.close()
 
-def update_resena(id, datos):
+def get_reserva(id):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM reservas WHERE id_reservas = %s", (id,))
+        reserva = cursor.fetchone()
+        return reserva
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def put_resena(id, datos):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
