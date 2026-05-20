@@ -335,9 +335,11 @@ def patch_comida_principal(id, datos):
         else:
             nuevo_nombre = datos.get('nombre_plato', plato['nombre_plato'])
             nuevo_precio = datos.get('precio', plato['precio'])
+            nuevo_es_vegano = datos.get('es_vegano', plato['es_vegano'])
+            nuevo_es_celiaco = datos.get('es_celiaco', plato['es_celiaco'])
             cursor.execute(
-                "UPDATE comida_principal SET nombre_plato = %s, precio = %s WHERE id_plato = %s",
-                (nuevo_nombre, nuevo_precio, id)
+                "UPDATE comida_principal SET nombre_plato = %s, precio = %s, es_vegano = %s, es_celiaco = %s WHERE id_plato = %s",
+                (nuevo_nombre, nuevo_precio, nuevo_es_vegano, nuevo_es_celiaco, id)
             )
             coneccion.commit()
             return {"mensaje": "Plato actualizado exitosamente"}
