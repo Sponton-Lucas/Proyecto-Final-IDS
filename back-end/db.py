@@ -388,3 +388,24 @@ def put_servicios_extra(id, datos):
     finally:
         cursor.close()
         coneccion.close()
+
+def patch_bebidas(id, datos):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM bebidas WHERE id_bebidas = %s", (id,))
+        bebida = cursor.fetchone()
+        if not bebida:
+            return {"mensaje": "Bebida no encontrada"}
+        else:
+            nuevo_nombre = datos.get('nombre', bebida['nombre'])
+            nuevo_precio = datos.get('precio', bebida['precio'])
+            cursor.execute(
+                "UPDATE bebidas SET nombre = %s, precio = %s WHERE id_bebidas = %s",
+                (nuevo_nombre, nuevo_precio, id)
+            )
+            coneccion.commit()
+            return {"mensaje": "Bebida actualizada exitosamente"}
+    finally:
+        cursor.close()
+        coneccion.close()
