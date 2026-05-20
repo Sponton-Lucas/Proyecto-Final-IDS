@@ -540,3 +540,18 @@ def get_bebidas():
     finally:
         cursor.close()
         coneccion.close()
+
+def post_plato(nombre_plato, precio, es_vegano, es_celiaco):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        sql = """
+        INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco)
+        VALUES (%s, %s, %s, %s)
+        """
+        cursor.execute(sql, (nombre_plato, precio, es_vegano, es_celiaco))
+        coneccion.commit()
+        return True
+    finally:
+        cursor.close()
+        coneccion.close()

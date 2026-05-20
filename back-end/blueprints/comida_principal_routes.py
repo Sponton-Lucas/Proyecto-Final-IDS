@@ -8,6 +8,30 @@ comida_principal_bp = Blueprint('comida_principal', __name__)
 #GET ID
 
 #POST
+@comida_principal_bp.route('/comida_principal', methods=['POST'])
+def crear_comida():
+    comida = request.get_json()
+    if not comida:
+        return jsonify({"message": "Body vacio o invalido"}), 400
+    
+    if ("nombre_plato" not in comida):
+        return jsonify({"message": "Faltan campos obligatorios"}), 400
+    else:
+        nombre_plato = comida.get("nombre_plato")
+        precio = comida.get("precio", 0)
+        es_vegano = comida.get("es_vegano", False)
+        es_celiaco = comida.get("es_celiaco", False)
+
+        if (not nombre_plato):
+            return jsonify({"message": "El campo nombre_plato no puede estar vacío."}), 400
+        plato_nuevo = db.post_plato(nombre_plato, precio, es_vegano, es_celiaco)
+        if plato_nuevo:
+            return '', 201
+        else:
+            return jsonify({"message": "No se pudo crear el plato."}), 400
+
+
+
 
 #PUT
 

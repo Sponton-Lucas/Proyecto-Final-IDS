@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import db
 
 from blueprints.bebidas_routes import bebidas_bp
+from blueprints.comida_principal_routes import comida_principal_bp
 
 app = Flask(__name__)
 
@@ -243,6 +244,8 @@ def patch_servicio_extra_route(id_servicio):
 #Registrar los blueprints
 
 app.register_blueprint(bebidas_bp)
+app.register_blueprint(comida_principal_bp)
+
 
 if __name__ == '__main__':
 	app.run(port=5000, debug=True)  
