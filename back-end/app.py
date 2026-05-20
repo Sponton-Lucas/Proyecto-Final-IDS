@@ -141,5 +141,24 @@ def delete_comida_principal(id):
     else:
         return jsonify({'error': 'Plato no encontrado'}), 404 
 
+
+@app.route('/reservas/<int:id>', methods=['PUT'])
+def put_reservas(id):
+    reserva = request.get_json()
+    if ("usuario_id" not in reserva) or ("fecha" not in reserva) or ("hora" not in reserva) or ("cantidad_personas" not in reserva) or ("estado" not in reserva):
+        return jsonify({'error':'body incompleto'}), 400
+    usuario_id = reserva.get("usuario_id")
+    fecha = reserva.get("fecha")
+    hora = reserva.get("hora")
+    cantidad_personas = reserva.get("cantidad_personas")
+    estado = reserva.get("estado")
+    if (not usuario_id) or (not fecha) or (not hora) or (not cantidad_personas) or (not estado):
+        return jsonify({'error':'los campos no pueden estar incompletos'}), 404
+    actualizar_reserva = db.put_reserva(id, usuario_id, fecha, hora, cantidad_personas, estado)
+    if actualizar_reserva:
+        return jsonify({'message':'reserva actualizada'}), 200
+    else:
+        return jsonify({'error':'no se pudo actualizar correctamente'}), 404
+
 if __name__ == '__main__':
 	app.run(port=5000, debug=True)  
