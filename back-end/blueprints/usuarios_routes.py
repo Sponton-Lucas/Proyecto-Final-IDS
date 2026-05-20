@@ -4,6 +4,10 @@ import db
 usuarios_bp = Blueprint('usuarios', __name__)
 
 #GET
+@usuarios_bp.route('/usuarios', methods=['GET'])
+def get_usuarios():
+    usuarios = db.get_usuarios()
+    return jsonify(usuarios)
 
 #GET ID
 
@@ -35,5 +39,28 @@ def usuarios_id(id):
     return jsonify({"error": "No se pudo actualizar los campos, intente de nuevo"}), 200
     
 #PATCH
+@usuarios_bp.route('/usuarios/<int:id>', methods=['PATCH'])
+def patch_usuario(id):
+    data_usuario = request.get_json()
+
+    nombre_apellido = data_usuario.get('nombre_apellido')
+    email = data_usuario.get('email')
+    telefono = data_usuario.get('telefono')
+    contrasenia = data_usuario.get('contrasenia')
+    es_admin = data_usuario.get('es_admin')
+
+    resultado = patch_usuario(id, nombre_apellido, email, telefono, contrasenia, es_admin)
+
+    if resultado:
+        return jsonify({'mensaje' : 'Usuario actualizado correctamente'}), 200
+    else:
+        return jsonify({'error: Usuario no encontrado'}), 400
 
 #DELETE
+@usuarios_bp.route('/usuarios/<int:id_usuario>', methods=['DELETE'])
+def borrar_usuario(id_usuario):
+    borrado = db.delete_usuario(id_usuario)
+    if borrado:
+        return '', 204
+    else:
+        return jsonify({"message": "No existe el usuario"}), 404
