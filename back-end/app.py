@@ -221,5 +221,14 @@ def put_reservas(id):
      else:
          return jsonify({'error': 'Reseña no encontrada'}), 404
 
+@app.route('/comida_principal/<int:id_plato>', methods=['PUT'])
+def put_comida_principal(id_plato):
+    datos = request.get_json()
+    
+    resultado = db.put_comida_principal(id_plato, datos)
+    
+    return jsonify(resultado), 200
+
+
 if __name__ == '__main__':
 	app.run(port=5000, debug=True)  

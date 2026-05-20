@@ -426,3 +426,44 @@ def delete_resena(id_resena):
         cursor.close()
         conexion.close()
 
+
+def put_comida_principal(id_plato, datos):
+    conexion = get_db_connection()
+    cursor = conexion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM comida_principal WHERE id_plato = %s", (id_plato,))
+        plato = cursor.fetchone()
+        
+        if not plato:
+            return {"error": "Plato de comida principal no encontrado"}
+        
+        campos = []
+        valores = []
+        
+        if 'nombre_plato' in datos:
+            campos.append("nombre_plato = %s")
+            valores.append(datos['nombre_plato'])
+        if 'precio' in datos:
+            campos.append("precio = %s")
+            valores.append(datos['precio'])
+        if 'es_vegano' in datos:
+            campos.append("es_vegano = %s")
+            valores.append(datos['es_vegano'])
+        if 'es_celiaco' in datos:
+            campos.append("es_celiaco = %s")
+            valores.append(datos['es_celiaco'])
+        
+        if not campos:
+            return {"error": "Al menos un campo debe ser proporcionado"}
+        
+        valores.append(id_plato)
+        
+        consulta = f"UPDATE comida_principal SET {', '.join(campos)} WHERE id_plato = %s"
+        cursor.execute(consulta, valores)
+        conexion.commit()
+        
+        return {"mensaje": "Plato de comida principal actualizado exitosamente"}
+    
+    finally:
+        cursor.close()
+        conexion.close()
