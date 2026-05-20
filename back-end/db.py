@@ -369,3 +369,22 @@ def get_postres():
     finally:
         cursor.close()
         coneccion.close()
+
+def put_servicios_extra(id, datos):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM servicios_extra WHERE id_servicio = %s", (id,))
+        servicio_extra = cursor.fetchone()
+        if not servicio_extra:
+            return {"mensaje": "Servicio no encontrada"}
+        else:
+            cursor.execute(
+                "UPDATE servicios_extra SET nombre_servicio = %s, precio = %s WHERE id_servicio = %s",
+                (datos['nombre_servicio'],datos['precio'], id)
+            )
+            coneccion.commit()
+            return {"mensaje": "Servicio actualizado exitosamente"}
+    finally:
+        cursor.close()
+        coneccion.close()
