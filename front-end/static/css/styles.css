@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* estilos navbar */
+.menu-hamburguesa {
+    flex-grow: 0 !important;
+}
+
+/* fin estilos navbar */
