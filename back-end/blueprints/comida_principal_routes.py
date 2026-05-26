@@ -3,16 +3,18 @@ import db
 
 comida_principal_bp = Blueprint('comida_principal', __name__)
 
+#GET
 @comida_principal_bp.route('/comida_principal', methods=['GET'])
-def get_comida_principal():
+def obtener_comidas_principales():
     comida_principal = db.get_comida_principal()
     if not comida_principal:
         return jsonify({"error": "No hay categorias cargadas por el momento"}), 404
     return jsonify(comida_principal), 200
 
-@comida_principal_bp.route('/comida_principal/<int:id>', methdos=['GET'])
-def get_comida_principal(id):
-    comida_principal = db.get_comida_principal_id(id)
+#GET ID
+@comida_principal_bp.route('/comida_principal/<int:id_plato>', methods=['GET'])
+def obtener_comida_principal_id(id_plato):
+    comida_principal = db.get_comida_principal_id(id_plato)
     if not comida_principal: 
         return jsonify({"error": "No existe la comida por el id buscado"}), 404
     return jsonify(comida_principal), 200
@@ -42,26 +44,26 @@ def crear_comida():
 
 #PUT
 @comida_principal_bp.route('/comida_principal/<int:id_plato>', methods=['PUT'])
-def put_comida_principal(id_plato):
+def actualizar_comida_principal(id_plato):
     datos = request.get_json()
     resultado = db.put_comida_principal(id_plato, datos)
     return jsonify(resultado), 200
 
 #PATCH
-@comida_principal_bp.route('/comida_principal/<int:id>', methods=['PATCH'])
-def patch_comida_principal(id):
+@comida_principal_bp.route('/comida_principal/<int:id_plato>', methods=['PATCH'])
+def modificar_comida_principal(id_plato):
     datos = request.get_json()
     if not datos:
         return jsonify({"error": "Datos no proporcionados"}), 400
     if 'nombre' not in datos and 'descripcion' not in datos and 'precio' not in datos:
         return jsonify({"error": "Al menos un campo (nombre, descripcion o precio) debe ser proporcionado"}), 400
-    resultado = db.patch_comida_principal(id, datos)
+    resultado = db.patch_comida_principal(id_plato, datos)
     return jsonify(resultado), 200
 
 #DELETE
-@comida_principal_bp.route('/comida-principal/<int:id>', methods=['DELETE'])
-def delete_comida_principal(id):
-    borrado = db.delete_comida_principal(id)
+@comida_principal_bp.route('/comida_principal/<int:id_plato>', methods=['DELETE'])
+def borrar_comida_principal(id_plato):
+    borrado = db.delete_comida_principal(id_plato)
     if borrado:
         return jsonify({'message': 'Plato eliminado'}), 200
     else:
