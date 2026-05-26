@@ -10,7 +10,7 @@ def get_comida_principal():
         return jsonify({"error": "No hay categorias cargadas por el momento"}), 404
     return jsonify(comida_principal), 200
 
-@comida_principal_bp.route('/comida_principal/<int:id>', methdos=['GET'])
+@comida_principal_bp.route('/comida_principal/<int:id>', methods=['GET'])
 def get_comida_principal(id):
     comida_principal = db.get_comida_principal_id(id)
     if not comida_principal: 
