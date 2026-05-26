@@ -470,29 +470,6 @@ def put_comida_principal(id_plato, datos):
         cursor.close()
         conexion.close()
 
-def patch_servicio_extra(id_servicio, nombre_servicio=None, precio=None):
-    conexion = get_db_connection()
-    cursor = conexion.cursor(dictionary=True)
-    try:
-        cursor.execute("SELECT * FROM servicios_extra WHERE id_servicio = %s", (id_servicio,))
-        servicio = cursor.fetchone()
-        
-        if not servicio:
-            return False
-
-        if nombre_servicio:
-            cursor.execute("UPDATE servicios_extra SET nombre_servicio = %s WHERE id_servicio = %s",
-                           (nombre_servicio, id_servicio))
-        if precio is not None:
-            cursor.execute("UPDATE servicios_extra SET precio = %s WHERE id_servicio = %s",
-                           (precio, id_servicio))
-
-        conexion.commit()
-        return True
-    finally:
-        cursor.close()
-        conexion.close()
-
 def patch_servicio_extra(id, datos):
     conexion = get_db_connection()
     cursor = conexion.cursor(dictionary=True)
@@ -512,24 +489,6 @@ def patch_servicio_extra(id, datos):
         cursor.close()
         conexion.close()
 
-def patch_servicio_extra(id, datos):
-    conexion = get_db_connection()
-    cursor = conexion.cursor(dictionary=True)
-    try:
-        cursor.execute("SELECT * FROM servicios_extra WHERE id_servicio = %s", (id,))
-        servicio = cursor.fetchone()
-        if not servicio:
-            return {"mensaje": "Servicio no encontrado"}
-        else:
-            cursor.execute(
-                "UPDATE servicios_extra SET nombre_servicio = %s, precio = %s WHERE id_servicio = %s",
-                (datos['nombre_servicio'], datos['precio'], id)
-            )
-            conexion.commit()
-            return {"mensaje": "Servicio actualizado exitosamente"}
-    finally:
-        cursor.close()
-        conexion.close()
 
 def get_comida_principal():
     coneccion = get_db_connection()
