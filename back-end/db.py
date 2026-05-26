@@ -58,7 +58,7 @@ def get_servicios_extra():
         cursor.close()
         coneccion.close()
 
-def get_servicio_extra(id):
+def get_servicio_extra_id(id):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
@@ -288,19 +288,19 @@ def get_resenas():
     cursor = coneccion.cursor(dictionary=True)
     try:
         cursor.execute("SELECT * FROM resenas")
-        reservas = cursor.fetchall()
-        return reservas
+        resenas = cursor.fetchall()
+        return resenas
     finally:
         cursor.close()
         coneccion.close()
 
-def get_resena(id):
+def get_resena_id(id):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute("SELECT * FROM reservas WHERE id_reservas = %s", (id,))
-        reserva = cursor.fetchone()
-        return reserva
+        cursor.execute("SELECT * FROM resenas WHERE id_resenas = %s", (id,))
+        resena = cursor.fetchone()
+        return resena
     finally:
         cursor.close()
         coneccion.close()
@@ -560,3 +560,46 @@ def patch_postres(id_postres, precio, nombre):
         cursor.close()
         coneccion.close()
     
+def get_postre_id(id_postre):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM postres WHERE id_postre = %s", (id_postre,))
+        postre = cursor.fetchone()
+        return postre
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def get_usuario_id(id_usuario):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM usuarios WHERE id_usuario = %s", (id_usuario,))
+        usuario = cursor.fetchone()
+        return usuario
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def get_bebida_id(id_bebida):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM bebidas WHERE id_bebidas = %s", (id_bebida,))
+        bebida = cursor.fetchone()
+        return bebida
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def get_reserva_id(id_reserva):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM reservas WHERE id_reservas = %s", (id_reserva,))
+        reserva = cursor.fetchone()
+        return reserva
+    finally:
+        cursor.close()
+        coneccion.close()
