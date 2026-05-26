@@ -5,14 +5,14 @@ servicios_extra_bp = Blueprint('servicios_extra', __name__)
 
 #GET
 @servicios_extra_bp.route('/servicios_extra', methods=['GET'])
-def get_servicios():
+def obtener_servicios():
     servicios = db.get_servicios_extra()
     return jsonify(servicios), 200
 
 #GET ID
-@servicios_extra_bp.route('/servicios_extra/<int:id>', methods=['GET'])
-def get_servicios_extra(id):
-    servicio = db.get_servicio_extra(id)
+@servicios_extra_bp.route('/servicios_extra/<int:id_servicio>', methods=['GET'])
+def obtener_servicio_extra(id_servicio):
+    servicio = db.get_servicio_extra(id_servicio)
     if servicio:
         return jsonify(servicio)
     else:
@@ -20,7 +20,7 @@ def get_servicios_extra(id):
 
 #POST
 @servicios_extra_bp.route('/servicios_extra', methods=['POST'])
-def post_servicios_extra():
+def crear_servicio_extra():
     servicio = request.get_json()
     if not servicio:
         return jsonify({'error': 'body vacio'}), 400
@@ -37,27 +37,27 @@ def post_servicios_extra():
         return jsonify({'error': 'No se pudo crear correctamente la nueva bebida'}), 400
 
 #PUT
-@servicios_extra_bp.route('/servicios_extra/<int:id>', methods=['PUT'])
-def put_servicios_extra(id):
+@servicios_extra_bp.route('/servicios_extra/<int:id_servicio>', methods=['PUT'])
+def actualizar_servicio_extra(id_servicio):
     datos = request.get_json()
     if not datos:
         return jsonify({"error": "Datos no proporcionados"}), 400
     if 'nombre_servicio' not in datos: #no chequeo si falta el precio por que se asume que si no se provee uno entonces es cero
         return jsonify({"error": "Falta el nombre del servicio"}), 400
-    resultado = db.put_servicios_extra(id, datos)
+    resultado = db.put_servicios_extra(id_servicio, datos)
     return jsonify(resultado), 200
 
 #PATCH
 @servicios_extra_bp.route('/servicios_extra/<int:id_servicio>', methods=['PATCH'])
-def patch_servicio_extra_route(id_servicio):
+def modificar_servicio_extra(id_servicio):
     datos = request.get_json()
     resultado = db.patch_servicio_extra(id_servicio, datos)
     return jsonify(resultado), 200
 
 #DELETE
-@servicios_extra_bp.route('/servicios_extra/<int:id>', methods=['DELETE'])
-def delete_servicio_extra(id):
-    borrado = db.delete_servicio_extra(id)
+@servicios_extra_bp.route('/servicios_extra/<int:id_servicio>', methods=['DELETE'])
+def borrar_servicio_extra(id_servicio):
+    borrado = db.delete_servicio_extra(id_servicio)
     if borrado:
         return jsonify({'message': 'servicio extra eliminado'}),200
     else:

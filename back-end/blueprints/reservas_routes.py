@@ -5,7 +5,7 @@ reservas_bp = Blueprint('reservas', __name__)
 
 #GET
 @reservas_bp.route('/reservas', methods=['GET'])
-def get_reservas():
+def obtener_reservas():
     reservas = db.get_reservas()
     if not reservas:
         return jsonify({"error": "No hay reservas"}), 404
@@ -13,7 +13,7 @@ def get_reservas():
 
 #GET ID
 @reservas_bp.route('/reservas/<int:id>', methods=['GET'])
-def get_reserva(id):
+def obtener_reserva(id):
     reserva = db.get_reserva(id)
     if reserva:
         return jsonify(reserva), 200
@@ -33,7 +33,7 @@ def crear_reserva():
 
 #PUT
 @reservas_bp.route('/reservas/<int:id>', methods=['PUT'])
-def put_reservas(id):
+def actualizar_reserva(id):
     reserva = request.get_json()
     if ("usuario_id" not in reserva) or ("fecha" not in reserva) or ("hora" not in reserva) or ("cantidad_personas" not in reserva) or ("estado" not in reserva):
         return jsonify({'error':'body incompleto'}), 400
@@ -53,13 +53,13 @@ def put_reservas(id):
 
 #DELETE
 @reservas_bp.route('/reservas/<int:id>', methods=['DELETE'])
-def delete_reserva(id):
+def borrar_reserva(id):
     reserva = db.delete_reserva(id)
     if not reserva:
-        return jsonify({"error" "No se encontro la reserva por el id buscado"}), 404
-    return jsonify({"mensage": "Reserva eliminada"}), 201
+        return jsonify({"error": "No se encontro la reserva por el id buscado"}), 404
+    return jsonify({"message": "Reserva eliminada"}), 201
 
-
+#PATCH
 @reservas_bp.route('/reservas/<int:id_reservas>', methods=['PATCH'])
 def modificar_reserva(id_reservas):
     datos = request.get_json()
