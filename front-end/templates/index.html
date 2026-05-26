@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titulo</title>
-</head>
-<body>
-    <h1>Hola mundo</h1>
-    <h2>Lista de usuarios</h1>
+{% extends "base.html" %}
 
-    <ol>
-        {% for usuario in usuarios %}
-            <li>
-                {{ usuario.nombre_apellido }}
-                <br></br>
-                Email: {{ usuario.email }}
-                <br></br>
-                Teléfono: {{ usuario.telefono }}
-                <br></br>
-                Admin: {{ usuario.es_admin }}
-            </li>
-            <br></br>
-        {% endfor %}
-    </ol>
-</body>
-</html>
+{% block tittle %} Nombre restaurante - Inicio{% endblock %}
+
+{% block content %}
+
+<p class="parrafo">Estas en /index</p>
+
+{% endblock %}
