@@ -4,6 +4,40 @@
 
 {% block content %}
 
-<p class="parrafo">Estas en /index</p>
+<h1>Sabores inconfundibles</h1>
+<h2>Historias Comidas</h2>
+
+<a href="/menu">Ver menu</a>
+<br></br>
+<h2>Reseñas de nuestros clientes: </h2>
+<br></br>
+<ol>
+    {% for resena in re %}
+        <li>
+            {% for usuario in u %}
+                {% if usuario.id_usuario == resena.usuario_id %}
+                    <h5>{{ usuario.nombre_apellido }}:</h5>
+                    {{ resena.mensaje }}
+                {% endif %}
+            {% endfor %}
+        </li>
+        <br></br>
+    {% endfor %}
+</ol>
+
+<h2>Tu mesa te espera aqui! No te quedes afuera</h2>
+<a href="/reservas">Haz tu reserva!</a>
+<br></br>
+<a href="/conocenos">conocenos</a>
+<br></br>
+<h2>Nuestros servicios</h2>
+<h3>Todo para ti</h3>
+<ol>
+    {% for servicios in se %}
+        <li>
+            {{ servicios.nombre_servicio }} : ${{ servicios.precio }}         
+        </li>
+    {% endfor %}
+</ol>
 
 {% endblock %}

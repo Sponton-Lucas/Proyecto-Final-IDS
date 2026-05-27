@@ -47,6 +47,14 @@ def patch_usuario(id, nombre_apellido, email, telefono, contrasenia, es_admin):
         cursor.close()
         coneccion.close()
 
+#a revisar, porque para crear una resena tiene que estar logeado
+#def crear_resena_por_form(nombre, mensaje):
+#   coneccion = get_db_connection()
+#    cursor = coneccion.cursor(dictionary=True)
+#    try:
+#        cursor.execute("INSERT INTO resenas ()")
+#    finally: 
+
 def get_servicios_extra():
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
@@ -589,6 +597,17 @@ def get_bebida_id(id_bebida):
         cursor.execute("SELECT * FROM bebidas WHERE id_bebidas = %s", (id_bebida,))
         bebida = cursor.fetchone()
         return bebida
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def get_bebidas():
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute('SELECT * FROM bebidas')
+        bebidas = cursor.fetchall()
+        return bebidas
     finally:
         cursor.close()
         coneccion.close()

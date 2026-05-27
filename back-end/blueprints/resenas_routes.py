@@ -21,6 +21,21 @@ def obtener_resena_id(id_resena):
         return jsonify({"error": "reseña no encontrada"}), 404
     
 #POST
+
+
+# a revisar, porque para crear una resena tiene que estar logeado
+@resenas_bp.route('/agregar_resena', methods=['POST'])
+def crear_resena_por_form():
+    nombre = request.form.get("nombre")
+    mensaje = request.form.get("mensaje")
+    resena_nueva = db.crear_resena_por_form(nombre, mensaje)
+    if reserva_nueva:
+        return jsonify({'message': 'se creo la resena correctamente por el form'}), 200
+    else:
+        return jsonify({'error': 'no se pudo crear la resena por el form'}), 400
+#a revisar, porque para crear una resena tiene que estar logeado
+
+
 @resenas_bp.route('/resenas', methods=['POST'])
 def crear_resena():
     data = request.get_json()
