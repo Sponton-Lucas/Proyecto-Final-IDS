@@ -14,9 +14,23 @@ def menu():
 def conocenos():
 	return render_template('conocenos.html')
 
-@app.route("/resenas")
-def resenas():
-	return render_template('resenas.html')
+
+@app.route('/resenas') 
+def mostrar_resenas():
+    reseñas_ejemplo = [
+        {
+            "comentario": "¡La comida aquí es un sueño! Nunca había probado sabores tan impactantes.",
+            "foto": "persona2.jpeg",
+            "nombre": "Sofía Martínez",
+        },
+        {
+            "comentario": "Excelente atención y los platos salen rapidísimo. Súper recomendado.",
+            "foto": "hombre1.jpeg",
+            "nombre": "Juan Pérez",
+        }
+    ]
+    
+    return render_template('resenas.html', reseñas=reseñas_ejemplo)
 
 @app.route("/reservas")
 def reservas():
