@@ -6,4 +6,76 @@
 
 <p>Estas en /conocenos</p>
 
+#Seccion 22
+<body>
+
+  <h1>Nuestros servicios para vos</h1>
+  <p>Todo lo que ofrecemos para que tu visita sea perfecta.</p>
+
+  <hr/>
+
+  <!-- SERVICIOS GRATUITOS -->
+  <h2>Incluidos sin costo</h2>
+
+  <div>
+
+    <div>
+      <img src="{{ url_for('static', filename='img/estacionamiento.jpg') }}" alt="Estacionamiento" width="300"/><br/>
+      <h3>Estacionamiento</h3>
+      <p>Amplio estacionamiento propio disponible para todos nuestros clientes.</p>
+ 
+    </div>
+
+    <div>
+      <img src="{{ url_for('static', filename='img/wifi.jpg') }}" alt="Wi-Fi" width="300"/><br/>
+      <h3>Wi-Fi</h3>
+      <p>Conexión de alta velocidad disponible en todo el salón.</p>
+ 
+    </div>
+
+    <div>
+      <img src="{{ url_for('static', filename='img/discapacitados.jpg') }}" alt="Acceso para discapacitados" width="300"/><br/>
+      <h3>Acceso para discapacitados</h3>
+      <p>Rampas, baños adaptados y asistencia para personas con movilidad reducida.</p>
+ 
+    </div>
+
+    <div>
+      <img src="{{ url_for('static', filename='img/ninos.jpg') }}" alt="Zona de juegos para niños" width="300"/><br/>
+      <h3>Zona de juegos para niños</h3>
+      <p>Espacio seguro y equipado para que los más chicos disfruten mientras comés tranquilo.</p>
+ 
+    </div>
+
+  </div>
+
+  <hr/>
+
+  <!-- SERVICIOS CON COSTO -->
+  <h2>Servicios adicionales</h2>
+
+  <div>
+
+    <div>
+      <img src="{{ url_for('static', filename='img/cumpleanos.jpg') }}" alt="Celebración de cumpleaños" width="300"/><br/>
+      <h3>Celebración de cumpleaños</h3>
+      <p>Decoración especial, torta y atención personalizada para festejar como se merece.</p>
+      <strong>$10.000</strong>
+    </div>
+
+    <div>
+      <img src="{{ url_for('static', filename='img/empresarial.jpg') }}" alt="Cenas empresariales" width="300"/><br/>
+      <h3>Cenas empresariales</h3>
+      <p>Salón privado con servicio exclusivo, ideal para reuniones de trabajo o eventos corporativos.</p>
+      <strong>$25.000</strong>
+    </div>
+
+  </div>
+
+  <hr/>
+
+  <a href="index.html">← Volver al inicio</a>
+
+</body>
+
 {% endblock %}
