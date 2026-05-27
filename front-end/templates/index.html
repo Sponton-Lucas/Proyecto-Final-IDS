@@ -1,9 +1,37 @@
 {% extends "base.html" %}
 
-{% block tittle %} Nombre restaurante - Inicio{% endblock %}
+{% block title %} Nombre restaurante - Inicio {% endblock %}
 
 {% block content %}
+{# seccion 1 #}
+<h1 class="titulo text-center"><b>Nombre</br>de restaurante</b></h1>  
 
-<p class="parrafo">Estas en /index</p>
+<h6 class="mesajito text-center">¡Bienvenidos al lugar donde ocurre la magia de las comidas!</h6>
+
+<div class="text-center boton-ver-menu"> 
+    <a href="/menu" class="btn btn-dark">Ver menú</a>
+</div>
+
+{#seccion 5#}
+<div class="container mt-5 mb-5">
+    <img src="{{url_for('static', filename='images/quienes_somos.jpeg')}}" width="1200" alt="foto del restaurante">
+    
+    <div class="row align-items-center">
+        <div class="col">
+            <a href="/conocenos" class="btn btn-dark">Conócenos más</a>
+        </div>
+
+        <div class="col">
+            <span>
+               <b>Nuestra pasión por la cocina se refleja en cada plato.
+                Creamos experiencias memorables, infusionadas con amor
+                y sabores intensos. Nuestro equipo está comprometido en
+                ofrecer lo mejor, desde recetas tradicionales hasta
+                innovaciones culinarias que sorprenden. Si no sales con
+                una sonrisa, ¡algo hicimos mal!</b>
+            </span>
+    </div>
+</div>
+
 
 {% endblock %}
