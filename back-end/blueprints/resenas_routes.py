@@ -21,6 +21,7 @@ def obtener_resena_id(id_resena):
         return jsonify({"error": "reseña no encontrada"}), 404
     
 #POST
+
 @resenas_bp.route('/resenas', methods=['POST'])
 def crear_resena():
     data = request.get_json()
