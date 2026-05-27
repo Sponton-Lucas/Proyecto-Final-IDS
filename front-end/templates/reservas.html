@@ -4,6 +4,66 @@
 
 {% block content %}
 
-<p>Estas en /reservas</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reservar</title>
+</head>
+<body>
+
+  <h1>Reservar</h1>
+  <hr/>
+
+  <form action="#" method="POST">
+
+    <label for="nombre">Nombre y apellido:</label><br/>
+    <input type="text" id="nombre" name="nombre" required/><br/><br/>
+
+    <label for="email">Email:</label><br/>
+    <input type="email" id="email" name="email" required/><br/><br/>
+
+    <label for="telefono">Teléfono:</label><br/>
+    <input type="tel" id="telefono" name="telefono"/><br/><br/>
+
+    <label for="fecha">Fecha:</label><br/>
+    <input type="date" id="fecha" name="fecha" required/><br/><br/>
+
+    <label for="horario">Horario:</label><br/>
+    <select id="horario" name="horario" required>
+      <option value="" disabled selected>Seleccioná un horario</option>
+      <optgroup label="Almuerzo">
+        <option value="12:00">12:00</option>
+        <option value="12:30">12:30</option>
+        <option value="13:00">13:00</option>
+        <option value="13:30">13:30</option>
+        <option value="14:00">14:00</option>
+        <option value="14:30">14:30</option>
+      </optgroup>
+      <optgroup label="Cena">
+        <option value="19:00">19:00</option>
+        <option value="19:30">19:30</option>
+        <option value="20:00">20:00</option>
+        <option value="20:30">20:30</option>
+        <option value="21:00">21:00</option>
+        <option value="21:30">21:30</option>
+        <option value="22:00">22:00</option>
+      </optgroup>
+    </select><br/><br/>
+
+    <label for="personas">Cantidad de personas:</label><br/>
+    <input type="number" id="personas" name="personas" min="1" max="6" value="1" required/>
+    <small> (Para más de 6 personas escribinos a <a href="mailto:restaurante@gmail.com">restaurante@gmail.com</a>)</small><br/><br/>
+
+    <button type="submit">Confirmar reserva</button>
+
+  </form>
+
+  <br/>
+  <a href="index.html">← Volver al inicio</a>
+
+</body>
+</html>
 
 {% endblock %}
