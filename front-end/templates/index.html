@@ -4,40 +4,13 @@
 
 {% block content %}
 
-<h1>Sabores inconfundibles</h1>
-<h2>Historias Comidas</h2>
+<h2>Por que elegirnos?</h2>
+<p>Nos apasiona servite cada platillo con amor y dedicacion</p>
 
-<a href="/menu">Ver menu</a>
-<br></br>
-<h2>Reseñas de nuestros clientes: </h2>
-<br></br>
-<ol>
-    {% for resena in re %}
-        <li>
-            {% for usuario in u %}
-                {% if usuario.id_usuario == resena.usuario_id %}
-                    <h5>{{ usuario.nombre_apellido }}:</h5>
-                    {{ resena.mensaje }}
-                {% endif %}
-            {% endfor %}
-        </li>
-        <br></br>
-    {% endfor %}
-</ol>
+<div class="card">
 
-<h2>Tu mesa te espera aqui! No te quedes afuera</h2>
-<a href="/reservas">Haz tu reserva!</a>
-<br></br>
-<a href="/conocenos">conocenos</a>
-<br></br>
-<h2>Nuestros servicios</h2>
-<h3>Todo para ti</h3>
-<ol>
-    {% for servicios in se %}
-        <li>
-            {{ servicios.nombre_servicio }} : ${{ servicios.precio }}         
-        </li>
-    {% endfor %}
-</ol>
+    <img src="{{ url_for('static', filename='primer-plano-carne-asada-salsa-verduras-patatas-fritas-plato-sobre-mesa_181624-35847.avif') }}" alt="comida">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</div>
 
 {% endblock %}

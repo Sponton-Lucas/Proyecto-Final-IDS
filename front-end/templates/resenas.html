@@ -4,24 +4,7 @@
 
 {% block content %}
 
-<h2>Reseñas de nuestros clientes: </h2>
-
-<ol>
-    {% for resena in re %}
-        <li>
-            {% for usuario in u %}
-                {% if usuario.id_usuario == resena.usuario_id %}
-                    <h5>{{ usuario.nombre_apellido }}:</h5>
-                    {{ resena.mensaje }}
-                {% endif %}
-            {% endfor %}
-        </li>
-        <br></br>
-    {% endfor %}
-</ol>
-
-
-<h3>Dejanos tu reseña!</h3>
+<h3>Dejanos tu reseña</h3>
 <form action='/agregar_resena' method="post">
         <label for="nombre">Nombre y Apellido:</label>
         <input type="text" id="nombre" name="nombre" placeholder="Nombre y Apellido">
