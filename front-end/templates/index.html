@@ -5,5 +5,21 @@
 {% block content %}
 
 <p class="parrafo">Estas en /index</p>
+ 
+ <body>
 
+  <div> 
+   <span>Sentite</span>
+   <span>Acompañado</span>    
+  
+   <h1> Probá Nuestros Platos</h1>
+  
+   <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
+   <a href="/reservas">¡Vení y Comé!</a>
+  </div>
+
+  <div>
+      <img src="{{ url_for('static', filename='img/mesas.JPG') }}" alt="mesas del restaurante"/>
+  </div>
+</body>
 {% endblock %}
