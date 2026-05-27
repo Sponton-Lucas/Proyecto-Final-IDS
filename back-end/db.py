@@ -612,6 +612,7 @@ def get_bebidas():
         cursor.close()
         coneccion.close()
 
+
 def get_reserva_id(id_reserva):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
