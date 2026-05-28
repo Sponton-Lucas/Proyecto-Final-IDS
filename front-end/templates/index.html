@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block tittle %} Nombre restaurante - Inicio{% endblock %}
+{% block tittle %}Nombre restaurante - Inicio{% endblock %}
 
 {% block content %}
 
 <p class="parrafo">Estas en /index</p>
  
- <section>
 
+<section>
   <div> 
    <span>Sentite</span>
    <span>Acompañado</span>    
@@ -22,4 +22,53 @@
       <img src="{{ url_for('static', filename='img/mesas.JPG') }}" alt="mesas del restaurante"/>
   </div>
 </section>
+ 
+<section class="seccion-resenas">
+
+
+  <div id="carouselResenas" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <div class="resena-card">
+          <div class="estrellas">★★★★★</div>
+          <p class="resena-texto">¡La comida aquí es un sueño! Nunca había probado sabores tan impactantes. Volveré cada semana.</p>
+          <img class="resena-foto" src="{{ url_for('static', filename='img/foto-sofia.jpg') }}" alt="Foto Sofía">
+          <p class="resena-nombre">Sofía Martínez</p>
+          <p class="resena-rol">Food Blogger</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="resena-card">
+          <div class="estrellas">★★★★★</div>
+          <p class="resena-texto">Un ambiente increíble y un servicio impecable. La mejor experiencia gastronómica de mi vida.</p>
+          <img class="resena-foto" src="{{ url_for('static', filename='img/foto-carlos.jpg') }}" alt="Foto Carlos">
+          <p class="resena-nombre">Carlos López</p>
+          <p class="resena-rol">Crítico gastronómico</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="resena-card">
+          <div class="estrellas">★★★★☆</div>
+          <p class="resena-texto">Los ingredientes son frescos y de altísima calidad. Se nota el amor que ponen en cada plato.</p>
+          <img class="resena-foto" src="{{ url_for('static', filename='img/foto-maria.jpg') }}" alt="Foto María">
+          <p class="resena-nombre">María González</p>
+          <p class="resena-rol">Chef amateur</p>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="carousel-control-prev resena-flecha" type="button" data-bs-target="#carouselResenas" data-bs-slide="prev">
+      <span>&#8592;</span> <!-- #Fecha hacia atrás--> 
+    </button>
+    <button class="carousel-control-next resena-flecha" type="button" data-bs-target="#carouselResenas" data-bs-slide="next">
+      <span>&#8594;</span> <!-- #Fecha hacia adelante--> 
+    </button>
+  </div>
+</section>
+
+
 {% endblock %}
