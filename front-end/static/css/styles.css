@@ -3,6 +3,21 @@
     padding: 0;
 }
 
+:root {
+    --principal: #00161e;
+    --secundario: #233338;
+    --marron: #1e0800;
+    --rosita: #ffa384;
+    --naranja-oscuro: #8e4c35;
+    --naranja-claro: #ebd5c6;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--principal) !important;
+    font-family: var(--font-family) !important;
+}
+
 /* estilos navbar */
 .menu-hamburguesa {
     flex-grow: 0 !important;
