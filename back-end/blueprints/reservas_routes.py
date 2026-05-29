@@ -14,7 +14,7 @@ def obtener_reservas():
 #GET ID
 @reservas_bp.route('/reservas/<int:id>', methods=['GET'])
 def obtener_reserva(id):
-    reserva = db.get_reserva(id)
+    reserva = db.get_reserva_id(id)
     if reserva:
         return jsonify(reserva), 200
     else:
@@ -50,15 +50,6 @@ def actualizar_reserva(id):
     else:
         return jsonify({'error':'no se pudo actualizar correctamente'}), 404
 
-
-#DELETE
-@reservas_bp.route('/reservas/<int:id>', methods=['DELETE'])
-def borrar_reserva(id):
-    reserva = db.delete_reserva(id)
-    if not reserva:
-        return jsonify({"error": "No se encontro la reserva por el id buscado"}), 404
-    return jsonify({"message": "Reserva eliminada"}), 201
-
 #PATCH
 @reservas_bp.route('/reservas/<int:id_reservas>', methods=['PATCH'])
 def modificar_reserva(id_reservas):
@@ -79,3 +70,13 @@ def modificar_reserva(id_reservas):
         return '', 204
     else:
         return jsonify({"message": "No se pudo modificar la reserva."}), 400
+
+#DELETE
+@reservas_bp.route('/reservas/<int:id>', methods=['DELETE'])
+def borrar_reserva(id):
+    reserva = db.delete_reserva(id)
+    if not reserva:
+        return jsonify({"error": "No se encontro la reserva por el id buscado"}), 404
+    return jsonify({"message": "Reserva eliminada"}), 201
+
+
