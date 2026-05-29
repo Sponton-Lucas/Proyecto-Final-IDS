@@ -7,54 +7,67 @@
 {% endblock %}
 
 {% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+
+  <h2 class="mb-4" style="color: var(--naranja-claro);">Reservar una mesa</h2>
+
   <form action="#" method="POST">
 
-    <label for="nombre">Nombre y apellido:</label><br/>
-    <input type="text" id="nombre" name="nombre" required/><br/><br/>
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre y apellido</label>
+      <input type="text" id="nombre" name="nombre" class="form-control" required/>
+    </div>
 
-    <label for="email">Email:</label><br/>
-    <input type="email" id="email" name="email" required/><br/><br/>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" name="email" class="form-control" required/>
+    </div>
 
-    <label for="telefono">Teléfono:</label><br/>
-    <input type="tel" id="telefono" name="telefono"/><br/><br/>
+    <div class="mb-3">
+      <label for="telefono" class="form-label">Teléfono</label>
+      <input type="tel" id="telefono" name="telefono" class="form-control"/>
+    </div>
 
-    <label for="fecha">Fecha:</label><br/>
-    <input type="date" id="fecha" name="fecha" required/><br/><br/>
+    <div class="mb-3">
+      <label for="fecha" class="form-label">Fecha</label>
+      <input type="date" id="fecha" name="fecha" class="form-control" required/>
+    </div>
 
-    <label for="horario">Horario:</label><br/>
-    <select id="horario" name="horario" required>
-      <option value="" disabled selected>Seleccioná un horario</option>
-      <optgroup label="Almuerzo">
-        <option value="12:00">12:00</option>
-        <option value="12:30">12:30</option>
-        <option value="13:00">13:00</option>
-        <option value="13:30">13:30</option>
-        <option value="14:00">14:00</option>
-        <option value="14:30">14:30</option>
-      </optgroup>
-      <optgroup label="Cena">
-        <option value="19:00">19:00</option>
-        <option value="19:30">19:30</option>
-        <option value="20:00">20:00</option>
-        <option value="20:30">20:30</option>
-        <option value="21:00">21:00</option>
-        <option value="21:30">21:30</option>
-        <option value="22:00">22:00</option>
-      </optgroup>
-    </select><br/><br/>
+    <div class="mb-3">
+      <label for="horario" class="form-label">Horario</label>
+      <select id="horario" name="horario" class="form-select" required>
+        <option value="" disabled selected>Seleccioná un horario</option>
+        <optgroup label="Almuerzo">
+          <option value="12:00">12:00</option>
+          <option value="12:30">12:30</option>
+          <option value="13:00">13:00</option>
+          <option value="13:30">13:30</option>
+          <option value="14:00">14:00</option>
+          <option value="14:30">14:30</option>
+        </optgroup>
+        <optgroup label="Cena">
+          <option value="19:00">19:00</option>
+          <option value="19:30">19:30</option>
+          <option value="20:00">20:00</option>
+          <option value="20:30">20:30</option>
+          <option value="21:00">21:00</option>
+          <option value="21:30">21:30</option>
+          <option value="22:00">22:00</option>
+        </optgroup>
+      </select>
+    </div>
 
-    <label for="personas">Cantidad de personas:</label><br/>
-    <input type="number" id="personas" name="personas" min="1" max="6" value="1" required/>
-    <small> (Para más de 6 personas escribinos a <a href="mailto:restaurante@gmail.com">restaurante@gmail.com</a>)</small><br/><br/>
+    <div class="mb-3">
+      <label for="personas" class="form-label">Cantidad de personas</label>
+      <input type="number" id="personas" name="personas" class="form-control" min="1" max="6" value="1" required/>
+      <small class="form-text">Para más de 6 personas escribinos a <a href="mailto:restaurante@gmail.com">restaurante@gmail.com</a></small>
+    </div>
 
-    <button type="submit">Confirmar reserva</button>
+    <button type="submit" class="btn btn-primary w-100">Confirmar reserva</button>
 
   </form>
 
-  <br/>
-  <a href="index.html">← Volver al inicio</a>
+  <a href="/" class="d-block mt-3" style="color: var(--rosita);">← Volver al inicio</a>
 
-</body>
-</html>
-
+</div>
 {% endblock %}
