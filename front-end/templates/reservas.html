@@ -2,8 +2,72 @@
 
 {% block tittle %} Nombre restaurante - Reservas{% endblock %}
 
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reservas.css') }}">
+{% endblock %}
+
 {% block content %}
+<div class="container mt-5" style="max-width: 500px;">
 
-<p>Estas en /reservas</p>
+  <h2 class="mb-4" style="color: var(--naranja-claro);">Reservar una mesa</h2>
 
+  <form action="#" method="POST">
+
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre y apellido</label>
+      <input type="text" id="nombre" name="nombre" class="form-control" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" name="email" class="form-control" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="telefono" class="form-label">Teléfono</label>
+      <input type="tel" id="telefono" name="telefono" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+      <label for="fecha" class="form-label">Fecha</label>
+      <input type="date" id="fecha" name="fecha" class="form-control" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="horario" class="form-label">Horario</label>
+      <select id="horario" name="horario" class="form-select" required>
+        <option value="" disabled selected>Seleccioná un horario</option>
+        <optgroup label="Almuerzo">
+          <option value="12:00">12:00</option>
+          <option value="12:30">12:30</option>
+          <option value="13:00">13:00</option>
+          <option value="13:30">13:30</option>
+          <option value="14:00">14:00</option>
+          <option value="14:30">14:30</option>
+        </optgroup>
+        <optgroup label="Cena">
+          <option value="19:00">19:00</option>
+          <option value="19:30">19:30</option>
+          <option value="20:00">20:00</option>
+          <option value="20:30">20:30</option>
+          <option value="21:00">21:00</option>
+          <option value="21:30">21:30</option>
+          <option value="22:00">22:00</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="personas" class="form-label">Cantidad de personas</label>
+      <input type="number" id="personas" name="personas" class="form-control" min="1" max="6" value="1" required/>
+      <small class="form-text">Para más de 6 personas escribinos a <a href="mailto:restaurante@gmail.com">restaurante@gmail.com</a></small>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Confirmar reserva</button>
+
+  </form>
+
+  <a href="/" class="d-block mt-3" style="color: var(--rosita);">← Volver al inicio</a>
+
+</div>
 {% endblock %}

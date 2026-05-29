@@ -1,0 +1,10 @@
+main {
+  background-color: var(--principal);
+  color: var(--naranja-claro);
+}
+
+.contenedor-reservas {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 0 10px;
+}
