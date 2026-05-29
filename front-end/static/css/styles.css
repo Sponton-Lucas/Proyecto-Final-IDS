@@ -3,9 +3,179 @@
     padding: 0;
 }
 
+:root {
+    --principal: #00161e;
+    --secundario: #233338;
+    --marron: #1e0800;
+    --rosita: #ffa384;
+    --naranja-oscuro: #8e4c35;
+    --naranja-claro: #ebd5c6;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--principal) !important;
+    font-family: var(--font-family) !important;
+}
+
 /* estilos navbar */
 .menu-hamburguesa {
     flex-grow: 0 !important;
 }
 
 /* fin estilos navbar */
+
+/* SECCIÓN 3 - Reseñas */
+.seccion-resenas {
+  background-color: #3d4a54;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
+}
+
+.seccion-numero {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  letter-spacing: 2px;
+}
+
+
+/* Tarjeta de cada reseña */
+
+.resena-card {
+  text-align: center;
+  color: white;
+  padding: 20px 80px;
+}
+
+.estrellas {
+  font-size: 1.3rem;
+  background-color: #4a5a66;
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  letter-spacing: 4px;
+}
+
+/* Texto de la reseña */
+.resena-texto {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+  color: #e0e0e0;
+}
+
+/* Foto circular del autor */
+.resena-foto {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.resena-nombre {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.resena-rol {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* Flecha del carousel */
+.resena-flecha {
+  width: 45px !important;
+  height: 45px !important;
+  background-color: #c4896b !important;
+  border-radius: 50% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 1.2rem;
+}
+
+/* Posición de cada flecha */
+.carousel-control-prev { left: 20px !important; }
+.carousel-control-next { right: 20px !important; }
+
+/* SECCIÓN 15 - Hero */
+.seccion-hero {
+  position: relative;
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-imagen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.seccion-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: relative;
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.hero-supertitulo {
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+.hero-titulo {
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+/* SECCIÓN 16 - Descripción */
+.seccion-descripcion {
+  background-color: #2e3a42;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  padding: 60px 80px;
+}
+
+.descripcion-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
