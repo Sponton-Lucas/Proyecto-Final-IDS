@@ -45,7 +45,7 @@ def actualizar_usuario(id_usuario):
         return jsonify({"message": "Campos actualizados con exito"}), 200
     return jsonify({"error": "No se pudo actualizar los campos, intente de nuevo"}), 200
     
-
+    
 #PATCH
 @usuarios_bp.route('/usuarios/<int:id_usuario>', methods=['PATCH'])
 def modificar_usuario(id_usuario):
