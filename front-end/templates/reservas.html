@@ -2,20 +2,11 @@
 
 {% block tittle %} Nombre restaurante - Reservas{% endblock %}
 
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reservas.css') }}">
+{% endblock %}
+
 {% block content %}
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Reservar</title>
-</head>
-<body>
-
-  <h1>Reservar</h1>
-  <hr/>
-
   <form action="#" method="POST">
 
     <label for="nombre">Nombre y apellido:</label><br/>
