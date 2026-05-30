@@ -25,6 +25,102 @@ body {
 
 /* fin estilos navbar */
 
+/* SECCION 2 - */
+.seccion-2 {
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+    padding: 4rem 5rem;
+    background-color: var(--secundario);
+}
+
+.seccion-2-texto {
+    flex: 1;
+}
+.seccion-2-etiquetas {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 2px 4px 2px 4px;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+
+.etiqueta-solido {
+    background-color: var(--rosita);
+    color: var(--secundario);
+    padding: 3px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: var(--font-family);
+}
+
+.etiqueta-texto {
+    color: var(--rosita);
+    padding: 5px 10px;
+    font-size: 13px;
+    font-family: var(--font-family);
+}
+.seccion-2-texto h2 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: var(--font-family);
+    margin-bottom: 1rem;
+}
+
+.seccion-2-texto p {
+    color: white;
+    font-family: var(--font-family);
+    font-weight: 300;
+    margin-bottom: 2rem;
+}
+
+
+.seccion-2-boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: var(--rosita);
+    color: var(--secundario);
+    padding: 6px 10px 6px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.seccion-2-boton:hover {
+    background-color: var(--naranja-claro);
+}
+
+.seccion-2-flecha {
+    background-color: var(--marron);
+    color: var(--rosita);
+    width: 30px;
+    height: 30px;
+    border-radius: 70%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.seccion-2-contenedor-img {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 50px ; 
+}
+
+.seccion-2-img {
+    width: 470px;
+    height: 470px;
+    object-fit: cover;
+    border-radius: 12px;
+}
 /* SECCIÓN 3 - Reseñas */
 .seccion-resenas {
   background-color: #3d4a54;

@@ -6,20 +6,24 @@
 
 <p class="parrafo">Estas en /index</p>
  
- <section>
-  <div> 
-   <span>Sentite</span>
-   <span>Acompañado</span>    
+ <section class="seccion-2">
+  <div class="seccion-2-texto">
+   <div class="seccion-2-etiquetas">
+    <span class="etiqueta-solido">Sentite</span>
+    <span class="etiqueta-texto">Acompañado</span>
+   </div>    
   
    <h2> Probá Nuestros Platos</h2>
-  
    <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
-   <a href="/reservas">¡Vení y Comé!</a>
+   <a href="/reservas" class="seccion-2-boton">
+    ¡Vení y Comé! <span class="seccion-2-flecha">→</span>
+   </a>
   </div>
-
-  <div>
-      <img src="{{ url_for('static', filename='img/mesas.JPG') }}" alt="mesas del restaurante"/>
-  </div>
+ <div class="seccion-2-contenedor-img">
+    <img class="seccion-2-img" 
+         src="{{ url_for('static', filename='img/mesas.JPG') }}" 
+         alt="Mesas del restaurante"/>
+ </div>
 </section>
 
 <section class="seccion-resenas">
