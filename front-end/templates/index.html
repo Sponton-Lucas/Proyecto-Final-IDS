@@ -6,7 +6,22 @@
 
 <p class="parrafo">Estas en /index</p>
  
- 
+ <section>
+  <div> 
+   <span>Sentite</span>
+   <span>Acompañado</span>    
+  
+   <h2> Probá Nuestros Platos</h2>
+  
+   <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
+   <a href="/reservas">¡Vení y Comé!</a>
+  </div>
+
+  <div>
+      <img src="{{ url_for('static', filename='img/mesas.JPG') }}" alt="mesas del restaurante"/>
+  </div>
+</section>
+
 <section class="seccion-resenas">
 
 
@@ -51,22 +66,6 @@
     <button class="carousel-control-next resena-flecha" type="button" data-bs-target="#carouselResenas" data-bs-slide="next">
       <span>&#8594;</span> <!-- #Fecha hacia adelante--> 
     </button>
-  </div>
-</section>
-
-<section>
-  <div> 
-   <span>Sentite</span>
-   <span>Acompañado</span>    
-  
-   <h2> Probá Nuestros Platos</h2>
-  
-   <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
-   <a href="/reservas">¡Vení y Comé!</a>
-  </div>
-
-  <div>
-      <img src="{{ url_for('static', filename='img/mesas.JPG') }}" alt="mesas del restaurante"/>
   </div>
 </section>
 {% endblock %}
