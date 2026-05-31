@@ -72,7 +72,7 @@ def modificar_postre(id_postre):
     if nombre is None and nombre.strip():
         return jsonify({"eror": "El nombre no puede estar vacio"}), 400
     
-    actualizar__postres = db.actualizar_postres(id_postre, precio, nombre)
+    actualizar__postres = db.patch_postre(id_postre, precio, nombre)
     if actualizar__postres:
         return jsonify(actualizar__postres), 200
 

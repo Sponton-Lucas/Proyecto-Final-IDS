@@ -1,9 +1,24 @@
 {% extends "base.html" %}
 
-{% block tittle %} Nombre restaurante - Conocenos{% endblock %}
+{% block tittle %}Nombre restaurante - Conócenos{% endblock %}
 
 {% block content %}
 
-<p>Estas en /conocenos</p>
+<!-- SECCIÓN 15 - Hero con imagen de fondo -->
+<section class="seccion-hero">
+  <img class="hero-imagen" src="{{ url_for('static', filename='img/restaurante-hero.jpg') }}" alt="Interior Pasillo Colón">
+  <div class="hero-overlay">
+    <p class="hero-supertitulo">CONÓCENOS</p>
+    <h1 class="hero-titulo">Pasillo Colón</h1>
+  </div>
+</section>
+
+<!-- SECCIÓN 16 - Descripción en dos columnas -->
+<section class="seccion-descripcion">
+  <div class="descripcion-columnas">
+    <p>Pasillo Colón nació con la intención de ofrecer una experiencia gastronómica honesta y memorable. Ubicados en pleno centro histórico, fusionamos la cocina de mercado tradicional con técnicas contemporáneas que respetan el producto y la temporada.</p>
+    <p>Nuestro equipo selecciona cada ingrediente de productores locales de confianza. El espacio fue diseñado para que cada visita sea íntima y sin prisa — un lugar donde la buena conversación y la buena mesa van de la mano.</p>
+  </div>
+</section>
 
 {% endblock %}
