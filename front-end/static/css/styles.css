@@ -1,29 +1,15 @@
-* {
-    margin: 0;
-    padding: 0;
-}
+@import url('base.css');
+@import url('variables.css');
+@import url('navbar.css');
+@import url('boton.css');
+@import url('footer.css');
+@import url('index.css');
+@import url('menu.css');
+@import url('resenas.css');
+@import url('reservas.css');
+@import url('login.css');
+@import url('registro.css');
 
-:root {
-    --principal: #00161e;
-    --secundario: #233338;
-    --marron: #1e0800;
-    --rosita: #ffa384;
-    --naranja-oscuro: #8e4c35;
-    --naranja-claro: #ebd5c6;
-    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: var(--principal) !important;
-    font-family: var(--font-family) !important;
-}
-
-/* estilos navbar */
-.menu-hamburguesa {
-    flex-grow: 0 !important;
-}
-
-/* fin estilos navbar */
 
 /* SECCIÓN 3 - Reseñas */
 .seccion-resenas {
