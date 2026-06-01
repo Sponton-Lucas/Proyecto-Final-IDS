@@ -4,6 +4,14 @@
 
 {% block content %}
 
-<p>Estas en /resenas</p>
+<h3>Dejanos tu reseña</h3>
+<form action='/agregar_resena' method="post">
+        <label for="nombre">Nombre y Apellido:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre y Apellido">
+        <label for="mensaje">Mensaje:</label>
+        <input type="text" id="mensaje" name="mensaje" placeholder="Mensaje">
+        <button type="submit">Enviar</button>
+    </form>
 
 {% endblock %}
+

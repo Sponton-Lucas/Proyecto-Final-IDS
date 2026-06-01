@@ -4,6 +4,14 @@
 
 {% block content %}
 
-<p>Estas en /login</p>
+<h2>Iniciar sesion</h2>
+<form action='/' method="post">
+    <label for="email">Correo electronico:</label>
+    <input type="text" id="email" name="email" placeholder="email">
+    <label for="contrasena">Contraseña:</label>
+    <input type="text" id="contrasena" name="contrasena" placeholder="Contraseña">
+    <button type="submit">Iniciar sesion</button>
+</form>
+<a href="/registro">Registrarse</a>
 
 {% endblock %}
