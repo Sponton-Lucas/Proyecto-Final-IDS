@@ -1,0 +1,93 @@
+/* Conócenos - Estilos CSS */
+main {
+    background-color: var(--principal);
+}
+
+/* SECCIÓN 22 - Servicios */
+.seccion-servicios h2 {
+  color: var(--naranja-claro);
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.seccion-servicios h3 {
+  color: var(--rosita);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.servicios-subtitulo {
+  color: rgba(235, 213, 198, 0.6);
+  font-size: 0.95rem;
+}
+
+.servicios-hr {
+  border-color: rgba(255, 255, 255, 0.08);
+  margin: 40px 0;
+}
+
+/* GRATUITOS */
+.servicios-gratis {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.servicio-item {
+  background-color: var(--secundario);
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.servicio-item strong {
+  color: var(--naranja-claro);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.servicio-item p {
+  color: rgba(235, 213, 198, 0.6);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ADICIONALES */
+.servicios-adicionales {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.servicio-card-grande {
+  background-color: var(--secundario);
+  border-radius: 8px;
+  padding: 24px;
+  border-left: 3px solid var(--rosita);
+}
+
+.servicio-card-info h4 {
+  color: var(--naranja-claro);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.servicio-card-info p {
+  color: rgba(235, 213, 198, 0.6);
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.servicio-precio {
+  display: block;
+  margin-top: 12px;
+  color: var(--rosita);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
