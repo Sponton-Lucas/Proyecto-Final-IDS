@@ -1,29 +1,15 @@
-* {
-    margin: 0;
-    padding: 0;
-}
+@import url('base.css');
+@import url('variables.css');
+@import url('navbar.css');
+@import url('boton.css');
+@import url('footer.css');
+@import url('index.css');
+@import url('menu.css');
+@import url('resenas.css');
+@import url('reservas.css');
+@import url('login.css');
+@import url('registro.css');
 
-:root {
-    --principal: #00161e;
-    --secundario: #233338;
-    --marron: #1e0800;
-    --rosita: #ffa384;
-    --naranja-oscuro: #8e4c35;
-    --naranja-claro: #ebd5c6;
-    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: var(--principal) !important;
-    font-family: var(--font-family) !important;
-}
-
-/* estilos navbar */
-.menu-hamburguesa {
-    flex-grow: 0 !important;
-}
-
-/* fin estilos navbar */
 
 /* SECCIÓN 3 - Reseñas */
 .seccion-resenas {
@@ -329,4 +315,62 @@ body {
   color: #ccc;
   font-size: 0.95rem;
   line-height: 1.8;
+}
+
+/* SECCIÓN 9 - FAQ */
+.seccion-faq {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.seccion-faq h1 {
+  color: var(--naranja-claro);
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.seccion-faq hr {
+  border-color: var(--naranja-oscuro);
+  margin: 24px 0;
+}
+
+.seccion-faq summary {
+  color: var(--naranja-claro);
+  cursor: pointer;
+  list-style: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 0;
+  display: block;
+}
+
+.seccion-faq details p {
+  margin-top: 8px;
+  color: var(--naranja-claro);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.seccion-faq details {
+  background-color: var(--secundario);
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 6px;
+  border-bottom: none;
+}
+
+.seccion-faq details[open] {
+  padding-bottom: 16px;
+}
+
+.seccion-faq summary::after {
+  content: ' +';
+  float: right;
+  color: var(--rosita);
+}
+
+.seccion-faq details[open] summary::after {
+  content: ' −';
 }
