@@ -4,6 +4,7 @@ import requests
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
 
+
 @app.route("/")
 def index():
 	return render_template('index.html')
@@ -17,6 +18,23 @@ def conocenos():
     ser = requests.get('http://localhost:5000/servicios_extra')
     servicios_extra = ser.json()
     return render_template('conocenos.html', se=servicios_extra)
+
+
+@app.route('/resenas') 
+def mostrar_resenas():
+	reseñas_ejemplo = [
+        {
+            "comentario": "¡La comida aquí es un sueño!",
+            "foto": "persona2.jpeg",
+            "nombre": "Sofía Martínez",
+        },
+        {
+            "comentario": "Excelente atención y los platos salen rapidísimo. Súper recomendado.",
+            "foto": "persona1.jpeg",
+            "nombre": "Juan Pérez",
+        }
+	] 
+	return render_template('resenas.html', reseñas=reseñas_ejemplo)
 
 @app.route("/resenas", methods=['GET'])
 def resenas():
