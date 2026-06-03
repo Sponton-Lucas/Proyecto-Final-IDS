@@ -30,6 +30,14 @@ def login():
 def registro():
 	return render_template('registro.html')
 
+@app.route('/registrarse', methods=['POST'])
+def register_form():
+    try:
+        datos_usuario = request.form.to_dict()
+        respuesta = requests.post("http://localhost:5000/usuarios", json=datos_usuario)
+    except requests.exceptions.RequestException as e:
+        return f"Error al procesar el registro: {e}", 400
+    return redirect('/')
 
 if __name__ == '__main__':
 	app.run(port=3000, debug=True)  
