@@ -137,3 +137,37 @@
 input[type="number"] {
   color-scheme: dark;
 }
+
+
+.alerta {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+.alerta-exito {
+  background-color: rgba(80, 180, 120, 0.15);
+  border: 1px solid rgba(80, 180, 120, 0.4);
+  color: #6fcf97;
+}
+.alerta-error {
+  background-color: rgba(220, 80, 80, 0.15);
+  border: 1px solid rgba(220, 80, 80, 0.4);
+  color: #eb5757;
+}
+
+.alerta-session {
+  background-color: rgba(180, 90, 40, 0.15);
+  border: 1px solid rgba(180, 90, 40, 0.4);
+  color: var(--naranja-claro);
+  padding: 16px 0px 0px 0px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+.alerta-session a {
+  color: var(--rosita);
+  text-decoration: underline;
+}
