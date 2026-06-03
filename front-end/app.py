@@ -48,7 +48,7 @@ def reservas():
 		return render_template('reservas.html', no_session=True)
 	if request.method == 'POST':
 		datos = {
-			"usuario_id": session.get('usuario_id', 1),
+			"usuario_id": session.get('usuario_id'),
 			"fecha": request.form.get('fecha'),
 			"hora": request.form.get('horario'),
 			"cantidad_personas": int(request.form.get('personas'))
@@ -77,6 +77,7 @@ def login_form():
     for u in usuarios:
         if u["email"] == email and u["contrasenia"] == contrasena:
             user = u["nombre_apellido"]
+            session["usuario_id"] = u["id_usuario"] 
             session["user"] = user
             return redirect('/usuario')
     return redirect('/usuario_not_found')
