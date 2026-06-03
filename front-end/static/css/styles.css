@@ -1,14 +1,379 @@
-* {
-    margin: 0;
-    padding: 0;
+@import url('base.css');
+@import url('variables.css');
+@import url('navbar.css');
+@import url('boton.css');
+@import url('footer.css');
+@import url('index.css');
+@import url('menu.css');
+@import url('resenas.css');
+@import url('reservas.css');
+@import url('login.css');
+@import url('registro.css');
+
+
+/* SECCIÓN 3 - Reseñas */
+.seccion-resenas {
+  background-color: #3d4a54;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
 }
 
-/* estilos navbar */
-.menu-hamburguesa {
-    flex-grow: 0 !important;
+.seccion-numero {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  letter-spacing: 2px;
 }
 
-/* fin estilos navbar */
+
+/* Tarjeta de cada reseña */
+
+.resena-card {
+  text-align: center;
+  color: white;
+  padding: 20px 80px;
+}
+
+.estrellas {
+  font-size: 1.3rem;
+  background-color: #4a5a66;
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  letter-spacing: 4px;
+}
+
+/* Texto de la reseña */
+.resena-texto {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+  color: #e0e0e0;
+}
+
+/* Foto circular del autor */
+.resena-foto {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.resena-nombre {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.resena-rol {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* Flecha del carousel */
+.resena-flecha {
+  width: 45px !important;
+  height: 45px !important;
+  background-color: #c4896b !important;
+  border-radius: 50% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 1.2rem;
+}
+
+/* Posición de cada flecha */
+.carousel-control-prev { left: 20px !important; }
+.carousel-control-next { right: 20px !important; }
+
+/* SECCIÓN 12 - Postres */
+
+.seccion-12 {
+    background-color: var(--secundario);
+    padding: 3rem;
+}
+
+.seccion-12 h2 {
+    color: var(--rosita);
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    margin-bottom: 2rem;
+    font-family: var(--font-family);
+    font-weight: 400;
+}
+
+.seccion-12__info h3 {
+    color: rgb(212, 210, 210);
+    font-size: 14px;
+    font-weight: 300 !important;
+    font-family: var(--font-family);
+    margin-bottom: 0.3rem;
+}
+
+
+.seccion-12__plato {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.seccion-12__info small {
+    color: #9e9e9e;
+    font-size: 13px;
+    font-weight: 300;
+    font-family: var(--font-family);
+}
+
+
+.seccion-12__precio {
+    color: rgb(181, 180, 180);
+    font-size: 11px;
+    font-weight: 100;
+    font-family: var(--font-family);
+}
+
+
+.badge-singluten {
+    background-color: rgba(180, 140, 53, 0.3);
+    color: #c4a535;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
+
+.badge-vegano {
+    background-color: rgba(53, 140, 80, 0.3);
+    color: #35c46a;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
+/* SECCIÓN 13 - Bebidas */
+
+.seccion-13 {
+    background-color: var(--secundario);
+    padding: 3rem;
+}
+
+.seccion-13 h2 {
+    color: var(--rosita);
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    margin-bottom: 2rem;
+    font-family: var(--font-family);
+    font-weight: 400;
+}
+
+.seccion-13__info h3 {
+    color: rgb(212, 210, 210);
+    font-size: 14px;
+    font-weight: 300 !important;
+    font-family: var(--font-family);
+    margin-bottom: 0.3rem;
+}
+
+
+.seccion-13__bebida {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.seccion-13__info small {
+    color: #9e9e9e;
+    font-size: 13px;
+    font-weight: 300;
+    font-family: var(--font-family);
+}
+
+
+.seccion-13__precio {
+    color: rgb(181, 180, 180);
+    font-size: 11px;
+    font-weight: 100;
+    font-family: var(--font-family);
+}
+
+
+.badge-singluten {
+    background-color: rgba(180, 140, 53, 0.3);
+    color: #c4a535;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
+
+.badge-vegano {
+    background-color: rgba(53, 140, 80, 0.3);
+    color: #35c46a;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
+
+.seccion-13__boton {
+    display: block;
+    width: fit-content;
+    margin: 2rem auto 0 !important;
+    background-color: var(--rosita);
+    color: var(--secundario);
+    padding:10px 60px;
+    border-radius: 0px;
+    text-decoration: none;
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+}
+
+.seccion-13__boton:hover {
+    background-color: var(--naranja-claro);
+}
+/* SECCIÓN 15 - Hero */
+.seccion-hero {
+  position: relative;
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-imagen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.seccion-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: relative;
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.hero-supertitulo {
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+.hero-titulo {
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+/* SECCIÓN 16 - Descripción */
+.seccion-descripcion {
+  background-color: #2e3a42;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  padding: 60px 80px;
+}
+
+.descripcion-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* SECCIÓN 9 - FAQ */
+.seccion-faq {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.seccion-faq h1 {
+  color: var(--naranja-claro);
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.seccion-faq hr {
+  border-color: var(--naranja-oscuro);
+  margin: 24px 0;
+}
+
+.seccion-faq summary {
+  color: var(--naranja-claro);
+  cursor: pointer;
+  list-style: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 0;
+  display: block;
+}
+
+.seccion-faq details p {
+  margin-top: 8px;
+  color: var(--naranja-claro);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.seccion-faq details {
+  background-color: var(--secundario);
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 6px;
+  border-bottom: none;
+}
+
+.seccion-faq details[open] {
+  padding-bottom: 16px;
+}
+
+.seccion-faq summary::after {
+  content: ' +';
+  float: right;
+  color: var(--rosita);
+}
+
+.seccion-faq details[open] summary::after {
+  content: ' −';
+}
 
 /* estilos seccion 20*/
 .contenido-resena{

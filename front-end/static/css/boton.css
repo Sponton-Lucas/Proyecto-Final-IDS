@@ -1,0 +1,57 @@
+.boton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--rosita);
+    color: var(--marron);
+    border: 1.7px solid var(--rosita);
+    border-radius: 50px;
+    padding: 0px 0px 0px 7px;
+    font-size: .8rem;
+    font-weight: 450;
+    text-decoration: none;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+.boton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--marron);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s ease-in-out;
+    z-index: 0;
+}
+
+.boton:hover::before {
+    transform: scaleX(1);
+}
+
+.boton .boton-texto {
+    padding: 0px 6px;
+    position: relateive;
+    z-index: 1;
+}
+
+.boton:hover {
+    color: var(--rosita);
+}
+
+.boton .boton-icono {
+    position: relative;
+    z-index: 1;
+    background-color: var(--marron);
+    color: var(--rosita);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
