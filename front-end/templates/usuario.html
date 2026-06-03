@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block tittle %} Nombre restaurante - Registro{% endblock %}
+
+{% block content %}
+{{ usuario }}
+<form action="/logout" method="post">
+    <button type="submit">Cerrar sesión</button>
+</form>
+{% endblock %}
+
