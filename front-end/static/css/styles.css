@@ -318,8 +318,9 @@
   padding: 0 20px;
 }
 
-.seccion-faq h1 {
+.seccion-faq h2 {
   color: var(--naranja-claro);
+  text-align: center;
   font-size: 2.5rem;
   font-weight: 300;
   margin-bottom: 8px;
