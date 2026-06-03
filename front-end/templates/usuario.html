@@ -2,10 +2,27 @@
 
 {% block tittle %} Nombre restaurante - Registro{% endblock %}
 
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/usuario.css') }}">
+{% endblock %}
+
 {% block content %}
-{{ usuario }}
-<form action="/logout" method="post">
-    <button type="submit">Cerrar sesión</button>
+<h1 class="titulo-bienvenido">Bienvenido {{ usuario }}!</h1>
+<br></br>
+<div class="resenas">
+    <h2 class="tus-resenas">Tus reseñas:</h2>
+    <ol class="resenas-list">
+        {% for re in resenas %}
+            {% if re.usuario_id == id_usuario%}
+                <li class="resena-item">
+                    <h4 class="resena-mensaje">{{ re.mensaje }}</h4>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+</div>
+<form action="/logout" method="post" class="logout-form">
+    <button type="submit" class="logout-cerrar">Cerrar sesión</button>
 </form>
 {% endblock %}
 

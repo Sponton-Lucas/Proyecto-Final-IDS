@@ -42,7 +42,7 @@ def agregar_resena():
 
 @app.route('/reservas', methods=['GET', 'POST'])
 def reservas():
-	if 'usuario_id' not in session:
+	if 'user' not in session:
 		return redirect('/login')
 	if request.method == 'POST':
 		datos = {
@@ -85,7 +85,15 @@ def usuario_not_found():
 def user():
     if "user" in session:
         usuario = session["user"]
-        return render_template('/usuario.html', usuario=usuario)
+        us = requests.get('http://localhost:5000/usuarios')
+        usuarios = us.json()
+        res = requests.get('http://localhost:5000/resenas')
+        resenas = res.json()        
+        id_usuario = 0
+        for u in usuarios:
+            if u["nombre_apellido"] == usuario:
+                id_usuario = u["id_usuario"]
+        return render_template('/usuario.html', usuario=usuario, resenas=resenas, id_usuario=id_usuario)
     else:
         return redirect('/login')
 

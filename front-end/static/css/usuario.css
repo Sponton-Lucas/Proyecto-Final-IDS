@@ -1,0 +1,59 @@
+.titulo-bienvenido{
+margin:0 0 14px 0;
+color:#f4f8f8;
+}
+.tus-resenas{
+color:#f4f8f8
+}
+/* reseñas wrapper */
+.resenas{
+margin-top:8px;
+}
+
+/* sección título dentro de reseñas */
+.resenas > h3{
+margin:8px 0 12px 0;
+font-size:16px;
+color:var(--muted);
+font-weight:600;
+}
+
+/* lista estilo similar al diseño anterior */
+.resenas-list{
+list-style:decimal;
+margin:0 0 18px 20px;
+padding:0;
+}
+.resena-item{
+margin:8px 0;
+padding:12px;
+background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.03);
+display:flex;
+align-items:flex-start;
+}
+.resena-mensaje{
+margin:0;
+font-size:15px;
+color:#e8f0ef;
+font-weight:500;
+}
+
+/* logout button styling */
+.logout-form{
+display:flex;
+justify-content:flex-start;
+margin-top:20px;
+}
+
+.logout-cerrar{
+    color: #FF8C00;
+}
+.logout-form button{
+display:inline-block;
+padding:12px 22px;
+border-radius:8px;
+font-weight:600;
+
+}
