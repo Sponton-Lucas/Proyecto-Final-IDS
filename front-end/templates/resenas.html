@@ -4,6 +4,38 @@
 
 {% block content %}
 
+<!--seccion 20-->
+<div class="contenido-resena">
+
+    <h1 class="titulo-resena"> Reseñas de nuestros clientes </h1>
+
+</div>
+
+<div class="carrusel-resena">
+
+    <button id="prev-flecha" class="boton-flecha">&larr;</button>
+
+      <div class="recuadro-resena">
+          <div id="carrusel-tracker" class="carrusel-tracker"> {# movimiento del carrusel, track es como una cinta que le da ese movimiento entre comentarios #}
+                {%for resena in reseñas%} 
+                   <div class="comentarios">
+                       <p class="texto-resena">
+                         "{{ resena.comentario }}"
+                       </p>
+                
+                       <img src="{{ url_for('static', filename='img/'~resena.foto) }}" alt="imagen-persona" width="100" height="100">
+                
+                       <p class="nombre">{{ resena.nombre }}</p>
+                   </div>
+                {% endfor %}
+         </div>
+     </div>
+
+    <button id="next-flecha" class="boton-flecha">&rarr;</button>
+</div>
+
+<!--seccion 21-->
+<h3>Dejanos tu reseña</h3>
 <h2>Reseñas de nuestros clientes: </h2>
 
 <ol>
@@ -26,6 +58,6 @@
         <label for="mensaje">Mensaje:</label>
         <input type="text" id="mensaje" name="mensaje" placeholder="Mensaje">
         <button type="submit">Enviar</button>
-    </form>
+</form>
 
 {% endblock %}
