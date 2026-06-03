@@ -6,4 +6,90 @@
 
 <p>Estas en /registro</p>
 
+<section>    <!-- SECCION 24 -->
+
+    <div>
+
+        <div>
+            <h2>PASILLO COLÓN</h2>
+            <p>CREAR CUENTA</p>
+        </div>
+
+        <form action="/registrarse" method="POST">
+
+            <div>
+                <label for="nombre">NOMBRE COMPLETO</label>
+                <br>
+                <input 
+                    type="text" 
+                    id="nombre" 
+                    name="nombre_apellido" 
+                    placeholder="Tu nombre"
+                    required
+                >
+            </div>
+        
+            <br>
+        
+            <div>
+                <label for="email">CORREO ELECTRÓNICO</label>
+                <br>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email"
+                    placeholder="tu@email.com"
+                    required
+                >
+            </div>
+        
+            <br>
+        
+            <div>
+                <label for="telefono">TELÉFONO</label>
+                <br>
+                <input 
+                    type="text" 
+                    id="telefono" 
+                    name="telefono"
+                    placeholder="Tu teléfono"
+                    required
+                >
+            </div>
+        
+            <br>
+        
+            <div>
+                <label for="password">CONTRASEÑA</label>
+                <br>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="contrasenia"
+                    placeholder="Mínimo 8 caracteres"
+                    required
+                >
+            </div>
+        
+            <br><br>
+        
+            <button type="submit">CREAR CUENTA</button>
+        
+        </form>
+
+        <br>
+
+        <p>
+            ¿Ya tienes cuenta?
+            <a href="/login">Inicia sesión</a>
+        </p>
+
+        <br>
+
+        <a href="/">← VOLVER AL INICIO</a>
+
+    </div>
+
+</section>
+
 {% endblock %}
