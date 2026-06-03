@@ -58,6 +58,9 @@ CREATE TABLE IF NOT EXISTS reservas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
+ALTER TABLE postres ADD COLUMN descripcion VARCHAR(200);
+ALTER TABLE bebidas ADD COLUMN descripcion VARCHAR(200);
+
 
 
 

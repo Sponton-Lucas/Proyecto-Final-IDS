@@ -8,7 +8,11 @@ def index():
 
 @app.route("/menu")
 def menu():
-	return render_template('menu.html')
+    pos = requests.get('http://localhost:5000/postres')
+    postres = pos.json()
+    beb = requests.get('http://localhost:5000/bebidas')
+    bebidas = beb.json()
+    return render_template('menu.html', postres=postres, bebidas=bebidas)
 
 @app.route("/conocenos")
 def conocenos():

@@ -130,7 +130,7 @@ body {
     font-weight: 400;
 }
 
-.seccion-12__info h3 {
+.seccion-12-info h3 {
     color: rgb(212, 210, 210);
     font-size: 14px;
     font-weight: 300 !important;
@@ -139,7 +139,7 @@ body {
 }
 
 
-.seccion-12__plato {
+.seccion-12-plato {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -147,7 +147,7 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.seccion-12__info small {
+.seccion-12-info small {
     color: #9e9e9e;
     font-size: 13px;
     font-weight: 300;
@@ -155,7 +155,7 @@ body {
 }
 
 
-.seccion-12__precio {
+.seccion-12-precio {
     color: rgb(181, 180, 180);
     font-size: 11px;
     font-weight: 100;
@@ -196,7 +196,7 @@ body {
     font-weight: 400;
 }
 
-.seccion-13__info h3 {
+.seccion-13-info h3 {
     color: rgb(212, 210, 210);
     font-size: 14px;
     font-weight: 300 !important;
@@ -205,7 +205,7 @@ body {
 }
 
 
-.seccion-13__bebida {
+.seccion-13-bebida {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -213,7 +213,7 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.seccion-13__info small {
+.seccion-13-info small {
     color: #9e9e9e;
     font-size: 13px;
     font-weight: 300;
@@ -221,7 +221,7 @@ body {
 }
 
 
-.seccion-13__precio {
+.seccion-13-precio {
     color: rgb(181, 180, 180);
     font-size: 11px;
     font-weight: 100;
@@ -246,6 +246,17 @@ body {
     border-radius: 4px;
     margin-left: 6px;
 }
+
+.badge-alcoholica {
+    background-color: rgba(53, 80, 140, 0.3);
+    color: #5b8cd4;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
+
+
 
 .seccion-13__boton {
     display: block;
