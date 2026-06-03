@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block tittle %} Nombre restaurante - Login{% endblock %}
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
 
 {% block content %}
 {% if error %}
@@ -10,7 +13,7 @@
 <form action='/login_form' method="post">
     <label for="email">Correo electronico:</label>
     <input type="text" id="email" name="email" placeholder="email">
-    <label for="contrasena">Contraseña:</label>
+    <label for="contrasenia">Contraseña:</label>
     <input type="text" id="contrasenia" name="contrasenia" placeholder="Contraseña">
     <button type="submit">Log in</button>
 </form>
