@@ -6,12 +6,14 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/reservas.css') }}">
 {% endblock %}
 
-{% block content %}
+{% block content %}  
+
+<h2 class="mb-4">Reservar una mesa</h2>
+
 <div class="container contenedor-reservas">
 
   <form action="#" method="POST">
-    <h2 class="mb-4">Reservar una mesa</h2>
-
+  
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre y apellido</label>
       <input type="text" id="nombre" name="nombre" class="form-control" required/>
