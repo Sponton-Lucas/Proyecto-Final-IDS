@@ -199,14 +199,20 @@ def get_resena_id(id):
         cursor.close()
         coneccion.close()
 
-def post_resena(mensaje, usuario_id):
+def crear_resena_por_form(nombre, mensaje):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute("INSERT INTO resenas (mensaje, usuario_id) VALUES (%s, %s)", (mensaje, usuario_id))
+        cursor.execute("SELECT id_usuario FROM usuarios WHERE nombre_apellido = %s", (nombre,))
+        id_us = cursor.fetchone()
+        if not id_us:
+            return False
+        id_usuario = id_us["id_usuario"]
+        cursor.execute("INSERT INTO resenas (mensaje, usuario_id) VALUES (%s, %s)", (mensaje, id_usuario,))
         coneccion.commit()
         return True
-    finally:
+        
+    finally: 
         cursor.close()
         coneccion.close()
 
