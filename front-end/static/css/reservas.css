@@ -66,27 +66,31 @@
 
 /* CONTENEDOR DEL FORMULARIO */
 .container {
-  width: min(680px, 100%);   /* ← más ancho */
+  width: min(680px, 100%);
   max-width: 680px;
   height: auto;
   background-color: var(--secundario);
-  padding: 44px 52px;        /* ← más aire interno */
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding: 40px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 20px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.822);
 }
 
 /* INPUTS */
 .form-control, .form-select {
-  background-color: var(--secundario);
+  background-color: rgba(0,0,0,0.2);
   border: 1px solid var(--naranja-oscuro);
   color: var(--naranja-claro);
 }
 
 .form-control:focus, .form-select:focus {
-  background-color: var(--secundario);
+  background-color: rgba(0,0,0,0.3);
   border-color: var(--rosita);
   color: var(--naranja-claro);
   box-shadow: none;
