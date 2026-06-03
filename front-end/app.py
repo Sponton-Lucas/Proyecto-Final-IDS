@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def index():
 	return render_template('index.html')
@@ -17,9 +18,9 @@ def conocenos():
 
 @app.route('/resenas') 
 def mostrar_resenas():
-    reseñas_ejemplo = [
+	reseñas_ejemplo = [
         {
-            "comentario": "¡La comida aquí es un sueño! Nunca había probado sabores tan impactantes.",
+            "comentario": "¡La comida aquí es un sueño!",
             "foto": "persona2.jpeg",
             "nombre": "Sofía Martínez",
         },
@@ -28,9 +29,9 @@ def mostrar_resenas():
             "foto": "persona1.jpeg",
             "nombre": "Juan Pérez",
         }
-    ]
-    
-    return render_template('resenas.html', reseñas=reseñas_ejemplo)
+	] 
+	return render_template('resenas.html', reseñas=reseñas_ejemplo)
+
 
 @app.route("/reservas")
 def reservas():

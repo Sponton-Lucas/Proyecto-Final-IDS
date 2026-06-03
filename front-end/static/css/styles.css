@@ -375,32 +375,3 @@
   content: ' −';
 }
 
-/* estilos seccion 20*/
-.contenido-resena{
-    background-color: rgba(0, 22, 30);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.titulo-resena {
-    font: 55px Verdana, sans-serif;
-    text-align: center;
-    color: white;
-    font-weight: 600;
-
-}
-
-.boton-resena{
-    background-color:#ffa384;
-    color:#1e0800;
-    border:0.5px solid #6f4030;
-    
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 18px;
-    font-weight: 600;
-    text-decoration: none;
-
-    border-radius: 25px;
-    cursor: pointer;
-
-    
-}
