@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, redirect, render_template, request, session
+from flask import Flask, jsonify, redirect, render_template, request, session, flash
 import requests
 
 app = Flask(__name__)
@@ -60,8 +60,8 @@ def agregar_resena():
 
 @app.route('/reservas', methods=['GET', 'POST'])
 def reservas():
-	if 'usuario_id' not in session:
-		return redirect('/login')
+	if 'user' not in session:
+		return render_template('reservas.html', no_session=True)
 	if request.method == 'POST':
 		datos = {
 			"usuario_id": session.get('usuario_id'),
@@ -69,8 +69,12 @@ def reservas():
 			"hora": request.form.get('horario'),
 			"cantidad_personas": int(request.form.get('personas'))
 		}
-		requests.post("http://localhost:5000/reservas", json=datos)
-		return redirect('/') 
+		respuesta = requests.post("http://localhost:5000/reservas", json=datos)
+		if respuesta.status_code == 201:
+			flash('¡Reserva confirmada! Te esperamos.', 'exito')
+		else:
+			flash('Hubo un error al hacer la reserva. Intentá de nuevo.', 'error')
+		return redirect('/reservas') 
 	return render_template('reservas.html')
 
 @app.route('/login')
@@ -89,6 +93,7 @@ def login_form():
     for u in usuarios:
         if u["email"] == email and u["contrasenia"] == contrasena:
             user = u["nombre_apellido"]
+            session["usuario_id"] = u["id_usuario"] 
             session["user"] = user
             return redirect('/usuario')
     return redirect('/usuario_not_found')
