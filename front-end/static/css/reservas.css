@@ -1,18 +1,11 @@
 main {
-  min-height: calc(100vh - 90px);
+  background: var(--principal);
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  min-height: calc(100vh - 86px); /* Ajusta el valor segun la altura del navbar */
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 40px;
-  background: linear-gradient(
-    90deg,
-    var(--principal) 0%,
-    var(--secundario) 30%,
-    var(--secundario) 70%,
-    var(--principal) 100%
-  );
-  color: var(--naranja-claro);
 }
 
 /* título de la página */
@@ -21,12 +14,18 @@ h2 {
   font-size: 2.5rem;
   font-weight: 300;
   letter-spacing: 0.05em;
-  margin-bottom: 8px !important;
+  text-align: center;
+  padding-top: 10px;
 }
 
 .contenedor-reservas {
-  max-width: 550px;
-  margin-top: 0px;
+  background-color: var(--secundario);
+  max-width: 600px;
+  padding: 20px 15px;
+  padding-top: 0px;
+  border-radius: 8px;
+  border-top: 3px solid var(--rosita);
+  margin-bottom: 30px;
 }
 
 /* inputs y selects */
@@ -55,6 +54,7 @@ h2 {
   background-color: var(--naranja-oscuro) !important;
   border: none !important;
   letter-spacing: 0.1em;
+  margin-top: 8px;
 }
 
 .btn-primary:hover {
@@ -80,5 +80,5 @@ h2 {
 .link-volver {
   color: var(--rosita);
   display: block;
-  margin-top: 1rem;
+  margin-top: 6px;
 }
