@@ -78,37 +78,6 @@ body {
     margin-bottom: 2rem;
 }
 
-
-.seccion-2-boton {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    background-color: var(--rosita);
-    color: var(--secundario);
-    padding: 6px 10px 6px 20px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-family: var(--font-family);
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.seccion-2-boton:hover {
-    background-color: var(--naranja-claro);
-}
-
-.seccion-2-flecha {
-    background-color: var(--marron);
-    color: var(--rosita);
-    width: 30px;
-    height: 30px;
-    border-radius: 70%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-}
-
 .seccion-2-contenedor-img {
     background-color: rgba(255, 255, 255, 0.08);
     border-radius: 20px;
