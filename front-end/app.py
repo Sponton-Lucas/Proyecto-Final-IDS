@@ -25,7 +25,7 @@ def mostrar_resenas():
         },
         {
             "comentario": "Excelente atención y los platos salen rapidísimo. Súper recomendado.",
-            "foto": "hombre1.jpeg",
+            "foto": "persona1.jpeg",
             "nombre": "Juan Pérez",
         }
     ]

@@ -5,34 +5,38 @@
 {% block content %}
 
 {#seccion 20#}
-<div class="container mt-3 md-3">
-    <h1 class="text-center">
-        <b>¡Reseñas de nuestros clientes!</b>
-    </h1>
-</div>
+<section class="contenido-resena">
 
-<div class="boton-resena">
-    <a href="#" class="btn btn-dark">Dejanos tu reseña aqui</a>
-</div>
+    <h1 class="titulo-resena"> ¡Reseñas de nuestros clientes! </h1>
+    
+    <div class="btn">
+        <a href="#" class="boton-resena">Dejanos tu reseña aqui</a>
+    </div>
 
-<div class="mover_resena">
+<div class="movimiento-resena">
 
-    <button class="flecha-btn" id="prev-btn"></button>
+    <button class="flecha-btn" id="prev-btn">flecha</button>
 
     <div class="resenas-slider"> {# esta clase sirve para hacer el efecto de la reseña que se mueva con los botones usando css #}
         <div class="resenas-track"> {# clase para hacer el efecto de la reseña en movimiento #}
-          {%for resena in reseñas%} 
+         
+            {%for resena in reseñas%} 
              <div class="comentario text-center">
-                <p>"{{ resena.comentario }}"</p>
-                <img src="{{ url_for('static', filename='images/'~resena.foto) }}" alt="imagen.persona" width="100" height="100">
+                <p class="comentario-personalizado">
+                    "{{ resena.comentario }}"
+                </p>
+                
+                <img src="{{ url_for('static', filename='images/'~resena.foto) }}" alt="imagen-persona" width="100" height="100">
+                
                 <h5 class="nombre">{{ resena.nombre }}</h5>
+
             </div>
           {% endfor %}
         </div>
     </div>
 
-    <button class="flecha-btn" id="next-btn"></button>
-</div>
+    <button class="flecha-btn" id="next-btn">flecha</button>
+</section>
 
 
 {% endblock %}
