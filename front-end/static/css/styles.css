@@ -1,14 +1,8 @@
 @import url('base.css');
 @import url('variables.css');
 @import url('navbar.css');
-@import url('boton.css');
 @import url('footer.css');
-@import url('index.css');
-@import url('menu.css');
-@import url('resenas.css');
-@import url('reservas.css');
-@import url('login.css');
-@import url('registro.css');
+@import url('boton.css');
 
 
 /* SECCIÓN 3 - Reseñas */
@@ -324,8 +318,9 @@
   padding: 0 20px;
 }
 
-.seccion-faq h1 {
+.seccion-faq h2 {
   color: var(--naranja-claro);
+  text-align: center;
   font-size: 2.5rem;
   font-weight: 300;
   margin-bottom: 8px;

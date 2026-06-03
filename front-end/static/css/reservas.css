@@ -1,60 +1,113 @@
-main {
-  min-height: calc(100vh - 90px);
+
+/* LAYOUT DOS COLUMNAS */
+.reservas-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  height: calc(100vh - 95.6px);
+  overflow: hidden;
+}
+
+/* COLUMNA IZQUIERDA */
+.reservas-imagen {
+  position: relative;
+  overflow: hidden;
+}
+
+.reservas-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;;
+}
+
+.reservas-imagen-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  color: var(--crema);
+}
+
+.reservas-imagen-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rosita);
+  margin-bottom: 8px;
+}
+
+.reservas-imagen-overlay h2 {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--naranja-claro);
+  line-height: 1.2;
+}
+
+/* COLUMNA DERECHA */
+.reservas-formulario {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 40px;
-  background: linear-gradient(
-    90deg,
-    var(--principal) 0%,
-    var(--secundario) 30%,
-    var(--secundario) 70%,
-    var(--principal) 100%
-  );
-  color: var(--naranja-claro);
+  background-color: var(--principal);
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
-/* título de la página */
-h2 {
+.reservas-formulario h2 {
   color: var(--naranja-claro);
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 300;
-  letter-spacing: 0.05em;
-  margin-bottom: 8px !important;
+  margin: 0 0 28px 0;
+  padding: 0;
 }
 
-.contenedor-reservas {
-  max-width: 550px;
-  margin-top: 0px;
-}
-
-/* inputs y selects */
-.form-control, .form-select {
+/* CONTENEDOR DEL FORMULARIO */
+.container {
+  width: min(680px, 100%);
+  max-width: 680px;
+  height: auto;
   background-color: var(--secundario);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding: 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.822);
+}
+
+/* INPUTS */
+.form-control, .form-select {
+  background-color: rgba(0,0,0,0.2);
   border: 1px solid var(--naranja-oscuro);
   color: var(--naranja-claro);
 }
 
 .form-control:focus, .form-select:focus {
-  background-color: var(--secundario);
+  background-color: rgba(0,0,0,0.3);
   border-color: var(--rosita);
   color: var(--naranja-claro);
   box-shadow: none;
 }
 
-/* labels */
 .form-label {
   color: var(--rosita);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.05em;
 }
 
-/* botón */
+/* BOTÓN */
 .btn-primary {
   background-color: var(--naranja-oscuro) !important;
   border: none !important;
   letter-spacing: 0.1em;
+  margin-top: 8px;
 }
 
 .btn-primary:hover {
@@ -62,23 +115,25 @@ h2 {
   color: var(--principal) !important;
 }
 
-/* texto pequeño del mail */
-.form-text a {
-  color: var(--rosita);
-}
-
+/* TEXTO PEQUEÑO */
 .form-text {
   color: var(--naranja-claro) !important;
+  font-size: 0.78rem;
 }
 
-/* tarjeta que envuelve el formulario */
-.container form {
-  padding: 20px;
-}
+.form-text a { color: var(--rosita); }
 
-/* link volver al inicio */
+/* VOLVER */
 .link-volver {
   color: var(--rosita);
   display: block;
-  margin-top: 1rem;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.link-volver:hover { color: var(--naranja-claro); }
+
+input[type="number"] {
+  color-scheme: dark;
 }
