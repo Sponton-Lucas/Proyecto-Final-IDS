@@ -1,5 +1,3 @@
-develop
-
 from flask import Flask, jsonify, render_template, request, redirect, session
 import requests
 
@@ -74,9 +72,7 @@ def login_form():
 def usuario_not_found():
     error = "Usuario no encontrado o contraseña incorrecta"
     return render_template('login.html', error = error)
-@app.route("/registro")
-def registro():
-	return render_template('registro.html')
+
 
 @app.route('/usuario')
 def user():
