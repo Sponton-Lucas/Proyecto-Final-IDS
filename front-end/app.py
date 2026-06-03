@@ -20,21 +20,6 @@ def conocenos():
     return render_template('conocenos.html', se=servicios_extra)
 
 
-@app.route('/resenas') 
-def mostrar_resenas():
-	reseñas_ejemplo = [
-        {
-            "comentario": "¡La comida aquí es un sueño!",
-            "foto": "persona2.jpeg",
-            "nombre": "Sofía Martínez",
-        },
-        {
-            "comentario": "Excelente atención y los platos salen rapidísimo. Súper recomendado.",
-            "foto": "persona1.jpeg",
-            "nombre": "Juan Pérez",
-        }
-	] 
-	return render_template('resenas.html', reseñas=reseñas_ejemplo)
 
 @app.route("/resenas", methods=['GET'])
 def resenas():
@@ -45,7 +30,7 @@ def resenas():
         usuarios = us.json()
         user = session["user"]
         
-        return render_template('resenas.html', re=resenas, u=usuarios, user=user )
+        return render_template('resenas.html', resenas=resenas, usuarios=usuarios, user=user )
     else: 
         return render_template('login.html')
 
