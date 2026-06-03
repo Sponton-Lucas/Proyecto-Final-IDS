@@ -45,22 +45,22 @@ def agregar_resena():
 
 @app.route('/reservas', methods=['GET', 'POST'])
 def reservas():
-	if 'user' not in session:
+    if 'user' not in session:
         return render_template('reservas.html', no_session=True)
-	if request.method == 'POST':
-		datos = {
-			"usuario_id": session.get('usuario_id'),
-			"fecha": request.form.get('fecha'),
-			"hora": request.form.get('horario'),
-			"cantidad_personas": int(request.form.get('personas'))
+    if request.method == 'POST':
+        datos = {
+            "usuario_id": session.get('usuario_id'),
+            "fecha": request.form.get('fecha'),
+            "hora": request.form.get('horario'),
+            "cantidad_personas": int(request.form.get('personas'))
 		}
-		respuesta = requests.post("http://localhost:5000/reservas", json=datos)
-		if respuesta.status_code == 201:
-			flash('¡Reserva confirmada! Te esperamos.', 'exito')
-		else:
-			flash('Hubo un error al hacer la reserva. Intentá de nuevo.', 'error')
-		return redirect('/reservas') 
-	return render_template('reservas.html')
+        respuesta = requests.post("http://localhost:5000/reservas", json=datos)
+        if respuesta.status_code == 201:
+            flash('¡Reserva confirmada! Te esperamos.', 'exito')
+        else:
+            flash('Hubo un error al hacer la reserva. Intentá de nuevo.', 'error')
+            return redirect('/reservas') 
+    return render_template('reservas.html')
 
 @app.route('/login')
 def login():
@@ -74,9 +74,9 @@ def login_form():
     us = requests.get('http://localhost:5000/usuarios')
     usuarios = us.json()
     email = request.form.get("email")
-    contrasena = request.form.get("contrasenia")
+    contrasenia = request.form.get("contrasenia")
     for u in usuarios:
-        if u["email"] == email and u["contrasenia"] == contrasena:
+        if u["email"] == email and u["contrasenia"] == contrasenia:
             user = u["nombre_apellido"]
             session["usuario_id"] = u["id_usuario"] 
             session["user"] = user
@@ -120,12 +120,24 @@ def registro():
 
 @app.route('/registrarse', methods=['POST'])
 def register_form():
-    try:
-        datos_usuario = request.form.to_dict()
-        respuesta = requests.post("http://localhost:5000/usuarios", json=datos_usuario)
-    except requests.exceptions.RequestException as e:
-        return f"Error al procesar el registro: {e}", 400
-    return redirect('/')
+    datos_usuario = request.form.to_dict()
+
+    respuesta = requests.post(
+        "http://localhost:5000/usuarios",
+        json=datos_usuario
+    )
+
+   
+    if respuesta.status_code == 201:
+        usuarios = requests.get("http://localhost:5000/usuarios").json()
+
+        for u in usuarios:
+            if u["email"] == datos_usuario["email"]:
+                session["user"] = u["nombre_apellido"]
+                session["usuario_id"] = u["id_usuario"]
+                break
+
+    return redirect('/usuario')
 
 if __name__ == '__main__':
 	app.run(port=3000, debug=True)  
