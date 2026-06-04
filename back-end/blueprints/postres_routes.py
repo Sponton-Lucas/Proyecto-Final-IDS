@@ -27,8 +27,8 @@ def crear_postre():
         return jsonify({"error": "Campos requeridos: precio y nombre"}), 400
     precio = datos.get("precio")
     nombre = datos.get("nombre")
-    es_vegano = datos.get("es_vegano")
-    es_celiaco = datos.get("es_celiaco")
+    es_vegano = datos.get("es_vegano", False)
+    es_celiaco = datos.get("es_celiaco", False)
     if (not precio) or (not nombre):
         return jsonify({'error': 'Precio y nombre no pueden estar vacios'}), 400
     postre_nuevo = db.post_postre(precio, nombre, es_vegano, es_celiaco)

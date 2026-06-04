@@ -46,7 +46,15 @@ def actualizar_comida_principal(id_plato):
     datos = request.get_json()
     if not datos:
         return jsonify({"error": "Body vacío"}), 400
-    resultado = db.put_comida_principal(id_plato, datos)
+    if ("nombre_plato" not in datos) or ("precio" not in datos) or ("es_vegano" not in datos) or ("es_celiaco" not in datos):
+        return jsonify({"error": "Body incompleto"}), 400
+    nombre_plato = datos.get("nombre_plato")
+    precio = datos.get("precio")
+    es_celiaco = datos.get("es_celiaco")
+    es_vegano = datos.get("es_vegano")
+    if nombre_plato is None or precio is None or es_celiaco is None or es_vegano is None:
+        return jsonify({"error": "Los campos (nombre_plato, precio, es_celiaco, es_vegano) no pueden estar incompletos"}), 400
+    resultado = db.put_comida_principal(id_plato, nombre_plato, precio, es_celiaco, es_vegano)
     if "error" in resultado:
         return jsonify(resultado), 404
     return jsonify(resultado), 200

@@ -1,5 +1,5 @@
 import mysql.connector
-
+from datetime import date, timedelta
 db_config = {
     'host':'localhost',
     'user':'caidaSiu',
@@ -53,12 +53,12 @@ def put_usuario_id(id_usuario, nombre_apellido, email, telefono):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute("SELECT * FROM usuarios WHERE id_usuarios = %s",(id_usuario,))
+        cursor.execute("SELECT * FROM usuarios WHERE id_usuario = %s",(id_usuario,))
         usuarios = cursor.fetchone()
         if not usuarios:
             return None
         else: 
-            cursor.execute("UPDATE usuario SET nombre_apellido = %s, email = %s, telefono = %s WHERE id_usuario = %s", (nombre_apellido, email, telefono, id_usuario,))
+            cursor.execute("UPDATE usuarios SET nombre_apellido = %s, email = %s, telefono = %s WHERE id_usuario = %s", (nombre_apellido, email, telefono, id_usuario,))
         coneccion.commit()
         return True
     finally:
@@ -164,9 +164,11 @@ def patch_servicio_extra(id_servicio, datos):
         if not servicio:
             return {"error": "Servicio no encontrado"}
         else:
+            nuevo_nombre = datos.get('nombre_servicio', servicio['nombre_servicio'])
+            nuevo_precio = datos.get('precio', servicio['precio'])
             cursor.execute(
                 "UPDATE servicios_extra SET nombre_servicio = %s, precio = %s WHERE id_servicio = %s",
-                (datos['nombre_servicio'], datos['precio'], id_servicio)
+                (nuevo_nombre, nuevo_precio, id_servicio)
             )
             conexion.commit()
             return {"mensaje": "Servicio actualizado exitosamente"}
@@ -244,7 +246,7 @@ def put_resena(id_resenas, datos):
         cursor.close()
         coneccion.close()
 
-def patch_resena(id_resenas, mensaje, usuario_id):
+def patch_resena(id_resenas, mensaje=None, usuario_id=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try: 
@@ -254,10 +256,9 @@ def patch_resena(id_resenas, mensaje, usuario_id):
             return False
         else:
             nuevo_mensaje = mensaje if mensaje is not None else resena["mensaje"]
-            nuevo_usuario_id = usuario_id if usuario_id is not None else resena["usuario_id"]
             cursor.execute(
-                "UPDATE resenas SET mensaje = %s, usuario_id = %s WHERE id_resenas = %s",
-                (nuevo_mensaje, nuevo_usuario_id, id_resenas,)
+                "UPDATE resenas SET mensaje = %s WHERE id_resenas = %s",
+                (nuevo_mensaje, id_resenas,)
             )
             coneccion.commit()
             return True
@@ -326,11 +327,11 @@ def put_postre(id_postre, precio, nombre, es_vegano, es_celiaco):
         cursor.close()
         coneccion.close()  
 
-def patch_postre(id_postres, precio=None, nombre=None, es_vegano=None, es_celiaco=None):
+def patch_postre(id_postre, precio=None, nombre=None, es_vegano=None, es_celiaco=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.excecute("SELECT * FROM postres WHERE id_postres = %s", (id_postres,))
+        cursor.execute("SELECT * FROM postres WHERE id_postre = %s", (id_postre,))
         postre = cursor.fetchone()
         if not postre: 
             return False
@@ -339,7 +340,7 @@ def patch_postre(id_postres, precio=None, nombre=None, es_vegano=None, es_celiac
             nuevo_nombre = nombre if nombre is not None else postre["nombre"]
             nuevo_es_vegano = es_vegano if es_vegano is not None else postre["es_vegano"]
             nuevo_es_celiaco = es_celiaco if es_celiaco is not None else postre["es_celiaco"]
-            cursor.execute("UPDATE postres SET precio = %s, nombre = %s, es_vegano = %s, es_celiaco = %s WHERE id_postres= %s", (nuevo_precio, nuevo_nombre, nuevo_es_vegano, nuevo_es_celiaco, id_postres,))
+            cursor.execute("UPDATE postres SET precio = %s, nombre = %s, es_vegano = %s, es_celiaco = %s WHERE id_postre = %s", (nuevo_precio, nuevo_nombre, nuevo_es_vegano, nuevo_es_celiaco, id_postre,))
             coneccion.commit()
             return True
     finally:
@@ -350,7 +351,7 @@ def delete_postre(id_postre):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-            cursor.execute("DELETE FROM postres WHERE id = %s", (id_postre,))
+            cursor.execute("DELETE FROM postres WHERE id_postre = %s", (id_postre,))
             coneccion.commit()
             return cursor.rowcount > 0
     finally:
@@ -433,8 +434,8 @@ def delete_bebida(id_bebidas):
     cursor = coneccion.cursor(dictionary=True)
 
     try:
-            cursor.execute(("DELETE FROM bebidas WHERE id_bebidas = %s", (id_bebidas,)))
-            cursor.commit()
+            cursor.execute("DELETE FROM bebidas WHERE id_bebidas = %s", (id_bebidas,))
+            coneccion.commit()
             return cursor.rowcount > 0
     finally:
         cursor.close()
@@ -473,34 +474,17 @@ def post_plato(nombre_plato, precio=0, es_vegano=False, es_celiaco=False):
         cursor.close()
         coneccion.close()
 
-def put_comida_principal(id_plato, datos):
+def put_comida_principal(id_plato, nombre_plato, precio, es_celiaco, es_vegano):
     conexion = get_db_connection()
     cursor = conexion.cursor(dictionary=True)
     try:
         cursor.execute("SELECT * FROM comida_principal WHERE id_plato = %s", (id_plato,))
         plato = cursor.fetchone()
         if not plato:
-            return {"error": "Plato de comida principal no encontrado"}
-        campos = []
-        valores = []
-        if 'nombre_plato' in datos:
-            campos.append("nombre_plato = %s")
-            valores.append(datos['nombre_plato'])
-        if 'precio' in datos:
-            campos.append("precio = %s")
-            valores.append(datos['precio'])
-        if 'es_vegano' in datos:
-            campos.append("es_vegano = %s")
-            valores.append(datos['es_vegano'])
-        if 'es_celiaco' in datos:
-            campos.append("es_celiaco = %s")
-            valores.append(datos['es_celiaco'])
-        if not campos:
-            return {"error": "Al menos un campo debe ser proporcionado"}
-        valores.append(id_plato)
-        consulta = f"UPDATE comida_principal SET {', '.join(campos)} WHERE id_plato = %s"
-        cursor.execute(consulta, valores)
-        conexion.commit()
+            return {"error": "Plato no encontrado"}
+        else:
+            cursor.execute("UPDATE comida_principal SET nombre_plato = %s, precio = %s, es_celiaco = %s, es_vegano = %s WHERE id_plato = %s", (nombre_plato, precio, es_celiaco, es_vegano, id_plato,))
+            conexion.commit()
         return {"mensaje": "Plato de comida principal actualizado exitosamente"}
     finally:
         cursor.close()
@@ -546,6 +530,15 @@ def get_reservas():
     try:
         cursor.execute('SELECT * FROM reservas')
         reservas = cursor.fetchall()
+        for r in reservas:
+            if isinstance(r.get("fecha"), date):
+                r["fecha"] = r["fecha"].isoformat()
+            if isinstance(r.get("hora"), timedelta):
+                total_seconds = int(r["hora"].total_seconds())
+                horas = total_seconds // 3600
+                minutos = (total_seconds % 3600) // 60
+                segundos = total_seconds % 60
+                r["hora"] = f"{horas:02d}:{minutos:02d}:{segundos:02d}"
         return reservas
     finally:
         cursor.close()
@@ -576,7 +569,7 @@ def post_reserva(datos):
         cursor.close()
         coneccion.close()
 
-def put_reserva(id_reservas, usuario_id, fecha, hora, cantidad_personas, estado):
+def put_reserva(id_reservas, fecha, hora, cantidad_personas, estado):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
@@ -586,8 +579,8 @@ def put_reserva(id_reservas, usuario_id, fecha, hora, cantidad_personas, estado)
             return False
         else:
             cursor.execute(
-                "UPDATE reservas SET usuario_id = %s, fecha = %s, hora = %s, cantidad_personas = %s, estado = %s WHERE id_reservas = %s",
-                (usuario_id, fecha, hora, cantidad_personas, estado, id_reservas,)
+                "UPDATE reservas SET fecha = %s, hora = %s, cantidad_personas = %s, estado = %s WHERE id_reservas = %s",
+                (fecha, hora, cantidad_personas, estado, id_reservas,)
             )
             coneccion.commit()
             return True

@@ -24,11 +24,11 @@ def crear_bebida():
     datos = request.get_json()
     if not datos:
         return jsonify({'error': 'Body vacio'}), 400
-    if ("precio" not in datos) or ("nombre" not in datos) or ("es_alcoholica" not in datos):
+    if ("precio" not in datos) or ("nombre" not in datos):
         return jsonify({'error': 'Body incompleto'}), 400
     precio = datos.get("precio")
     nombre = datos.get("nombre")
-    es_alcoholica = datos.get("es_alcoholica")
+    es_alcoholica = datos.get("es_alcoholica", False)
     if (not precio) or (not nombre):
         return jsonify({'error': 'Los campos precio y nombre no pueden estar vacios'}), 400
     bebida_nueva = db.post_bebida(precio, nombre, es_alcoholica)
