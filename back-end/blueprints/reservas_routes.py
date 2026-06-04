@@ -56,27 +56,26 @@ def modificar_reserva(id_reservas):
     datos = request.get_json()
     if not datos:
         return jsonify({"error": "Datos no proporcionados."}), 400
-    if ('usuario_id' not in datos) and ('fecha' not in datos) and ('hora' not in datos) and ('cantidad_personas' not in datos) and ('"estado' not in datos):
-        return jsonify({"message": "Al menos un campo (usuario_id, fecha, hora, cantidad_personas) debe ser proporcionado"}), 400
+    if ('fecha' not in datos) and ('hora' not in datos) and ('cantidad_personas' not in datos) and ('estado' not in datos):
+        return jsonify({"message": "Al menos un campo (fecha, hora, cantidad_personas, estado) debe ser proporcionado"}), 400
     
-    usuario_id = datos.get("usuario_id")
     fecha = datos.get("fecha")
     hora = datos.get("hora")
     cantidad_personas = datos.get("cantidad_personas")
-    estado = datos.get("estado", "pendiente")
+    estado = datos.get("estado")
 
-    reserva_modificada = db.patch_reserva(id_reservas, usuario_id, fecha, hora, cantidad_personas, estado)
+    reserva_modificada = db.patch_reserva(id_reservas, fecha, hora, cantidad_personas, estado)
     if reserva_modificada:
         return '', 204
     else:
         return jsonify({"message": "No se pudo modificar la reserva."}), 400
 
 #DELETE
-@reservas_bp.route('/reservas/<int:id>', methods=['DELETE'])
-def borrar_reserva(id):
-    reserva = db.delete_reserva(id)
-    if not reserva:
+@reservas_bp.route('/reservas/<int:id_reservas>', methods=['DELETE'])
+def borrar_reserva(id_reservas):
+    eliminada = db.delete_reserva(id_reservas)
+    if not eliminada:
         return jsonify({"error": "No se encontro la reserva por el id buscado"}), 404
-    return jsonify({"message": "Reserva eliminada"}), 201
+    return jsonify({"message": "Reserva eliminada"}), 200
 
 

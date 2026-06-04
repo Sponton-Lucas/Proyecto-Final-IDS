@@ -40,7 +40,7 @@ def actualizar_usuario(id_usuario):
     telefono = usuarios.get("telefono")
     if (not nombre_apellido or not email or not telefono):
         return jsonify({"error": "Los campos no pueden estar incompletos"}), 404 
-    actualiza_usuario = db.put_usuarios(id_usuario, nombre_apellido, email, telefono)
+    actualiza_usuario = db.put_usuarios_id(id_usuario, nombre_apellido, email, telefono)
     if actualiza_usuario:
         return jsonify({"message": "Campos actualizados con exito"}), 200
     return jsonify({"error": "No se pudo actualizar los campos, intente de nuevo"}), 200
@@ -67,7 +67,7 @@ def modificar_usuario(id_usuario):
 @usuarios_bp.route('/usuarios/<int:id_usuario>', methods=['DELETE'])
 def borrar_usuario(id_usuario):
     borrado = db.delete_usuario(id_usuario)
-    if borrado:
-        return '', 204
+    if not borrado:
+        return jsonify({"error": "No se encontro el usuario con el id buscado"}), 404
     else:
-        return jsonify({"message": "No existe el usuario"}), 404
+        return jsonify({"message": "Usuario eliminado"}), 200

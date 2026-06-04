@@ -12,7 +12,7 @@ def obtener_servicios():
 #GET ID
 @servicios_extra_bp.route('/servicios_extra/<int:id_servicio>', methods=['GET'])
 def obtener_servicio_extra(id_servicio):
-    servicio = db.get_servicio_extra(id_servicio)
+    servicio = db.get_servicio_extra_id(id_servicio)
     if servicio:
         return jsonify(servicio)
     else:

@@ -55,7 +55,7 @@ def put_usuarios_id(id_usuarios, nombre_apellido, email, telefono):
         usuarios = cursor.fetchone()
         if not usuarios:
             return {"error": "usuario no encontrado"}
-        else: cursor.execute("UPDATE usuario SET nombre_apelllido = %s email = %s telefono = %s WHERE id_usuario = %s", (nombre_apellido, email, telefono, id,))
+        else: cursor.execute("UPDATE usuario SET nombre_apelllido = %s, email = %s, telefono = %s WHERE id_usuario = %s", (nombre_apellido, email, telefono, id_usuarios,))
         coneccion.commit()
         return {"message": "Usuario actualizado exitosamente"}
     finally:
@@ -82,6 +82,17 @@ def patch_usuario(id, nombre_apellido, email, telefono, contrasenia, es_admin):
             )
             coneccion.commit()
             return True
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def delete_usuario(id_usuario):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("DELETE FROM usuarios WHERE id_usuario = %s", (id_usuario,))
+        coneccion.commit()
+        return cursor.rowcount > 0
     finally:
         cursor.close()
         coneccion.close()
@@ -356,6 +367,17 @@ def delete_postre(id):
         cursor.close()
         coneccion.close()
 
+def get_bebidas():
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM bebidas")
+        bebidas = cursor.fetchall()
+        return bebidas
+    finally:
+        cursor.close()
+        coneccion.close()
+
 def get_bebida_id(id_bebida):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
@@ -453,6 +475,17 @@ def get_comida_principal_id():
         cursor.execute("SELECT * FROM comida_principal WHERE id_comida_principal = %s", (id_comida_principal,))
         id_comida_principal = cursor.fetchall()
         return id_comida_principal
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def post_plato(nombre_plato, precio, es_vegano, es_celiaco):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute('INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco) VALUES (%s, %s, %s, %s)', (nombre_plato, precio, es_vegano, es_celiaco,))
+        coneccion.commit()
+        return True
     finally:
         cursor.close()
         coneccion.close()
@@ -592,17 +625,29 @@ def put_reserva(id, usuario_id, fecha, hora, cantidad_personas, estado):
         cursor.close()
         coneccion.close()
 
-def delete_reservas_id(id_reserva):
+def patch_reserva(id_reservas, fecha=None, hora=None, cantidad_personas=None, estado=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute("SELECT * FROM reserva WHERE id_reserva = %s", (id_reserva,))
+        cursor.execute("SELECT * FROM reservas WHERE id_reservas = %s", (id_reservas,))
         reserva = cursor.fetchone()
         if not reserva:
-            return False
+            return None
         else:
-            cursor.execute("DELETE FROM reserva WHERE id_reserva = %s", (id_reserva,))
+            cursor.execute("UPDATE reservas SET fecha = COALESCE(%s, fecha), hora = COALESCE(%s, hora), cantidad_personas = COALESCE(%s, cantidad_personas), estado = COALESCE(%s, estado) WHERE id_reservas = %s", (fecha, hora, cantidad_personas, estado, id_reservas))
+            coneccion.commit()
             return True
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def delete_reserva(id_reservas):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("DELETE FROM reservas WHERE id_reservas = %s", (id_reservas,))
+        coneccion.commit()
+        return cursor.rowcount > 0
     finally:
         cursor.close()
         coneccion.close()
