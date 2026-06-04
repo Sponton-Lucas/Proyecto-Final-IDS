@@ -14,7 +14,7 @@ def obtener_servicios():
 def obtener_servicio_extra(id_servicio):
     servicio = db.get_servicio_extra_id(id_servicio)
     if servicio:
-        return jsonify(servicio)
+        return jsonify(servicio), 200
     else:
         return jsonify({'error': 'servicio no encontrado'}), 404
 
@@ -32,9 +32,9 @@ def crear_servicio_extra():
         return jsonify({'error': 'los campos no pueden estar vacios'}), 400
     servicio_nuevo = db.post_servicio_extra(nombre_servicio, precio)
     if servicio_nuevo:
-        return jsonify({'message': 'se creo correctamente la nueva bebida'}), 200
+        return jsonify({'message': 'Servicio creado correctamente'}), 201
     else:
-        return jsonify({'error': 'No se pudo crear correctamente la nueva bebida'}), 400
+        return jsonify({'error': 'No se pudo crear el servicio'}), 400
 
 #PUT
 @servicios_extra_bp.route('/servicios_extra/<int:id_servicio>', methods=['PUT'])
@@ -42,16 +42,22 @@ def actualizar_servicio_extra(id_servicio):
     datos = request.get_json()
     if not datos:
         return jsonify({"error": "Datos no proporcionados"}), 400
-    if 'nombre_servicio' not in datos: #no chequeo si falta el precio por que se asume que si no se provee uno entonces es cero
+    if 'nombre_servicio' not in datos:
         return jsonify({"error": "Falta el nombre del servicio"}), 400
     resultado = db.put_servicios_extra(id_servicio, datos)
+    if "error" in resultado:
+        return jsonify(resultado), 404
     return jsonify(resultado), 200
 
 #PATCH
 @servicios_extra_bp.route('/servicios_extra/<int:id_servicio>', methods=['PATCH'])
 def modificar_servicio_extra(id_servicio):
     datos = request.get_json()
+    if not datos:
+        return jsonify({"error": "Datos no proporcionados"}), 400
     resultado = db.patch_servicio_extra(id_servicio, datos)
+    if "error" in resultado:
+        return jsonify(resultado), 404
     return jsonify(resultado), 200
 
 #DELETE
@@ -59,6 +65,6 @@ def modificar_servicio_extra(id_servicio):
 def borrar_servicio_extra(id_servicio):
     borrado = db.delete_servicio_extra(id_servicio)
     if borrado:
-        return jsonify({'message': 'servicio extra eliminado'}),200
+        return jsonify({'message': 'Servicio eliminado'}),200
     else:
-        return jsonify({'error': 'servicio no eliminado'}), 404
+        return jsonify({'error': 'Servicio no encontrado'}), 404

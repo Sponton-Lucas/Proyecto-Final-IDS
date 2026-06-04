@@ -7,14 +7,12 @@ reservas_bp = Blueprint('reservas', __name__)
 @reservas_bp.route('/reservas', methods=['GET'])
 def obtener_reservas():
     reservas = db.get_reservas()
-    if not reservas:
-        return jsonify({"error": "No hay reservas"}), 404
     return jsonify(reservas), 200
 
 #GET ID
-@reservas_bp.route('/reservas/<int:id>', methods=['GET'])
-def obtener_reserva(id):
-    reserva = db.get_reserva_id(id)
+@reservas_bp.route('/reservas/<int:id_reservas>', methods=['GET'])
+def obtener_reserva(id_reservas):
+    reserva = db.get_reserva_id(id_reservas)
     if reserva:
         return jsonify(reserva), 200
     else:
@@ -28,27 +26,27 @@ def crear_reserva():
         return jsonify({"error": "Datos no proporcionados"}), 400
     if 'usuario_id' not in datos or 'fecha' not in datos or 'hora' not in datos or 'cantidad_personas' not in datos:
         return jsonify({"error": "Todos los campos son requeridos"}), 400
-    resultado = db.crear_reserva(datos)
+    resultado = db.post_reserva(datos)
     return jsonify(resultado), 201
 
 #PUT
-@reservas_bp.route('/reservas/<int:id>', methods=['PUT'])
-def actualizar_reserva(id):
+@reservas_bp.route('/reservas/<int:id_reservas>', methods=['PUT'])
+def actualizar_reserva(id_reservas):
     reserva = request.get_json()
     if ("usuario_id" not in reserva) or ("fecha" not in reserva) or ("hora" not in reserva) or ("cantidad_personas" not in reserva) or ("estado" not in reserva):
-        return jsonify({'error':'body incompleto'}), 400
+        return jsonify({'error':'Body incompleto'}), 400
     usuario_id = reserva.get("usuario_id")
     fecha = reserva.get("fecha")
     hora = reserva.get("hora")
     cantidad_personas = reserva.get("cantidad_personas")
     estado = reserva.get("estado")
     if (not usuario_id) or (not fecha) or (not hora) or (not cantidad_personas) or (not estado):
-        return jsonify({'error':'los campos no pueden estar incompletos'}), 404
-    actualizar_reserva = db.put_reserva(id, usuario_id, fecha, hora, cantidad_personas, estado)
+        return jsonify({'error':'Los campos no pueden estar vacios'}), 400
+    actualizar_reserva = db.put_reserva(id_reservas, usuario_id, fecha, hora, cantidad_personas, estado)
     if actualizar_reserva:
-        return jsonify({'message':'reserva actualizada'}), 200
+        return jsonify({'message':'Reserva actualizada'}), 200
     else:
-        return jsonify({'error':'no se pudo actualizar correctamente'}), 404
+        return jsonify({'error':'Reserva no encontrada'}), 404
 
 #PATCH
 @reservas_bp.route('/reservas/<int:id_reservas>', methods=['PATCH'])
@@ -68,14 +66,14 @@ def modificar_reserva(id_reservas):
     if reserva_modificada:
         return '', 204
     else:
-        return jsonify({"message": "No se pudo modificar la reserva."}), 400
+        return jsonify({"error": "Reserva no encontrada."}), 404
 
 #DELETE
 @reservas_bp.route('/reservas/<int:id_reservas>', methods=['DELETE'])
 def borrar_reserva(id_reservas):
     eliminada = db.delete_reserva(id_reservas)
     if not eliminada:
-        return jsonify({"error": "No se encontro la reserva por el id buscado"}), 404
-    return jsonify({"message": "Reserva eliminada"}), 200
+        return jsonify({"error": "Reserva no encontrada"}), 404
+    return ' ', 204
 
 
