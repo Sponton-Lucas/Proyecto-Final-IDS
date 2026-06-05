@@ -139,5 +139,25 @@ def register_form():
 
     return redirect('/usuario')
 
+@app.route('/admin')
+def admin_index():
+    return render_template('admin/admin_index.html')
+
+@app.route('/admin/menu')
+def admin_menu():
+    return render_template('admin/admin_menu.html')
+
+@app.route('/admin/reservas')
+def admin_reservas():
+    return render_template('admin/admin_reservas.html')
+
+@app.route('/admin/usuarios')
+def admin_usuarios():
+    return render_template('admin/admin_usuarios.html')
+
+@app.route('/admin/resenas')
+def admin_resenas():
+    return render_template('admin/admin_resenas.html')
+
 if __name__ == '__main__':
 	app.run(port=3000, debug=True)  
