@@ -7,9 +7,10 @@
 <p>Estas en /menu</p>
 
 <section class="seccion-12">
+   <div class="seccion-12-contenido">
     <h2>POSTRES</h2>
      {% for postre in postres %}
-    <div class="seccion-12-plato">
+     <div class="seccion-12-plato">
         <div class="seccion-12-info">
             <h3>{{ postre["nombre"] }}
                 {% if postre["es_celiaco"] %}
@@ -27,9 +28,10 @@
 </section>    
 
 <section class="seccion-13">
+   <div class="seccion-13-contenido">
     <h2>BEBIDAS</h2>
      {% for bebida in bebidas %}
-    <div class="seccion-13-bebida">
+     <div class="seccion-13-bebida">
         <div class="seccion-13-info">
             <h3>{{ bebida["nombre"] }}
                 {% if bebida["es_alcoholica"] %}
@@ -38,9 +40,11 @@
             </h3>
             <small>{{ bebida["descripcion"] }}</small>
         </div>
-        <p class="seccion-13-precio">{{ bebida["precio"] }}$</p>
+        <p class="seccion-13-precio">${{ bebida["precio"] }}</p>
     </div>
     {% endfor %}
+   </div> 
+
     <a href="/reservas" class="seccion-13__boton">RESERVAR</a>
 </section>
 

@@ -350,6 +350,18 @@ def delete_postre(id):
         cursor.close()
         coneccion.close()
 
+def get_bebidas():
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM bebidas")
+        bebidas = cursor.fetchall()
+        return bebidas
+    finally:
+        cursor.close()
+        coneccion.close()
+
+
 def get_bebida_id(id_bebida):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
