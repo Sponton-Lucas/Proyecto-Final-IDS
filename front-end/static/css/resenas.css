@@ -1,7 +1,7 @@
 /* estilos seccion 20*/
 
-.titulo-resena {
-    font: 55px serif;
+.titulo-resenas-criticos, .titulo-resenas-clientes {
+    font: 40px serif;
     text-align: center;
     color: var(--naranja-claro);
     font-weight: 600;
@@ -26,14 +26,6 @@
 }
 
 
-.resena {
-    width: 100%;
-    min-height: 150px;
-    padding: 15px;
-    resize: vertical;
-    font-size: 16px;
-    font-family: inherit;
-}
 
 
 .container {
@@ -53,10 +45,7 @@
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.822);
 }
 
-.nombre {
-    color: #B0B0B0;
-    font: 20px serif;
-}
+
 
 .sin-sesion{
     color: white;
@@ -69,92 +58,32 @@
     font: 30px serif;
 }
 
-.carrusel-resena {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 0% auto;
-    padding: 20px 0;
+
+
+.contiene-resenas{
+    width:80%;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
 }
 
-.recuadro-resena {
-    overflow: hidden;
-    width: 80%;
-    padding: 20px 0;
-    margin: 0 auto;
+.card-resena{
+    background:#42505C;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
 
-.carrusel-tracker {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-
-}
-
-.comentarios {
-    min-width: 100%;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-}
-
-.comentarios img {
-    object-fit: cover;
-    border-radius: 50%;
-    margin: 20px 0}
-
-.texto-resena {
-    font: 25px Arial;
-    text-align: center;
+.nombre-resena{
+    color: var(--naranja-claro);
+    font-size: 1.4rem;
     font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.mensaje-resena{
     color: white;
-    max-width: 450px;
-    margin: 0 0 20px 0;
-    padding-right: 15px;
-    line-height: 1.5;
-
+    font-size: 1rem;
+    margin: 0;
 }
-
-.boton-flecha{
-   background-color: var(--rosita);
-   color: var(--marron);
-   font-size: x-large;
-   position: absolute;
-   border: none;
-   width: 50px;
-   height: 50px;
-   border-radius: 50%;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   cursor: pointer;
-   transition: transform 0.5s ease;
-}
-
-#prev-flecha {
-    top: 50%;
-    transform: translateY(-50%);
-    margin-top: 0;
-    left: 50px;
-}
-
-#next-flecha {
-    top: 50%;
-    transform: translateY(-50%);
-    margin-top: 0;
-    right: 50px;
-}
-
-#prev-flecha:hover {
-    transform: translateY(-50%) translateX(-10px);
-}
-
-#next-flecha:hover {
-    transform: translateY(-50%) translateX(10px);
-}
-
-
-
-
