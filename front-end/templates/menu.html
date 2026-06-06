@@ -1,9 +1,31 @@
 {% extends "base.html" %}
 
 {% block tittle %} Nombre restaurante - Menu{% endblock %}
-
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+{% endblock %}
 {% block content %}
 
+<section class="comida-principal">
+    <div class="comida-principal-contenido">
+    <h2>COMIDA PRINCIPAL</h2>
+    {% for comida in comida_principal%}
+    <div class="comida-principal-plato">
+        <div class="comida-principal-info">
+            <h3>{{ comida["nombre_plato"] }}
+                {% if comida["es_vegano"] %}
+                    <span class="badge-vegano">VEGANO</span>
+                {% endif %}
+                {% if comida["es_celiaco"] %}
+                    <span class="badge-singluten">SIN GLUTEN</span>
+                {% endif %}
+            </h3>
+        </div>
+        <p class="comida-principal-precio">${{ comida["precio"] }}</p>
+    </div>    
+    {% endfor%}
+    </div>
+</section>
 <section class="seccion-12">
    <div class="seccion-12-contenido">
     <h2>POSTRES</h2>
@@ -18,7 +40,6 @@
                     <span class="badge-vegano">VEGANO</span>
                 {% endif %}
             </h3>
-            <small>{{ postre["descripcion"] }}</small>
         </div>
         <p class="seccion-12-precio">${{ postre["precio"] }}</p>
     </div>
@@ -36,7 +57,6 @@
                     <span class="badge-alcoholica">ALCOHOLICA</span>
                 {% endif %}
             </h3>
-            <small>{{ bebida["descripcion"] }}</small>
         </div>
         <p class="seccion-13-precio">${{ bebida["precio"] }}</p>
     </div>

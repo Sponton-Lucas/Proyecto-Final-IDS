@@ -7,6 +7,7 @@ from blueprints.login_routes import login_bp
 from blueprints.usuario_routes import usuario_bp
 from blueprints.registro_routes import registro_bp
 from blueprints.reservas_routes import reservas_bp
+from blueprints.menu_routes import menu_bp
 
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
@@ -18,13 +19,6 @@ app.permanent_session_lifetime = timedelta(days=1)
 def index():
 	return render_template('index.html')
 
-@app.route("/menu")
-def menu():
-    pos = requests.get('http://localhost:5000/postres')
-    postres = pos.json()
-    beb = requests.get('http://localhost:5000/bebidas')
-    bebidas = beb.json()
-    return render_template('menu.html', postres=postres, bebidas=bebidas)
 
 @app.route("/conocenos")
 def conocenos():
@@ -39,7 +33,7 @@ app.register_blueprint(login_bp)
 app.register_blueprint(usuario_bp)
 app.register_blueprint(registro_bp)
 app.register_blueprint(reservas_bp)
-
+app.register_blueprint(menu_bp)
 
 
 

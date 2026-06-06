@@ -1,0 +1,59 @@
+.comida-principal {
+    background-color: var(--secundario);
+    padding: 3rem;
+}
+
+.comida-principal h2 {
+    color: var(--rosita);
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    margin-bottom: 2rem;
+    font-family: var(--font-family);
+    font-weight: 400;
+}
+.comida-principal-contenido {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+
+.comida-principal-plato {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.comida-principal-info h3 {
+    color: rgb(212, 210, 210);
+    font-size: 14px;
+    font-weight: 300 !important;
+    font-family: var(--font-family);
+    margin-bottom: 0.3rem;
+}
+
+.comida-principal-precio {
+    color: rgb(181, 180, 180);
+    font-size: 11px;
+    font-weight: 100;
+    font-family: var(--font-family);
+}
+
+.badge-singluten {
+    background-color: rgba(180, 140, 53, 0.3);
+    color: #c4a535;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
+
+.badge-vegano {
+    background-color: rgba(53, 140, 80, 0.3);
+    color: #35c46a;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
