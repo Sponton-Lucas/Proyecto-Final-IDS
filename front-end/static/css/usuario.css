@@ -1,0 +1,76 @@
+.titulo-bienvenido, .titulo-resenas, .titulo-reservas{
+    color: white;
+    margin-left: 10%;
+}
+
+.tabla-resenas {
+    background-color: #233342;
+    width: 80%;
+    margin: 0 auto; /* la centra */
+    border: 1px solid rgba(255,255,255,0.08);
+    border-collapse: collapse;
+}
+
+.tabla-reservas{
+    background-color: #233342;
+    width: 80%;
+    margin: 0 auto; /* la centra */
+    border: 1px solid rgba(255,255,255,0.08);
+    border-collapse: collapse;  
+}
+
+.encabezado{
+    color:white;
+    font-size: 20px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08); 
+}
+
+.tus-resenas, .tu-fecha, .tu-hora, .cantidad-personas, .tu-estado{
+    color: #BEBEBE;
+    padding: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.08); 
+}
+
+
+
+/*Botones*/
+
+.acciones-botones{
+    display: flex;          
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08); 
+}
+
+.logout-cerrar-boton{
+    color: white;
+    background-color: var(--naranja-oscuro) !important;
+    border: none;
+    border-radius: 20px;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    padding: 20px;
+    margin-left: 190px;
+}
+
+.eliminar-resena-boton{
+    color: red;
+    background-color: #1e0800 !important;
+    border: none;
+    border-radius: 15px;
+    letter-spacing: 0.1em;
+    padding: 5px;
+    margin-right: 30px;
+    margin-left: 5px
+    
+}
+
+.editar-resena-boton{
+    color: green;
+    background-color: #06402B !important;
+    border: none;
+    border-radius: 15px;
+    letter-spacing: 0.1em;
+    padding: 5px;
+}
+    
