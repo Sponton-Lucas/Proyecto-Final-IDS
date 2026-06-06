@@ -5,77 +5,87 @@ postres_bp = Blueprint('postres', __name__)
 
 #GET
 @postres_bp.route('/postres', methods=['GET'])
-def get_postres():
+def obtener_postres():
     postres = db.get_postres()
-    if not postres:
-        return jsonify({"error": "No hay postres cargados en este momento"}), 404
     return jsonify(postres), 200
 
 #GET ID
+@postres_bp.route('/postres/<int:id_postre>', methods=['GET'])
+def obtener_postre_id(id_postre):
+    postre = db.get_postre_id(id_postre)
+    if not postre:
+        return jsonify({"error": "Postre no encontrado"}), 404
+    return jsonify(postre), 200
 
 #POST
 @postres_bp.route('/postres', methods=['POST'])
-def post_postres():
-    postre = request.get_json()
-    if not postre:
-        return jsonify({'error': 'body vacio'}), 400
-    if ("precio" not in postre) or ("nombre" not in postre ) or ("es_vegano" not in postre) or ("es_celiaco" not in postre):
-        return jsonify({'error': 'body incompleto'}), 400
-    precio = postre.get("precio")
-    nombre = postre.get("nombre")
-    es_vegano = postre.get("es_vegano")
-    es_celiaco = postre.get("es_celiaco")
+def crear_postre():
+    datos = request.get_json()
+    if not datos:
+        return jsonify({'error': 'Body vacio'}), 400
+    if ("precio" not in datos) or ("nombre" not in datos ):
+        return jsonify({"error": "Campos requeridos: precio y nombre"}), 400
+    precio = datos.get("precio")
+    nombre = datos.get("nombre")
+    es_vegano = datos.get("es_vegano", False)
+    es_celiaco = datos.get("es_celiaco", False)
     if (not precio) or (not nombre):
-        return jsonify({'error': 'los campos no pueden estar vacios'}), 400
-    postre_nuevo = db.post_bebida(precio, nombre, es_vegano, es_celiaco)
+        return jsonify({'error': 'Precio y nombre no pueden estar vacios'}), 400
+    postre_nuevo = db.post_postre(precio, nombre, es_vegano, es_celiaco)
     if postre_nuevo:
-        return jsonify({'message': 'se creo correctamente el postre nuevo'}), 200
+        return jsonify({'message': 'Se creo correctamente el postre'}), 201
     else:
-        return jsonify({'error': 'No se pudo crear correctamente el postre nuevo'}), 400
+        return jsonify({'error': 'No se pudo crear el postre'}), 400
 
 #PUT
-@postres_bp.route('/postres/<int:id>', methods=['PUT'])
-def put_postres(id):
-    postre = request.get_json()
-    if ("precio" not in postre) or ("nombre" not in postre) or ("es_vegano" not in postre) or ("es_celiaco" not in postre):
-        return jsonify({'error':'body incompleto'}), 400
-    precio = postre.get("precio")
-    nombre = postre.get("nombre")
-    es_vegano = postre.get("es_vegano")
-    es_celiaco = postre.get("es_celiaco")
+@postres_bp.route('/postres/<int:id_postre>', methods=['PUT'])
+def actualizar_postre(id_postre):
+    datos = request.get_json()
+    if not datos:
+        return jsonify({"error": "Body vacío"}), 400
+    if ("precio" not in datos) or ("nombre" not in datos) or ("es_vegano" not in datos) or ("es_celiaco" not in datos):
+        return jsonify({'error':'Body incompleto'}), 400
+    precio = datos.get("precio")
+    nombre = datos.get("nombre")
+    es_vegano = datos.get("es_vegano")
+    es_celiaco = datos.get("es_celiaco")
     if (not precio) or (not nombre):
-        return jsonify({'error': 'los campos no pueden estar incompletos'}), 404
-    actualizar_postre = db.put_postre(id, precio, nombre, es_vegano, es_celiaco)
-    if actualizar_postre:
-        return jsonify({'message':'postre actualizado'}), 200
+        return jsonify({'error': 'Los campos no pueden estar incompletos'}), 400
+    actualizado = db.put_postre(id_postre, precio, nombre, es_vegano, es_celiaco)
+    if actualizado:
+        return jsonify({'message':'Postre actualizado'}), 200
     else:
-        return jsonify({'error': 'no se pudo actualizar correctamente'}), 404   
+        return jsonify({'error': 'Postre no encontrado'}), 404   
 
 #PATCH
-@postres_bp.route('/postres/<int:id>', methods=['PATCH'])
-def patch_postres(id):
-    postres = request.get_json()
-    if not postres: 
-        return jsonify({"error": "campos vacios"}), 400
+@postres_bp.route('/postres/<int:id_postre>', methods=['PATCH'])
+def modificar_postre(id_postre):
+    datos = request.get_json()
+    if not datos: 
+        return jsonify({"error": "Campos vacios"}), 400
     
-    precio = postres.get("precio")
-    nombre = postres.get("nombre")
+    precio = datos.get("precio")
+    nombre = datos.get("nombre")
+    es_vegano = datos.get("es_vegano")
+    es_celiaco = datos.get("es_celiaco")
 
-    if precio is None and precio.strip():
-        return jsonify({"error": "El precio no puede estar vacio"}), 400
-    if nombre is None and nombre.strip():
-        return jsonify({"eror": "El nombre no puede estar vacio"}), 400
+    if precio is not None and precio < 0:
+        return jsonify({"error": "El precio no puede ser negativo"}), 400
+    if nombre is not None and nombre.strip() == "":
+        return jsonify({"error": "El nombre no puede estar vacio"}), 400
     
-    actualizar__postres = db.actualizar_postres(id, precio, nombre)
-    if actualizar__postres:
-        return jsonify(actualizar__postres), 200
+    actualizado = db.patch_postre(id_postre, precio, nombre, es_vegano, es_celiaco)
+    if actualizado:
+        return ' ', 204
+    else:
+        return jsonify({"error": "Postre no encontrado"}), 404
 
 #DELETE
-@postres_bp.route('/postres/<int:id>', methods=['DELETE'])
-def delete_postres(id):
-    eliminar_postre = db.delete_postre(id)
+@postres_bp.route('/postres/<int:id_postre>', methods=['DELETE'])
+def borrar_postre(id_postre):
+    eliminar_postre = db.delete_postre(id_postre)
     
     if eliminar_postre:
-        return jsonify({'message': 'postre eliminado'}), 200
+        return ' ', 204
     else:
-        return jsonify({'error': 'no se pudo eliminar correctamente o no existe'}), 404 
+        return jsonify({'error': 'Postre no encontrado'}), 404 

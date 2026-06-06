@@ -1,0 +1,35 @@
+/* estilos navbar */
+.menu-hamburguesa {
+    flex-grow: 0 !important;
+}
+
+.menu-hamburguesa svg {
+    fill: var(--rosita);
+}
+
+.dropdown-menu-fondo {
+    background-color: var(--rosita);
+}
+
+.dropdown-menu-fondo a {
+    color: var(--marron);
+    transition: all 0.3s ease;
+}
+.dropdown-menu-fondo a:hover {
+    background-color: var(--marron);
+    color: var(--rosita);
+}
+
+.navbar-title {
+    font-size: 48px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: url('/static/img/fondo-titulo-navbar.png') no-repeat center center;
+    background-size: cover;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+/* fin estilos navbar */

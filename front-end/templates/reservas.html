@@ -2,8 +2,88 @@
 
 {% block tittle %} Nombre restaurante - Reservas{% endblock %}
 
-{% block content %}
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reservas.css') }}">
+{% endblock %}
 
-<p>Estas en /reservas</p>
+{% block content %}  
 
+<div class="reservas-layout">
+
+  <div class="reservas-imagen">
+    <img src="{{ url_for('static', filename='img/restaurante-hero.jpg') }}" alt="Restaurante"/>
+    <div class="reservas-imagen-overlay">
+      <p class="reservas-imagen-tag">Pasillo Colón</p>
+      <h2>Tu mesa te espera</h2>
+    </div>
+  </div>
+
+  <div class="reservas-formulario">
+    <div class="container">
+      <h2>Reservar una mesa</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %} <!-- Mostrar mensaje flash de exito o error -->
+        {% for category, message in messages %}
+          <div class="alerta alerta-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+      {% if no_session %} <!-- Si no hay sesión, muestra mensaje para iniciar sesión -->
+        <div class="alerta-session">
+          <p>Para hacer una reserva necesitás <a href="/login">iniciar sesión</a>.</p>
+        </div>
+      {% else %}
+        <form action="/reservas" method="POST">
+
+          <div class="row mb-3">
+            <div class="col">
+              <label for="nombre" class="form-label">Nombre y apellido</label>
+              <input type="text" id="nombre" name="nombre" class="form-control" required/>
+            </div>
+            <div class="col-4">
+              <label for="personas" class="form-label">Personas</label>
+              <input type="number" id="personas" name="personas" class="form-control" min="1" max="6" value="1" required/>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col">
+              <label for="fecha" class="form-label">Fecha</label>
+              <input type="date" id="fecha" name="fecha" class="form-control" required/>
+            </div>
+            <div class="col">
+              <label for="horario" class="form-label">Horario</label>
+              <select id="horario" name="horario" class="form-select" required>
+                <option value="" disabled selected>Seleccioná</option>
+                <optgroup label="Almuerzo">
+                  <option value="12:00">12:00</option>
+                  <option value="12:30">12:30</option>
+                  <option value="13:00">13:00</option>
+                  <option value="13:30">13:30</option>
+                  <option value="14:00">14:00</option>
+                  <option value="14:30">14:30</option>
+                </optgroup>
+                <optgroup label="Cena">
+                  <option value="19:00">19:00</option>
+                  <option value="19:30">19:30</option>
+                  <option value="20:00">20:00</option>
+                  <option value="20:30">20:30</option>
+                  <option value="21:00">21:00</option>
+                  <option value="21:30">21:30</option>
+                  <option value="22:00">22:00</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+
+          <small class="form-text mb-3 d-block">Para más de 6 personas escribinos a <a href="mailto:restaurante@gmail.com">restaurante@gmail.com</a></small>
+
+          <button type="submit" class="btn btn-primary w-100">Confirmar reserva</button>
+
+        </form>
+      {% endif %}
+      <a href="/" class="link-volver">Volver al inicio</a>
+    </div>
+
+  </div>
+
+</div>
 {% endblock %}

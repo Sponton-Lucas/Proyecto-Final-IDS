@@ -1,0 +1,89 @@
+/* estilos seccion 20*/
+
+.titulo-resenas-criticos, .titulo-resenas-clientes {
+    font: 40px serif;
+    text-align: center;
+    color: var(--naranja-claro);
+    font-weight: 600;
+
+}
+
+.enviar-resena{
+    color: white;
+    background-color: var(--naranja-oscuro) !important;
+    border: none !important;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    padding: 8px;
+    
+}
+
+.form-resena {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+
+
+
+.container {
+  width: min(680px, 100%);
+  max-width: 680px;
+  height: auto;
+  background-color: var(--secundario);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding: 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.822);
+}
+
+
+
+.sin-sesion{
+    color: white;
+    font: 30px serif;
+}
+
+
+.con-sesion{
+    color: white;
+    font: 30px serif;
+}
+
+
+
+.contiene-resenas{
+    width:80%;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.card-resena{
+    background:#42505C;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+.nombre-resena{
+    color: var(--naranja-claro);
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.mensaje-resena{
+    color: white;
+    font-size: 1rem;
+    margin: 0;
+}

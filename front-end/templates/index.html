@@ -1,9 +1,212 @@
 {% extends "base.html" %}
 
-{% block tittle %} Nombre restaurante - Inicio{% endblock %}
-
+{% block title %} Nombre restaurante - Inicio {% endblock %}
+{% block estilos %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
 {% block content %}
 
+<!--seccion 1-->
+<h1 class="titulo text-center"><b> Pasillo Colon </br>de restaurante</b></h1>  
+
+<h6 class="mesajito text-center">¡Bienvenidos al lugar donde ocurre la magia de las comidas!</h6>
+
+<div class="text-center boton-ver-menu"> 
+    <a href="/menu" class="btn btn-dark">Ver menú</a>
+</div>
+
+<!--seccion 5-->
+<div class="container mt-5 mb-5">
+    <img src="{{url_for('static', filename='images/quienes_somos.jpeg')}}" width="1200" alt="foto del restaurante">
+    
+    <div class="row align-items-center">
+        <div class="col">
+            <a href="/conocenos" class="btn btn-dark">Conócenos más</a>
+        </div>
+
+        <div class="col">
+            <span>
+               <b>Nuestra pasión por la cocina se refleja en cada plato.
+                Creamos experiencias memorables, infusionadas con amor
+                y sabores intensos. Nuestro equipo está comprometido en
+                ofrecer lo mejor, desde recetas tradicionales hasta
+                innovaciones culinarias que sorprenden. Si no sales con
+                una sonrisa, ¡algo hicimos mal!</b>
+            </span>
+    </div>
+</div>
+
 <p class="parrafo">Estas en /index</p>
+ 
+<section class="seccion-2">
+  <div class="seccion-2-texto">
+   <div class="seccion-2-etiquetas">
+     <span class="etiqueta-solido">Sentite</span>
+     <span class="etiqueta-texto">Acompañado</span>
+   </div>    
+  
+   <h2> Probá Nuestros Platos</h2>
+   <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
+   <a href="/reservas" class="boton">
+    <span class="boton-texto">¡Vení y Comé!</span>
+    <span class="boton-icono">→</span>
+   </a>
+
+  </div>
+  <div class="seccion-2-contenedor-img">
+   <img class="seccion-2-img" 
+         src="{{ url_for('static', filename='img/mesas.jpg') }}" 
+         alt="Mesas del restaurante"/>
+  </div>
+</section>
+<section>    <!-- SECCION 7 -->
+
+    <div>
+
+        <div>
+            <img 
+                src="{{ url_for('static', filename='img/restaurante.jpg') }}"
+                alt="Restaurante"
+            >
+        </div>
+
+        <div>
+
+            <small>Miguel Torres</small>
+
+            <h2>Director General</h2>
+
+            <p>
+                Apasionado por la gastronomía desde joven,
+                siempre buscando traer lo mejor al paladar
+                de nuestros comensales.
+            </p>
+
+            <a href="#">
+                Conócenos →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+ 
+<section class="seccion-resenas">
+
+
+  <div id="carouselResenas" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <div class="resena-card">
+          <div class="estrellas">★★★★★</div>
+          <p class="resena-texto">¡La comida aquí es un sueño! Nunca había probado sabores tan impactantes. Volveré cada semana.</p>
+          <img class="resena-foto" src="{{ url_for('static', filename='img/foto-sofia.jpg') }}" alt="Foto Sofía">
+          <p class="resena-nombre">Sofía Martínez</p>
+          <p class="resena-rol">Food Blogger</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="resena-card">
+          <div class="estrellas">★★★★★</div>
+          <p class="resena-texto">Un ambiente increíble y un servicio impecable. La mejor experiencia gastronómica de mi vida.</p>
+          <img class="resena-foto" src="{{ url_for('static', filename='img/foto-carlos.jpg') }}" alt="Foto Carlos">
+          <p class="resena-nombre">Carlos López</p>
+          <p class="resena-rol">Crítico gastronómico</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="resena-card">
+          <div class="estrellas">★★★★☆</div>
+          <p class="resena-texto">Los ingredientes son frescos y de altísima calidad. Se nota el amor que ponen en cada plato.</p>
+          <img class="resena-foto" src="{{ url_for('static', filename='img/foto-maria.jpg') }}" alt="Foto María">
+          <p class="resena-nombre">María González</p>
+          <p class="resena-rol">Chef amateur</p>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="carousel-control-prev resena-flecha" type="button" data-bs-target="#carouselResenas" data-bs-slide="prev">
+      <span>&#8592;</span> <!-- #Fecha hacia atrás--> 
+    </button>
+    <button class="carousel-control-next resena-flecha" type="button" data-bs-target="#carouselResenas" data-bs-slide="next">
+      <span>&#8594;</span> <!-- #Fecha hacia adelante--> 
+    </button>
+  </div>
+</section>
+
+<section>
+  <div> 
+   <span>Sentite</span>
+   <span>Acompañado</span>    
+  
+   <h2> Probá Nuestros Platos</h2>
+  
+   <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
+   <a href="/reservas">¡Vení y Comé!</a>
+  </div>
+
+  <div>
+      <img src="{{ url_for('static', filename='img/mesas.JPG') }}" alt="mesas del restaurante"/>
+  </div>
+</section>
+
+<!--secion de preguntas frecuentes-->
+<div class="seccion-faq">
+  <h2>Preguntas Frecuentes</h1>
+
+  <hr/>
+
+  <details name="faq">
+    <summary>¿Tienen opciones vegetarianas?</summary>
+    <p>Sí, contamos con una amplia variedad de opciones vegetarianas y veganas en nuestra carta. Podés consultarle a nuestro mozo o revisar el menú en línea para más detalles.</p>
+  </details>
+
+  <details name="faq">
+    <summary>¿Se puede reservar para grupos grandes?</summary>
+    <p>Para grupos de más de 6 personas, te recomendamos contactarnos directamente por teléfono o email para coordinar los detalles y garantizar la mejor experiencia.</p>
+  </details>
+
+  <details name="faq">
+    <summary>¿Aceptan pagos con tarjeta?</summary>
+    <p>Sí, aceptamos todas las tarjetas de débito y crédito, además de efectivo y transferencias bancarias.</p>
+  </details>
+
+  <details name="faq">
+    <summary>¿Tienen opciones sin gluten?</summary>
+    <p>Contamos con un menú especial apto para celíacos, preparado en una zona de cocina separada para evitar la contaminación cruzada. Por favor, indicalo al hacer tu reserva.</p>
+  </details>
+
+  <details name="faq">
+    <summary>¿Cuál es la dirección?</summary>
+    <p>Nos encontramos en Av. Corrientes 1234, Ciudad de Buenos Aires. Contamos con estacionamiento propio sin costo.</p>
+  </details>
+
+  <details name="faq">
+    <summary>¿Puedo cancelar mi reserva?</summary>
+    <p>Podés cancelar o modificar tu reserva hasta 2 horas antes del horario pactado sin cargo. Para cancelaciones con menor anticipación, avisanos de todas formas para liberar el lugar.</p>
+  </details>
+
+  <details name="faq">
+    <summary>¿Tienen Wi-Fi?</summary>
+    <p>Sí, ofrecemos Wi-Fi gratuito de alta velocidad. Pedile la contraseña a cualquier miembro del personal al llegar.</p>
+  </details>
+
+  <hr/>
+</div>
+<h2>Por que elegirnos?</h2>
+<p>Nos apasiona servite cada platillo con amor y dedicacion</p>
+
+<div>
+
+    <img src="{{ url_for('static', filename='img/Untitled.jpeg') }}" alt="comida" width="300">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</div>
 
 {% endblock %}
