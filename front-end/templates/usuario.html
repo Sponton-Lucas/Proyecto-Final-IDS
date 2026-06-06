@@ -19,12 +19,14 @@
         <th class="encabezado">Estado</th>
     </tr>
     {% for rer in reservas %}
-        <tr>
-            <td><p class="tu-fecha">{{ rer.fecha }}</p></td>
-            <td><p class="tu-hora">{{ rer.hora}}</p></td>
-            <td><p class="cantidad-personas">{{ rer.cantidad_personas }}</p></td>
-            <td><p class="tu-estado">{{ rer.estado }}</p></td>
-        </tr>
+        {% if rer.usuario_id == id_usuario%}
+            <tr>
+                <td><p class="tu-fecha">{{ rer.fecha }}</p></td>
+                <td><p class="tu-hora">{{ rer.hora}}</p></td>
+                <td><p class="cantidad-personas">{{ rer.cantidad_personas }}</p></td>
+                <td><p class="tu-estado">{{ rer.estado }}</p></td>
+            </tr>
+        {% endif %}
     {% endfor %}
 
 </table>
