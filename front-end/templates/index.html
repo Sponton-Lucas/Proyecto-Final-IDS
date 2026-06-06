@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block title %} Nombre restaurante - Inicio {% endblock %}
-
+{% block estilos %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
 {% block content %}
 
 <!--seccion 1-->
@@ -56,7 +58,7 @@
          src="{{ url_for('static', filename='img/mesas.jpg') }}" 
          alt="Mesas del restaurante"/>
   </div>
-
+</section>
 <section>    <!-- SECCION 7 -->
 
     <div>

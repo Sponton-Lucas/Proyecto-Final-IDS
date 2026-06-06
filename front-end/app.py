@@ -1,9 +1,10 @@
 from flask import Flask, jsonify, redirect, render_template, request, session, flash
 import requests
+from datetime import timedelta
 
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
-
+app.permanent_session_lifetime = timedelta(days=1)
 
 @app.route("/")
 def index():
@@ -23,22 +24,28 @@ def conocenos():
 
 @app.route("/resenas", methods=['GET'])
 def resenas():
+    res = requests.get('http://localhost:5000/resenas')
+    resenas = res.json()
+    us = requests.get('http://localhost:5000/usuarios')
+    usuarios = us.json()
+    user = None
     if "user" in session:
-        res = requests.get('http://localhost:5000/resenas')
-        resenas = res.json()
-        us = requests.get('http://localhost:5000/usuarios')
-        usuarios = us.json()
         user = session["user"]
         
-        return render_template('resenas.html', resenas=resenas, usuarios=usuarios, user=user )
-    else: 
-        return render_template('login.html')
+    return render_template('resenas.html', resenas=resenas, usuarios=usuarios, user=user)
+    
+
 
 @app.route('/agregar_resena', methods=['POST'])
 def agregar_resena():
     if "user" in session:
-        data = request.form.to_dict()
-        data["nombre_apellido"] = session["user"]
+        mensaje = request.form.get("mensaje", "").strip()
+        if not mensaje:
+            return redirect('/resenas')
+        data = {
+            "mensaje": mensaje,
+            "nombre_apellido": session["user"]
+        }
         requests.post("http://localhost:5000/agregar_resena", json=data)
         return redirect('/resenas')
 
@@ -96,12 +103,14 @@ def user():
         us = requests.get('http://localhost:5000/usuarios')
         usuarios = us.json()
         res = requests.get('http://localhost:5000/resenas')
-        resenas = res.json()        
+        resenas = res.json()
+        rer = requests.get('http://localhost:5000/reservas')
+        reservas = rer.json()    
         id_usuario = 0
         for u in usuarios:
             if u["nombre_apellido"] == usuario:
                 id_usuario = u["id_usuario"]
-        return render_template('/usuario.html', usuario=usuario, resenas=resenas, id_usuario=id_usuario)
+        return render_template('/usuario.html', usuario=usuario, resenas=resenas, id_usuario=id_usuario, reservas=reservas)
     else:
         return redirect('/login')
 
@@ -110,6 +119,36 @@ def logout():
     session.pop("user", None)
     return redirect('/login')
 
+@app.route('/eliminar_resena', methods=['POST'])
+def eliminar_resena():
+    id_resenas = request.form.get("id_resenas")
+    requests.delete(f"http://localhost:5000/resenas/{id_resenas}")
+    return redirect('/usuario')
+    
+
+@app.route('/editar_resena', methods=['POST'])
+def editar_resena():
+    id_resena = int(request.form.get("id_resenas"))
+    usuario_id = request.form.get("usuario_id")
+    print(id_resena)
+    print(usuario_id)
+    res = requests.get('http://localhost:5000/resenas')
+    resenas = res.json()
+    print(resenas)
+    for r in resenas:
+        if r["id_resenas"] == id_resena:
+            print(r)
+            return render_template('editar_resena.html', usuario_id=usuario_id, resena=r)
+    return redirect('/usuario')
+
+@app.route('/guardar_resena', methods=['POST'])
+def guardar_resena():
+    id_resena = request.form.get("id_resenas")
+    usuario_id = request.form.get("usuario_id")
+    mensaje = request.form.get("mensaje")
+    datos = {"mensaje": mensaje, "usuario_id": usuario_id}
+    requests.patch(f"http://localhost:5000/resenas/{id_resena}", json=datos)
+    return redirect('/usuario')
 
 @app.route("/registro")
 def registro():

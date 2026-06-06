@@ -22,27 +22,16 @@
         <div id="carrusel-tracker" class="carrusel-tracker">
 
             {% for resena in resenas %}
-
-                <div class="comentarios">
-
-                    <p class="texto-resena">
-                        "{{ resena.mensaje }}"
-                    </p>
-
-                    {% for usuario in usuarios %}
-                        {% if usuario.id_usuario == resena.usuario_id %}
-                            <p class="nombre">
-                                {{ usuario.nombre_apellido }}
-                            </p>
-                        {% endif %}
-                    {% endfor %}
-
-                    <img src="{{ url_for('static', filename='img/persona1.jpeg') }}"
-                         alt="imagen-persona"
-                         width="100"
-                         height="100">
-
-                </div>
+                {% if resena.mensaje %}
+                    <div class="comentarios">
+                        <p class="texto-resena">"{{ resena.mensaje }}"</p>
+                        {% for usuario in usuarios %}
+                            {% if usuario.id_usuario == resena.usuario_id %}
+                                <p class="nombre">{{ usuario.nombre_apellido }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
             {% endfor %}
 
@@ -53,12 +42,19 @@
 
 </div>
 
+{% if user %}
 
-<h3>Dejanos tu reseña {{ user }}!</h3>
-<form action='/agregar_resena' method="post">
-        <label for="mensaje">Mensaje:</label>
-        <input type="text" id="mensaje" name="mensaje" placeholder="Mensaje">
-        <button type="submit">Enviar</button>
-</form>
+<div class="container">
+    <p>{{ mensaje }}</p>
+    <h4 class="con-sesion">Dejanos tu reseña {{ user }}!</h4>
+    <form action='/agregar_resena' method="post" class="form-resena">
+        <textarea type="text" id="mensaje" name="mensaje" placeholder="Mensaje" class="resena"></textarea>
+        <button type="submit" class="enviar-resena">Enviar</button>
+    </form>
+</div>
+{% else %}
+    <h4 class="sin-sesion">Debes iniciar sesion para dejar una reseña</h4>
+{% endif %}
+
 
 {% endblock %}

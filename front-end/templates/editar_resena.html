@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block tittle %} Nombre restaurante - Registro{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/editar_resena.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="contenedor">
+    <h2 class="titulo-editar-resena">Editar reseña</h2>
+    <form action="/guardar_resena" method="post" class="editar-resena-form">
+        <input type="hidden" name="id_resenas" value="{{ resena.id_resenas }}">
+        <input type="hidden" name="usuario_id" value="{{ usuario_id }}">
+        <textarea name="mensaje" class="edicion">{{ resena.mensaje }}</textarea>
+        <button type="submit" class="guardar-boton">Guardar cambios</button>
+    </form>
+</div>
+{% endblock %}

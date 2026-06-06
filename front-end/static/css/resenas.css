@@ -8,6 +8,67 @@
 
 }
 
+.enviar-resena{
+    color: white;
+    background-color: var(--naranja-oscuro) !important;
+    border: none !important;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    padding: 8px;
+    
+}
+
+.form-resena {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.resena {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    resize: vertical;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+
+.container {
+  width: min(680px, 100%);
+  max-width: 680px;
+  height: auto;
+  background-color: var(--secundario);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding: 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.822);
+}
+
+.nombre {
+    color: #B0B0B0;
+    font: 20px serif;
+}
+
+.sin-sesion{
+    color: white;
+    font: 30px serif;
+}
+
+
+.con-sesion{
+    color: white;
+    font: 30px serif;
+}
+
 .carrusel-resena {
     position: relative;
     width: 100%;
