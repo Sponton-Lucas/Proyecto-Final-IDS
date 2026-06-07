@@ -7,19 +7,100 @@
 {% endblock %}
 
 {% block content %}
+<div>
+  <h4>Maestro de Artículos (Menú)</h4>
+</div>
 
   <!-- Tabla de artículos del menú -->
+   <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre Comercial</th>
+        <th>Categoría</th>
+        <th>Precio de venta</th>
+        <th>Acciones</th>
+      </tr>
+    </table>
+   </thead>
+   <tbody>
+    <!-- Filas de artículos -->
+     <tr> 
+      <td>001</td>
+      <td>Milanesa Napolitana</td>
+      <td>Plato principal</td>
+      <td>$15000</td>
+          <button>Editar</button>
+          <button>Eliminar</button>
+      <td>
+      
+     </tr>
+   </tbody>
+  </table>
 
   <!-- FIN tabla artículos menú -->
 
 
   <!-- Modal "Agregar artículo" -->
+ <div class="modal fade" id="modalAgregar" tabindex="-1">
 
-  <!-- FIN Modal "Agregar artículo" -->
+    <div class="modal-dialog">
 
+        <div class="modal-content">
 
-  <!-- Modal "Editar artículo" -->
+            <div class="modal-header">
 
-  <!-- FIN Modal "Editar artículo" -->
+                <h3>Nuevo Artículo</h3>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <label>Código</label>
+                <input type="text">
+
+                <label>Nombre Comercial</label>
+                <input type="text">
+
+                <label>Categoría</label>
+                <select>
+                    <option>Plato Principal</option>
+                    <option>Pastas</option>
+                    <option>Entradas</option>
+                    <option>Postres</option>
+                    <option>Bebidas</option>
+                </select>
+
+                <label>Precio</label>
+                <input type="number">
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <button type="submit">
+                    Guardar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock %}
+
