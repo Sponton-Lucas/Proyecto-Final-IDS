@@ -44,6 +44,32 @@ def admin_index():
 def admin_menu():
     return render_template('admin/admin_menu.html')
 
+@app.route('/admin/nuevo_articulo', methods=['POST'])
+def nuevo_articulo():
+    return render_template('admin/admin_nuevo_articulo.html')    
+
+@app.route('/admin/creacion_nuevo_articulo', methods=['POST'])
+def crear_nuevo_articulo():
+    nombre = request.form.get("nombre")
+    precio = request.form.get("precio")
+    categoria = request.form.get("categoria")
+    descripcion = request.form.get("descripcion")
+    es_vegano = "vegano" in request.form
+    es_celiaco = "celiaco" in request.form
+    es_alcoholica = "alcoholica" in request.form
+
+    if categoria == "comida":
+        datos = {"nombre_plato": nombre, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
+        requests.post('http://localhost:5000/comida_principal', json=datos)
+    if categoria == "postre":
+        datos = {"precio": precio, "nombre": nombre,"es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
+        requests.post('http://localhost:5000/postres', json=datos)
+    if categoria == "bebida":
+        datos = {"precio": precio, "nombre": nombre, "es_alcoholica": es_alcoholica, "descripcion": descripcion}
+        requests.post('http://localhost:5000/bebidas', json=datos)
+    return redirect('/admin/menu')
+
+
 @app.route('/admin/reservas')
 def admin_reservas():
     res = requests.get('http://localhost:5000/reservas')
