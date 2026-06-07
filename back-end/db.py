@@ -528,7 +528,9 @@ def get_reservas():
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute('SELECT * FROM reservas')
+        cursor.execute(("""SELECT reservas.id_reservas, reservas.fecha, reservas.hora,
+                         reservas.cantidad_personas,reservas.estado, usuarios.nombre_apellido, usuarios.email,
+                         usuarios.telefono FROM reservas JOIN usuarios ON reservas.usuario_id = usuarios.id_usuario"""))
         reservas = cursor.fetchall()
         for r in reservas:
             if isinstance(r.get("fecha"), date):
