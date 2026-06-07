@@ -1,35 +1,40 @@
 /* estilos navbar */
+.navbar-border {
+    box-shadow: 0 4px 10px rgba(255,163,132, 0.5);
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    height: 75px;
+    margin-bottom: 2rem;
+}
 .menu-hamburguesa {
     flex-grow: 0 !important;
 }
-
 .menu-hamburguesa svg {
     fill: var(--rosita);
 }
-
 .dropdown-menu-fondo {
-    background-color: var(--rosita);
+    background-color: var(--secundario);
+    border: .1rem solid var(--secundario);
 }
-
 .dropdown-menu-fondo a {
-    color: var(--marron);
+    text-align: center;
+    color: var(--blanco);
     transition: all 0.3s ease;
 }
 .dropdown-menu-fondo a:hover {
-    background-color: var(--marron);
+    font-size: 1.1rem;
+    background-color: var(--principal);
     color: var(--rosita);
+    border-radius: 15%;
 }
-
 .navbar-title {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: bold;
     text-transform: uppercase;
-    background: url('/static/img/fondo-titulo-navbar.png') no-repeat center center;
+    background-color: var(--blanco);
     background-size: cover;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
-
-
 /* fin estilos navbar */
+
