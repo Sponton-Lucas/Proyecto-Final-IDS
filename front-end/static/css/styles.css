@@ -159,6 +159,71 @@
 .carousel-control-prev { left: 20px !important; }
 .carousel-control-next { right: 20px !important; }
 
+
+/* --- ESTILOS SECCIÓN 7 --- */
+.s7-seccion {
+  background-color: var(--secundario);
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.s7-tarjeta {
+  background-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+  max-width: 750px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: flex;
+  overflow: hidden;
+}
+
+.s7-bloque-imagen {
+  flex: 1;
+}
+
+.s7-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.s7-bloque-texto {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.s7-subtitulo {
+  color: white;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+
+.s7-titulo {
+  color: white; 
+  font-size: 2rem;
+  font-weight: 300;
+  font-family: var(--font-family);
+  margin: 0 0 15px 0;
+  padding: 0;
+}
+
+.s7-parrafo {
+  color: white; 
+  font-family: var(--font-family);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+/* --- FIN ESTILOS SECCIÓN 7 --- */
+
+
 /* SECCIÓN 12 - Postres */
 
 .seccion-12 {
@@ -456,3 +521,194 @@
   content: ' −';
 }
 
+/* --- ESTILOS SECCIÓN 19 --- */
+.s19-seccion {
+  background-color: var(--secundario);
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.s19-contenedor {
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.s19-bloque-encabezado {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.s19-titulo {
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 300;
+  font-family: var(--font-family);
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+.s19-parrafo {
+  color: white;
+  font-family: var(--font-family);
+  font-weight: 300;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.s19-bloque-mapa {
+  background-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: flex;
+  overflow: hidden;
+}
+
+.s19-mapa-iframe {
+  width: 100%;
+  height: 450px;
+  border: none;
+  border-radius: 12px;
+}
+/* --- FIN ESTILOS SECCIÓN 19 --- */
+
+/* --- ESTILOS SECCIÓN 24--- */
+.s24-seccion {
+  background-color: #2c3539;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.s24-contenedor {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.s24-encabezado {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.s24-titulo-principal {
+  color: white;
+  font-family: var(--font-family);
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin: 0 0 5px 0;
+}
+
+.s24-subtitulo {
+  color: white;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  font-weight: 300;
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.s24-formulario {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.s24-grupo-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.s24-label {
+  color: white;
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.s24-input {
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white;
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  padding: 10px 0;
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-color 0.3s ease;
+}
+
+.s24-input:focus {
+  border-bottom-color: #f59e7d !important; 
+}
+
+.s24-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 300;
+}
+
+.s24-boton-submit {
+  background-color: #f59e7d; 
+  color: var(--secundario); 
+  border: none;
+  padding: 12px;
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: opacity 0.2s ease;
+}
+
+.s24-boton-submit:hover {
+  opacity: 0.9;
+}
+
+.s24-texto-login {
+  color: white;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  opacity: 0.5;
+  margin: 0 0 15px 0;
+}
+
+.s24-enlace-login {
+  color: #f59e7d; 
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.s24-enlace-volver {
+  color: white;
+  font-family: var(--font-family);
+  font-size: 0.8rem;
+  text-decoration: none;
+  opacity: 0.4;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s ease;
+}
+
+.s24-enlace-volver:hover {
+  opacity: 0.8;
+}
+/* --- FIN ESTILOS SECCIÓN 24 --- */
