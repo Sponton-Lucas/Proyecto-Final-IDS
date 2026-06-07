@@ -36,7 +36,6 @@ app.register_blueprint(reservas_bp)
 app.register_blueprint(menu_bp)
 
 
-
 @app.route('/admin')
 def admin_index():
     return render_template('admin/admin_index.html')
@@ -47,7 +46,21 @@ def admin_menu():
 
 @app.route('/admin/reservas')
 def admin_reservas():
-    return render_template('admin/admin_reservas.html')
+    res = requests.get('http://localhost:5000/reservas')
+    reservas = res.json()
+    return render_template('admin/admin_reservas.html', reservas=reservas)
+
+@app.route('/admin/reserva/<int:id>/asistio')
+def marcar_asistio(id):
+    requests.patch(f'http://localhost:5000/reservas/{id}',
+                   json={'estado': 'asistio'})
+    return redirect('/admin/reservas')
+
+@app.route('/admin/reserva/<int:id>/no-asistio')
+def marcar_no_asistio(id):
+    requests.patch(f'http://localhost:5000/reservas/{id}',
+                   json={'estado': 'no-asistio'})
+    return redirect('/admin/reservas')
 
 @app.route('/admin/usuarios')
 def admin_usuarios():
