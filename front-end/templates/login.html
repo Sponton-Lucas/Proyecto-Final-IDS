@@ -4,22 +4,44 @@
 {% block estilos %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% endblock %}
-
 {% block content %}
-{% if error %}
-    <div class="conteiner-error">
-        <p class="mensaje-error"> {{ error }} </p>
-    </div>
-{% endif %}
-<div class="contenedor">
-    <form action='/login_form' method="post" class="login-formulario">
-        <h2 class="titulo-log-in">Log in</h2>
-        <label for="email" class="form-label">Correo electronico:</label>
-        <input type="text" id="email" name="email" placeholder="E-mail">
-        <label for="contrasenia" class="form-label">Contraseña:</label>
-        <input type="text" id="contrasenia" name="contrasenia" placeholder="Contraseña">
-        <button type="submit" class="boton-login">Log in</button>
-    </form>
-</div>
+<section class="s24-seccion">
 
+    <div class="s24-contenedor">
+
+        <div class="s24-encabezado">
+            <h2 class="s24-titulo-principal">PASILLO COLÓN</h2>
+            <p class="s24-subtitulo">INICIAR SESIÓN</p>
+        </div>
+        {% if error %}
+            <div class="conteiner-error">
+                <p class="mensaje-error"> {{ error }} </p>
+            </div>
+        {% endif %}
+        <form action="/login_form" method="post" class="s24-formulario">
+
+            <div class="s24-grupo-input">
+                <label class="s24-label">CORREO ELECTRÓNICO</label>
+                <input type="email" name="email" class="s24-input" placeholder="tu@email.com" required>
+            </div>
+
+            <div class="s24-grupo-input">
+                <label class="s24-label">CONTRASEÑA</label>
+                <input type="password" name="contrasenia" class="s24-input" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="s24-boton-submit">INICIAR SESIÓN</button>
+
+        </form>
+
+        <p class="s24-texto-login">
+            ¿No tienes cuenta?
+            <a href="/registrarse" class="s24-enlace-login">Regístrate</a>
+        </p>
+
+        <a href="/" class="s24-enlace-volver">← VOLVER AL INICIO</a>
+
+    </div>
+
+</section>
 {% endblock %}

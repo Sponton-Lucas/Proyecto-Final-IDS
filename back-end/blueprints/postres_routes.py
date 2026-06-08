@@ -23,15 +23,16 @@ def crear_postre():
     datos = request.get_json()
     if not datos:
         return jsonify({'error': 'Body vacio'}), 400
-    if ("precio" not in datos) or ("nombre" not in datos ):
+    if ("precio" not in datos) or ("nombre" not in datos) or ("descripcion" not in datos):
         return jsonify({"error": "Campos requeridos: precio y nombre"}), 400
     precio = datos.get("precio")
     nombre = datos.get("nombre")
     es_vegano = datos.get("es_vegano", False)
     es_celiaco = datos.get("es_celiaco", False)
-    if (not precio) or (not nombre):
+    descripcion = datos.get("descripcion")
+    if (not precio) or (not nombre) or (not descripcion) or (nombre.strip() == "") or (descripcion.strip() == ""):
         return jsonify({'error': 'Precio y nombre no pueden estar vacios'}), 400
-    postre_nuevo = db.post_postre(precio, nombre, es_vegano, es_celiaco)
+    postre_nuevo = db.post_postre(precio, nombre, descripcion, es_vegano, es_celiaco)
     if postre_nuevo:
         return jsonify({'message': 'Se creo correctamente el postre'}), 201
     else:
