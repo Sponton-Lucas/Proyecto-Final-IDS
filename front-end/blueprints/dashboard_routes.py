@@ -1,10 +1,12 @@
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, redirect
 import requests
 
 dashboard_bp = Blueprint('admin_index', __name__)
 
 @dashboard_bp.route("/admin")
 def dashboard():
+    if not session.get('es_admin'):
+        return redirect('/')
     print("Sesion actual:", session)
     nombre_admin = session.get("user")
     resumen = requests.get("http://localhost:5000/resumen").json()

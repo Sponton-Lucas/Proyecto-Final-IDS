@@ -26,6 +26,7 @@ def login_form():
 
         session["usuario_id"] = usuario["id_usuario"]
         session["user"] = usuario["nombre_apellido"]
+        session["es_admin"] = usuario["es_admin"]
 
         return redirect('/usuario')
 

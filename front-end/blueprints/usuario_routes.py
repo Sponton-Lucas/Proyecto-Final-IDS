@@ -6,7 +6,7 @@ usuario_bp = Blueprint('usuario', __name__)
 
 @usuario_bp.route('/logout', methods=['POST'])
 def logout():
-    session.pop("user", None)
+    session.clear()
     return redirect('/login')
 
 
