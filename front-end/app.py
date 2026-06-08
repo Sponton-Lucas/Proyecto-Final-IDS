@@ -90,7 +90,21 @@ def marcar_no_asistio(id):
 
 @app.route('/admin/usuarios')
 def admin_usuarios():
-    return render_template('admin/admin_usuarios.html')
+    res = requests.get('http://localhost:5000/usuarios')
+    usuarios = res.json()
+    return render_template('admin/admin_usuarios.html', usuarios=usuarios)
+
+@app.route('/admin/usuario/<int:id>/dar-admin')
+def dar_admin(id):
+    if id != 1:
+        requests.patch(f'http://localhost:5000/usuarios/{id}', json={'es_admin': True})
+    return redirect('/admin/usuarios')
+
+@app.route('/admin/usuario/<int:id>/quitar-admin')
+def quitar_admin(id):
+    if id != 1:
+        requests.patch(f'http://localhost:5000/usuarios/{id}', json={'es_admin': False})
+    return redirect('/admin/usuarios')
 
 @app.route('/admin/resenas')
 def admin_resenas():
