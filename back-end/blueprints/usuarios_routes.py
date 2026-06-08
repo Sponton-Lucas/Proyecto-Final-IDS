@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 import db
+import bcrypt
 
 usuarios_bp = Blueprint('usuarios', __name__)
 
@@ -18,6 +19,8 @@ def obtener_usuario_id(id_usuario):
     else:
         return jsonify({"error": "Usuario no encontrado"}), 404
 
+
+
 #POST
 @usuarios_bp.route('/usuarios', methods=['POST'])
 def crear_usuario():
@@ -26,12 +29,55 @@ def crear_usuario():
         return jsonify({"error": "Datos no proporcionados"}), 400
     if 'nombre_apellido' not in datos or 'email' not in datos or 'contrasenia' not in datos or 'telefono' not in datos:
         return jsonify({"error": "Todos los campos son requeridos"}), 400
+    password_plana = datos["contrasenia"]
+    password_hasheada = bcrypt.hashpw(password_plana.encode('utf-8'), bcrypt.gensalt())
+    datos["contrasenia"] = password_hasheada.decode('utf-8')
     resultado = db.post_usuario(datos)
     if "error" in resultado:
         if resultado["error"] == "El email ya esta registrado":
             return jsonify(resultado), 409
         return jsonify(resultado), 400
     return jsonify(resultado), 201
+
+@usuarios_bp.route('/login', methods=['POST'])
+def login():
+
+    datos = request.get_json()
+
+    if not datos:
+        return jsonify({"error": "Datos no enviados"}), 400
+
+    email = datos.get("email")
+    contrasenia = datos.get("contrasenia")
+
+    if not email or not contrasenia:
+        return jsonify({"error": "Faltan datos"}), 400
+
+    usuario = db.get_usuario_email(email)
+
+    if not usuario:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+
+    password_guardada = usuario["contrasenia"]
+
+    coincide = bcrypt.checkpw(
+        contrasenia.encode('utf-8'),
+        password_guardada.encode('utf-8')
+    )
+
+    if not coincide:
+        return jsonify({"error": "Contraseña incorrecta"}), 401
+
+    return jsonify({
+        "mensaje": "Login correcto",
+        "usuario": {
+            "id_usuario": usuario["id_usuario"],
+            "nombre_apellido": usuario["nombre_apellido"],
+            "email": usuario["email"],
+            "es_admin": usuario["es_admin"]
+        }
+    }), 200
+
 
 #PUT
 @usuarios_bp.route('/usuarios/<int:id_usuario>', methods=['PUT'])

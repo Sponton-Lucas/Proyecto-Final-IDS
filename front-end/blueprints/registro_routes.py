@@ -14,20 +14,12 @@ def registro():
 def register_form():
     datos_usuario = request.form.to_dict()
 
-    respuesta = requests.post(
-        "http://localhost:5000/usuarios",
-        json=datos_usuario
-    )
-
+    respuesta = requests.post("http://localhost:5000/usuarios", json=datos_usuario)
    
     if respuesta.status_code == 201:
-        usuarios = requests.get("http://localhost:5000/usuarios").json()
-
-        for u in usuarios:
-            if u["email"] == datos_usuario["email"]:
-                session["user"] = u["nombre_apellido"]
-                session["usuario_id"] = u["id_usuario"]
-                break
-
-    return redirect('/usuario')
+        usuario = respuesta.json()
+        session["user"] = usuario["nombre_apellido"]
+        session["usuario_id"] = usuario["id_usuario"]
+        return redirect('/usuario')
+    return redirect('/registro')
 
