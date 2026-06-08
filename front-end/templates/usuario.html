@@ -9,20 +9,60 @@
 {% block content %}
 <h1 class="titulo-bienvenido">Bienvenido {{ usuario }}!</h1>
 <br></br>
-<div class="resenas">
-    <h2 class="tus-resenas">Tus reseñas:</h2>
-    <ol class="resenas-list">
-        {% for re in resenas %}
-            {% if re.usuario_id == id_usuario%}
-                <li class="resena-item">
-                    <h4 class="resena-mensaje">{{ re.mensaje }}</h4>
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ol>
-</div>
+<h2 class="titulo-reservas">Tus reservas</h2>
+<br></br>
+<table class="tabla-reservas">
+    <tr>
+        <th class="encabezado">Fecha</th>
+        <th class="encabezado">Hora</th>
+        <th class="encabezado">Cantidad de personas</th>
+        <th class="encabezado">Estado</th>
+    </tr>
+    {% for rer in reservas %}
+        {% if rer.usuario_id == id_usuario%}
+            <tr>
+                <td><p class="tu-fecha">{{ rer.fecha }}</p></td>
+                <td><p class="tu-hora">{{ rer.hora}}</p></td>
+                <td><p class="cantidad-personas">{{ rer.cantidad_personas }}</p></td>
+                <td><p class="tu-estado">{{ rer.estado }}</p></td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+
+</table>
+<br></br>
+<h2 class="titulo-resenas">Tus reseñas</h2>
+<br></br>
+<table class="tabla-resenas">
+    <tr>
+        <th class="encabezado">Reseñas</th>
+        <th class="encabezado">Acciones</th>
+    </tr>
+    {% for re in resenas %}
+        {% if re.usuario_id == id_usuario %}
+            <tr>
+                <td><p class="tus-resenas">{{ re.mensaje }}</p></td>
+                <td>
+                    <div class="acciones-botones">
+                        <form action="/eliminar_resena" method="post">
+                            <input type="hidden" name="id_resenas" value="{{ re.id_resenas }}">
+                            <button type="submit" class="eliminar-resena-boton">Eliminar</button>
+                        </form>
+                        <form action="/editar_resena" method="post">
+                            <input type="hidden" name="usuario_id" value="{{ re.usuario_id }}">
+                            <input type="hidden" name="id_resenas" value="{{ re.id_resenas }}">
+                            <button type="submit" class="editar-resena-boton">Editar</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+
+</table>
+<br></br>
 <form action="/logout" method="post" class="logout-form">
-    <button type="submit" class="logout-cerrar">Cerrar sesión</button>
+    <button type="submit" class="logout-cerrar-boton">Cerrar sesión</button>
 </form>
 {% endblock %}
 

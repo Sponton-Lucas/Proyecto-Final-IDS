@@ -58,11 +58,14 @@ CREATE TABLE IF NOT EXISTS reservas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
+ALTER TABLE postres ADD COLUMN descripcion VARCHAR(200);
+ALTER TABLE bebidas ADD COLUMN descripcion VARCHAR(200);
+ALTER TABLE comida_principal ADD COLUMN descripcion VARCHAR(200);
 
 
 
 #USUARIO MYSQL
-CREATE USER 'caidaSiu'@'localhost'
+CREATE USER IF NOT EXISTS'caidaSiu'@'localhost'
 IDENTIFIED BY '1234';
 
 GRANT ALL PRIVILEGES

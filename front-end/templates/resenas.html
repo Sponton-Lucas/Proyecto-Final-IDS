@@ -8,57 +8,82 @@
 
 {% block content %}
 
+<!--seccion 20-->
+<h2 class="titulo-resenas-criticos">Reseñas de criticos gastronomicos</h2>
+<section class="seccion-resenas">
 
-<div class="contenido-resena">
+    
+  <div id="carouselResenas" class="carousel slide" data-bs-ride="carousel">
+    
+    <div class="carousel-inner">
 
-    <h1 class="titulo-resena"> Reseñas de nuestros clientes </h1>
-
-</div>
-
-<div class="carrusel-resena">
-
-    <button id="prev-flecha" class="boton-flecha">&larr;</button>
-
-    <div class="recuadro-resena">
-        <div id="carrusel-tracker" class="carrusel-tracker">
-
-            {% for resena in resenas %}
-
-                <div class="comentarios">
-
-                    <p class="texto-resena">
-                        "{{ resena.mensaje }}"
-                    </p>
-
-                    {% for usuario in usuarios %}
-                        {% if usuario.id_usuario == resena.usuario_id %}
-                            <p class="nombre">
-                                {{ usuario.nombre_apellido }}
-                            </p>
-                        {% endif %}
-                    {% endfor %}
-
-                    <img src="{{ url_for('static', filename='img/persona1.') }}"
-                         alt="imagen-persona"
-                         width="100"
-                         height="100">
-
-                </div>
-
-            {% endfor %}
-
+      <div class="carousel-item active">
+        <div class="resena-card">
+          <div class="estrellas">★★★★★</div>
+          <p class="resena-texto">¡La comida aquí es un sueño! Nunca había probado sabores tan impactantes. Volveré cada semana.</p>
+          <img class="resena-foto" src="{{ url_for('static', filename='img/foto-sofia.jpg') }}" alt="Foto Sofía">
+          <p class="resena-nombre">Sofía Martínez</p>
+          <p class="resena-rol">Food Blogger</p>
         </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="resena-card">
+          <div class="estrellas">★★★★★</div>
+          <p class="resena-texto">Un ambiente increíble y un servicio impecable. La mejor experiencia gastronómica de mi vida.</p>
+          <img class="resena-foto" src="{{ url_for('static', filename='img/foto-carlos.jpg') }}" alt="Foto Carlos">
+          <p class="resena-nombre">Carlos López</p>
+          <p class="resena-rol">Crítico gastronómico</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="resena-card">
+          <div class="estrellas">★★★★☆</div>
+          <p class="resena-texto">Los ingredientes son frescos y de altísima calidad. Se nota el amor que ponen en cada plato.</p>
+          <img class="resena-foto" src="{{ url_for('static', filename='img/foto-maria.jpg') }}" alt="Foto María">
+          <p class="resena-nombre">María González</p>
+          <p class="resena-rol">Chef amateur</p>
+        </div>
+      </div>
+
     </div>
 
-    <button id="next-flecha" class="boton-flecha">&rarr;</button>
+    <button class="carousel-control-prev resena-flecha" type="button" data-bs-target="#carouselResenas" data-bs-slide="prev">
+      <span>&#8592;</span> <!-- #Fecha hacia atrás--> 
+    </button>
+    <button class="carousel-control-next resena-flecha" type="button" data-bs-target="#carouselResenas" data-bs-slide="next">
+      <span>&#8594;</span> <!-- #Fecha hacia adelante--> 
+    </button>
+  </div>
+</section>
 
+<h2 class="titulo-resenas-clientes">Reseñas de nuestros clientes</h2>
+<div class="contiene-resenas">
+    {% for resena in resenas %}
+        {% for usuario in usuarios %}
+            {% if resena.usuario_id == usuario.id_usuario %}
+                <div class="card-resena">
+                    <p class="nombre-resena">{{ usuario.nombre_apellido }}</p>
+                    <p class="mensaje-resena">{{ resena.mensaje }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 </div>
+<br></br>
+{% if user %}
 
-<h3>Dejanos tu reseña {{ user }}!</h3>
-<form action='/agregar_resena' method="post">
-        <label for="mensaje">Mensaje:</label>
-        <input type="text" id="mensaje" name="mensaje" placeholder="Mensaje">
-        <button type="submit">Enviar</button>
-</form>
+<div class="container">
+    <h4 class="con-sesion">Dejanos tu reseña {{ user }}!</h4>
+    <form action='/agregar_resena' method="post" class="form-resena">
+        <textarea type="text" id="mensaje" name="mensaje" placeholder="Mensaje" class="resena"></textarea>
+        <button type="submit" class="enviar-resena">Enviar</button>
+    </form>
+</div>
+{% else %}
+    <h4 class="sin-sesion">Debes iniciar sesion para dejar una reseña</h4>
+{% endif %}
+
 
 {% endblock %}

@@ -1,142 +1,88 @@
 from flask import Flask, jsonify, redirect, render_template, request, session, flash
 import requests
+from datetime import timedelta
+
+from blueprints.resenas_routes import resenas_bp
+from blueprints.login_routes import login_bp
+from blueprints.usuario_routes import usuario_bp
+from blueprints.registro_routes import registro_bp
+from blueprints.reservas_routes import reservas_bp
+from blueprints.menu_routes import menu_bp
 
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
+app.permanent_session_lifetime = timedelta(days=1)
+app.register_blueprint(resenas_bp)
+app.register_blueprint(login_bp)
+app.register_blueprint(usuario_bp)
+app.register_blueprint(registro_bp)
+app.register_blueprint(reservas_bp)
+app.register_blueprint(menu_bp)
 
 
 @app.route("/")
 def index():
 	return render_template('index.html')
 
-@app.route("/menu")
-def menu():
-	return render_template('menu.html')
+@app.route('/admin')
+def admin_index():
+    return render_template('admin/admin_index.html')
 
-@app.route("/conocenos")
-def conocenos():
-    ser = requests.get('http://localhost:5000/servicios_extra')
-    servicios_extra = ser.json()
-    return render_template('conocenos.html', se=servicios_extra)
+@app.route('/admin/menu')
+def admin_menu():
+    return render_template('admin/admin_menu.html')
 
+@app.route('/admin/nuevo_articulo', methods=['POST'])
+def nuevo_articulo():
+    return render_template('admin/admin_nuevo_articulo.html')    
 
-@app.route("/resenas", methods=['GET'])
-def resenas():
-    if "user" in session:
-        res = requests.get('http://localhost:5000/resenas')
-        resenas = res.json()
-        us = requests.get('http://localhost:5000/usuarios')
-        usuarios = us.json()
-        user = session["user"]
-        
-        return render_template('resenas.html', resenas=resenas, usuarios=usuarios, user=user )
-    else: 
-        return render_template('login.html')
+@app.route('/admin/creacion_nuevo_articulo', methods=['POST'])
+def crear_nuevo_articulo():
+    nombre = request.form.get("nombre")
+    precio = request.form.get("precio")
+    categoria = request.form.get("categoria")
+    descripcion = request.form.get("descripcion")
+    es_vegano = "vegano" in request.form
+    es_celiaco = "celiaco" in request.form
+    es_alcoholica = "alcoholica" in request.form
 
-@app.route('/agregar_resena', methods=['POST'])
-def agregar_resena():
-    if "user" in session:
-        data = request.form.to_dict()
-        data["nombre_apellido"] = session["user"]
-        requests.post("http://localhost:5000/agregar_resena", json=data)
-        return redirect('/resenas')
-
-
-@app.route('/reservas', methods=['GET', 'POST'])
-def reservas():
-    if 'user' not in session:
-        return render_template('reservas.html', no_session=True)
-    if request.method == 'POST':
-        datos = {
-            "usuario_id": session.get('usuario_id'),
-            "fecha": request.form.get('fecha'),
-            "hora": request.form.get('horario'),
-            "cantidad_personas": int(request.form.get('personas'))
-		}
-        respuesta = requests.post("http://localhost:5000/reservas", json=datos)
-        if respuesta.status_code == 201:
-            flash('¡Reserva confirmada! Te esperamos.', 'exito')
-        else:
-            flash('Hubo un error al hacer la reserva. Intentá de nuevo.', 'error')
-            return redirect('/reservas') 
-    return render_template('reservas.html')
-
-@app.route('/login')
-def login():
-    if "user" in session:
-        return redirect('/usuario')
-    else:
-	    return render_template('login.html')
-
-@app.route('/login_form', methods=['POST'])
-def login_form():
-    us = requests.get('http://localhost:5000/usuarios')
-    usuarios = us.json()
-    email = request.form.get("email")
-    contrasenia = request.form.get("contrasenia")
-    for u in usuarios:
-        if u["email"] == email and u["contrasenia"] == contrasenia:
-            user = u["nombre_apellido"]
-            session["usuario_id"] = u["id_usuario"] 
-            session["user"] = user
-            return redirect('/usuario')
-    return redirect('/usuario_not_found')
-
-@app.route('/usuario_not_found')
-def usuario_not_found():
-    error = "Usuario no encontrado o contraseña incorrecta"
-    return render_template('login.html', error = error)
+    if categoria == "comida":
+        datos = {"nombre_plato": nombre, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
+        requests.post('http://localhost:5000/comida_principal', json=datos)
+    if categoria == "postre":
+        datos = {"precio": precio, "nombre": nombre,"es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
+        requests.post('http://localhost:5000/postres', json=datos)
+    if categoria == "bebida":
+        datos = {"precio": precio, "nombre": nombre, "es_alcoholica": es_alcoholica, "descripcion": descripcion}
+        requests.post('http://localhost:5000/bebidas', json=datos)
+    return redirect('/admin/menu')
 
 
-@app.route('/usuario')
-def user():
-    if "user" in session:
-        usuario = session["user"]
-        us = requests.get('http://localhost:5000/usuarios')
-        usuarios = us.json()
-        res = requests.get('http://localhost:5000/resenas')
-        resenas = res.json()        
-        id_usuario = 0
-        for u in usuarios:
-            if u["nombre_apellido"] == usuario:
-                id_usuario = u["id_usuario"]
-        return render_template('/usuario.html', usuario=usuario, resenas=resenas, id_usuario=id_usuario)
-    else:
-        return redirect('/login')
+@app.route('/admin/reservas')
+def admin_reservas():
+    res = requests.get('http://localhost:5000/reservas')
+    reservas = res.json()
+    return render_template('admin/admin_reservas.html', reservas=reservas)
 
-@app.route('/logout', methods=['POST'])
-def logout():
-    session.pop("user", None)
-    return redirect('/login')
+@app.route('/admin/reserva/<int:id>/asistio')
+def marcar_asistio(id):
+    requests.patch(f'http://localhost:5000/reservas/{id}',
+                   json={'estado': 'asistio'})
+    return redirect('/admin/reservas')
 
+@app.route('/admin/reserva/<int:id>/no-asistio')
+def marcar_no_asistio(id):
+    requests.patch(f'http://localhost:5000/reservas/{id}',
+                   json={'estado': 'no-asistio'})
+    return redirect('/admin/reservas')
 
-@app.route("/registro")
-def registro():
-    if "user" in session:
-        return redirect('/usuario')
-    else:	
-        return render_template('registro.html')
+@app.route('/admin/usuarios')
+def admin_usuarios():
+    return render_template('admin/admin_usuarios.html')
 
-@app.route('/registrarse', methods=['POST'])
-def register_form():
-    datos_usuario = request.form.to_dict()
-
-    respuesta = requests.post(
-        "http://localhost:5000/usuarios",
-        json=datos_usuario
-    )
-
-   
-    if respuesta.status_code == 201:
-        usuarios = requests.get("http://localhost:5000/usuarios").json()
-
-        for u in usuarios:
-            if u["email"] == datos_usuario["email"]:
-                session["user"] = u["nombre_apellido"]
-                session["usuario_id"] = u["id_usuario"]
-                break
-
-    return redirect('/usuario')
+@app.route('/admin/resenas')
+def admin_resenas():
+    return render_template('admin/admin_resenas.html')
 
 if __name__ == '__main__':
 	app.run(port=3000, debug=True)  

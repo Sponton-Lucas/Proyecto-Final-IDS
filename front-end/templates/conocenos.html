@@ -69,26 +69,47 @@
 
 </section>
 
-<section>    <!-- SECCION 19 -->
+<!-- SECCION 19 -->
+<section class="s19-seccion">    
 
-    <div>
+    <div class="s19-contenedor">
 
-        <div>
-            <h2>Dónde Encontrarnos</h2>
-            <p>Ubicación Exacta</p>
+        <div class="s19-bloque-encabezado">
+            <h2 class="s19-titulo">Dónde Encontrarnos</h2>
+            <p class="s19-parrafo">Ubicación Exacta</p>
         </div>
 
-        <div>
+        <div class="s19-bloque-mapa">
             <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6175402120464!2d-73.98785312342624!3d40.74844047138914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2s350%205th%20Ave%2C%20New%20York%2C%20NY%2010118%2C%20EE.%20UU.!5e0!3m2!1ses-419!2sar!4v1716840000000!5m2!1ses-419!2sar" 
-                width="600" 
-                height="450" 
                 loading="lazy"
+                class="s19-mapa-iframe"
             ></iframe>
         </div>
 
     </div>
 
+</section>
+<!-- FIN SECCION 19 -->
+
+<section id="galeria" class="seccion17 text-center py-5">
+  <div class="container">
+    <h2 class="mb-4">Galería del Restaurante</h2>
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <img src="{{ url_for('static', filename='img/foto1.jpg') }}" class="img-fluid rounded" alt="Foto 1">
+      </div>
+      <div class="col-md-3 mb-3">
+        <img src="{{ url_for('static', filename='img/foto2.jpg') }}" class="img-fluid rounded" alt="Foto 2">
+      </div>
+      <div class="col-md-3 mb-3">
+        <img src="{{ url_for('static', filename='img/foto3.jpg') }}" class="img-fluid rounded" alt="Foto 3">
+      </div>
+      <div class="col-md-3 mb-3">
+        <img src="{{ url_for('static', filename='img/foto4.jpg') }}" class="img-fluid rounded" alt="Foto 4">
+      </div>
+    </div>
+  </div>
 </section>
 
 {% endblock %}
