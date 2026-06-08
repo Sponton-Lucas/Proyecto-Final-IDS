@@ -3,14 +3,13 @@
 {% block title %} Nombre restaurante - Inicio {% endblock %}
 
 {% block estilos %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block content %}
 
 <!--seccion 1-->
 <section class="seccion-1">
-
   <h1 class="titulo"> Pasillo Colón </h1> 
   <h2 class="titulo1">Sabores Inconfundibles</h2> 
   <h5 class="mesajito">¡Bienvenidos al lugar donde la comida cuenta historias desgarradoras! Un banquete para los sentidos.</h5>
@@ -24,7 +23,32 @@
   
 </section>
 
-<!--seccion 2-->
+<!--seccion 5-->
+<div class="container mt-5 mb-5">
+  <img class="rounded-5" src="{{url_for('static', filename='img/quienes_somos.jpeg')}}" width="100%" alt="foto del restaurante">
+  <div class="row align-items-center">
+    <div class="col-4 offset-1 text-center">
+      <a class="boton" href="{{ url_for('conocenos') }}" role="button">
+        <span class="boton-texto">Conócenos más</span>
+        <span class="boton-icono">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+    <div class="col-6 p-3 fs-5 text-white text-center">
+      <span>
+        <b>Nuestra pasión por la cocina se refleja en cada plato.
+              Creamos experiencias memorables, infusionadas con amor
+              y sabores intensos. Nuestro equipo está comprometido en
+              ofrecer lo mejor, desde recetas tradicionales hasta
+              innovaciones culinarias que sorprenden. Si no sales con
+              una sonrisa, ¡algo hicimos mal!
+        </b>
+      </span>
+  </div>
+</div> 
 <section class="seccion-2">
   <div class="seccion-2-texto">
    <div class="seccion-2-etiquetas">
