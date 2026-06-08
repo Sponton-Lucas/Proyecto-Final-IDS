@@ -1,5 +1,6 @@
 import mysql.connector
 from datetime import date, timedelta
+from mysql.connector import IntegrityError
 db_config = {
     'host':'localhost',
     'user':'caidaSiu',
@@ -33,19 +34,47 @@ def get_usuario_id(id_usuario):
         cursor.close()
         coneccion.close()
 
-def post_usuario(datos):
+def get_usuario_email(email):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
+
     try:
-        cursor.execute(
-            "INSERT INTO usuarios (nombre_apellido, email, telefono, contrasenia, es_admin) VALUES (%s, %s, %s, %s, %s)",
-            (datos['nombre_apellido'], datos['email'], datos['telefono'], datos['contrasenia'], datos.get('es_admin', False))
-        )
-        coneccion.commit()
-        return {"mensaje": "Usuario creado exitosamente"}
-    except coneccion.IntegrityError:
-        return {"error": "El email ya esta registrado"}
+        cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
+        usuario = cursor.fetchone()
+
+        return usuario
+
     finally:
+        cursor.close()
+        coneccion.close()
+
+
+def post_usuario(datos):
+
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+
+    try:
+
+        cursor.execute("INSERT INTO usuarios (nombre_apellido, email, telefono, contrasenia, es_admin) VALUES (%s, %s, %s, %s, %s)", (datos['nombre_apellido'], datos['email'], datos['telefono'], datos['contrasenia'], datos.get('es_admin', False),) )
+
+        coneccion.commit()
+
+        id_usuario = cursor.lastrowid
+
+        return {
+            "id_usuario": id_usuario,
+            "nombre_apellido": datos["nombre_apellido"],
+            "email": datos["email"],
+            "telefono": datos["telefono"],
+            "es_admin": datos.get("es_admin", False)
+        }
+
+    except IntegrityError:
+        return {"error": "El email ya esta registrado"}
+
+    finally:
+
         cursor.close()
         coneccion.close()
 
@@ -299,11 +328,11 @@ def get_postre_id(id_postre):
         cursor.close()
         coneccion.close()
 
-def post_postre(precio, nombre, es_vegano=False, es_celiaco=False):
+def post_postre(precio, nombre, descripcion, es_vegano=False, es_celiaco=False):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute("INSERT INTO postres (precio, nombre, es_vegano, es_celiaco) VALUES (%s, %s, %s, %s)", (precio, nombre, es_vegano, es_celiaco))
+        cursor.execute("INSERT INTO postres (precio, nombre, es_vegano, es_celiaco, descripcion) VALUES (%s, %s, %s, %s, %s)", (precio, nombre, es_vegano, es_celiaco, descripcion, ))
         coneccion.commit()
         return True
     finally:
@@ -380,11 +409,11 @@ def get_bebida_id(id_bebidas):
         cursor.close()
         coneccion.close()
 
-def post_bebida(precio, nombre, es_alcoholica=False):
+def post_bebida(precio, nombre, descripcion, es_alcoholica=False):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try: 
-        cursor.execute('INSERT INTO bebidas (precio, nombre, es_alcoholica) VALUES (%s, %s, %s)', (precio, nombre, es_alcoholica,))
+        cursor.execute('INSERT INTO bebidas (precio, nombre, es_alcoholica, descripcion) VALUES (%s, %s, %s, %s)', (precio, nombre, es_alcoholica, descripcion,))
         coneccion.commit()
         return True
     finally:
@@ -463,11 +492,11 @@ def get_comida_principal_id(id_plato):
         cursor.close()
         coneccion.close()
 
-def post_plato(nombre_plato, precio=0, es_vegano=False, es_celiaco=False):
+def post_plato(nombre_plato, descripcion, precio=0, es_vegano=False, es_celiaco=False):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute('INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco) VALUES (%s, %s, %s, %s)', (nombre_plato, precio, es_vegano, es_celiaco,))
+        cursor.execute('INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco, descripcion) VALUES (%s, %s, %s, %s, %s)', (nombre_plato, precio, es_vegano, es_celiaco, descripcion,))
         coneccion.commit()
         return True
     finally:
@@ -528,7 +557,9 @@ def get_reservas():
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute('SELECT * FROM reservas')
+        cursor.execute(("""SELECT reservas.id_reservas, reservas.usuario_id, reservas.fecha, reservas.hora,
+                         reservas.cantidad_personas,reservas.estado, usuarios.nombre_apellido, usuarios.email,
+                         usuarios.telefono FROM reservas JOIN usuarios ON reservas.usuario_id = usuarios.id_usuario"""))
         reservas = cursor.fetchall()
         for r in reservas:
             if isinstance(r.get("fecha"), date):

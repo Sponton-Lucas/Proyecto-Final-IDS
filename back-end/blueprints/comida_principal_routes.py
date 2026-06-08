@@ -24,17 +24,18 @@ def crear_comida():
     if not datos:
         return jsonify({"error": "Body vacio o invalido"}), 400
     
-    if ("nombre_plato" not in datos):
+    if ("nombre_plato" not in datos) or ("descripcion" not in datos) or ("precio" not in datos):
         return jsonify({"error": "Falta el campo obligatorio nombre_plato"}), 400
     else:
         nombre_plato = datos.get("nombre_plato")
         precio = datos.get("precio", 0)
         es_vegano = datos.get("es_vegano", False)
         es_celiaco = datos.get("es_celiaco", False)
+        descripcion = datos.get("descripcion")
 
-        if not nombre_plato or nombre_plato.strip() == "":
+        if (not nombre_plato) or (nombre_plato.strip() == "") or (descripcion.strip() == "") or (not descripcion) or (precio.strip() == ""):
             return jsonify({"error": "El campo nombre_plato no puede estar vacío."}), 400
-        plato_nuevo = db.post_plato(nombre_plato, precio, es_vegano, es_celiaco)
+        plato_nuevo = db.post_plato(nombre_plato, descripcion, precio, es_vegano, es_celiaco)
         if plato_nuevo:
             return '', 201
         else:

@@ -20,6 +20,7 @@
                     <span class="badge-singluten">SIN GLUTEN</span>
                 {% endif %}
             </h3>
+            <small class="descripcion">{{ comida["descripcion"] }}</small>
         </div>
         <p class="comida-principal-precio">${{ comida["precio"] }}</p>
     </div>    
@@ -40,6 +41,7 @@
                     <span class="badge-vegano">VEGANO</span>
                 {% endif %}
             </h3>
+            <small class="descripcion">{{ postre["descripcion"] }}</small>
         </div>
         <p class="seccion-12-precio">${{ postre["precio"] }}</p>
     </div>
@@ -57,6 +59,7 @@
                     <span class="badge-alcoholica">ALCOHOLICA</span>
                 {% endif %}
             </h3>
+            <small class="descripcion">{{ bebida["descripcion"] }}</small>
         </div>
         <p class="seccion-13-precio">${{ bebida["precio"] }}</p>
     </div>

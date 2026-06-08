@@ -10,6 +10,52 @@
 
   <!-- Tabla de reservas -->
 
+ <section class="seccion-admin">
+     <h2>Libro de Reservas</h2>
+
+     <table class="admin-tabla">
+         <thead>
+             <tr>
+                <th>Nro. Reserva</th>
+                <th>Cliente</th>
+                <th>Contacto</th>
+                <th>Fecha y Hora</th>
+                <th>Estado</th>
+                <th>Gestión</th>
+             </tr>
+         </thead>
+         <tbody>
+            {% for reserva in reservas %}
+             <tr>
+                <td class="admin-id">
+                  <div class="admin-id-contenedor">
+                    #RES-{{ reserva["id_reservas"] }}
+                  </div>
+                </td>
+                <td>{{ reserva["nombre_apellido"] }}</td>
+                <td>
+                    {{ reserva["email"] }}<br>
+                    {{ reserva["telefono"] }}
+                </td>
+                <td>{{ reserva["fecha"] }} - {{ reserva["hora"] }}</td>
+                <td>
+                    <span class="etiqueta-estado etiqueta-{{ reserva['estado'] }}">
+                    {{ reserva["estado"] }}
+                    </span>
+                </td>
+                <td class="admin-gestion">
+                    <a href="/admin/reserva/{{ reserva['id_reservas'] }}/asistio" class="boton-gestion boton-verde">✓</a>
+                    <a href="/admin/reserva/{{ reserva['id_reservas'] }}/no-asistio" class="boton-gestion boton-rojo">✗</a>
+                    <a href="/admin/reserva/{{ reserva['id_reservas'] }}" class="boton-gestion boton-ojito">👁</a>
+                </td>
+             </tr>
+            {% endfor %}
+         </tbody>
+     </table>
+ </section>
+
+
+
   <!-- FIN ZONA Reservas -->
 
 

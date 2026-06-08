@@ -32,3 +32,22 @@ if (carruseltracker) {
         moverCarrusel();
     });
 }
+
+/*parte del admin nuevo articulo*/
+const categoria = document.getElementById("categoria");
+
+if (categoria) {
+    categoria.addEventListener("change", function () {
+
+        const comida = document.getElementById("campos-comida");
+        const bebida = document.getElementById("campos-bebida");
+
+        if (this.value === "bebida") {
+            comida.style.display = "none";
+            bebida.style.display = "block";
+        } else {
+            comida.style.display = "block";
+            bebida.style.display = "none";
+        }
+    });
+}

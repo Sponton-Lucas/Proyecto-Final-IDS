@@ -11,7 +11,7 @@
 </head>
 <body class="body">
     <header>
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg navbar-border">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse menu-hamburguesa" id="navbarNavDropdown">
                     <ul class="navbar-nav">
@@ -22,26 +22,26 @@
                                 </svg>       
                             </a>
                             <ul class="dropdown-menu dropdown-menu-fondo">
-                                <li><a class="dropdown-item" href="/">Inicio</a></li>
-                                <li><a class="dropdown-item" href="menu">Menu</a></li>
-                                <li><a class="dropdown-item" href="conocenos">Conocenos</a></li>
-                                <li><a class="dropdown-item" href="resenas">Reseñas</a></li>
-                                <li><a class="dropdown-item" href="reservas">Reservas</a></li>
-                                <li><a class="dropdown-item" href="login">Login</a></li>
-                                <li><a class="dropdown-item" href="registro">Registro</a></li>
-                                <li><a class="dropdown-item" href="usuario">Usuario</a></li>
-                                <li><a class="dropdown-item" href="admin">Panel Admin</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('index') }}">Inicio</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('menu.menu') }}">Menu</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('conocenos') }}">Conocenos</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('resenas.resenas') }}">Reseñas</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('reservas.reservas') }}">Reservas</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('login.login') }}">Login</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('registro.registro') }}">Registro</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('usuario.user') }}">Usuario</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('admin_index') }}">Panel Admin</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <a class="btn" href="/" role="button">
+                <div class="ms-5">
+                    <a class="btn" href="{{ url_for('index') }}" role="button">
                         <h1 class="navbar-title"><b>PASILLO COLÓN</b></h1>
                     </a>
                 </div>
                 <div>
-                    <a class="boton" href="reservas" role="button">
+                    <a class="boton" href="{{ url_for('reservas.reservas') }}" role="button">
                         <span class="boton-texto">Reservar ahora</span>
                         <span class="boton-icono">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
