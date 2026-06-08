@@ -1,0 +1,136 @@
+/* ── Admin Usuarios ── */
+.padron-seccion-admin {
+    padding: 2rem;
+    background-color: white;
+}
+
+.padron-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.padron-titulo-seccion {
+    color: #333;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.padron-btn-descargar {
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #9e9e9e;
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-family: var(--font-family);
+    font-size: 12.5px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.padron-btn-descargar:hover {
+    background-color: #f5f5f5;
+}
+
+.padron-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-family);
+    border: 1px solid #e0e0e0;
+}
+
+.padron-tabla thead th {
+    color: #555;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f5f5f5;
+}
+
+.padron-tabla tbody td {
+    color: #333;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle !important;
+}
+
+.padron-id {
+    color: #5b8cd4 !important;
+    font-weight: 500 !important;
+}
+
+.padron-email {
+    font-weight: 500;
+}
+
+.padron-badge {
+    font-size: 12.5px;
+    padding: 6px 11px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+}
+
+.badge-super-admin {
+    background-color: #dc3545;
+    color: white;
+}
+
+.badge-cliente {
+    background-color: #007bff;
+    color: white;
+}
+
+.badge-admin {
+    background-color: #28a745;
+    color: white;
+}
+
+.padron-gestion {
+    white-space: nowrap;
+}
+
+.padron-btn-gestion {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.boton-verde {
+    background-color: #28a745;
+    color: white;
+}
+.boton-verde:hover { 
+    background-color: #218838; 
+}
+
+.boton-rojo {
+    background-color: #dc3545;
+    color: white;
+}
+.boton-rojo:hover { 
+    background-color: #c82333; 
+}
+
+.padron-texto-bloqueado {
+    color: #9e9e9e;
+    font-size: 13px;
+    font-style: italic;
+}
