@@ -13,7 +13,11 @@
             <h2 class="s24-titulo-principal">PASILLO COLÓN</h2>
             <p class="s24-subtitulo">INICIAR SESIÓN</p>
         </div>
-
+        {% if error %}
+            <div class="conteiner-error">
+                <p class="mensaje-error"> {{ error }} </p>
+            </div>
+        {% endif %}
         <form action="/login_form" method="post" class="s24-formulario">
 
             <div class="s24-grupo-input">
