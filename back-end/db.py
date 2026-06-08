@@ -1,5 +1,6 @@
 import mysql.connector
 from datetime import date, timedelta
+from mysql.connector import IntegrityError
 db_config = {
     'host':'localhost',
     'user':'caidaSiu',
@@ -33,19 +34,47 @@ def get_usuario_id(id_usuario):
         cursor.close()
         coneccion.close()
 
-def post_usuario(datos):
+def get_usuario_email(email):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
+
     try:
-        cursor.execute(
-            "INSERT INTO usuarios (nombre_apellido, email, telefono, contrasenia, es_admin) VALUES (%s, %s, %s, %s, %s)",
-            (datos['nombre_apellido'], datos['email'], datos['telefono'], datos['contrasenia'], datos.get('es_admin', False))
-        )
-        coneccion.commit()
-        return {"mensaje": "Usuario creado exitosamente"}
-    except coneccion.IntegrityError:
-        return {"error": "El email ya esta registrado"}
+        cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
+        usuario = cursor.fetchone()
+
+        return usuario
+
     finally:
+        cursor.close()
+        coneccion.close()
+
+
+def post_usuario(datos):
+
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+
+    try:
+
+        cursor.execute("INSERT INTO usuarios (nombre_apellido, email, telefono, contrasenia, es_admin) VALUES (%s, %s, %s, %s, %s)", (datos['nombre_apellido'], datos['email'], datos['telefono'], datos['contrasenia'], datos.get('es_admin', False),) )
+
+        coneccion.commit()
+
+        id_usuario = cursor.lastrowid
+
+        return {
+            "id_usuario": id_usuario,
+            "nombre_apellido": datos["nombre_apellido"],
+            "email": datos["email"],
+            "telefono": datos["telefono"],
+            "es_admin": datos.get("es_admin", False)
+        }
+
+    except IntegrityError:
+        return {"error": "El email ya esta registrado"}
+
+    finally:
+
         cursor.close()
         coneccion.close()
 

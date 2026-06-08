@@ -46,7 +46,6 @@ def editar_resena():
     print(resenas)
     for r in resenas:
         if r["id_resenas"] == id_resena:
-            print(r)
             return render_template('editar_resena.html', usuario_id=usuario_id, resena=r)
     return redirect('/usuario')
 

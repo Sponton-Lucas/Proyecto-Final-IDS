@@ -12,16 +12,23 @@ def login():
 
 @login_bp.route('/login_form', methods=['POST'])
 def login_form():
-    us = requests.get('http://localhost:5000/usuarios')
-    usuarios = us.json()
+
     email = request.form.get("email")
     contrasenia = request.form.get("contrasenia")
-    for u in usuarios:
-        if u["email"] == email and u["contrasenia"] == contrasenia:
-            user = u["nombre_apellido"]
-            session["usuario_id"] = u["id_usuario"] 
-            session["user"] = user
-            return redirect('/usuario')
+
+    datos = {"email": email, "contrasenia": contrasenia}
+
+    respuesta = requests.post('http://localhost:5000/login', json=datos)
+
+    if respuesta.status_code == 200:
+
+        usuario = respuesta.json()["usuario"]
+
+        session["usuario_id"] = usuario["id_usuario"]
+        session["user"] = usuario["nombre_apellido"]
+
+        return redirect('/usuario')
+
     return redirect('/usuario_not_found')
 
 @login_bp.route('/usuario_not_found')
