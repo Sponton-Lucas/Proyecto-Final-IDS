@@ -1,9 +1,3 @@
-/* =========================================================
-   admin_sidebar.css
-   Persona 2 — Sidebar y layout general admin
-   ========================================================= */
-
-/* --- Layout general --- */
 body {
   background-color: white;
   font-family: var(--font-family);
@@ -51,10 +45,11 @@ body {
 }
 
 .sidebar .nav-link.active {
-  background-color: var(--rosita);
-  color: var(--principal);
-  font-weight: 700;
-  border-left: 4px solid var(--naranja-oscuro);
+    background-color: var(--rosita);
+    color: var(--principal);
+    font-weight: 500;
+    border-left: 4px solid var(--naranja-oscuro);
+    padding-left: 16px;
 }
 
 .sidebar .btn.w-100 {
