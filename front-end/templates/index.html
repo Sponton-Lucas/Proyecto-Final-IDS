@@ -59,31 +59,35 @@
          alt="Mesas del restaurante"/>
   </div>
 </section>
-<section>    <!-- SECCION 7 -->
 
-    <div>
+<!-- SECCION 7 -->
+<section class="s7-seccion">    
 
-        <div>
+    <div class="s7-tarjeta">
+
+        <div class="s7-bloque-imagen">
             <img 
                 src="{{ url_for('static', filename='img/restaurante.jpg') }}"
                 alt="Restaurante"
+                class="s7-img"
             >
         </div>
 
-        <div>
+        <div class="s7-bloque-texto">
 
-            <small>Miguel Torres</small>
+            <small class="s7-subtitulo">Miguel Torres</small>
 
-            <h2>Director General</h2>
+            <h2 class="s7-titulo">Director General</h2>
 
-            <p>
+            <p class="s7-parrafo">
                 Apasionado por la gastronomía desde joven,
                 siempre buscando traer lo mejor al paladar
                 de nuestros comensales.
             </p>
 
-            <a href="#">
-                Conócenos →
+            <a href="/conocenos" class="boton">
+              <span class="boton-texto">Conócenos</span>
+              <span class="boton-icono">→</span>
             </a>
 
         </div>
@@ -91,7 +95,7 @@
     </div>
 
 </section>
-
+<!-- FIN SECCION 7 -->
 
  
 <section class="seccion-resenas">
