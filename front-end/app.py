@@ -12,22 +12,6 @@ from blueprints.menu_routes import menu_bp
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
 app.permanent_session_lifetime = timedelta(days=1)
-
-
-
-@app.route("/")
-def index():
-	return render_template('index.html')
-
-
-@app.route("/conocenos")
-def conocenos():
-    ser = requests.get('http://localhost:5000/servicios_extra')
-    servicios_extra = ser.json()
-    return render_template('conocenos.html', se=servicios_extra)
-
-
-
 app.register_blueprint(resenas_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(usuario_bp)
@@ -35,6 +19,14 @@ app.register_blueprint(registro_bp)
 app.register_blueprint(reservas_bp)
 app.register_blueprint(menu_bp)
 
+
+@app.route("/")
+def index():
+	return render_template('index.html')
+
+@app.route("/conocenos")
+def conocenos():
+    return render_template('conocenos.html')
 
 @app.route('/admin')
 def admin_index():

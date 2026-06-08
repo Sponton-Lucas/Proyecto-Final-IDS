@@ -1,10 +1,11 @@
 :root {
     --principal: #00161e;
-    --secundario: #233338;
+    --secundario: #002431;
+    --gris-oscuro: #233338;
     --marron: #1e0800;
     --rosita: #ffa384;
     --naranja-oscuro: #8e4c35;
     --naranja-claro: #ebd5c6;
-    --blanco: #f7f7f7;
+    --celeste-claro: #d3f0f8;
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
