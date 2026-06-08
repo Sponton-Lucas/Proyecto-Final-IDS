@@ -20,7 +20,6 @@ def conocenos():
     return render_template('conocenos.html', se=servicios_extra)
 
 
-
 @app.route("/resenas", methods=['GET'])
 def resenas():
     if "user" in session:

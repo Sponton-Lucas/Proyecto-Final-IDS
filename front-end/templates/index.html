@@ -2,38 +2,29 @@
 
 {% block title %} Nombre restaurante - Inicio {% endblock %}
 
+{%block estilos%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{%endblock%}
+
 {% block content %}
 
 <!--seccion 1-->
-<h1 class="titulo text-center"><b> Pasillo Colon </br>de restaurante</b></h1>  
+<section class="seccion-1">
 
-<h6 class="mesajito text-center">¡Bienvenidos al lugar donde ocurre la magia de las comidas!</h6>
+  <h1 class="titulo"> Pasillo Colón </h1> 
+  <h2 class="titulo1">Sabores Inconfundibles</h2> 
+  <h5 class="mesajito">¡Bienvenidos al lugar donde la comida cuenta historias desgarradoras! Un banquete para los sentidos.</h5>
 
-<div class="text-center boton-ver-menu"> 
-    <a href="/menu" class="btn btn-dark">Ver menú</a>
-</div>
+  <div class="boton-inicio"> 
+    <a href="/menu" class="boton-ver-menu">
+      <span class="texto">Ver Menú</span>
+      <span class="icono">&rarr;</span>
+    </a>
+  </div>
+  
+</section>
 
-<!--seccion 5-->
-<div class="container mt-5 mb-5">
-    <img src="{{url_for('static', filename='images/quienes_somos.jpeg')}}" width="1200" alt="foto del restaurante">
-    
-    <div class="row align-items-center">
-        <div class="col">
-            <a href="/conocenos" class="btn btn-dark">Conócenos más</a>
-        </div>
-
-        <div class="col">
-            <span>
-               <b>Nuestra pasión por la cocina se refleja en cada plato.
-                Creamos experiencias memorables, infusionadas con amor
-                y sabores intensos. Nuestro equipo está comprometido en
-                ofrecer lo mejor, desde recetas tradicionales hasta
-                innovaciones culinarias que sorprenden. Si no sales con
-                una sonrisa, ¡algo hicimos mal!</b>
-            </span>
-    </div>
-</div>
- 
+<!--seccion 2-->
 <section class="seccion-2">
   <div class="seccion-2-texto">
    <div class="seccion-2-etiquetas">
@@ -44,8 +35,8 @@
    <h2> Probá Nuestros Platos</h2>
    <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
    <a href="/reservas" class="boton">
-    <span class="boton-texto">¡Vení y Comé!</span>
-    <span class="boton-icono">→</span>
+     <span class="boton-texto">¡Vení y Comé!</span>
+     <span class="boton-icono">→</span>
    </a>
 
   </div>
@@ -54,45 +45,10 @@
          src="{{ url_for('static', filename='img/mesas.jpg') }}" 
          alt="Mesas del restaurante"/>
   </div>
-
-<section>    <!-- SECCION 7 -->
-
-    <div>
-
-        <div>
-            <img 
-                src="{{ url_for('static', filename='img/restaurante.jpg') }}"
-                alt="Restaurante"
-            >
-        </div>
-
-        <div>
-
-            <small>Miguel Torres</small>
-
-            <h2>Director General</h2>
-
-            <p>
-                Apasionado por la gastronomía desde joven,
-                siempre buscando traer lo mejor al paladar
-                de nuestros comensales.
-            </p>
-
-            <a href="#">
-                Conócenos →
-            </a>
-
-        </div>
-
-    </div>
-
 </section>
 
-
- 
+<!--seccion 3-->
 <section class="seccion-resenas">
-
-
   <div id="carouselResenas" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
 
@@ -137,23 +93,85 @@
   </div>
 </section>
 
-<section>
-  <div> 
-   <span>Sentite</span>
-   <span>Acompañado</span>    
-  
-   <h2> Probá Nuestros Platos</h2>
-  
-   <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
-   <a href="/reservas">¡Vení y Comé!</a>
+<!--seccion 4-->
+
+<!--seccion 5-->
+<section class="seccion-5">
+
+  <div class="imagen-conocenos">
+    <img src="{{url_for('static', filename='img/quienes_somos.jpeg')}}" alt="foto del restaurante">
   </div>
 
-  <div>
-      <img src="{{ url_for('static', filename='img/mesas.JPG') }}" alt="mesas del restaurante"/>
+  <div class="caja-text-btn">
+    <div class="conocenos">
+     <a href="/conocenos" class="boton-conocenos">
+       <span class="texto1">Conócenos</span>
+       <span class="icono1">&rarr;</span>
+      </a>
+    </div>
+  
+    <div class="conocenos-texto">
+      <p>
+      Nuestra pasión por la cocina se refleja en cada plato.
+      Creamos experiencias memorables, infusionadas con amor
+      y sabores intensos. Nuestro equipo está comprometido en
+      ofrecer lo mejor, desde recetas tradicionales hasta
+      innovaciones culinarias que sorprenden. Si no sales con
+      una sonrisa, ¡algo hicimos mal!
+     </p>
+    </div>
   </div>
+
 </section>
 
-<!--secion de preguntas frecuentes-->
+<!--seccion 6-->
+
+<!--seccion 7-->
+<section>   
+
+    <div>
+
+        <div>
+            <img 
+                src="{{ url_for('static', filename='img/restaurante.jpg') }}"
+                alt="Restaurante"
+            >
+        </div>
+
+        <div>
+
+            <small>Miguel Torres</small>
+
+            <h2>Director General</h2>
+
+            <p>
+                Apasionado por la gastronomía desde joven,
+                siempre buscando traer lo mejor al paladar
+                de nuestros comensales.
+            </p>
+
+            <a href="#">
+                Conócenos →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--seccion 8-->
+<h2>Por que elegirnos?</h2>
+<p>Nos apasiona servite cada platillo con amor y dedicacion</p>
+
+<div>
+
+    <img src="{{ url_for('static', filename='img/Untitled.jpeg') }}" alt="comida" width="300">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</div>
+
+
+<!--seccion 9-->
 <div class="seccion-faq">
   <h2>Preguntas Frecuentes</h1>
 
@@ -196,13 +214,7 @@
 
   <hr/>
 </div>
-<h2>Por que elegirnos?</h2>
-<p>Nos apasiona servite cada platillo con amor y dedicacion</p>
 
-<div>
-
-    <img src="{{ url_for('static', filename='img/Untitled.jpeg') }}" alt="comida" width="300">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-</div>
+<!--footer-->
 
 {% endblock %}
