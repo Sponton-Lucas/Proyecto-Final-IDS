@@ -24,6 +24,10 @@ app.register_blueprint(menu_bp)
 def index():
 	return render_template('index.html')
 
+@app.route("/conocenos")
+def conocenos():
+    return render_template('conocenos.html')
+
 @app.route('/admin')
 def admin_index():
     return render_template('admin/admin_index.html')

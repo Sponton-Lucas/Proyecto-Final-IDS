@@ -171,6 +171,7 @@
 /* seccion 3 */
 
 .seccion-resenas {
+  background-color: var(--principal);
   min-height: 500px;
   display: flex;
   align-items: center;
