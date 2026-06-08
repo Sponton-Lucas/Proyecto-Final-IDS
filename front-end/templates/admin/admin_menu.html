@@ -1,0 +1,36 @@
+{% extends "admin/admin_base.html" %}
+
+{% block tittle %}Gestión de Menú{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_menu.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<table class="topper">
+    <tr>
+    <th><h2>Maestro de articulos (Menu)</h2></th>
+    <th>
+        <form action="/admin/nuevo_articulo" method="post">
+            <button class="nuevo-articulo-boton" type="submit">Nuevo articulo</button>
+        </form>
+    </th>
+    </tr>
+</table>
+
+  <!-- Tabla de artículos del menú -->
+
+  <!-- FIN tabla artículos menú -->
+
+
+  <!-- Modal "Agregar artículo" -->
+
+  <!-- FIN Modal "Agregar artículo" -->
+
+
+  <!-- Modal "Editar artículo" -->
+
+  <!-- FIN Modal "Editar artículo" -->
+
+{% endblock %}

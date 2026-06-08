@@ -11,6 +11,9 @@ from blueprints.usuarios_routes import usuarios_bp
 
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def inicio():
+    return ("Back end Corriendo")
 
 @app.route('/reservas/' , methods=['GET'])
 def get_reservas():
@@ -34,5 +37,4 @@ app.register_blueprint(usuarios_bp)
 
 if __name__ == '__main__':
 	app.run(port=5000, debug=True)  
-
 

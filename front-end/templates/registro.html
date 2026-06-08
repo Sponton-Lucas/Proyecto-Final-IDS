@@ -1,95 +1,86 @@
 {% extends "base.html" %}
 
 {% block tittle %} Nombre restaurante - Registro{% endblock %}
-
+{% block estilos %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
 {% block content %}
 
-<p>Estas en /registro</p>
 
-<section>    <!-- SECCION 24 -->
+<!-- SECCION 24 -->
+<section class="s24-seccion">    
 
-    <div>
+    <div class="s24-contenedor">
 
-        <div>
-            <h2>PASILLO COLÓN</h2>
-            <p>CREAR CUENTA</p>
+        <div class="s24-encabezado">
+            <h2 class="s24-titulo-principal">PASILLO COLÓN</h2>
+            <p class="s24-subtitulo">CREAR CUENTA</p>
         </div>
 
-        <form action="/registrarse" method="POST">
+        <form action="/registrarse" method="POST" class="s24-formulario">
 
-            <div>
-                <label for="nombre">NOMBRE COMPLETO</label>
-                <br>
+            <div class="s24-grupo-input">
+                <label for="nombre" class="s24-label">NOMBRE COMPLETO</label>
                 <input 
                     type="text" 
                     id="nombre" 
                     name="nombre_apellido" 
+                    class="s24-input"
                     placeholder="Tu nombre"
                     required
                 >
             </div>
         
-            <br>
-        
-            <div>
-                <label for="email">CORREO ELECTRÓNICO</label>
-                <br>
+            <div class="s24-grupo-input">
+                <label for="email" class="s24-label">CORREO ELECTRÓNICO</label>
                 <input 
                     type="email" 
                     id="email" 
                     name="email"
+                    class="s24-input"
                     placeholder="tu@email.com"
                     required
                 >
             </div>
         
-            <br>
-        
-            <div>
-                <label for="telefono">TELÉFONO</label>
-                <br>
+            <div class="s24-grupo-input">
+                <label for="telefono" class="s24-label">TELÉFONO</label>
                 <input 
                     type="text" 
                     id="telefono" 
                     name="telefono"
+                    class="s24-input"
                     placeholder="Tu teléfono"
                     required
                 >
             </div>
         
-            <br>
-        
-            <div>
-                <label for="password">CONTRASEÑA</label>
-                <br>
+            <div class="s24-grupo-input">
+                <label for="password" class="s24-label">CONTRASEÑA</label>
                 <input 
                     type="password" 
                     id="password" 
                     name="contrasenia"
+                    class="s24-input"
                     placeholder="Mínimo 8 caracteres"
                     required
                 >
             </div>
         
-            <br><br>
-        
-            <button type="submit">CREAR CUENTA</button>
+            <button type="submit" class="s24-boton-submit">CREAR CUENTA</button>
         
         </form>
 
-        <br>
-
-        <p>
+        <p class="s24-texto-login">
             ¿Ya tienes cuenta?
-            <a href="/login">Inicia sesión</a>
+            <a href="/login" class="s24-enlace-login">Inicia sesión</a>
         </p>
 
-        <br>
-
-        <a href="/">← VOLVER AL INICIO</a>
+        <a href="/" class="s24-enlace-volver">← VOLVER AL INICIO</a>
 
     </div>
 
 </section>
+<!-- FIN SECCION 24 -->
 
 {% endblock %}

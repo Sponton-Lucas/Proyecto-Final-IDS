@@ -1,0 +1,115 @@
+/* ── Admin Reservas ── */
+.seccion-admin {
+    padding: 2rem;
+    background-color: white;
+}
+
+.seccion-admin h2 {
+    color: #333;
+    font-family: var(--font-family);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.admin-id-contenedor {
+    display: flex;
+    align-items: center !important;
+    height: 100%;
+}
+
+.admin-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-family);
+    border: 1px solid #e0e0e0;
+}
+
+.admin-tabla thead th {
+    color: #555;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f5f5f5;
+}
+
+.admin-tabla tbody td {
+    color: #333;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle !important;
+}
+
+.admin-id {
+    color: #5b8cd4 !important;
+    font-weight: 500 !important;
+    vertical-align: middle !important;
+    line-height: 65px;
+}
+
+/* etiquetas estado */
+.etiqueta-estado {
+    font-size: 12.5px;
+    padding: 6px 11px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.etiqueta-pendiente {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.etiqueta-asistio {
+    background-color: #28a745;
+    color: white;
+}
+
+.etiqueta-no-asistio {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Botones gestión */
+.admin-gestion {
+    white-space: nowrap;
+    vertical-align: middle !important;
+}
+
+.boton-gestion {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+}
+
+.boton-verde {
+    background-color: #28a745;
+    color: white;
+}
+
+.boton-rojo {
+    background-color: #dc3545;
+    color: white;
+}
+
+.boton-ojito {
+    background-color: transparent;
+    color: #9e9e9e;
+    border: 1px solid #9e9e9e;
+    border-radius: 50%;
+}
+
+.boton-verde:hover { background-color: #218838; }
+.boton-rojo:hover { background-color: #c82333; }
+.boton-ojito:hover { border-color: #666; color: #666; }
+
