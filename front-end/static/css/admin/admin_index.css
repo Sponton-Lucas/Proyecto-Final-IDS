@@ -1,0 +1,146 @@
+
+
+body {
+    font-family: var(--font-family);
+    margin: 5px;
+}
+.bg-user {
+    background-color: var(--principal);
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    flex-direction: row;
+    padding: 10px;
+    background: var(--principal);
+    border-radius: 8px;
+    text-align: center;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(30, 8, 0, 0.4);
+    transition: all 0.4s ease;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.card-numero {
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: start;
+    padding-left: 1rem;
+    margin-bottom: 0;
+    color: var(--blanco);
+}
+
+.card-icono {
+    width: 50px;
+    height: 60%;
+    background-color: rgba(47, 161, 47, 0.39);
+    border-radius: 8px;
+    align-content: center;
+}
+.card-texto {
+    font-size: 1rem;
+    padding-left: 1rem;
+    display: flex;
+    text-align: start;
+    white-space: nowrap;
+    color: var(--blanco);
+}
+
+#reservasChart {
+
+    width: 350px;
+    display: block;
+}
+#estadoChart {
+    width: 200px;
+    margin:  5px auto;
+    display: block;
+}
+
+.canvas-contenedor {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem 2rem 1rem 2rem;
+}
+
+.canvas-div {
+    background-color: var(--principal);
+    width: 45%;
+    align-content: center;
+    padding: 0rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(30, 8, 0, 0.6);
+    transition: all 0.4s ease;
+}
+
+.canvas-div:hover {
+    transform: scale(1.1);
+}
+
+.ultimas-reservas {
+    background-color: var(--principal);
+    margin-top: 2rem;
+    margin-right: 1rem;
+    padding: 1rem;
+    border-radius: 15px;
+    transition: all 0.4s ease;
+}
+.ultimas-reservas:hover {
+    transform: scaleY(1.1);
+}
+
+.columna-grafico {
+    margin-top: 2rem;
+    margin-left: 1rem;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 3px;
+}
+.filas-bordes {
+    border-top: 1px solid var(--secundario);
+}
+
+
+#menuChart {
+    width: 50px;
+    display: block;
+}
+
+.menu-chart-contenedor {
+    background-color: var(--principal);
+    align-content: center;
+    padding: 1rem .5rem 1rem .5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(30, 8, 0, 0.8);
+    margin: 1rem 0rem 1rem 0rem;
+    transition: all 0.4s ease;
+}
+.menu-chart-contenedor:hover {
+    transform: scale(1.1);
+}
+
+.bordes-contenedor-final-top {
+    border-top:  1px solid var(--secundario);
+}
+
+.bordes-contenedor-final-bottom {
+    border-bottom: 1px solid var(--secundario);
+}

@@ -4,9 +4,125 @@
 
 {% block estilos %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_index.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %}
 
 {% block content %}
+    <h2>Hola <b class="bg-user p-2 rounded-4 m-2 text-white">{{ nombre_admin }}</b></h2>
+    <p class="fs-3">Bienvenido al panel de administración</p>
 
+    <!-- Tarjetas resumen -->
+    <div class="cards">
+        <div class="card">
+          <div class="card-icono">
+            👥 
+          </div>
+          <div>
+            <p class="card-numero"><b>{{ resumen.usuarios }}</b></p>
+            <h3 class=" card-texto">
+              Usuarios registrados 
+            </h3>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icono">
+            📅
+          </div>
+          <div>
+            <p class="card-numero"><b>{{ resumen.reservas }}</b></p>
+            <h3 class=" card-texto">
+              Total Reservas
+            </h3>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icono">
+            💬
+          </div>
+          <div>
+            <p class="card-numero"><b>{{ resumen.resenas }}</b></p>
+            <h3 class=" card-texto">
+              Reseñas 
+            </h3>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icono">
+            🍽️
+          </div>
+          <div>
+            <p class="card-numero"><b>{{ resumen.menu_total }}</b></p>
+            <h3 class=" card-texto">
+              Articulos en la carta
+            </h3>
+          </div>
+        </div>
+    </div>
 
+    <!-- Gráficos -->
+    <section class=" canvas-contenedor">
+      <div class="canvas-div">
+        <canvas id="reservasChart"></canvas>
+      </div>
+      <div class="canvas-div">
+        <canvas id="estadoChart"></canvas>
+      </div>
+    </section>
+
+    <section>
+      <div class="row d-flex justify-content-around">
+        <div class="col-6 ultimas-reservas">
+            <h3 class="p-2 text-white">Últimas Reservas</h3>
+            <table>
+                <tr class="text-white"><th>Usuario</th><th>Fecha</th><th>Estado</th></tr>
+                {% for r in ultimas_reservas %}
+                <tr class="filas-bordes text-white">
+                    <td><b>{{ r.nombre_apellido }}</b></td>
+                    <td>{{ r.fecha }}</td>
+                    <td class="bg-success p-2 bg-opacity-50 rounded-3 text-center">{{ r.estado }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-5 columna-grafico">
+          <div class="row menu-chart-contenedor">
+            <canvas id="menuChart"></canvas>
+          </div>
+          <div class="row menu-chart-contenedor">
+            <h3 class="text-white">Últimas Reseñas</h3>
+            <table class="text-white">
+                {% for re in ultimas_resenas %}
+                <tr class="bordes-contenedor-final-top">
+                    <td><strong>{{ re.nombre_apellido }}</strong></td>
+                </tr>
+                <tr class="bordes-contenedor-final-bottom">
+                  <td>{{ re.mensaje }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+          </div>
+          <div class="row menu-chart-contenedor">
+            <h3 class="text-white">Ultimos servicios agregados</h3>
+            <table>
+                {% for s in servicios %}
+                <tr class="bordes-contenedor-top bordes-contenedor-final-bottom">
+                    <td class="text-white"><b>{{ s.nombre_servicio }}</b></td>
+                    <td class="bg-success p-1 bg-opacity-50 rounded-1 text-center text-white">${{ s.precio }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+<script>
+  const dias = {{ dias | tojson}};
+  const promedios = {{ promedios | tojson}};
+  const estados = {{ estados | tojson}};
+  const categorias = {{ categorias | tojson}};
+</script>
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
 {% endblock %}
