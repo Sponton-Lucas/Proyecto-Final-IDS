@@ -7,14 +7,10 @@
     justify-content: center;
     margin: 0 auto;
     width: 100%;
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-}
-
-.titulo {
-  font-size: 100px;
 }
 
 .titulo1 {
@@ -30,7 +26,7 @@
   font-size: 18px;
   font: sans-serif;
   padding: 30px;
-  width: 600px;
+  width: 500px;
   line-height: 1.5;
 }
 
@@ -382,9 +378,23 @@
 /* seccion 6*/
 
 /* seccion 7 */
-
+.contenedor-director-imagen {
+    border-radius:  2rem 0rem 0rem 2rem;
+}
+.contenedor-director-texto {
+    background-color: var(--secundario);
+    border-radius: 0rem 2rem 2rem 0rem;
+}
 /* seccion 8 */
+.contenedor-sabores-unicos {
+    background-color: var(--rosita);
+    color: var(--marron);
+    border-radius:  2rem;
+}
 
+.bordes-img-sabores-unicos {
+    border-radius: 2rem 0rem 2rem 0rem;
+}
 /* seccion 9 */
 
 .seccion-faq {
