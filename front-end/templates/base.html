@@ -30,7 +30,9 @@
                                 <li><a class="dropdown-item" href="{{ url_for('login.login') }}">Login</a></li>
                                 <li><a class="dropdown-item" href="{{ url_for('registro.registro') }}">Registro</a></li>
                                 <li><a class="dropdown-item" href="{{ url_for('usuario.user') }}">Usuario</a></li>
+                                {% if session.get('es_admin') %}
                                 <li><a class="dropdown-item" href="{{ url_for('admin_index') }}">Panel Admin</a></li>
+                                {% endif %}
                             </ul>
                         </li>
                     </ul>
