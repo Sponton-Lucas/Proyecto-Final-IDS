@@ -5,6 +5,7 @@
 @import url('boton.css');
 
 
+
 /* SECCIÓN 12 - Postres */
 
 .seccion-12 {
@@ -242,8 +243,6 @@
   font-size: 0.95rem;
   line-height: 1.8;
 }
-<<<<<<< HEAD
-=======
 
 /* SECCIÓN 9 - FAQ */
 .seccion-faq {
@@ -512,4 +511,3 @@
   opacity: 0.8;
 }
 /* --- FIN ESTILOS SECCIÓN 24 --- */
->>>>>>> origin/develop

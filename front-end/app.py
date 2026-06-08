@@ -9,6 +9,8 @@ from blueprints.registro_routes import registro_bp
 from blueprints.reservas_routes import reservas_bp
 from blueprints.menu_routes import menu_bp
 
+from blueprints.dashboard_routes import dashboard_bp
+
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
 app.permanent_session_lifetime = timedelta(days=1)
@@ -19,6 +21,8 @@ app.register_blueprint(registro_bp)
 app.register_blueprint(reservas_bp)
 app.register_blueprint(menu_bp)
 
+# Prueba de index de admin con graficos y charts.
+app.register_blueprint(dashboard_bp)
 
 @app.route("/")
 def index():
@@ -26,13 +30,9 @@ def index():
 
 @app.route("/conocenos")
 def conocenos():
-    return render_template('conocenos.html')
-
-@app.route('/admin')
-def admin_index():
-    if not session.get('es_admin'):
-        return redirect('/')
-    return render_template('admin/admin_index.html')
+    ser = requests.get('http://localhost:5000/servicios_extra')
+    servicios_extra = ser.json()
+    return render_template('conocenos.html', se=servicios_extra)
 
 @app.route('/admin/menu')
 def admin_menu():
@@ -123,6 +123,10 @@ def admin_resenas():
     if not session.get('es_admin'):
         return redirect('/')
     return render_template('admin/admin_resenas.html')
+
+
+
+
 
 if __name__ == '__main__':
 	app.run(port=3000, debug=True)  
