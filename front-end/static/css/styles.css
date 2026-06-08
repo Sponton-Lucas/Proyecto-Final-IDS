@@ -578,6 +578,23 @@
 }
 /* --- FIN ESTILOS SECCIÓN 19 --- */
 
+/*mensaje error del login*/
+.conteiner-error{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mensaje-error{
+    background-color: rgba(180, 90, 40, 0.15);
+    border: 1px solid rgba(180, 90, 40, 0.4);
+    color: var(--naranja-claro);
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+
 /* --- ESTILOS SECCIÓN 24--- */
 .s24-seccion {
   background-color: #2c3539;
