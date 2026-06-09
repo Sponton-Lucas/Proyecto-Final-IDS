@@ -595,7 +595,7 @@ def post_reserva(datos):
             (datos['usuario_id'], datos['fecha'], datos['hora'], datos['cantidad_personas'],)
         )
         coneccion.commit()
-        return {"mensaje": "Reserva creada exitosamente"}
+        return {"mensaje": "Reserva creada exitosamente", "id_reservas": cursor.lastrowid}
     finally:
         cursor.close()
         coneccion.close()
