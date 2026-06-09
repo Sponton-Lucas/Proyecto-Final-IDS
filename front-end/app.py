@@ -124,6 +124,11 @@ def admin_resenas():
         return redirect('/')
     return render_template('admin/admin_resenas.html')
 
+@app.route('/cancelar-reserva/<int:id_reservas>')
+def cancelar_reserva(id_reservas):
+    requests.patch(f'http://localhost:5000/reservas/{id_reservas}', json={'estado': 'cancelada'})
+    requests.post(f'http://localhost:5000/mail-cancelacion/{id_reservas}')
+    return render_template('cancelar_reserva.html')
 
 
 
