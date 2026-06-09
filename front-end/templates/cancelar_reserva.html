@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %} Pasillo Colon - Reserva Cancelada{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cancelar_reserva.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="cancelar-contenedor">
+    <div class="cancelar-card">
+        <h2>Tu reserva fue cancelada exitosamente</h2>
+        <p>Lamentamos que no puedas venir. ¡Te esperamos pronto!</p>
+        <a href="/" class="cancelar-link">Volver al inicio</a>
+    </div>
+</div>
+{% endblock %}
