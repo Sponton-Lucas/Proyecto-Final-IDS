@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_mail import Mail, Message
 import db
 
 from blueprints.bebidas_routes import bebidas_bp
@@ -24,6 +25,16 @@ def get_reservas():
         return jsonify(reserva)
     else:
         return jsonify({'error': 'servicio no encontrado'}), 404
+    
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'pasillocolon@gmail.com'  # el mail del restaurante
+app.config['MAIL_PASSWORD'] = 'kvka zeyw gpli sbkc'  # la app password
+app.config['MAIL_DEFAULT_SENDER'] = 'pasillocolon@gmail.com'
+
+mail = Mail(app)
 
 
 #Registrar los blueprints
