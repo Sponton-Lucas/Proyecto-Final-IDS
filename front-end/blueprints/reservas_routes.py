@@ -2,7 +2,9 @@ from flask import Blueprint, redirect, render_template, request, session, flash,
 from flask_mail import Message, Mail
 from datetime import datetime
 import requests, locale
-
+import qrcode
+from PIL import Image
+import io
 
 reservas_bp = Blueprint('reservas', __name__)
 
@@ -21,11 +23,27 @@ def reservas():
         respuesta = requests.post("http://localhost:5000/reservas", json=datos)
         if respuesta.status_code == 201:
             resultado = respuesta.json()
-            id_reservas = resultado['id_reservas'] # Obtener el ID de la reserva recién creada
-            cancel_url = f"http://localhost:3000/cancelar-reserva/{id_reservas}" 
+            id_reservas = resultado['id_reservas']  # Obtener el ID de la reserva recién creada
+            cancel_url = f"http://localhost:3000/cancelar-reserva/{id_reservas}"
             locale.setlocale(locale.LC_TIME, 'es_AR.UTF-8')
-            fecha_formateada = datetime.strptime(datos['fecha'], '%Y-%m-%d').strftime('%-d de %B de %Y') # Formatea la fecha a "(dia) de (mes) de (año)"
-            
+            fecha_formateada = datetime.strptime(datos['fecha'], '%Y-%m-%d').strftime(
+                '%-d de %B de %Y')  # Formatea la fecha a "(dia) de (mes) de (año)"
+
+            # Generar el Codigo QR
+            qr = qrcode.QRCode(
+                version=1,
+                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                box_size=10,
+                border=4,
+            )
+            qr.add_data(f"http://localhost:3000/confirmar-reserva/{id_reservas}")
+            qr.make(fit=True)
+
+            img = qr.make_image(fill='black', back_color='white')
+            img_byte_arr = io.BytesIO()
+            img.save(img_byte_arr, format='PNG')
+            img_byte_arr.seek(0)
+
             msg = Message(
                 subject="Confirmación de reserva - Pasillo Colón",
                 recipients=[session.get('email')]
@@ -37,6 +55,7 @@ def reservas():
                 cantidad_personas=datos['cantidad_personas'],
                 cancel_url=cancel_url
             )
+            msg.attach(f'qr_{id_reservas}.png', 'image/png', img_byte_arr.getvalue())
             current_app.extensions['mail'].send(msg)
             flash('¡Reserva confirmada! Te esperamos.', 'exito')
         else:
@@ -56,3 +75,9 @@ def cancelar_reserva(id_reservas):
     current_app.extensions['mail'].send(msg)
     
     return render_template('cancelar_reserva.html')
+
+@reservas_bp.route('/confirmar-reserva/<int:id_reservas>')
+def confirmar_reserva(id_reservas):
+    requests.patch(f'http://localhost:5000/reservas/{id_reservas}', json={'estado': 'confirmada'})
+    flash('Reserva confirmada correctamente.', 'exito')
+    return redirect('/')
