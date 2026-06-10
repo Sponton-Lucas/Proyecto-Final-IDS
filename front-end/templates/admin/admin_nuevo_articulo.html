@@ -1,9 +1,10 @@
 {% extends "admin/admin_base.html" %}
 {% block estilos %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_menu.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_menu.css') }}">
 {% endblock %}
 
 {% block content %}
+
 <form action="/admin/creacion_nuevo_articulo" method="post">
     <div class="contenedor">
         <div class="contenedor-header">
@@ -32,14 +33,12 @@
                     <label>
                         <input type="checkbox" name="vegano">
                             Es vegano
-                        </label>
-
+                    </label>
                     <label>
                         <input type="checkbox" name="celiaco">
                             Es apto celíacos
                     </label>
                 </div>
-
                 <div id="campos-bebida">
                     <label>
                         <input type="checkbox" name="alcoholica">
@@ -47,23 +46,21 @@
                     </label>
                 </div>
             </div>
-
             <div class="grupo">
                 <label>DESCRIPCIÓN</label>
                 <textarea rows="4" name="descripcion"></textarea>
             </div>
-
         </div>
-
         <div class="modal-footer">
             <button class="btn-cancelar"><a href="{{ url_for('admin_menu') }}" class="cerrar">Cancelar</a></button>
             <button type="submit" class="btn-guardar">Guardar Registro</button>
         </div>
-
         </div>
     </div>
 </form>
+
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
+
 {% endblock %}

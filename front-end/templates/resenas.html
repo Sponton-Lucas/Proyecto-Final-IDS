@@ -9,15 +9,10 @@
 
 {% block content %}
 
-<!--seccion 20-->
 <h2 class="titulo-resenas-criticos">Reseñas de criticos gastronomicos</h2>
 <section class="seccion-resenas">
-
-    
   <div id="carouselResenas" class="carousel slide" data-bs-ride="carousel">
-    
     <div class="carousel-inner">
-
       <div class="carousel-item active">
         <div class="resena-card">
           <div class="estrellas">★★★★★</div>
@@ -27,7 +22,6 @@
           <p class="resena-rol">Food Blogger</p>
         </div>
       </div>
-
       <div class="carousel-item">
         <div class="resena-card">
           <div class="estrellas">★★★★★</div>
@@ -37,7 +31,6 @@
           <p class="resena-rol">Crítico gastronómico</p>
         </div>
       </div>
-
       <div class="carousel-item">
         <div class="resena-card">
           <div class="estrellas">★★★★☆</div>
@@ -47,9 +40,7 @@
           <p class="resena-rol">Chef amateur</p>
         </div>
       </div>
-
     </div>
-
     <button class="carousel-control-prev resena-flecha" type="button" data-bs-target="#carouselResenas" data-bs-slide="prev">
       <span>&#8592;</span> <!-- #Fecha hacia atrás--> 
     </button>
@@ -72,9 +63,10 @@
         {% endfor %}
     {% endfor %}
 </div>
-<br></br>
-{% if user %}
 
+<br></br>
+
+{% if user %}
 <div class="container">
     <h4 class="con-sesion">Dejanos tu reseña {{ user }}!</h4>
     <form action='/agregar_resena' method="post" class="form-resena">

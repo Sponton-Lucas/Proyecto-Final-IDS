@@ -3,32 +3,31 @@
 {% block tittle %}Padrón de Usuarios{% endblock %}
 
 {% block estilos %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_usuarios.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_usuarios.css') }}">
 {% endblock %}
 <link rel="stylesheet" href="/front-end/static/css/admin/admin_usuarios.css">
 
 {% block content %}
 
- <section class="padron-seccion-admin">
-     
-     <div class="padron-header">
-         <h2 class="padron-titulo-seccion">Padrón de Usuarios del Sistema</h2>
-         <a href="#" class="padron-btn-descargar">descargar pdf</a>
-     </div>
+<section class="padron-seccion-admin">     
+    <div class="padron-header">
+        <h2 class="padron-titulo-seccion">Padrón de Usuarios del Sistema</h2>
+        <a href="#" class="padron-btn-descargar">descargar pdf</a>
+    </div>
 
-     <table class="padron-tabla">
-         <thead>
-             <tr>
+    <table class="padron-tabla">
+        <thead>
+            <tr>
                 <th>ID</th>
                 <th>Email Registrado</th>
                 <th>Nombre Completo</th>
                 <th>Rol</th>
                 <th>Acciones de Administrador</th>
-             </tr>
-         </thead>
-         <tbody>
+            </tr>
+        </thead>
+        <tbody>
             {% for usuario in usuarios %}
-             <tr>
+            <tr>
                 <td class="padron-id">
                     <div class="padron-id-contenedor">
                         {{ usuario["id_usuario"] }}
@@ -48,20 +47,18 @@
                 <td class="padron-gestion">
                     {% if usuario["id_usuario"] == 1 %}
                         <span class="padron-texto-bloqueado">Bloqueado por Seguridad</span>
-                    {% else %}
-                        
+                    {% else %}                
                         {% if usuario["es_admin"] %}
                             <a href="/admin/usuario/{{ usuario['id_usuario'] }}/quitar-admin" class="padron-btn-gestion boton-rojo" title="Quitar Admin">✕</a>
                         {% else %}
                             <a href="/admin/usuario/{{ usuario['id_usuario'] }}/dar-admin" class="padron-btn-gestion boton-verde" title="Dar Admin">✓</a>
                         {% endif %}
-
                     {% endif %}
                 </td>
-             </tr>
+            </tr>
             {% endfor %}
-         </tbody>
-     </table>
- </section>
+        </tbody>
+    </table>
+</section>
 
- {% endblock %}
+{% endblock %}

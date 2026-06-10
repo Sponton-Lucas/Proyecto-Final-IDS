@@ -8,8 +8,8 @@ from blueprints.usuario_routes import usuario_bp
 from blueprints.registro_routes import registro_bp
 from blueprints.reservas_routes import reservas_bp
 from blueprints.menu_routes import menu_bp
-
-from blueprints.dashboard_routes import dashboard_bp
+from blueprints.conocenos_routes import conocenos_bp
+from blueprints.admin.dashboard_routes import dashboard_bp
 
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
@@ -20,6 +20,7 @@ app.register_blueprint(usuario_bp)
 app.register_blueprint(registro_bp)
 app.register_blueprint(reservas_bp)
 app.register_blueprint(menu_bp)
+app.register_blueprint(conocenos_bp)
 
 # Prueba de index de admin con graficos y charts.
 app.register_blueprint(dashboard_bp)
@@ -27,12 +28,6 @@ app.register_blueprint(dashboard_bp)
 @app.route("/")
 def index():
 	return render_template('index.html')
-
-@app.route("/conocenos")
-def conocenos():
-    ser = requests.get('http://localhost:5000/servicios_extra')
-    servicios_extra = ser.json()
-    return render_template('conocenos.html', se=servicios_extra)
 
 @app.route('/admin/menu')
 def admin_menu():
