@@ -69,13 +69,14 @@ def modificar_postre(id_postre):
     nombre = datos.get("nombre")
     es_vegano = datos.get("es_vegano")
     es_celiaco = datos.get("es_celiaco")
+    descripcion = datos.get("descripcion")
 
-    if precio is not None and precio < 0:
+    if int(precio) is not None and int(precio) < 0:
         return jsonify({"error": "El precio no puede ser negativo"}), 400
     if nombre is not None and nombre.strip() == "":
         return jsonify({"error": "El nombre no puede estar vacio"}), 400
     
-    actualizado = db.patch_postre(id_postre, precio, nombre, es_vegano, es_celiaco)
+    actualizado = db.patch_postre(id_postre, descripcion, precio, nombre, es_vegano, es_celiaco)
     if actualizado:
         return ' ', 204
     else:

@@ -356,7 +356,7 @@ def put_postre(id_postre, precio, nombre, es_vegano, es_celiaco):
         cursor.close()
         coneccion.close()  
 
-def patch_postre(id_postre, precio=None, nombre=None, es_vegano=None, es_celiaco=None):
+def patch_postre(id_postre, descripcion, precio=None, nombre=None, es_vegano=None, es_celiaco=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
@@ -369,7 +369,8 @@ def patch_postre(id_postre, precio=None, nombre=None, es_vegano=None, es_celiaco
             nuevo_nombre = nombre if nombre is not None else postre["nombre"]
             nuevo_es_vegano = es_vegano if es_vegano is not None else postre["es_vegano"]
             nuevo_es_celiaco = es_celiaco if es_celiaco is not None else postre["es_celiaco"]
-            cursor.execute("UPDATE postres SET precio = %s, nombre = %s, es_vegano = %s, es_celiaco = %s WHERE id_postre = %s", (nuevo_precio, nuevo_nombre, nuevo_es_vegano, nuevo_es_celiaco, id_postre,))
+            nueva_desc = descripcion if descripcion is not None else postre["descripcion"]
+            cursor.execute("UPDATE postres SET precio = %s, nombre = %s, es_vegano = %s, es_celiaco = %s, descripcion = %s WHERE id_postre = %s", (nuevo_precio, nuevo_nombre, nuevo_es_vegano, nuevo_es_celiaco, nueva_desc, id_postre,))
             coneccion.commit()
             return True
     finally:
@@ -448,9 +449,10 @@ def patch_bebidas(id_bebidas, datos):
             nuevo_nombre = datos.get('nombre', bebida['nombre'])
             nuevo_precio = datos.get('precio', bebida['precio'])
             nuevo_es_alcoholica = datos.get('es_alcoholica', bebida['es_alcoholica'])
+            nueva_desc = datos.get('descripcion', bebida['descripcion'])
             cursor.execute(
-                "UPDATE bebidas SET nombre = %s, precio = %s, es_alcoholica = %s WHERE id_bebidas = %s",
-                (nuevo_nombre, nuevo_precio, nuevo_es_alcoholica, id_bebidas)
+                "UPDATE bebidas SET nombre = %s, precio = %s, es_alcoholica = %s, descripcion = %s WHERE id_bebidas = %s",
+                (nuevo_nombre, nuevo_precio, nuevo_es_alcoholica, nueva_desc, id_bebidas)
             )
             coneccion.commit()
             return {"mensaje": "Bebida actualizada exitosamente"}
@@ -532,9 +534,10 @@ def patch_comida_principal(id_plato, datos):
             nuevo_precio = datos.get('precio', plato['precio'])
             nuevo_es_vegano = datos.get('es_vegano', plato['es_vegano'])
             nuevo_es_celiaco = datos.get('es_celiaco', plato['es_celiaco'])
+            nueva_desc = datos.get('descripcion', plato['descripcion'])
             cursor.execute(
-                "UPDATE comida_principal SET nombre_plato = %s, precio = %s, es_vegano = %s, es_celiaco = %s WHERE id_plato = %s",
-                (nuevo_nombre, nuevo_precio, nuevo_es_vegano, nuevo_es_celiaco, id_plato)
+                "UPDATE comida_principal SET nombre_plato = %s, precio = %s, es_vegano = %s, es_celiaco = %s, descripcion = %s WHERE id_plato = %s",
+                (nuevo_nombre, nuevo_precio, nuevo_es_vegano, nuevo_es_celiaco, nueva_desc, id_plato)
             )
             coneccion.commit()
             return {"mensaje": "Plato actualizado exitosamente"}
