@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from datetime import timedelta
+from flask_mail import Mail, Message
 
 from blueprints.resenas_routes import resenas_bp
 from blueprints.login_routes import login_bp
@@ -32,6 +33,15 @@ app.register_blueprint(admin_menu_bp)
 app.register_blueprint(admin_resenas_bp)
 app.register_blueprint(admin_reservas_bp)
 app.register_blueprint(admin_usuarios_bp)
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'pasillocolon@gmail.com'
+app.config['MAIL_PASSWORD'] = 'kvka zeyw gpli sbkc'
+app.config['MAIL_DEFAULT_SENDER'] = 'pasillocolon@gmail.com'
+
+mail = Mail(app) # Inicialización de Flask-Mail
 
 @app.route("/")
 def index():

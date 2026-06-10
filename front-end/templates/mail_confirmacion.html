@@ -1,0 +1,51 @@
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #1a2535; padding: 48px 40px; border-radius: 12px;">
+
+    <div style="text-align: center; margin-bottom: 36px;">
+        <h1 style="color: #c87941; margin: 0 0 6px 0; font-size: 30px; font-family: Arial, sans-serif;">Pasillo Colón</h1>
+        <p style="color: #aaa; margin: 0; font-size: 11px; letter-spacing: 3px; font-family: Arial, sans-serif;">CONFIRMACIÓN DE RESERVA</p>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid rgba(200,121,65,0.4); margin-bottom: 36px;">
+
+    <p style="color: #e8c49a; font-size: 20px; font-weight: 300; margin: 0 0 32px 0; font-family: Arial, sans-serif;">¡Te esperamos!</p>
+
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 32px;">
+        <tr>
+            <td style="padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: Arial, sans-serif;">
+                <p style="margin: 0; color: #aaa; font-size: 11px; letter-spacing: 2px;">FECHA</p>
+                <p style="margin: 4px 0 0 0; color: #e8c49a; font-size: 16px;">{{ fecha_formateada }}</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: Arial, sans-serif;">
+                <p style="margin: 0; color: #aaa; font-size: 11px; letter-spacing: 2px;">HORARIO</p>
+                <p style="margin: 4px 0 0 0; color: #e8c49a; font-size: 16px;">{{ hora }} hs</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: Arial, sans-serif;">
+                <p style="margin: 0; color: #aaa; font-size: 11px; letter-spacing: 2px;">PERSONAS</p>
+                <p style="margin: 4px 0 0 0; color: #e8c49a; font-size: 16px;">{{ cantidad_personas }}</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 16px 0; font-family: Arial, sans-serif;">
+                <p style="margin: 0; color: #aaa; font-size: 11px; letter-spacing: 2px;">UBICACIÓN</p>
+                <p style="margin: 4px 0 0 0; color: #e8c49a; font-size: 16px;">Av. Paseo Colon 1234, Buenos Aires</p>
+            </td>
+        </tr>
+    </table>
+
+    <div style="text-align: center; margin-bottom: 28px;">
+        <a href="{{ cancel_url }}" style="display: inline-block; padding: 14px 32px; background-color: #c87941; color: #1a2535; text-decoration: none; border-radius: 8px; font-size: 14px; letter-spacing: 1px; font-family: Arial, sans-serif;">
+            CANCELAR RESERVA
+        </a>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid rgba(200,121,65,0.4); margin-bottom: 28px;">
+
+    <p style="color: #666; font-size: 12px; text-align: center; margin: 0; font-family: Arial, sans-serif;">
+        Consultas: pasillocolon@gmail.com
+    </p>
+
+</div>

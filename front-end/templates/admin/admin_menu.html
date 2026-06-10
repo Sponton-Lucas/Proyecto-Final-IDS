@@ -10,27 +10,181 @@
 
 <table class="topper">
     <tr>
-    <th><h2>Maestro de articulos (Menu)</h2></th>
+    <th><h4>Maestro de articulos (Menu)</h4></th>
     <th>
-        <form action="/admin/nuevo_articulo" method="post">
+        <form action="/admin/nuevo_articulo" method="POST">
             <button class="nuevo-articulo-boton" type="submit">Nuevo articulo</button>
         </form>
     </th>
     </tr>
 </table>
 
-  <!-- Tabla de artículos del menú -->
+<!-- Tabla de artículos del menú -->
 
-  <!-- FIN tabla artículos menú -->
+<div class="despliegue-menu">
+    <input type="checkbox" id="check-platos-principales" class="toggle-input">
+    <label for="check-platos-principales" class="label-categoria">Platos Principales ▼</label>
+
+    <table class="tabla-menu">
+      <thead>
+         <tr>
+             <th>CÓDIGO</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Categoría</th>
+             <th>Precio</th>
+             <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+         {% for plato in comida_principal %}
+         <tr> 
+             <td>{{ loop.index }}</td> <!--empieza en 1 automaticamente sirve para que el id se muestre como una secuencia del lado del front-->
+
+             <td>{{ plato.nombre_plato }}</td>
+             <td>{{ plato.descripcion }}</td>
+             <td>Plato Principal</td><td>{{ plato.precio }}</td>
+             <td class="centro-acciones">
+                 <form action="/admin/eliminar_articulo" method="post">
+                     <input type="hidden" name="id_comida" value="{{ plato.id_plato }}">
+                     <input type="hidden" name="categoria" value="platos_principales"> <button type="submit" class="btn-icono eliminar">🗑️</button>
+                 </form>
+             </td>
+         </tr>
+         {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+<div class="despliegue-menu">
+    <input type="checkbox" id="check-postres" class="toggle-input">
+    <label for="check-postres" class="label-categoria">Postres ▼</label>
+
+    <table class="tabla-menu">
+     <thead>
+         <tr>
+             <th>CÓDIGO</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Categoría</th>
+             <th>Precio</th>
+             <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+         {% for plato in postres %}
+         <tr> 
+             <td>{{ loop.index }}</td>
+
+             <td>{{ plato.nombre }}</td>
+             <td>{{ plato.descripcion }}</td>
+             <td>Postres</td><td>{{ plato.precio }}</td>
+             <td class="centro-acciones">
+                 <form action="/admin/eliminar_articulo" method="POST">
+                     <input type="hidden" name="id_comida" value="{{ plato.id_postre }}">
+                     <input type="hidden" name="categoria" value="postres"> <button type="submit" class="btn-icono eliminar">🗑️</button>
+                 </form>
+             </td>
+         </tr>
+         {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+<div class="despliegue-menu">
+    <input type="checkbox" id="check-bebidas" class="toggle-input">
+    <label for="check-bebidas" class="label-categoria">Bebidas ▼</label>
+
+    <table class="tabla-menu">
+     <thead>
+         <tr>
+             <th>CÓDIGO</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Categoría</th>
+             <th>Precio</th>
+             <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+         {% for plato in bebidas %}
+         <tr> 
+             <td>{{ loop.index }}</td>
+
+             <td>{{ plato.nombre }}</td>
+             <td>{{ plato.descripcion }}</td>
+             <td>Bebidas</td><td>{{ plato.precio }}</td>
+             <td class="centro-acciones">
+                  <form action="/admin/eliminar_articulo" method="POST">
+                     <input type="hidden" name="id_comida" value="{{ plato.id_bebidas }}">
+                     <input type="hidden" name="categoria" value="bebidas"> <button type="submit" class="btn-icono eliminar">🗑️</button>
+                  </form>
+             </td>
+          </tr>
+          {% endfor %}
+     </tbody>
+   </table>
+</div>
+<!-- FIN tabla artículos menú -->
 
 
-  <!-- Modal "Agregar artículo" -->
+<!-- Modal "Agregar artículo" -->
+<div class="modal fade" id="modalAgregar" tabindex="-1">
 
-  <!-- FIN Modal "Agregar artículo" -->
+    <div class="modal-dialog">
 
+        <form action="/admin/creacion_nuevo_articulo" method="POST">
 
-  <!-- Modal "Editar artículo" -->
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h3>Nuevo Artículo</h3>
+                 <button
+                     type="button"
+                     class="btn-close"
+                     data-bs-dismiss="modal">
+                 </button>
+             </div>
+             
+             <div class="modal-body">
+                 <label>CÓDIGO</label>
+                 <input type="text">
 
-  <!-- FIN Modal "Editar artículo" -->
+                 <label>Nombre Comercial</label>
+                 <input type="text" name="nombre" required>
+
+                 <label>Categoría</label>
+                 <select>
+                      <option>Plato Principal</option>
+                      <option>Pastas</option>
+                      <option>Entradas</option>
+                      <option>Postres</option>
+                      <option>Bebidas</option>
+                 </select>
+
+                 <label>Precio</label>
+                 <input type="number" name="precio" required>
+
+                 <label>Descripción</label>
+                 <input type="text" name="descripción">
+             </div>
+
+             <div class="modal-footer">
+
+                 <button
+                     type="button"
+                     data-bs-dismiss="modal">
+                     Cancelar
+                 </button>
+
+                 <button type="submit">
+                    Guardar
+                 </button>
+              </div>
+            </div>
+        </form>
+    </div>
+
+</div>
 
 {% endblock %}
+

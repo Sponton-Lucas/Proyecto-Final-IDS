@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 import db
 
 reservas_bp = Blueprint('reservas', __name__)
@@ -26,6 +26,9 @@ def crear_reserva():
         return jsonify({"error": "Datos no proporcionados"}), 400
     if 'usuario_id' not in datos or 'fecha' not in datos or 'hora' not in datos or 'cantidad_personas' not in datos:
         return jsonify({"error": "Todos los campos son requeridos"}), 400
+    reserva_existente = db.get_reserva_por_usuario_y_fecha(datos['usuario_id'], datos['fecha'])
+    if reserva_existente:
+        return jsonify({"error": "Ya tenés una reserva para ese día"}), 409
     resultado = db.post_reserva(datos)
     return jsonify(resultado), 201
 
@@ -74,5 +77,3 @@ def borrar_reserva(id_reservas):
     if not eliminada:
         return jsonify({"error": "Reserva no encontrada"}), 404
     return ' ', 204
-
-

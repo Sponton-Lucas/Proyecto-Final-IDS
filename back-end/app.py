@@ -24,8 +24,7 @@ def get_reservas():
         return jsonify(reserva)
     else:
         return jsonify({'error': 'servicio no encontrado'}), 404
-
-
+    
 #Registrar los blueprints
 
 app.register_blueprint(bebidas_bp)
