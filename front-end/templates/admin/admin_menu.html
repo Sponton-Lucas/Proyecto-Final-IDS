@@ -7,108 +7,181 @@
 {% endblock %}
 
 {% block content %}
-<div>
-  <h4>Maestro de Artículos (Menú)</h4>
-</div>
 
 <table class="topper">
     <tr>
-    <th><h2>Maestro de articulos (Menu)</h2></th>
+    <th><h4>Maestro de articulos (Menu)</h4></th>
     <th>
-        <form action="/admin/nuevo_articulo" method="post">
+        <form action="/admin/nuevo_articulo" method="POST">
             <button class="nuevo-articulo-boton" type="submit">Nuevo articulo</button>
         </form>
     </th>
     </tr>
 </table>
 
-  <!-- Tabla de artículos del menú -->
-   <table>
-    <thead>
-      <tr>
-        <th>Código</th>
-        <th>Nombre Comercial</th>
-        <th>Categoría</th>
-        <th>Precio de venta</th>
-        <th>Acciones</th>
-      </tr>
+<!-- Tabla de artículos del menú -->
+
+<div class="despliegue-menu">
+    <input type="checkbox" id="check-platos-principales" class="toggle-input">
+    <label for="check-platos-principales" class="label-categoria">Platos Principales ▼</label>
+
+    <table class="tabla-menu">
+      <thead>
+         <tr>
+             <th>CÓDIGO</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Categoría</th>
+             <th>Precio</th>
+             <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+         {% for plato in comida_principal %}
+         <tr> 
+             <td>{{ loop.index }}</td> <!--empieza en 1 automaticamente sirve para que el id se muestre como una secuencia del lado del front-->
+
+             <td>{{ plato.nombre_plato }}</td>
+             <td>{{ plato.descripcion }}</td>
+             <td>Plato Principal</td><td>{{ plato.precio }}</td>
+             <td class="centro-acciones">
+                 <form action="/admin/eliminar_articulo" method="post">
+                     <input type="hidden" name="id_comida" value="{{ plato.id_plato }}">
+                     <input type="hidden" name="categoria" value="platos_principales"> <button type="submit" class="btn-icono eliminar">🗑️</button>
+                 </form>
+             </td>
+         </tr>
+         {% endfor %}
+      </tbody>
     </table>
-   </thead>
-   <tbody>
-    <!-- Filas de artículos -->
-     <tr> 
-      <td>001</td>
-      <td>Milanesa Napolitana</td>
-      <td>Plato principal</td>
-      <td>$15000</td>
-          <button>Editar</button>
-          <button>Eliminar</button>
-      <td>
-      
-     </tr>
-   </tbody>
-  </table>
+</div>
 
-  <!-- FIN tabla artículos menú -->
+<div class="despliegue-menu">
+    <input type="checkbox" id="check-postres" class="toggle-input">
+    <label for="check-postres" class="label-categoria">Postres ▼</label>
+
+    <table class="tabla-menu">
+     <thead>
+         <tr>
+             <th>CÓDIGO</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Categoría</th>
+             <th>Precio</th>
+             <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+         {% for plato in postres %}
+         <tr> 
+             <td>{{ loop.index }}</td>
+
+             <td>{{ plato.nombre }}</td>
+             <td>{{ plato.descripcion }}</td>
+             <td>Postres</td><td>{{ plato.precio }}</td>
+             <td class="centro-acciones">
+                 <form action="/admin/eliminar_articulo" method="POST">
+                     <input type="hidden" name="id_comida" value="{{ plato.id_postre }}">
+                     <input type="hidden" name="categoria" value="postres"> <button type="submit" class="btn-icono eliminar">🗑️</button>
+                 </form>
+             </td>
+         </tr>
+         {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+<div class="despliegue-menu">
+    <input type="checkbox" id="check-bebidas" class="toggle-input">
+    <label for="check-bebidas" class="label-categoria">Bebidas ▼</label>
+
+    <table class="tabla-menu">
+     <thead>
+         <tr>
+             <th>CÓDIGO</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Categoría</th>
+             <th>Precio</th>
+             <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+         {% for plato in bebidas %}
+         <tr> 
+             <td>{{ loop.index }}</td>
+
+             <td>{{ plato.nombre }}</td>
+             <td>{{ plato.descripcion }}</td>
+             <td>Bebidas</td><td>{{ plato.precio }}</td>
+             <td class="centro-acciones">
+                  <form action="/admin/eliminar_articulo" method="POST">
+                     <input type="hidden" name="id_comida" value="{{ plato.id_bebida }}">
+                     <input type="hidden" name="categoria" value="bebidas"> <button type="submit" class="btn-icono eliminar">🗑️</button>
+                  </form>
+             </td>
+          </tr>
+          {% endfor %}
+     </tbody>
+   </table>
+</div>
+<!-- FIN tabla artículos menú -->
 
 
-  <!-- Modal "Agregar artículo" -->
- <div class="modal fade" id="modalAgregar" tabindex="-1">
+<!-- Modal "Agregar artículo" -->
+<div class="modal fade" id="modalAgregar" tabindex="-1">
 
     <div class="modal-dialog">
 
-        <div class="modal-content">
+        <form action="/admin/creacion_nuevo_articulo" method="POST">
 
-            <div class="modal-header">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h3>Nuevo Artículo</h3>
+                 <button
+                     type="button"
+                     class="btn-close"
+                     data-bs-dismiss="modal">
+                 </button>
+             </div>
+             
+             <div class="modal-body">
+                 <label>CÓDIGO</label>
+                 <input type="text">
 
-                <h3>Nuevo Artículo</h3>
+                 <label>Nombre Comercial</label>
+                 <input type="text" name="nombre" required>
 
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal">
-                </button>
+                 <label>Categoría</label>
+                 <select>
+                      <option>Plato Principal</option>
+                      <option>Pastas</option>
+                      <option>Entradas</option>
+                      <option>Postres</option>
+                      <option>Bebidas</option>
+                 </select>
 
-            </div>
+                 <label>Precio</label>
+                 <input type="number" name="precio" required>
 
-            <div class="modal-body">
+                 <label>Descripción</label>
+                 <input type="text" name="descripción">
+             </div>
 
-                <label>Código</label>
-                <input type="text">
+             <div class="modal-footer">
 
-                <label>Nombre Comercial</label>
-                <input type="text">
+                 <button
+                     type="button"
+                     data-bs-dismiss="modal">
+                     Cancelar
+                 </button>
 
-                <label>Categoría</label>
-                <select>
-                    <option>Plato Principal</option>
-                    <option>Pastas</option>
-                    <option>Entradas</option>
-                    <option>Postres</option>
-                    <option>Bebidas</option>
-                </select>
-
-                <label>Precio</label>
-                <input type="number">
-
-            </div>
-
-            <div class="modal-footer">
-
-                <button
-                    type="button"
-                    data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-
-                <button type="submit">
+                 <button type="submit">
                     Guardar
-                </button>
-
+                 </button>
+              </div>
             </div>
-
-        </div>
-
+        </form>
     </div>
 
 </div>
