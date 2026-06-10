@@ -1,0 +1,23 @@
+body {
+background-color: var(--principal);
+color: var(--blanco);
+font-family: var(--font-family);
+text-align: center;
+padding-top: 8%;
+}
+
+.spinner-estilos {
+    width: 6rem !important;
+    height: 6rem !important;
+    margin-bottom: 2rem;
+}
+
+.error-container h1 {
+font-size: 6rem;
+margin-bottom: 20px;
+}
+
+.error-container p {
+font-size: 1.5rem;
+margin-bottom: 30px;
+}
