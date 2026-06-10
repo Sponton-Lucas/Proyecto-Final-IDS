@@ -46,49 +46,8 @@ mail = Mail(app) # Inicialización de Flask-Mail
 @app.route("/")
 def index():
 	return render_template('index.html')
-@app.route('/admin/resenas')
-def admin_resenas():
-    if not session.get('es_admin'):
-        return redirect('/')
-    re = requests.get('http://localhost:5000/resenas')
-    resenas = re.json()
-    us = requests.get('http://localhost:5000/usuarios')
-    usuarios = us.json()
-    return render_template('admin/admin_resenas.html', resenas=resenas, usuarios=usuarios)
 
-@app.route('/admin/eliminar_resena', methods=['POST'])
-def admin_eliminar_resena():
-    id_resenas = request.form.get("id_resenas")
-    requests.delete(f"http://localhost:5000/resenas/{id_resenas}")
-    return redirect('/admin/resenas')
 
-@app.route('/admin/editar_resena', methods=['POST'])
-def admin_editar_resena():
-    id_resenas = int(request.form.get("id_resenas"))
-    usuario_id = request.form.get("usuario_id")
-    res = requests.get('http://localhost:5000/resenas')
-    resenas = res.json()
-    print(id_resenas)
-    print(usuario_id)
-    print(resenas)
-    for resena in resenas:
-        if resena["id_resenas"] == id_resenas:
-            print("entra al if")
-            return render_template('admin/admin_editar_resena.html', usuario_id=usuario_id, resena=resena)
-    return redirect('/admin/resenas')
-        
-@app.route('/admin/guardar_resena', methods=['POST'])
-def admin_guardar_resena():
-    id_resenas = request.form.get("id_resenas")
-    usuario_id = request.form.get("usuario_id")
-    mensaje = request.form.get("mensaje")
-    datos = {"mensaje": mensaje, "usuario_id": usuario_id}
-    requests.patch(f"http://localhost:5000/resenas/{id_resenas}", json=datos)
-    return redirect('/admin/resenas')
-
-@app.route('/admin/cancelar_edicion', methods=['POST'])
-def admin_cancelar_edicion():
-    return redirect('/admin/resenas')
 
 @app.errorhandler(404)
 def page_not_found(e):
