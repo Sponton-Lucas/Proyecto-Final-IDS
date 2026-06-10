@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 import db
 
 reservas_bp = Blueprint('reservas', __name__)
@@ -74,5 +74,3 @@ def borrar_reserva(id_reservas):
     if not eliminada:
         return jsonify({"error": "Reserva no encontrada"}), 404
     return ' ', 204
-
-
