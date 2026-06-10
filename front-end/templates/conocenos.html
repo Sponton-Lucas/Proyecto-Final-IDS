@@ -23,6 +23,20 @@
   </div>
 </section>
 
+<section id="galeria" class="seccion17 text-center py-5">
+  <div class="container">
+    <h2 class="mb-4 text-white fs-1">Galería del Restaurante</h2>
+    <div class="galeria">
+        <div><img src="{{ url_for('static', filename='img/galeria-3.jpeg') }}" class="img-fluid rounded" alt="Foto 1"></div>
+        <div><img src="{{ url_for('static', filename='img/galeria-5.jpeg') }}" class="img-fluid rounded" alt="Foto 2"></div>
+        <div><img src="{{ url_for('static', filename='img/galeria-4.jpeg') }}" class="img-fluid rounded" alt="Foto 4"></div>
+        <div><img src="{{ url_for('static', filename='img/galeria-6.jpeg') }}" class="img-fluid rounded" alt="Foto 3"></div>
+        <div><img src="{{ url_for('static', filename='img/galeria-7.jpeg') }}" class="img-fluid rounded" alt="Foto 6"></div>
+        <div><img src="{{ url_for('static', filename='img/galeria-2.png') }}" class="img-fluid rounded" alt="Foto 5"></div>
+    </div>
+  </div>
+</section>
+
 <section class="seccion-servicios container py-5">
   <div class="text-center mb-5">
     <h2>Nuestros servicios para vos</h2>
@@ -76,26 +90,6 @@
             </iframe>
       </div>
     </div>
-</section>
-
-<section id="galeria" class="seccion17 text-center py-5">
-  <div class="container">
-    <h2 class="mb-4">Galería del Restaurante</h2>
-    <div class="row">
-      <div class="col-md-3 mb-3">
-        <img src="{{ url_for('static', filename='img/foto1.jpg') }}" class="img-fluid rounded" alt="Foto 1">
-      </div>
-      <div class="col-md-3 mb-3">
-        <img src="{{ url_for('static', filename='img/foto2.jpg') }}" class="img-fluid rounded" alt="Foto 2">
-      </div>
-      <div class="col-md-3 mb-3">
-        <img src="{{ url_for('static', filename='img/foto3.jpg') }}" class="img-fluid rounded" alt="Foto 3">
-      </div>
-      <div class="col-md-3 mb-3">
-        <img src="{{ url_for('static', filename='img/foto4.jpg') }}" class="img-fluid rounded" alt="Foto 4">
-      </div>
-    </div>
-  </div>
 </section>
 
 {% endblock %}
