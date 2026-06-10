@@ -645,3 +645,105 @@ def delete_reserva(id_reservas):
     finally:
         cursor.close()
         coneccion.close()
+
+
+#admin endpoints
+
+
+def obtener_resumen_dashboard():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM usuarios")
+    usuarios = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM reservas")
+    reservas = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM resenas")
+    resenas = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM comida_principal")
+    comidas = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM postres")
+    postres = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM bebidas")
+    bebidas = cursor.fetchone()[0]
+    menu_total = comidas + postres + bebidas
+    conn.close()
+    return {"usuarios": usuarios, "reservas": reservas, "resenas": resenas, "menu_total": menu_total}
+
+def obtener_promedio_reservas_por_dia_semana():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT DAYNAME(fecha) AS dia_semana,
+            AVG(cantidad_personas) AS promedio_reservas
+        FROM reservas
+        GROUP BY dia_semana
+        ORDER BY FIELD(dia_semana,
+        'Monday','Tuesday','Wednesday',
+        'Thursday','Friday','Saturday','Sunday');
+    """)
+    resultados = cursor.fetchall()
+    conn.close()
+    dias = [r[0] for r in resultados]
+    promedios = [round(r[1], 2) for r in resultados]
+    return {"dias": dias, "promedios": promedios}
+
+def obtener_estados_reserva():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT estado, COUNT(*) FROM reservas GROUP BY estado")
+    resultados = cursor.fetchall()
+    conn.close()
+    return {estado: cantidad for estado, cantidad in resultados}
+
+def obtener_categorias_menu():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM comida_principal")
+    comidas = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM postres")
+    postres = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM bebidas")
+    bebidas = cursor.fetchone()[0]
+    conn.close()
+    return {"Comidas": comidas, "Postres": postres, "Bebidas": bebidas}
+
+def obtener_ultimas_reservas(limit=7):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT r.id_reservas, u.nombre_apellido, r.fecha, r.hora, r.estado
+        FROM reservas r
+        JOIN usuarios u ON r.usuario_id = u.id_usuario
+        ORDER BY r.fecha DESC, r.hora DESC
+        LIMIT %s
+    """, (limit,))
+    resultados = cursor.fetchall()
+    #Conversión de timedelta a string
+    for r in resultados:
+        if isinstance(r.get("hora"), timedelta):
+            r["hora"] = str(r["hora"])  # "HH:MM:SS"
+
+    conn.close()
+    return resultados
+
+def obtener_ultimas_resenas(limit=3):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT re.mensaje, u.nombre_apellido
+        FROM resenas re
+        JOIN usuarios u ON re.usuario_id = u.id_usuario
+        ORDER BY re.id_resenas DESC
+        LIMIT %s
+    """, (limit,))
+    resultados = cursor.fetchall()
+    conn.close()
+    return resultados
+
+def obtener_servicios_extra():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT nombre_servicio, precio FROM servicios_extra ORDER BY id_servicio DESC LIMIT 3")
+    resultados = cursor.fetchall()
+    conn.close()
+    return resultados

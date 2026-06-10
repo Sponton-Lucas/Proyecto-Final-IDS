@@ -9,6 +9,8 @@ from blueprints.reservas_routes import reservas_bp
 from blueprints.servicios_extra_routes import servicios_extra_bp
 from blueprints.usuarios_routes import usuarios_bp
 
+from blueprints.dashboard_routes import dashboard_bp
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
@@ -34,6 +36,8 @@ app.register_blueprint(reservas_bp)
 app.register_blueprint(servicios_extra_bp)
 app.register_blueprint(usuarios_bp)
 
+#admin bp
+app.register_blueprint(dashboard_bp)
 
 if __name__ == '__main__':
 	app.run(port=5000, debug=True)  

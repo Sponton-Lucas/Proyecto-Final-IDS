@@ -9,6 +9,8 @@ from blueprints.registro_routes import registro_bp
 from blueprints.reservas_routes import reservas_bp
 from blueprints.menu_routes import menu_bp
 
+from blueprints.dashboard_routes import dashboard_bp
+
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
 app.permanent_session_lifetime = timedelta(days=1)
@@ -19,6 +21,8 @@ app.register_blueprint(registro_bp)
 app.register_blueprint(reservas_bp)
 app.register_blueprint(menu_bp)
 
+# Prueba de index de admin con graficos y charts.
+app.register_blueprint(dashboard_bp)
 
 @app.route("/")
 def index():
@@ -26,22 +30,26 @@ def index():
 
 @app.route("/conocenos")
 def conocenos():
-    return render_template('conocenos.html')
-
-@app.route('/admin')
-def admin_index():
-    return render_template('admin/admin_index.html')
+    ser = requests.get('http://localhost:5000/servicios_extra')
+    servicios_extra = ser.json()
+    return render_template('conocenos.html', se=servicios_extra)
 
 @app.route('/admin/menu')
 def admin_menu():
+    if not session.get('es_admin'):
+        return redirect('/')
     return render_template('admin/admin_menu.html')
 
 @app.route('/admin/nuevo_articulo', methods=['POST'])
 def nuevo_articulo():
+    if not session.get('es_admin'):
+        return redirect('/')
     return render_template('admin/admin_nuevo_articulo.html')    
 
 @app.route('/admin/creacion_nuevo_articulo', methods=['POST'])
 def crear_nuevo_articulo():
+    if not session.get('es_admin'):
+        return redirect('/')
     nombre = request.form.get("nombre")
     precio = request.form.get("precio")
     categoria = request.form.get("categoria")
@@ -64,43 +72,61 @@ def crear_nuevo_articulo():
 
 @app.route('/admin/reservas')
 def admin_reservas():
+    if not session.get('es_admin'):
+        return redirect('/')
     res = requests.get('http://localhost:5000/reservas')
     reservas = res.json()
     return render_template('admin/admin_reservas.html', reservas=reservas)
 
 @app.route('/admin/reserva/<int:id>/asistio')
 def marcar_asistio(id):
+    if not session.get('es_admin'):
+        return redirect('/')
     requests.patch(f'http://localhost:5000/reservas/{id}',
                    json={'estado': 'asistio'})
     return redirect('/admin/reservas')
 
 @app.route('/admin/reserva/<int:id>/no-asistio')
 def marcar_no_asistio(id):
+    if not session.get('es_admin'):
+        return redirect('/')
     requests.patch(f'http://localhost:5000/reservas/{id}',
                    json={'estado': 'no-asistio'})
     return redirect('/admin/reservas')
 
 @app.route('/admin/usuarios')
 def admin_usuarios():
+    if not session.get('es_admin'):
+        return redirect('/')
     res = requests.get('http://localhost:5000/usuarios')
     usuarios = res.json()
     return render_template('admin/admin_usuarios.html', usuarios=usuarios)
 
 @app.route('/admin/usuario/<int:id>/dar-admin')
 def dar_admin(id):
+    if not session.get('es_admin'):
+        return redirect('/')
     if id != 1:
         requests.patch(f'http://localhost:5000/usuarios/{id}', json={'es_admin': True})
     return redirect('/admin/usuarios')
 
 @app.route('/admin/usuario/<int:id>/quitar-admin')
 def quitar_admin(id):
+    if not session.get('es_admin'):
+        return redirect('/')
     if id != 1:
         requests.patch(f'http://localhost:5000/usuarios/{id}', json={'es_admin': False})
     return redirect('/admin/usuarios')
 
 @app.route('/admin/resenas')
 def admin_resenas():
+    if not session.get('es_admin'):
+        return redirect('/')
     return render_template('admin/admin_resenas.html')
+
+
+
+
 
 if __name__ == '__main__':
 	app.run(port=3000, debug=True)  

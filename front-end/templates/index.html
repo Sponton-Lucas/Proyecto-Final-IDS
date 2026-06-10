@@ -3,20 +3,18 @@
 {% block title %} Nombre restaurante - Inicio {% endblock %}
 
 {% block estilos %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block content %}
 
 <!--seccion 1-->
 <section class="seccion-1">
-
-  <h1 class="titulo"> Pasillo Colón </h1> 
   <h2 class="titulo1">Sabores Inconfundibles</h2> 
   <h5 class="mesajito">¡Bienvenidos al lugar donde la comida cuenta historias desgarradoras! Un banquete para los sentidos.</h5>
 
   <div class="boton-inicio"> 
-    <a href="/menu" class="boton-ver-menu">
+    <a href="{{ url_for('menu.menu') }}" class="boton-ver-menu">
       <span class="texto">Ver Menú</span>
       <span class="icono">&rarr;</span>
     </a>
@@ -24,7 +22,34 @@
   
 </section>
 
-<!--seccion 2-->
+<!--seccion 5-->
+<section class="seccion-5">
+
+  <div class="imagen-conocenos">
+    <img src="{{url_for('static', filename='img/quienes_somos.jpeg')}}" alt="foto del restaurante">
+  </div>
+
+  <div class="caja-text-btn">
+    <div class="conocenos">
+     <a href="{{ url_for('conocenos') }}" class="boton-conocenos">
+       <span class="texto1">Conócenos</span>
+       <span class="icono1">&rarr;</span>
+      </a>
+    </div>
+  
+    <div class="conocenos-texto">
+      <p>
+      Nuestra pasión por la cocina se refleja en cada plato.
+      Creamos experiencias memorables, infusionadas con amor
+      y sabores intensos. Nuestro equipo está comprometido en
+      ofrecer lo mejor, desde recetas tradicionales hasta
+      innovaciones culinarias que sorprenden. Si no sales con
+      una sonrisa, ¡algo hicimos mal!
+     </p>
+    </div>
+  </div>
+</section>
+
 <section class="seccion-2">
   <div class="seccion-2-texto">
    <div class="seccion-2-etiquetas">
@@ -34,7 +59,7 @@
   
    <h2> Probá Nuestros Platos</h2>
    <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
-   <a href="/reservas" class="boton">
+   <a href="{{ url_for('reservas.reservas') }}" class="boton">
      <span class="boton-texto">¡Vení y Comé!</span>
      <span class="boton-icono">→</span>
    </a>
@@ -95,79 +120,56 @@
 
 <!--seccion 4-->
 
-<!--seccion 5-->
-<section class="seccion-5">
 
-  <div class="imagen-conocenos">
-    <img src="{{url_for('static', filename='img/quienes_somos.jpeg')}}" alt="foto del restaurante">
-  </div>
-
-  <div class="caja-text-btn">
-    <div class="conocenos">
-     <a href="/conocenos" class="boton-conocenos">
-       <span class="texto1">Conócenos</span>
-       <span class="icono1">&rarr;</span>
-      </a>
-    </div>
-  
-    <div class="conocenos-texto">
-      <p>
-      Nuestra pasión por la cocina se refleja en cada plato.
-      Creamos experiencias memorables, infusionadas con amor
-      y sabores intensos. Nuestro equipo está comprometido en
-      ofrecer lo mejor, desde recetas tradicionales hasta
-      innovaciones culinarias que sorprenden. Si no sales con
-      una sonrisa, ¡algo hicimos mal!
-     </p>
-    </div>
-  </div>
-
-</section>
 
 <!--seccion 6-->
 
 <!--seccion 7-->
 <section>   
-
-    <div>
-
-        <div>
-            <img 
-                src="{{ url_for('static', filename='img/restaurante.jpg') }}"
-                alt="Restaurante"
-            >
+    <div class="d-flex">
+        <div class="col-7 text-end">
+            <img class="w-75 contenedor-director-imagen" src="{{ url_for('static', filename='img/restaurante.jpg') }}" alt="Restaurante">
         </div>
-
-        <div>
-
-            <small>Miguel Torres</small>
-
-            <h2>Director General</h2>
-
-            <p>
+        <div class="col-4 p-2 text-white contenedor-director-texto">
+            <h2 class="py-4 px-3 fs-5">Miguel Torres</h2>
+            <h3 class="py-2 px-3"><b>Director General</b></h3>
+            <p class="py-2 px-3">
                 Apasionado por la gastronomía desde joven,
                 siempre buscando traer lo mejor al paladar
                 de nuestros comensales.
             </p>
-
-            <a href="#">
-                Conócenos →
-            </a>
-
+            <div class="py-4 px-3">
+                    <a class="boton" href="{{ url_for('conocenos') }}" role="button">
+                        <span class="boton-texto">Conocenos</span>
+                        <span class="boton-icono">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
         </div>
-
     </div>
-
 </section>
 
 <!--seccion 8-->
-<h2>Por que elegirnos?</h2>
-<p>Nos apasiona servite cada platillo con amor y dedicacion</p>
+
 
 <div>
-
-    <img src="{{ url_for('static', filename='img/Untitled.jpeg') }}" alt="comida" width="300">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <div class="text-center py-4 text-white">
+    <h2>Por que elegirnos?</h2>
+    <p>Nos apasiona servite cada platillo con amor y dedicacion</p>
+  </div>
+  <div class="col-6 offset-3 contenedor-sabores-unicos">
+    <div>
+      <h3 class="py-3 px-4">Sabores únicos</h3>
+      <p class="pt-2 px-4 fw-bold">Cada receta cuenta la historia de nuestra pasión por la cocina.</p>
+      <p class="pb-2 px-4 fw-bold">¡Ven y siente la magia!</p>
+    </div>
+    <div class="text-end">
+      <img class="bordes-img-sabores-unicos" src="{{ url_for('static', filename='img/Untitled.jpeg') }}" alt="comida" width="600">
+    </div>
+  </div>
 </div>
 
 
