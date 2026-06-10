@@ -43,7 +43,7 @@
           <td class="admin-gestion">
             <a href="{{ url_for('admin_reservas_bp.marcar_asistio', id=reserva['id_reservas']) }}" class="boton-gestion boton-verde">✓</a>
             <a href="{{ url_for('admin_reservas_bp.marcar_no_asistio', id=reserva['id_reservas']) }}" class="boton-gestion boton-rojo">✗</a>
-            <a href="{{ url_for('admin_reservas_bp.admin_reservas') }}" class="boton-gestion boton-ojito">👁</a>
+            <a href="{{ url_for('admin_reservas_bp.admin_reservas', detalle=reserva['id_reservas']) }}" class="boton-gestion boton-ojito">👁</a>
           </td>
           </tr>
         {% endfor %}
@@ -53,7 +53,41 @@
 
 
   <!-- Modal detalles -->
+{% if reserva_seleccionada %}
+<div class="modal-overlay">
+    <div class="modal-contenedor">
+        
+        <div class="modal-header">
+            <h3>📋 Datos del Cliente - #RES-{{ reserva_seleccionada["id_reservas"] }}</h3>
+            <a href="{{ url_for('admin_reservas_bp.admin_reservas') }}" class="modal-cerrar-x">✕</a>
+        </div>
 
+        <div class="modal-cuerpo">
+            
+            <h4 class="modal-seccion-titulo blue-text">INFORMACIÓN DEL USUARIO</h4>
+            <p><strong>Nombre:</strong> {{ reserva_seleccionada["nombre_apellido"] }}</p>
+            <p><strong>Email:</strong> {{ reserva_seleccionada["email"] }}</p>
+            <p><strong>Teléfono:</strong> {{ reserva_seleccionada["telefono"] }}</p>
+            <p><strong>ID Usuario:</strong> #USR-{{ reserva_seleccionada["usuario_id"] }}</p>
+
+            <h4 class="modal-seccion-titulo blue-text">DETALLES DE LA RESERVA</h4>
+            <p><strong>Fecha:</strong> {{ reserva_seleccionada["fecha"] }}</p>
+            <p><strong>Hora:</strong> {{ reserva_seleccionada["hora"] }} hs</p>
+            <p><strong>Personas:</strong> {{ reserva_seleccionada["cantidad_personas"] }}</p>
+
+            <div class="modal-alerta-solicitud">
+                <strong>📝 SOLICITUD ESPECIAL:</strong>
+                <p>"Festejo de cumpleaños, celíaco."</p>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="{{ url_for('admin_reservas_bp.admin_reservas') }}" class="modal-btn-cerrar">Cerrar</a>
+        </div>
+
+    </div>
+</div>
+{% endif %}
   <!-- FIN Modal de detalles -->
 
 {% endblock %}

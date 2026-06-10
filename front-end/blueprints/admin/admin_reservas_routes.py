@@ -9,7 +9,14 @@ def admin_reservas():
         return redirect('/')
     res = requests.get('http://localhost:5000/reservas')
     reservas = res.json()
-    return render_template('admin/admin_reservas.html', reservas=reservas)
+    id_detalle = request.args.get('detalle')
+    reserva_seleccionada = None
+    if id_detalle:
+        for r in reservas:
+            if str(r["id_reservas"]) == str(id_detalle):
+                reserva_seleccionada = r
+                break
+    return render_template('admin/admin_reservas.html', reservas=reservas, reserva_seleccionada=reserva_seleccionada)
 
 @admin_reservas_bp.route('/admin/reserva/<int:id>/asistio')
 def marcar_asistio(id):
