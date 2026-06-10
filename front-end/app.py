@@ -14,6 +14,7 @@ from blueprints.admin.admin_menu_routes import admin_menu_bp
 from blueprints.admin.admin_resenas_routes import admin_resenas_bp
 from blueprints.admin.admin_reservas_routes import admin_reservas_bp
 from blueprints.admin.admin_usuarios_routes import admin_usuarios_bp
+from blueprints.admin.admin_servicios_routes import admin_servicios_bp
 
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
@@ -33,6 +34,7 @@ app.register_blueprint(admin_menu_bp)
 app.register_blueprint(admin_resenas_bp)
 app.register_blueprint(admin_reservas_bp)
 app.register_blueprint(admin_usuarios_bp)
+app.register_blueprint(admin_servicios_bp)
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
