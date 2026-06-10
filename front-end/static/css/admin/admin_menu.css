@@ -127,87 +127,45 @@ textarea{
     display:none;
 }
 
-/*tabla-menu-admin*/
 
-.despliegue-menu {
-    margin-bottom: 50px;
-    border: 1px solid #233338;
-    border-radius: 8px;
+
+.seccion-admin-menu{
+    padding: 2rem;
+    background-color: white;
 }
 
-.toggle-input {
-    display: none;
+.seccion-admin-menu h2 {
+    color: #333;
+    font-family: var(--font-family);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
 }
 
-.label-categoria {
-    display: block;
-    cursor: pointer;
-    background-color: var(--principal);
-    color: var(--rosita);
-    font-size: 30px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    user-select: none; /*evita que se seleccione el texto al hacer doble clic*/
-}
 
-.tabla-menu {
-    display: none;
+.tabla-admin-menu {
     width: 100%;
     border-collapse: collapse;
-    font-family: Arial, Helvetica, sans-serif;
-    border: 0.2px solid #002431;
-    
+    font-family: var(--font-family);
+    border: 1px solid #e0e0e0;
 }
 
-.tabla-menu .centro-acciones {
-    align-items: center;
-    vertical-align: middle;
-}
-
-.tabla-menu thead  {
-    background-color: var(--gris-oscuro);
-    color: white;
+.tabla-admin-menu th {
+    color: #555;
+    font-size: 12px;
+    font-weight: 600;
     text-align: left;
-    font-weight: bold;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f5f5f5;
 }
 
-.tabla-menu th, .tabla-menu td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #dee2e6;
-    font-size: 14px;
+.tabla-admin-menu tbody td {
+    color: #333;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle !important;
 }
 
-.tabla-menu td:nth-child(3) {
-    max-width: 100px;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.tabla-menu .centro {
-    text-align: center;
-}
-
-.btn-icono {
-    background: transparent;
-    border: 1px solid;
-    border-radius: 4px;
-    padding: 4px 8px;
-    cursor: pointer;
-    margin: 0 2px;
-}
-
-.btn-icono.eliminar{
-    border-color: #dc3545; /* Borde rojo */
-    color: #dc3545;
-}
-
-.btn-icono:hover {
-    opacity: 0.7;
-}
-
-.toggle-input:checked + .label-categoria + .tabla-menu {
-    display: table; /*se hace el despliegue de cada tabla*/
-}

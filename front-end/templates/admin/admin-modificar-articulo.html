@@ -1,0 +1,55 @@
+{% extends "admin/admin_base.html" %}
+
+{% block tittle %}Gestión de Menú{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_modificar_articulo.css') }}">
+{% endblock %}
+
+{% block content %}
+
+
+<form action="/admin/guardar_cambios" method="post">
+    <h2>Modificar articulo</h2>
+    <input type="hidden" name="id_articulo" value="{{ id_articulo }}">
+    {% if categoria != "bebidas" %}
+        <label for="nombre">Nombre comercial</label>
+        {% if categoria == "comida_principal" %}
+            <input type="hidden" name="categoria" value="{{ categoria }}">
+            <input id="nombre" name="nombre_plato" value="{{ articulo.nombre_plato }}" type="text">
+        {% endif %}
+        {% if categoria == "postres" %}
+            <input type="hidden" name="categoria" value="{{ categoria }}">
+            <input id="nombre" name="nombre" value="{{ articulo.nombre }}" type="text">
+        {% endif %}
+        <label for="precio">Precio</label>
+        <input id="precio" name="precio" value="{{ articulo.precio }}" type="text">
+
+        <label for="es_vegano">Es vegano</label>
+        <input id="es_vegano" name="es_vegano" value="{{ articulo.es_vegano }}" type="checkbox">
+
+        <label for="es_celiaco">Es celiaco</label>
+        <input id="es_celiaco" name="es_celiaco" value="{{ articulo.es_celiaco }}" type="checkbox">
+    {% endif %}
+    {% if categoria == "bebidas" %}
+        <input type="hidden" name="categoria" value="{{ categoria }}">
+        <label for="nombre">Nombre comercial</label>
+        <input id="nombre" name="nombre" value="{{ articulo.nombre }}" type="text">
+
+        <label for="precio">Precio</label>
+        <input id="precio" name="precio" value="{{ articulo.precio }}" type="text">
+
+        <label for="es_alcoholica">Es alcoholica</label>
+        <input id="es_alcoholica" name="es_alcoholica" value="{{ articulo.es_alcoholica }}" type="checkbox">
+    {% endif %}
+    <label for="desc">Descripcion</label>
+    <input id="desc" type="text" name="descripcion" value="{{ articulo.descripcion }}">
+    <button type="submit">Guardar Cambios</button>
+</form>
+
+
+<form action="/admin/cancelar_modificacion" method="post">
+    <button type="submit">Cancelar</button>
+</form>
+
+{% endblock %}
