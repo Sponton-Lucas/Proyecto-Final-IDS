@@ -41,9 +41,9 @@
             </span>
           </td>
           <td class="admin-gestion">
-            <a href="/admin/reserva/{{ reserva['id_reservas'] }}/asistio" class="boton-gestion boton-verde">✓</a>
-            <a href="/admin/reserva/{{ reserva['id_reservas'] }}/no-asistio" class="boton-gestion boton-rojo">✗</a>
-            <a href="/admin/reserva/{{ reserva['id_reservas'] }}" class="boton-gestion boton-ojito">👁</a>
+            <a href="{{ url_for('admin_reservas_bp.marcar_asistio', id=reserva['id_reservas']) }}" class="boton-gestion boton-verde">✓</a>
+            <a href="{{ url_for('admin_reservas_bp.marcar_no_asistio', id=reserva['id_reservas']) }}" class="boton-gestion boton-rojo">✗</a>
+            <a href="{{ url_for('admin_reservas_bp.admin_reservas') }}" class="boton-gestion boton-ojito">👁</a>
           </td>
           </tr>
         {% endfor %}
