@@ -386,14 +386,67 @@
     border-radius: 0rem 2rem 2rem 0rem;
 }
 /* seccion 8 */
+
+.pill-estilos {
+  background-color: var(--principal);
+  margin-top: 1rem;
+  margin-left: 2rem;
+  width: 50%;
+}
+
+.pill-estilos-2 {
+  background-color: var(--principal);
+  margin-top: 1rem;
+  margin-left: 2rem;
+  width: 40%;
+}
+
+.parrafo-card-estilos-1 {
+  background-color: var(--rosita);
+  border-radius: 2rem;
+  border: 2px solid var(--principal);
+  padding: 0rem 1rem 0rem 1rem;
+  margin: 0;
+  align-content: center;
+  color: var(--marron);
+}
+.parrafo-card-estilos-2 {
+  padding: 0rem 1rem 0rem .5rem;
+  margin: 0;
+  align-content: center;
+  color: var(--rosita);
+}
+
 .contenedor-sabores-unicos {
     background-color: var(--rosita);
     color: var(--marron);
-    border-radius:  2rem;
+    border-radius:  1rem;
+    height: fit-content;
+    padding: 0;
+    box-shadow: 3px -8px 8px rgba(142, 76, 53, 0.8);
+}
+.contenedor-sabores-unicos-2 {
+  background-color: var(--secundario);
+  color: var(--blanco);
+  border-radius: 1rem;
+  height: fit-content;
+  padding: 0;
+  box-shadow: 3px -8px 8px rgba(35, 51, 56, 0.8);
 }
 
+.text-card-estilos {
+  padding-left: 2rem;
+  line-height: 1.4;
+}
+
+.padding-img {
+  padding-left: 2rem;
+}
+
+
 .bordes-img-sabores-unicos {
-    border-radius: 2rem 0rem 2rem 0rem;
+  width: 100%;
+  border-radius: 1rem 0rem 1rem 0rem;
 }
 /* seccion 9 */
 
