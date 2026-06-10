@@ -18,6 +18,7 @@ def register_form():
         usuario = respuesta.json()
         session["user"] = usuario["nombre_apellido"]
         session["usuario_id"] = usuario["id_usuario"]
+        session["email"] = usuario["email"]
         return redirect('/usuario')
     return redirect('/registro')
 

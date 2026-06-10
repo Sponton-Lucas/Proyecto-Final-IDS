@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, current_app
 import db
+from datetime import timedelta
 
 reservas_bp = Blueprint('reservas', __name__)
 
@@ -13,6 +14,8 @@ def obtener_reservas():
 @reservas_bp.route('/reservas/<int:id_reservas>', methods=['GET'])
 def obtener_reserva(id_reservas):
     reserva = db.get_reserva_id(id_reservas)
+    if isinstance(reserva.get('hora'), timedelta):
+        reserva['hora'] = str(reserva['hora'])
     if reserva:
         return jsonify(reserva), 200
     else:

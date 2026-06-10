@@ -69,12 +69,22 @@ def reservas():
 def cancelar_reserva(id_reservas):
     requests.patch(f'http://localhost:5000/reservas/{id_reservas}', json={'estado': 'cancelada'})
     
-    msg = Message(
-        subject="Reserva cancelada - Pasillo Colón",
-        recipients=[session.get('email')]
-    )
-    msg.html = render_template('mail_cancelacion.html')
-    current_app.extensions['mail'].send(msg)
+    # Reemplazá la línea 72 que tenía el .json() directo por esto:
+    respuesta_api = requests.get(f'http://localhost:5000/reservas/{id_reservas}')
+
+    # Intentamos parsear solo si la respuesta fue exitosa (200 OK)
+    if respuesta_api.status_code == 200:
+        reserva = respuesta_api.json()
+    usuario = requests.get(f'http://localhost:5000/usuarios/{reserva["usuario_id"]}').json()
+    email = usuario.get('email')
+    
+    if email:
+        msg = Message(
+            subject="Reserva cancelada - Pasillo Colón",
+            recipients=[email]
+        )
+        msg.html = render_template('mail_cancelacion.html')
+        current_app.extensions['mail'].send(msg)
     
     return render_template('cancelar_reserva.html')
 
