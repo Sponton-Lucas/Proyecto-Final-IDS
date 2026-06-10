@@ -38,7 +38,14 @@ def conocenos():
 def admin_menu():
     if not session.get('es_admin'):
         return redirect('/')
-    return render_template('admin/admin_menu.html')
+    
+    com = requests.get('http://localhost:5000/comida_principal')
+    lista_comida_principal = com.json()
+    pos = requests.get('http://localhost:5000/postres')
+    lista_postres = pos.json()
+    beb = requests.get('http://localhost:5000/bebidas')
+    lista_bebidas= beb.json()
+    return render_template('admin/admin_menu.html', comida_principal=lista_comida_principal, postres=lista_postres, bebidas=lista_bebidas)
 
 @app.route('/admin/nuevo_articulo', methods=['POST'])
 def nuevo_articulo():
@@ -60,14 +67,38 @@ def crear_nuevo_articulo():
 
     if categoria == "comida":
         datos = {"nombre_plato": nombre, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
-        requests.post('http://localhost:5000/comida_principal', json=datos)
+        requests.post('http://localhost:5000/comida_principal', json=datos)   
     if categoria == "postre":
         datos = {"precio": precio, "nombre": nombre,"es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
         requests.post('http://localhost:5000/postres', json=datos)
     if categoria == "bebida":
         datos = {"precio": precio, "nombre": nombre, "es_alcoholica": es_alcoholica, "descripcion": descripcion}
         requests.post('http://localhost:5000/bebidas', json=datos)
+
     return redirect('/admin/menu')
+
+@app.route('/admin/eliminar_articulo', methods=['POST'])
+def eliminar_articulo():
+    id_articulo = request.form.get("id_comida")
+    categoria = request.form.get("categoria")
+
+    eliminando = {
+         "platos_principales": "http://localhost:5000/comida_principal/",
+         "postres": "http://localhost:5000/postres/",
+         "bebidas": "http://localhost:5000/bebidas/"
+    }
+
+    eliminado_articulo= eliminando.get(categoria)
+
+    if eliminado_articulo and id_articulo:
+        requests.delete(f"{eliminado_articulo}{id_articulo}")
+
+    return redirect('/admin/menu')
+
+
+
+
+
 
 
 @app.route('/admin/reservas')
