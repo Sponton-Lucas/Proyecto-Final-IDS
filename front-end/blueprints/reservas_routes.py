@@ -18,6 +18,8 @@ def reservas():
         respuesta = requests.post("http://localhost:5000/reservas", json=datos)
         if respuesta.status_code == 201:
             flash('¡Reserva confirmada! Te esperamos.', 'exito')
+        elif respuesta.status_code == 409:
+            flash('Ya tenés una reserva para ese día.', 'error')
         else:
             flash('Hubo un error al hacer la reserva. Intentá de nuevo.', 'error')
             return redirect('/reservas') 
