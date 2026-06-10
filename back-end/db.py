@@ -747,3 +747,16 @@ def obtener_servicios_extra():
     resultados = cursor.fetchall()
     conn.close()
     return resultados
+
+def get_reserva_por_usuario_y_fecha(usuario_id, fecha):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "SELECT * FROM reservas WHERE usuario_id = %s AND fecha = %s AND estado != 'cancelada'",
+            (usuario_id, fecha)
+        )
+        return cursor.fetchone()
+    finally:
+        cursor.close()
+        coneccion.close()
