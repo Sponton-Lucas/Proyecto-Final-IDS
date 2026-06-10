@@ -1,0 +1,149 @@
+{% extends "admin/admin_base.html" %}
+
+{% block tittle %}Servicios Extra{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_servicios.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="servicios-header">
+    <h4>Gestión de Servicios Extra</h4>
+    <button class="nuevo-servicio-boton" data-bs-toggle="modal" data-bs-target="#modalCrear">
+        Nuevo servicio
+    </button>
+</div>
+<div class="servicios-tablas">
+    <!-- Servicios gratuitos -->
+    <div class="servicios-seccion">
+        <h5 class="servicios-subtitulo">Servicios incluidos</h5>
+        <table class="tabla-servicios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for servicio in servicios %}
+                {% if servicio.precio == 0 %}
+                <tr>
+                    <td class="servicios-id">{{ loop.index }}</td>
+                    <td>{{ servicio.nombre_servicio }}</td>
+                    <td class="servicios-acciones">
+                        <button class="btn-editar" data-bs-toggle="modal"
+                            data-bs-target="#modalEditar"
+                            data-id="{{ servicio.id_servicio }}"
+                            data-nombre="{{ servicio.nombre_servicio }}"
+                            data-precio="{{ servicio.precio }}">Editar</button>
+                        <form action="/admin/servicios/eliminar/{{ servicio.id_servicio }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn-eliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Servicios de pago -->
+    <div class="servicios-seccion">
+        <h5 class="servicios-subtitulo">Servicios adicionales</h5>
+        <table class="tabla-servicios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for servicio in servicios %}
+                {% if servicio.precio > 0 %}
+                <tr>
+                    <td class="servicios-id">{{ loop.index }}</td>
+                    <td>{{ servicio.nombre_servicio }}</td>
+                    <td>${{ servicio.precio }}</td>
+                    <td class="servicios-acciones">
+                        <button class="btn-editar" data-bs-toggle="modal"
+                            data-bs-target="#modalEditar"
+                            data-id="{{ servicio.id_servicio }}"
+                            data-nombre="{{ servicio.nombre_servicio }}"
+                            data-precio="{{ servicio.precio }}">Editar</button>
+                        <form action="/admin/servicios/eliminar/{{ servicio.id_servicio }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn-eliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Crear -->
+<div class="modal fade" id="modalCrear" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="/admin/servicios/crear" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Nuevo Servicio</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <label>NOMBRE</label>
+                    <input type="text" name="nombre_servicio" required>
+                    <label>PRECIO ($) — dejá en 0 si es gratuito</label>
+                    <input type="number" name="precio" value="0" min="0" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditar" tabindex="-1">
+    <div class="modal-dialog">
+        <form id="form-editar" action="" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Editar Servicio</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <label>NOMBRE</label>
+                    <input type="text" name="nombre_servicio" id="input-nombre" required>
+                    <label>PRECIO ($)</label>
+                    <input type="number" name="precio" id="input-precio" min="0" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const modalEditar = document.getElementById('modalEditar')
+    modalEditar.addEventListener('show.bs.modal', event => {
+        const btn = event.relatedTarget
+        document.getElementById('input-nombre').value = btn.getAttribute('data-nombre')
+        document.getElementById('input-precio').value = btn.getAttribute('data-precio')
+        document.getElementById('form-editar').action = `/admin/servicios/editar/${btn.getAttribute('data-id')}`
+    })
+</script>
+{% endblock %}
