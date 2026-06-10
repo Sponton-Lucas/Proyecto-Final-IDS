@@ -160,14 +160,32 @@
     <h2>Por que elegirnos?</h2>
     <p>Nos apasiona servite cada platillo con amor y dedicacion</p>
   </div>
-  <div class="col-6 offset-3 contenedor-sabores-unicos">
-    <div>
-      <h3 class="py-3 px-4">Sabores únicos</h3>
-      <p class="pt-2 px-4 fw-bold">Cada receta cuenta la historia de nuestra pasión por la cocina.</p>
-      <p class="pb-2 px-4 fw-bold">¡Ven y siente la magia!</p>
+  <div class="row justify-content-center">
+    <div class="col-4 contenedor-sabores-unicos mx-2">
+      <div class="rounded-pill pill-estilos d-flex">
+        <p class="parrafo-card-estilos-1">Deliciosos</p>
+        <p class="parrafo-card-estilos-2">Innovadores</p>
+      </div>
+      <div>
+        <h4 class=" text-card-estilos pt-4 pb-2">Sabores únicos</h4>
+        <p class="text-card-estilos">Cada receta cuenta la historia de nuestra pasión por la cocina. ¡Ven y siente la magia!</p>
+      </div>
+      <div class="padding-img">
+        <img class="bordes-img-sabores-unicos" src="{{ url_for('static', filename='img/plato_persona.jpeg') }}" alt="persona comiendo">
+      </div>
     </div>
-    <div class="text-end">
-      <img class="bordes-img-sabores-unicos" src="{{ url_for('static', filename='img/Untitled.jpeg') }}" alt="comida" width="600">
+    <div class="col-4 contenedor-sabores-unicos-2 mx-2">
+      <div class="rounded-pill pill-estilos-2 d-flex">
+        <p class="parrafo-card-estilos-1">Rápido</p>
+        <p class="parrafo-card-estilos-2">Cómodo</p>
+      </div>
+      <div>
+        <h4 class="text-card-estilos pt-4 pb-2">Servicio Rápido</h4>
+        <p class="text-card-estilos">Nuestro euipo está listo para atenderte prontamente para que disfrutes sin demoras.</p>
+      </div>
+      <div class="padding-img">
+        <img class="bordes-img-sabores-unicos" src="{{ url_for('static', filename='img/plato_comida_2.png') }}" alt="plato comida" height="286.17">
+      </div>
     </div>
   </div>
 </div>

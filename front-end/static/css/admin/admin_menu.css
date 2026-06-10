@@ -1,5 +1,8 @@
+/*toper-admin*/
+
 .topper {
     width: 100%;
+    margin-bottom: 50px;
 }
 
 .nuevo-articulo-boton {
@@ -122,4 +125,89 @@ textarea{
 
 #campos-bebida{
     display:none;
+}
+
+/*tabla-menu-admin*/
+
+.despliegue-menu {
+    margin-bottom: 50px;
+    border: 1px solid #233338;
+    border-radius: 8px;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.label-categoria {
+    display: block;
+    cursor: pointer;
+    background-color: var(--principal);
+    color: var(--rosita);
+    font-size: 30px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    user-select: none; /*evita que se seleccione el texto al hacer doble clic*/
+}
+
+.tabla-menu {
+    display: none;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0.2px solid #002431;
+    
+}
+
+.tabla-menu .centro-acciones {
+    align-items: center;
+    vertical-align: middle;
+}
+
+.tabla-menu thead  {
+    background-color: var(--gris-oscuro);
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.tabla-menu th, .tabla-menu td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 14px;
+}
+
+.tabla-menu td:nth-child(3) {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.tabla-menu .centro {
+    text-align: center;
+}
+
+.btn-icono {
+    background: transparent;
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.btn-icono.eliminar{
+    border-color: #dc3545; /* Borde rojo */
+    color: #dc3545;
+}
+
+.btn-icono:hover {
+    opacity: 0.7;
+}
+
+.toggle-input:checked + .label-categoria + .tabla-menu {
+    display: table; /*se hace el despliegue de cada tabla*/
 }
