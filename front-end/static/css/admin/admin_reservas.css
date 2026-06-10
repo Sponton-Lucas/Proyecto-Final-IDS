@@ -74,6 +74,11 @@
     color: white;
 }
 
+.etiqueta-cancelada {
+    background-color: #6c757d;
+    color: white;
+}
+
 /* Botones gestión */
 .admin-gestion {
     white-space: nowrap;
