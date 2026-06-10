@@ -116,7 +116,7 @@
              <td>Bebidas</td><td>{{ plato.precio }}</td>
              <td class="centro-acciones">
                   <form action="/admin/eliminar_articulo" method="POST">
-                     <input type="hidden" name="id_comida" value="{{ plato.id_bebida }}">
+                     <input type="hidden" name="id_comida" value="{{ plato.id_bebidas }}">
                      <input type="hidden" name="categoria" value="bebidas"> <button type="submit" class="btn-icono eliminar">🗑️</button>
                   </form>
              </td>

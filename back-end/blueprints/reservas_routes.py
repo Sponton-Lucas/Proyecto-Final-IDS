@@ -26,6 +26,9 @@ def crear_reserva():
         return jsonify({"error": "Datos no proporcionados"}), 400
     if 'usuario_id' not in datos or 'fecha' not in datos or 'hora' not in datos or 'cantidad_personas' not in datos:
         return jsonify({"error": "Todos los campos son requeridos"}), 400
+    reserva_existente = db.get_reserva_por_usuario_y_fecha(datos['usuario_id'], datos['fecha'])
+    if reserva_existente:
+        return jsonify({"error": "Ya tenés una reserva para ese día"}), 409
     resultado = db.post_reserva(datos)
     return jsonify(resultado), 201
 
