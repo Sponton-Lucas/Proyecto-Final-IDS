@@ -10,4 +10,41 @@
 
   <!-- Tabla de reseñas públicas -->
 
+<section class="seccion-admin-resenas">
+    <h2>Reseñas</h2>
+    <table class="admin-tabla">
+        <tr>
+            <th>ID Reseña</th>
+            <th>Nombre y Apellido</th>
+            <th>Mensaje</th>
+            <th>Acciones de Administrador</th>
+        </tr>
+        <tbody>
+        {% for resena in resenas %}
+            <tr>
+                <td class="admin-id">#RES-{{ resena.id_resenas }}</td>
+                {% for usuario in usuarios %}
+                    {% if resena.usuario_id == usuario.id_usuario %}
+                        <td>{{ usuario.nombre_apellido }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td>{{ resena.mensaje }}</td>
+                <td class="admin-gestion">
+                    <form action="/admin/editar_resena" method="post">
+                        <input type="hidden" name="usuario_id" value="{{ resena.usuario_id }}">
+                        <input type="hidden" name="id_resenas" value="{{ resena.id_resenas }}">
+                        <button type="submit" class="boton-gestion boton-editar">Editar</button>
+                    </form>
+                    <form action="/admin/eliminar_resena" method="post">
+                        <input type="hidden" name="id_resenas" value="{{ resena.id_resenas }}">
+                        <button type="submit" class="boton-gestion boton-eliminar">Eliminar</button>
+                    </form>
+                </td>
+
+            </tr>
+        {% endfor %}
+        <tbody>
+    </table>
+</section>
+
 {% endblock %}

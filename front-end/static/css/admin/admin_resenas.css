@@ -1,1 +1,79 @@
+.seccion-admin-resenas {
+    padding: 2rem;
+    background-color: white;
+}
+
+.seccion-admin-resenas h2 {
+    color: #333;
+    font-family: var(--font-family);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.admin-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-family);
+    border: 1px solid #e0e0e0;
+}
+
+.admin-tabla th {
+    color: #555;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f5f5f5;
+}
+
+.admin-tabla tbody td {
+    color: #333;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle !important;
+}
+
+.admin-id {
+    color: #5b8cd4 !important;
+    font-weight: 500 !important;
+    vertical-align: middle !important;
+    line-height: 65px;
+}
+
+
+.admin-gestion {
+    white-space: nowrap;
+    vertical-align: middle !important;
+}
+
+.admin-gestion form {
+  display: inline-block; /* o inline-flex */
+  margin: 0 4px 0 0;     /* separador opcional */
+}
+
+.boton-gestion {
+    width: 60px;
+    height: 28px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+}
+.boton-editar {
+    background-color: #28a745;
+    color: white;
+}
+
+.boton-eliminar {
+    background-color: #dc3545;
+    color: white;
+}
+
 

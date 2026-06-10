@@ -1,0 +1,29 @@
+{% extends "admin/admin_base.html" %}
+
+{% block tittle %}Auditoría de Reseñas{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_editar_resenas.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="seccion-admin-resenas">
+  <h2 class="titulo">Editar reseña</h2>
+
+  <form action="/admin/guardar_resena" method="post">
+    <input type="hidden" name="id_resenas" value="{{ resena.id_resenas }}">
+    <input type="hidden" name="usuario_id" value="{{ usuario_id }}">
+    <textarea name="mensaje">{{ resena.mensaje }}</textarea>
+
+    <div class="acciones">
+      <button type="submit" class="guardar boton-gestion boton-guardar">Guardar cambios</button>
+  </form>
+
+  <form action="/admin/cancelar_edicion" method="post">
+      <button type="submit" class="cancelar boton-gestion boton-cancelar">Cancelar</button>
+    </div>
+  </form>
+</section>
+
+{% endblock %}

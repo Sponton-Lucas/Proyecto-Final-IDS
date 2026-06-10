@@ -1,0 +1,90 @@
+.seccion-admin-resenas {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  padding: 18px;
+  max-width: 700px;
+  margin: 24px auto;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.seccion-admin-resenas .titulo {
+  background: #222;
+  color: #fff;
+  padding: 12px 16px;
+  margin: -18px -18px 14px -18px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.seccion-admin-resenas textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #d6d6d6;
+  border-radius: 3px;
+  resize: vertical;
+  box-sizing: border-box;
+  color: #222;
+  background: #fff;
+  margin-bottom: 14px;
+}
+.seccion-admin-resenas textarea:focus {
+  outline: none;
+  border-color: #8ab4ff;
+  box-shadow: 0 0 0 3px rgba(138,180,255,0.12);
+}
+
+/* Botones base */
+.boton-gestion,
+.seccion-admin-resenas button {
+  min-width: 110px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* Guardar: azul (como en Nuevo Artículo) */
+.boton-guardar {
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+}
+.boton-guardar:hover { background-color: #0069d9; border-color: #0069d9; }
+
+/* Cancelar: gris */
+.boton-cancelar {
+  background-color: #f0f0f0;
+  color: #666;
+  border: 1px solid #d0d0d0;
+}
+.boton-cancelar:hover { background-color: #e8e8e8; }
+
+/* Contenedor de acciones: botones alineados a la derecha con espacio */
+.seccion-admin-resenas .acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 6px;
+}
+
+/* Si quieres que Cancelar quede a la izquierda y Guardar a la derecha dentro del mismo contenedor */
+.seccion-admin-resenas .acciones .left {
+  margin-right: auto;
+}
+
