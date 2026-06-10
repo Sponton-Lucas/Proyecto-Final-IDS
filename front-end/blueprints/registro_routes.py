@@ -13,9 +13,7 @@ def registro():
 @registro_bp.route('/registrarse', methods=['POST'])
 def register_form():
     datos_usuario = request.form.to_dict()
-
     respuesta = requests.post("http://localhost:5000/usuarios", json=datos_usuario)
-   
     if respuesta.status_code == 201:
         usuario = respuesta.json()
         session["user"] = usuario["nombre_apellido"]

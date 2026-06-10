@@ -11,7 +11,6 @@
     <h2>Hola <b class="bg-user p-2 rounded-4 m-2 text-white">{{ nombre_admin }}</b></h2>
     <p class="fs-3">Bienvenido al panel de administración</p>
 
-    <!-- Tarjetas resumen -->
     <div class="cards">
         <div class="card">
           <div class="card-icono">
@@ -59,7 +58,6 @@
         </div>
     </div>
 
-    <!-- Gráficos -->
     <section class=" canvas-contenedor">
       <div class="canvas-div">
         <canvas id="reservasChart"></canvas>
@@ -74,11 +72,11 @@
         <div class="col-6 ultimas-reservas">
             <h3 class="p-2 text-white">Últimas Reservas</h3>
             <table>
-                <tr class="text-white"><th>Usuario</th><th>Fecha</th><th>Estado</th></tr>
+                <tr class="text-white"><th>Usuario</th><th>Fecha y hora</th><th>Estado</th></tr>
                 {% for r in ultimas_reservas %}
                 <tr class="filas-bordes text-white">
                     <td><b>{{ r.nombre_apellido }}</b></td>
-                    <td>{{ r.fecha }}</td>
+                    <td>{{ r.fecha_hora }}</td>
                     <td class="bg-success p-2 bg-opacity-50 rounded-3 text-center">{{ r.estado }}</td>
                 </tr>
                 {% endfor %}

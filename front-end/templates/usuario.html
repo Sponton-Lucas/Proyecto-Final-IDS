@@ -3,10 +3,11 @@
 {% block tittle %} Nombre restaurante - Registro{% endblock %}
 
 {% block estilos %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/usuario.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/usuario.css') }}">
 {% endblock %}
 
 {% block content %}
+
 <h1 class="titulo-bienvenido">Bienvenido {{ usuario }}!</h1>
 <br></br>
 <h2 class="titulo-reservas">Tus reservas</h2>
@@ -64,5 +65,6 @@
 <form action="/logout" method="post" class="logout-form">
     <button type="submit" class="logout-cerrar-boton">Cerrar sesión</button>
 </form>
+
 {% endblock %}
 

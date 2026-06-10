@@ -8,35 +8,28 @@
 
 {% block content %}
 
-<!--seccion 1-->
 <section class="seccion-1">
   <h2 class="titulo1">Sabores Inconfundibles</h2> 
   <h5 class="mesajito">¡Bienvenidos al lugar donde la comida cuenta historias desgarradoras! Un banquete para los sentidos.</h5>
-
   <div class="boton-inicio"> 
     <a href="{{ url_for('menu.menu') }}" class="boton-ver-menu">
       <span class="texto">Ver Menú</span>
       <span class="icono">&rarr;</span>
     </a>
   </div>
-  
 </section>
 
-<!--seccion 5-->
 <section class="seccion-5">
-
   <div class="imagen-conocenos">
     <img src="{{url_for('static', filename='img/quienes_somos.jpeg')}}" alt="foto del restaurante">
   </div>
-
   <div class="caja-text-btn">
     <div class="conocenos">
-     <a href="{{ url_for('conocenos') }}" class="boton-conocenos">
-       <span class="texto1">Conócenos</span>
-       <span class="icono1">&rarr;</span>
+      <a href="{{ url_for('conocenos_bp.conocenos') }}" class="boton-conocenos">
+        <span class="texto1">Conócenos</span>
+        <span class="icono1">&rarr;</span>
       </a>
     </div>
-  
     <div class="conocenos-texto">
       <p>
       Nuestra pasión por la cocina se refleja en cada plato.
@@ -45,38 +38,34 @@
       ofrecer lo mejor, desde recetas tradicionales hasta
       innovaciones culinarias que sorprenden. Si no sales con
       una sonrisa, ¡algo hicimos mal!
-     </p>
+      </p>
     </div>
   </div>
 </section>
 
 <section class="seccion-2">
   <div class="seccion-2-texto">
-   <div class="seccion-2-etiquetas">
-     <span class="etiqueta-solido">Sentite</span>
-     <span class="etiqueta-texto">Acompañado</span>
-   </div>    
-  
-   <h2> Probá Nuestros Platos</h2>
-   <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
-   <a href="{{ url_for('reservas.reservas') }}" class="boton">
-     <span class="boton-texto">¡Vení y Comé!</span>
-     <span class="boton-icono">→</span>
-   </a>
-
+    <div class="seccion-2-etiquetas">
+      <span class="etiqueta-solido">Sentite</span>
+      <span class="etiqueta-texto">Acompañado</span>
+    </div>    
+    <h2> Probá Nuestros Platos</h2>
+    <p>Dejá que nuestros sabores hagan historia. ¡Te esperamos con los brazos abiertos!</p>
+    <a href="{{ url_for('reservas.reservas') }}" class="boton">
+      <span class="boton-texto">¡Vení y Comé!</span>
+      <span class="boton-icono">→</span>
+    </a>
   </div>
   <div class="seccion-2-contenedor-img">
-   <img class="seccion-2-img" 
-         src="{{ url_for('static', filename='img/mesas.jpg') }}" 
-         alt="Mesas del restaurante"/>
+    <img class="seccion-2-img" 
+        src="{{ url_for('static', filename='img/mesas.jpg') }}" 
+        alt="Mesas del restaurante"/>
   </div>
 </section>
 
-<!--seccion 3-->
 <section class="seccion-resenas">
   <div id="carouselResenas" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-
       <div class="carousel-item active">
         <div class="resena-card">
           <div class="estrellas">★★★★★</div>
@@ -86,7 +75,6 @@
           <p class="resena-rol">Food Blogger</p>
         </div>
       </div>
-
       <div class="carousel-item">
         <div class="resena-card">
           <div class="estrellas">★★★★★</div>
@@ -96,7 +84,6 @@
           <p class="resena-rol">Crítico gastronómico</p>
         </div>
       </div>
-
       <div class="carousel-item">
         <div class="resena-card">
           <div class="estrellas">★★★★☆</div>
@@ -106,9 +93,7 @@
           <p class="resena-rol">Chef amateur</p>
         </div>
       </div>
-
     </div>
-
     <button class="carousel-control-prev resena-flecha" type="button" data-bs-target="#carouselResenas" data-bs-slide="prev">
       <span>&#8592;</span> <!-- #Fecha hacia atrás--> 
     </button>
@@ -118,13 +103,6 @@
   </div>
 </section>
 
-<!--seccion 4-->
-
-
-
-<!--seccion 6-->
-
-<!--seccion 7-->
 <section>   
     <div class="d-flex">
         <div class="col-7 text-end">
@@ -139,7 +117,7 @@
                 de nuestros comensales.
             </p>
             <div class="py-4 px-3">
-                    <a class="boton" href="{{ url_for('conocenos') }}" role="button">
+                    <a class="boton" href="{{ url_for('conocenos_bp.conocenos') }}" role="button">
                         <span class="boton-texto">Conocenos</span>
                         <span class="boton-icono">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -151,9 +129,6 @@
         </div>
     </div>
 </section>
-
-<!--seccion 8-->
-
 
 <div>
   <div class="text-center py-4 text-white">
@@ -190,51 +165,38 @@
   </div>
 </div>
 
-
-<!--seccion 9-->
 <div class="seccion-faq">
   <h2>Preguntas Frecuentes</h1>
-
   <hr/>
-
   <details name="faq">
     <summary>¿Tienen opciones vegetarianas?</summary>
     <p>Sí, contamos con una amplia variedad de opciones vegetarianas y veganas en nuestra carta. Podés consultarle a nuestro mozo o revisar el menú en línea para más detalles.</p>
   </details>
-
   <details name="faq">
     <summary>¿Se puede reservar para grupos grandes?</summary>
     <p>Para grupos de más de 6 personas, te recomendamos contactarnos directamente por teléfono o email para coordinar los detalles y garantizar la mejor experiencia.</p>
   </details>
-
   <details name="faq">
     <summary>¿Aceptan pagos con tarjeta?</summary>
     <p>Sí, aceptamos todas las tarjetas de débito y crédito, además de efectivo y transferencias bancarias.</p>
   </details>
-
   <details name="faq">
     <summary>¿Tienen opciones sin gluten?</summary>
     <p>Contamos con un menú especial apto para celíacos, preparado en una zona de cocina separada para evitar la contaminación cruzada. Por favor, indicalo al hacer tu reserva.</p>
   </details>
-
   <details name="faq">
     <summary>¿Cuál es la dirección?</summary>
     <p>Nos encontramos en Av. Corrientes 1234, Ciudad de Buenos Aires. Contamos con estacionamiento propio sin costo.</p>
   </details>
-
   <details name="faq">
     <summary>¿Puedo cancelar mi reserva?</summary>
     <p>Podés cancelar o modificar tu reserva hasta 2 horas antes del horario pactado sin cargo. Para cancelaciones con menor anticipación, avisanos de todas formas para liberar el lugar.</p>
   </details>
-
   <details name="faq">
     <summary>¿Tienen Wi-Fi?</summary>
     <p>Sí, ofrecemos Wi-Fi gratuito de alta velocidad. Pedile la contraseña a cualquier miembro del personal al llegar.</p>
   </details>
-
   <hr/>
 </div>
-
-<!--footer-->
 
 {% endblock %}

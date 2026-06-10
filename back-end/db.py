@@ -723,6 +723,9 @@ def obtener_ultimas_reservas(limit=7):
         if isinstance(r.get("hora"), timedelta):
             r["hora"] = str(r["hora"])  # "HH:MM:SS"
 
+        if r.get("fecha") and r.get("hora"):
+            r["fecha_hora"] = f"{r['fecha']} {r['hora']}"
+
     conn.close()
     return resultados
 
