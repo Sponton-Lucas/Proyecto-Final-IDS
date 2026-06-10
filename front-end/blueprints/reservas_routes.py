@@ -55,7 +55,7 @@ def reservas():
                 cantidad_personas=datos['cantidad_personas'],
                 cancel_url=cancel_url
             )
-            msg.attach(f'qr_{id_reservas}.png', 'image/png', img_byte_arr.getvalue())
+            msg.attach(f'qr_{id_reservas}.png', 'image/png', img_byte_arr.getvalue(), 'inline', headers={'Content-ID': '<qr_code>'})
             current_app.extensions['mail'].send(msg)
             flash('¡Reserva confirmada! Te esperamos.', 'exito')
         elif respuesta.status_code == 409:
