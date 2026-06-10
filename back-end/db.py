@@ -595,7 +595,7 @@ def post_reserva(datos):
             (datos['usuario_id'], datos['fecha'], datos['hora'], datos['cantidad_personas'],)
         )
         coneccion.commit()
-        return {"mensaje": "Reserva creada exitosamente"}
+        return {"mensaje": "Reserva creada exitosamente", "id_reservas": cursor.lastrowid}
     finally:
         cursor.close()
         coneccion.close()
@@ -723,6 +723,9 @@ def obtener_ultimas_reservas(limit=7):
         if isinstance(r.get("hora"), timedelta):
             r["hora"] = str(r["hora"])  # "HH:MM:SS"
 
+        if r.get("fecha") and r.get("hora"):
+            r["fecha_hora"] = f"{r['fecha']} {r['hora']}"
+
     conn.close()
     return resultados
 
@@ -747,3 +750,16 @@ def obtener_servicios_extra():
     resultados = cursor.fetchall()
     conn.close()
     return resultados
+
+def get_reserva_por_usuario_y_fecha(usuario_id, fecha):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "SELECT * FROM reservas WHERE usuario_id = %s AND fecha = %s AND estado != 'cancelada'",
+            (usuario_id, fecha)
+        )
+        return cursor.fetchone()
+    finally:
+        cursor.close()
+        coneccion.close()

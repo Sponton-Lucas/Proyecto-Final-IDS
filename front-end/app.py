@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, redirect, render_template, request, session, flash
-import requests
+from flask import Flask, render_template
 from datetime import timedelta
+from flask_mail import Mail, Message
 
 from blueprints.resenas_routes import resenas_bp
 from blueprints.login_routes import login_bp
@@ -8,147 +8,44 @@ from blueprints.usuario_routes import usuario_bp
 from blueprints.registro_routes import registro_bp
 from blueprints.reservas_routes import reservas_bp
 from blueprints.menu_routes import menu_bp
-
-from blueprints.dashboard_routes import dashboard_bp
+from blueprints.conocenos_routes import conocenos_bp
+from blueprints.admin.dashboard_routes import dashboard_bp
+from blueprints.admin.admin_menu_routes import admin_menu_bp
+from blueprints.admin.admin_resenas_routes import admin_resenas_bp
+from blueprints.admin.admin_reservas_routes import admin_reservas_bp
+from blueprints.admin.admin_usuarios_routes import admin_usuarios_bp
 
 app = Flask(__name__)
 app.secret_key = "una_clave_secreta"
 app.permanent_session_lifetime = timedelta(days=1)
+
 app.register_blueprint(resenas_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(usuario_bp)
 app.register_blueprint(registro_bp)
 app.register_blueprint(reservas_bp)
 app.register_blueprint(menu_bp)
+app.register_blueprint(conocenos_bp)
 
-# Prueba de index de admin con graficos y charts.
+#bp de admin
 app.register_blueprint(dashboard_bp)
+app.register_blueprint(admin_menu_bp)
+app.register_blueprint(admin_resenas_bp)
+app.register_blueprint(admin_reservas_bp)
+app.register_blueprint(admin_usuarios_bp)
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'pasillocolon@gmail.com'
+app.config['MAIL_PASSWORD'] = 'kvka zeyw gpli sbkc'
+app.config['MAIL_DEFAULT_SENDER'] = 'pasillocolon@gmail.com'
+
+mail = Mail(app) # Inicialización de Flask-Mail
 
 @app.route("/")
 def index():
 	return render_template('index.html')
-
-@app.route("/conocenos")
-def conocenos():
-    ser = requests.get('http://localhost:5000/servicios_extra')
-    servicios_extra = ser.json()
-    return render_template('conocenos.html', se=servicios_extra)
-
-@app.route('/admin/menu')
-def admin_menu():
-    if not session.get('es_admin'):
-        return redirect('/')
-    
-    com = requests.get('http://localhost:5000/comida_principal')
-    lista_comida_principal = com.json()
-    pos = requests.get('http://localhost:5000/postres')
-    lista_postres = pos.json()
-    beb = requests.get('http://localhost:5000/bebidas')
-    lista_bebidas= beb.json()
-    return render_template('admin/admin_menu.html', comida_principal=lista_comida_principal, postres=lista_postres, bebidas=lista_bebidas)
-
-@app.route('/admin/nuevo_articulo', methods=['POST'])
-def nuevo_articulo():
-    if not session.get('es_admin'):
-        return redirect('/')
-    return render_template('admin/admin_nuevo_articulo.html')    
-
-@app.route('/admin/creacion_nuevo_articulo', methods=['POST'])
-def crear_nuevo_articulo():
-    if not session.get('es_admin'):
-        return redirect('/')
-    nombre = request.form.get("nombre")
-    precio = request.form.get("precio")
-    categoria = request.form.get("categoria")
-    descripcion = request.form.get("descripcion")
-    es_vegano = "vegano" in request.form
-    es_celiaco = "celiaco" in request.form
-    es_alcoholica = "alcoholica" in request.form
-
-    if categoria == "comida":
-        datos = {"nombre_plato": nombre, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
-        requests.post('http://localhost:5000/comida_principal', json=datos)   
-    if categoria == "postre":
-        datos = {"precio": precio, "nombre": nombre,"es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
-        requests.post('http://localhost:5000/postres', json=datos)
-    if categoria == "bebida":
-        datos = {"precio": precio, "nombre": nombre, "es_alcoholica": es_alcoholica, "descripcion": descripcion}
-        requests.post('http://localhost:5000/bebidas', json=datos)
-
-    return redirect('/admin/menu')
-
-@app.route('/admin/eliminar_articulo', methods=['POST'])
-def eliminar_articulo():
-    id_articulo = request.form.get("id_comida")
-    categoria = request.form.get("categoria")
-
-    eliminando = {
-         "platos_principales": "http://localhost:5000/comida_principal/",
-         "postres": "http://localhost:5000/postres/",
-         "bebidas": "http://localhost:5000/bebidas/"
-    }
-
-    eliminado_articulo= eliminando.get(categoria)
-
-    if eliminado_articulo and id_articulo:
-        requests.delete(f"{eliminado_articulo}{id_articulo}")
-
-    return redirect('/admin/menu')
-
-
-
-
-
-
-
-@app.route('/admin/reservas')
-def admin_reservas():
-    if not session.get('es_admin'):
-        return redirect('/')
-    res = requests.get('http://localhost:5000/reservas')
-    reservas = res.json()
-    return render_template('admin/admin_reservas.html', reservas=reservas)
-
-@app.route('/admin/reserva/<int:id>/asistio')
-def marcar_asistio(id):
-    if not session.get('es_admin'):
-        return redirect('/')
-    requests.patch(f'http://localhost:5000/reservas/{id}',
-                   json={'estado': 'asistio'})
-    return redirect('/admin/reservas')
-
-@app.route('/admin/reserva/<int:id>/no-asistio')
-def marcar_no_asistio(id):
-    if not session.get('es_admin'):
-        return redirect('/')
-    requests.patch(f'http://localhost:5000/reservas/{id}',
-                   json={'estado': 'no-asistio'})
-    return redirect('/admin/reservas')
-
-@app.route('/admin/usuarios')
-def admin_usuarios():
-    if not session.get('es_admin'):
-        return redirect('/')
-    res = requests.get('http://localhost:5000/usuarios')
-    usuarios = res.json()
-    return render_template('admin/admin_usuarios.html', usuarios=usuarios)
-
-@app.route('/admin/usuario/<int:id>/dar-admin')
-def dar_admin(id):
-    if not session.get('es_admin'):
-        return redirect('/')
-    if id != 1:
-        requests.patch(f'http://localhost:5000/usuarios/{id}', json={'es_admin': True})
-    return redirect('/admin/usuarios')
-
-@app.route('/admin/usuario/<int:id>/quitar-admin')
-def quitar_admin(id):
-    if not session.get('es_admin'):
-        return redirect('/')
-    if id != 1:
-        requests.patch(f'http://localhost:5000/usuarios/{id}', json={'es_admin': False})
-    return redirect('/admin/usuarios')
-
 @app.route('/admin/resenas')
 def admin_resenas():
     if not session.get('es_admin'):
@@ -196,6 +93,7 @@ def admin_cancelar_edicion():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
 
 if __name__ == '__main__':
 	app.run(port=3000, debug=True)  

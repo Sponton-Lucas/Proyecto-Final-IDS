@@ -6,19 +6,13 @@
 {% endblock %}
 {% block content %}
 
-
-<!-- SECCION 24 -->
 <section class="s24-seccion">    
-
     <div class="s24-contenedor">
-
         <div class="s24-encabezado">
             <h2 class="s24-titulo-principal">PASILLO COLÓN</h2>
             <p class="s24-subtitulo">CREAR CUENTA</p>
         </div>
-
         <form action="/registrarse" method="POST" class="s24-formulario">
-
             <div class="s24-grupo-input">
                 <label for="nombre" class="s24-label">NOMBRE COMPLETO</label>
                 <input 
@@ -30,7 +24,6 @@
                     required
                 >
             </div>
-        
             <div class="s24-grupo-input">
                 <label for="email" class="s24-label">CORREO ELECTRÓNICO</label>
                 <input 
@@ -42,7 +35,6 @@
                     required
                 >
             </div>
-        
             <div class="s24-grupo-input">
                 <label for="telefono" class="s24-label">TELÉFONO</label>
                 <input 
@@ -54,7 +46,6 @@
                     required
                 >
             </div>
-        
             <div class="s24-grupo-input">
                 <label for="password" class="s24-label">CONTRASEÑA</label>
                 <input 
@@ -66,21 +57,14 @@
                     required
                 >
             </div>
-        
             <button type="submit" class="s24-boton-submit">CREAR CUENTA</button>
-        
         </form>
-
         <p class="s24-texto-login">
             ¿Ya tienes cuenta?
             <a href="/login" class="s24-enlace-login">Inicia sesión</a>
         </p>
-
         <a href="/" class="s24-enlace-volver">← VOLVER AL INICIO</a>
-
     </div>
-
 </section>
-<!-- FIN SECCION 24 -->
 
 {% endblock %}
