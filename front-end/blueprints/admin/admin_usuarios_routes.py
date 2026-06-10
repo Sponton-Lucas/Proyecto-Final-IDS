@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, request
+from flask import Blueprint, render_template, session, redirect, request, Response
 import requests
 
 admin_usuarios_bp = Blueprint('admin_usuarios_bp', __name__)
@@ -27,3 +27,9 @@ def quitar_admin(id):
     if id != 1:
         requests.patch(f'http://localhost:5000/usuarios/{id}', json={'es_admin': False})
     return redirect('/admin/usuarios')
+
+@admin_usuarios_bp.route('/admin/usuarios/pdf')
+def descargar_pdf_usuarios():
+    backend_url = "http://localhost:5000/admin/usuarios/pdf"
+    res = requests.get(backend_url)
+    return Response(res.content, mimetype="application/pdf", headers={"Content-Disposition": "attachment;filename=usuarios.pdf"})

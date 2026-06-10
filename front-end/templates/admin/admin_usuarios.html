@@ -11,7 +11,7 @@
 <section class="padron-seccion-admin">     
     <div class="padron-header">
         <h2 class="padron-titulo-seccion">Padrón de Usuarios del Sistema</h2>
-        <a href="#" class="padron-btn-descargar">descargar pdf</a>
+        <a href="{{ url_for('admin_usuarios_bp.descargar_pdf_usuarios')}}" class="padron-btn-descargar">descargar pdf</a>
     </div>
 
     <table class="padron-tabla">
