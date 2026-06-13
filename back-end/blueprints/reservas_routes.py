@@ -1,8 +1,30 @@
 from flask import Blueprint, request, jsonify, current_app
 import db
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 reservas_bp = Blueprint('reservas', __name__)
+
+#Validar Fecha
+def validar_fecha(fecha):
+    try:
+        fecha_reserva = datetime.strptime(fecha, "%Y-%m-%d").date()
+        if fecha_reserva >= datetime.now.date():
+            es_valida = True
+    except ValueError:
+        es_valida = False
+    
+    return es_valida
+
+#validar cantidad de personas
+def validar_cantidad_personas(cantidad):
+    es_valida = False
+
+    if isinstance(cantidad, int):
+        if cantidad >=1 and cantidad <= 6:
+            es_valida = True
+    
+    return es_valida
+
 
 #GET
 @reservas_bp.route('/reservas', methods=['GET'])
@@ -30,6 +52,11 @@ def crear_reserva():
     if 'usuario_id' not in datos or 'fecha' not in datos or 'hora' not in datos or 'cantidad_personas' not in datos:
         return jsonify({"error": "Todos los campos son requeridos"}), 400
     reserva_existente = db.get_reserva_por_usuario_y_fecha(datos['usuario_id'], datos['fecha'])
+    if not validar_fecha(datos["fecha"]):
+        return jsonify({"error": "La fecha es inválida o es perteneciente al pasado"}), 00
+    
+    if not validar_cantidad_personas(datos["cantidad_personas"]):
+        return jsonify({"error": "La cantidad de personas debe estar entre 1 y 6"})
     if reserva_existente:
         return jsonify({"error": "Ya tenés una reserva para ese día"}), 409
     resultado = db.post_reserva(datos)
@@ -45,6 +72,10 @@ def actualizar_reserva(id_reservas):
     hora = reserva.get("hora")
     cantidad_personas = reserva.get("cantidad_personas")
     estado = reserva.get("estado")
+    if not validar_cantidad_personas(cantidad_personas):
+        return jsonify({"error": "La catidad de personas debe estar entre 1 y 6"}),400
+    if not validar_fecha(fecha):
+        return jsonify({"error": "LA fecha es inválida o pertenece al pasado"})
     if (not fecha) or (not hora) or (not cantidad_personas) or (not estado):
         return jsonify({'error':'Los campos no pueden estar vacios'}), 400
     actualizar_reserva = db.put_reserva(id_reservas, fecha, hora, cantidad_personas, estado)
@@ -65,7 +96,15 @@ def modificar_reserva(id_reservas):
     fecha = datos.get("fecha")
     hora = datos.get("hora")
     cantidad_personas = datos.get("cantidad_personas")
+
+    if cantidad_personas is not None:
+        if not validar_cantidad_personas(cantidad_personas):
+            return jsonify({"error": "La cantidad de personas debe estar entre 1 y 6"}), 400
     estado = datos.get("estado")
+
+    if fecha is not None:
+        if not validar_fecha(fecha):
+            return jsonify({"error" : "La fecha es inválida o pertenece al pasado"})
 
     reserva_modificada = db.patch_reserva(id_reservas, fecha, hora, cantidad_personas, estado)
     if reserva_modificada:

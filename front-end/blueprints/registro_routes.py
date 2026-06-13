@@ -14,6 +14,9 @@ def registro():
 def register_form():
     datos_usuario = request.form.to_dict()
     respuesta = requests.post("http://localhost:5000/usuarios", json=datos_usuario)
+    print(respuesta.status_code)
+    print(respuesta.text)
+    
     if respuesta.status_code == 201:
         usuario = respuesta.json()
         session["user"] = usuario["nombre_apellido"]
