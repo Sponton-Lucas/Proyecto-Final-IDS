@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS comida_principal (
     nombre_plato VARCHAR(100) NOT NULL, 
     precio INT DEFAULT 0, 
     es_vegano BOOLEAN DEFAULT FALSE,
-    es_celiaco BOOLEAN DEFAULT FALSE
+    es_celiaco BOOLEAN DEFAULT FALSE,
 );
 
 CREATE TABLE IF NOT EXISTS reservas (
@@ -61,10 +61,13 @@ CREATE TABLE IF NOT EXISTS reservas (
 ALTER TABLE postres ADD COLUMN descripcion VARCHAR(200);
 ALTER TABLE bebidas ADD COLUMN descripcion VARCHAR(200);
 ALTER TABLE comida_principal ADD COLUMN descripcion VARCHAR(200);
+ALTER TABLE comida_principal ADD COLUMN imagen VARCHAR(255);
+ALTER TABLE postre ADD COLUMN imagen VARCHAR(255) NULL;
+ALTER TABLE bebida ADD COLUMN imagen VARCHAR(255) NULL;
 
 INSERT INTO usuarios (id_usuario, nombre_apellido, email, telefono, contrasenia, es_admin) #se inserta el super admin predeterminado
 VALUES (1, 'Admin', 'admin@gmail.com', '1234567890', '1234', TRUE);
-UPDATE usuarios SET contrasenia = '$2b$12$S.q7K65PcCVxJ3sztawZ6.8uOlwhHrhABAIGdpvFUXs1rBbu26aha' WHERE id_usuario = 1; #contraseña hasheada (externamente mediante bcrypt) del super admin
+UPDATE usuarios SET contrasenia = '$2b$12$S.q7K65PcCVxJ3sztawZ6.8uOlwhHrhABAIGdpvFUXs1rBbu26aha' WHERE id_usuario = 1; #contraseña hasheada (externamente mediante bcrexitypt) del super admin
 
 #USUARIO MYSQL
 CREATE USER IF NOT EXISTS'caidaSiu'@'localhost'
@@ -74,3 +77,4 @@ GRANT ALL PRIVILEGES
 ON restaurante_db.*
 TO 'caidaSiu'@'localhost';
 FLUSH PRIVILEGES;
+

@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<form action="/admin/creacion_nuevo_articulo" method="post">
+<form action="/admin/creacion_nuevo_articulo" method="post" enctype="multipart/form-data">
     <div class="contenedor">
         <div class="contenedor-header">
             <h3>Alta de Nuevo Artículo</h3>
@@ -49,6 +49,11 @@
             <div class="grupo">
                 <label>DESCRIPCIÓN</label>
                 <textarea rows="4" name="descripcion"></textarea>
+            </div>
+            <div class="grupo">
+              <label>SUBIR IMAGEN</label>
+              <input type="file" class="form-control" name ="imagen" id="imagen">
+              <div class="file-list" id="filelist"></div>
             </div>
         </div>
         <div class="modal-footer">

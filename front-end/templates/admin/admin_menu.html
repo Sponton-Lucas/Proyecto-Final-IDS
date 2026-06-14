@@ -27,6 +27,7 @@
             <th>Descripcion</th>
             <th>Es vegano</th>
             <th>Es celiaco</th>
+            <th>Img Plato</th>
             <th>Acciones</th>
         <tr>
         <tbody>
@@ -38,7 +39,13 @@
                 <td>{{ comida.descripcion}}</td>
                 <td>{{ comida.es_vegano }}</td>
                 <td>{{ comida.es_celiaco }}</td>
+
                 <td>
+                    <img src="http://127.0.0.1:5000{{ url_for('static', filename='img/comida-principal/' + comida.imagen) }}" width="80">
+                </td>
+
+                <td>
+                    </form>
                     <form action="/admin/eliminar_articulo" method="post">
                         <input type="hidden" name="id_comida" value="{{ comida.id_plato }}">
                         <input type="hidden" name="categoria" value="platos_principales"> <button type="submit" class="btn-icono eliminar">🗑️</button>
