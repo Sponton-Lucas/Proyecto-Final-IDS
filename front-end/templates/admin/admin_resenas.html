@@ -30,11 +30,6 @@
                 {% endfor %}
                 <td>{{ resena.mensaje }}</td>
                 <td class="admin-gestion">
-                    <form action="/admin/editar_resena" method="post">
-                        <input type="hidden" name="usuario_id" value="{{ resena.usuario_id }}">
-                        <input type="hidden" name="id_resenas" value="{{ resena.id_resenas }}">
-                        <button type="submit" class="boton-gestion boton-editar">Editar</button>
-                    </form>
                     <form action="/admin/eliminar_resena" method="post">
                         <input type="hidden" name="id_resenas" value="{{ resena.id_resenas }}">
                         <button type="submit" class="boton-gestion boton-eliminar">Eliminar</button>
