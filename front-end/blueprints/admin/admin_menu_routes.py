@@ -83,26 +83,27 @@ def admin_modificar_articulo():
 def admin_guardar_cambios():
     id_articulo = request.form.get("id_articulo")
     precio = request.form.get("precio")
-    es_vegano = "vegano" in request.form
-    es_celiaco = "celiaco" in request.form
-    es_alcoholica = "alcoholica" in request.form
+    imagen = request.form.get("imagen")
+    es_vegano = "es_vegano" in request.form
+    es_celiaco = "es_celiaco" in request.form
+    es_alcoholica = "es_alcoholica" in request.form
     categoria = request.form.get("categoria")
     descripcion = request.form.get("descripcion")
     print(descripcion)
 
     if categoria == "comida_principal":
         nombre_plato = request.form.get("nombre_plato")
-        datos = {"nombre_plato": nombre_plato, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
+        datos = {"nombre_plato": nombre_plato, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion, "imagen": imagen}
         requests.patch(f"http://localhost:5000/comida_principal/{id_articulo}", json=datos)
         return redirect('/admin/menu')
     if categoria == "postres":
         nombre = request.form.get("nombre")
-        datos = {"nombre": nombre, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
+        datos = {"nombre": nombre, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion, "imagen": imagen}
         requests.patch(f"http://localhost:5000/postres/{id_articulo}", json=datos)
         return redirect('/admin/menu')
     if categoria == "bebidas":
         nombre = request.form.get("nombre")
-        datos = {"nombre": nombre, "precio": precio, "es_alcoholica": es_alcoholica, "descripcion": descripcion}
+        datos = {"nombre": nombre, "precio": precio, "es_alcoholica": es_alcoholica, "descripcion": descripcion, "imagen": imagen}
         requests.patch(f"http://localhost:5000/bebidas/{id_articulo}", json=datos)
         return redirect('/admin/menu')
     return redirect('/admin/menu')
