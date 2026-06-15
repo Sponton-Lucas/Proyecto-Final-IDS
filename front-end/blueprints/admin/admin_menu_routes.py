@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, session, redirect, request
 import requests
-import os 
 
 admin_menu_bp = Blueprint('admin_menu_bp', __name__)
 
@@ -47,19 +46,8 @@ def admin_crear_nuevo_articulo():
     es_vegano = "vegano" in request.form
     es_celiaco = "celiaco" in request.form
     es_alcoholica = "alcoholica" in request.form
-
-    #imagen = request.files.get('imagen')
-    #ruta_relativa = None
-    imagen = request.form.get("imagen")
-
-
-    '''if imagen and imagen.filename != '':
-        ruta_principal = os.path.join(os.getcwd(), '..', 'back-end', 'static', 'img', 'comida-principal')
-        imagen.save(os.path.join(ruta_principal, imagen.filename))
-        ruta_relativa = imagen.filename'''
-        
     if categoria == "comida":
-        datos = {"nombre_plato": nombre, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion, "imagen_url": imagen}
+        datos = {"nombre_plato": nombre, "precio": precio, "es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
         requests.post('http://localhost:5000/comida_principal', json=datos)
     if categoria == "postre":
         datos = {"precio": precio, "nombre": nombre,"es_vegano": es_vegano, "es_celiaco": es_celiaco, "descripcion": descripcion}
