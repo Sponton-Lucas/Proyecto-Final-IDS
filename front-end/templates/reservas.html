@@ -44,7 +44,8 @@
           <div class="row mb-3">
             <div class="col">
               <label for="fecha" class="form-label">Fecha</label>
-              <input type="date" id="fecha" name="fecha" class="form-control" required/>
+              <input type="date" id="fecha" name="fecha" class="form-control" required 
+              min="{{ fecha_minima }}"/>
             </div>
             <div class="col">
               <label for="horario" class="form-label">Horario</label>

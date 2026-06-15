@@ -339,4 +339,11 @@
 .s24-enlace-volver:hover {
   opacity: 0.8;
 }
+
+.s24-error {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
 /* --- FIN ESTILOS SECCIÓN 24 --- */

@@ -27,9 +27,13 @@
                                 <li><a class="dropdown-item" href="{{ url_for('conocenos_bp.conocenos') }}">Conocenos</a></li>
                                 <li><a class="dropdown-item" href="{{ url_for('resenas.resenas') }}">Reseñas</a></li>
                                 <li><a class="dropdown-item" href="{{ url_for('reservas.reservas') }}">Reservas</a></li>
+                                {% if not session.get('user') %}
                                 <li><a class="dropdown-item" href="{{ url_for('login.login') }}">Login</a></li>
                                 <li><a class="dropdown-item" href="{{ url_for('registro.registro') }}">Registro</a></li>
+                                {% endif %}
+                                {% if session.get('user') %}
                                 <li><a class="dropdown-item" href="{{ url_for('usuario.user') }}">Usuario</a></li>
+                                {% endif %}
                                 {% if session.get('es_admin') %}
                                 <li><a class="dropdown-item" href="{{ url_for('admin_index.dashboard') }}">Panel Admin</a></li>
                                 {% endif %}

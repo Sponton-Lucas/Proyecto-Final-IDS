@@ -43,8 +43,8 @@ def generar_pdf_usuarios():
     output = io.BytesIO()
     doc = SimpleDocTemplate(output, pagesize=letter, leftMargin=40, rightMargin=40, topMargin=40, bottomMargin=40)
     styles = getSampleStyleSheet()
-    styles.add(ParagraphStyle(name="CenterTitle", alignment=1, fontSize=16))
-    styles.add(ParagraphStyle(name="NormalText", alignment=0, fontSize=12))
+    styles.add(ParagraphStyle(name="CenterTitle", alignment=1, fontSize=14))
+    styles.add(ParagraphStyle(name="NormalText", alignment=0, fontSize=10))
     story = []
     story.append(Paragraph("Informe de Usuarios", styles["CenterTitle"]))
     story.append(Spacer(1, 20))

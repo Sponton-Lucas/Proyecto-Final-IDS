@@ -1,156 +1,45 @@
-/*toper-admin*/
+/* ── Admin Menú ── */
 
-.topper {
-    width: 100%;
-    margin-bottom: 50px;
-}
-
-.nuevo-articulo-boton {
-    background-color: #2D7FF9;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 14px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.contenedor {
-    width: 650px;
-    margin: 40px auto;
-    background: #fff;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,.3);
-}
-
-.contenedor-header{
-    background: #252a31;
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.contenedor-header h3{
-    margin: 0;
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.cerrar{
-    color: #8f959d;
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.contenedor-body{
-    padding: 25px;
-}
-
-.fila{
-    display: flex;
-    gap: 20px;
-}
-
-.grupo{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    flex: 1;
-}
-
-.precio{
-    max-width: 180px;
-}
-
-.grupo label{
-    font-size: 12px;
-    font-weight: 700;
-    color: #777;
-    margin-bottom: 6px;
-}
-
-input[type="text"],
-input[type="number"],
-select,
-textarea{
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: #fff;
-}
-
-textarea{
-    resize: vertical;
-    min-height: 90px;
-}
-
-.modal-footer{
-    background: #f5f5f5;
-    border-top: 1px solid #e2e2e2;
-    padding: 15px 25px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.btn-cancelar{
-    text-decoration: none;
-    background: white;
-    color: #555;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px 18px;
-}
-
-.btn-guardar{
-    background: #2d7ff9;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 18px;
-}
-
-.btn-guardar:hover{
-    background: #1f6de0;
-}
-
-#campos-bebida{
-    display:none;
-}
-
-
-
-.seccion-admin-menu{
+.seccion-admin {
     padding: 2rem;
     background-color: white;
 }
 
-.seccion-admin-menu h2 {
+.seccion-admin h2 {
     color: #333;
     font-family: var(--font-family);
     font-weight: 400;
-    margin-bottom: 1.5rem;
     font-size: 1.2rem;
+    margin: 0;
 }
 
+/* Header con título y botón */
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
 
-.tabla-admin-menu {
+/* Títulos de sección */
+.menu-seccion-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    margin: 1.8rem 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Tabla */
+.admin-tabla {
     width: 100%;
     border-collapse: collapse;
     font-family: var(--font-family);
     border: 1px solid #e0e0e0;
 }
 
-.tabla-admin-menu th {
+.admin-tabla thead th {
     color: #555;
     font-size: 12px;
     font-weight: 600;
@@ -160,12 +49,253 @@ textarea{
     background-color: #f5f5f5;
 }
 
-.tabla-admin-menu tbody td {
+.admin-tabla tbody td {
     color: #333;
     font-size: 13px;
     font-weight: 400;
     padding: 0.8rem 1rem;
     border-bottom: 1px solid #e0e0e0;
-    vertical-align: middle !important;
+    vertical-align: middle;
 }
 
+/* Gestión */
+.admin-gestion {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+/* Botones de acción */
+.boton-nuevo {
+    background-color: #5b8cd4;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.boton-nuevo:hover {
+    background-color: #4a7bc4;
+}
+
+.boton-editar {
+    background-color: #5b8cd4;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+.boton-editar:hover {
+    background-color: #4a7bc4;
+}
+
+.boton-rojo {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+.boton-rojo:hover {
+    background-color: #c82333;
+}
+
+/* Etiquetas vegano/celíaco */
+.etiqueta-estado {
+    font-size: 12.5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.etiqueta-si {
+    background-color: #28a745;
+    color: white;
+}
+
+.etiqueta-no {
+    color: #adb5bd;
+    font-size: 14px;
+}
+
+/* Alerta flash */
+.menu-alerta {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 10px 20px;
+    font-size: 13px;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-contenedor {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    font-family: var(--font-family, sans-serif);
+    overflow: hidden;
+}
+
+.modal-header {
+    background-color: #23272b;
+    color: #ffffff;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.modal-cerrar-x {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.modal-cuerpo {
+    padding: 20px;
+    color: #333333;
+}
+
+.modal-seccion-titulo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.blue-text {
+    color: #5b8cd4;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 12px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.modal-btn-cerrar {
+    display: inline-block;
+    background-color: #6c757d;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 6px 14px;
+    font-size: 12.5px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.modal-btn-cerrar:hover {
+    background-color: #5a6268;
+}
+
+/* Formulario dentro del modal */
+.menu-form-fila {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.menu-form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+    margin-bottom: 0.8rem;
+}
+
+.menu-form-chico {
+    flex: 0 0 130px;
+}
+
+.menu-input {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+.menu-input:focus {
+    outline: none;
+    border-color: #5b8cd4;
+    box-shadow: 0 0 0 2px rgba(91,140,212,0.15);
+}
+
+.menu-textarea {
+    resize: vertical;
+}
+
+.menu-checkboxes {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.menu-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 13px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Columna imagen */
+.celda-imagen {
+    width: 70px;
+}
+
+.preview-imagen {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.sin-imagen {
+    font-size: 11px;
+    color: #adb5bd;
+    font-style: italic;
+}

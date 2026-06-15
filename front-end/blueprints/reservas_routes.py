@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, request, session, flash, current_app
 from flask_mail import Message, Mail
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import requests, locale
 import qrcode
 from PIL import Image
@@ -13,6 +13,7 @@ reservas_bp = Blueprint('reservas', __name__)
 def reservas():
     if 'user' not in session:
         return render_template('reservas.html', no_session=True)
+    fecha_minima = (date.today() + timedelta(days=1)).strftime('%Y-%m-%d')
     if request.method == 'POST':
         datos = {
             "usuario_id": session.get('usuario_id'),
@@ -63,16 +64,14 @@ def reservas():
         else:
             flash('Hubo un error al hacer la reserva. Intentá de nuevo.', 'error')
         return redirect('/reservas')
-    return render_template('reservas.html')
+    return render_template('reservas.html', fecha_minima=fecha_minima)
 
 @reservas_bp.route('/cancelar-reserva/<int:id_reservas>')
 def cancelar_reserva(id_reservas):
     requests.patch(f'http://localhost:5000/reservas/{id_reservas}', json={'estado': 'cancelada'})
     
-    # Reemplazá la línea 72 que tenía el .json() directo por esto:
     respuesta_api = requests.get(f'http://localhost:5000/reservas/{id_reservas}')
 
-    # Intentamos parsear solo si la respuesta fue exitosa (200 OK)
     if respuesta_api.status_code == 200:
         reserva = respuesta_api.json()
         usuario = requests.get(f'http://localhost:5000/usuarios/{reserva["usuario_id"]}').json()

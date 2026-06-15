@@ -7,98 +7,65 @@
 {% endblock %}
 
 {% block content %}
-<table class="topper">
-    <tr>
-        <th><h4>Maestro de articulos (Menu)</h4></th>
-        <th>
-            <form action="/admin/nuevo_articulo" method="POST">
-                <button class="nuevo-articulo-boton" type="submit">Nuevo articulo</button>
-            </form>
-        </th>
-    </tr>
-</table>
-<section class="seccion-admin-menu">
-    <h3>Comida principal</h3>
-    <table class="tabla-admin-menu">
-        <tr>
-            <th>Codigo</th>
-            <th>Imagen plato</th>
-            <th>Nombre comercial</th>
-            <th>Precio</th>
-            <th>Descripcion</th>
-            <th>Es vegano</th>
-            <th>Es celiaco</th>
-            <th>Acciones</th>
-        <tr>
+
+<section class="seccion-admin">
+    <div class="menu-header">
+        <h2>Maestro de artículos (Menú)</h2>
+        <form action="/admin/nuevo_articulo" method="POST">
+            <button class="boton-nuevo" type="submit">+ Nuevo artículo</button>
+        </form>
+    </div>
+
+    <h3 class="menu-seccion-titulo">Comida principal</h3>
+    <table class="admin-tabla">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>Vegano</th>
+                <th>Celíaco</th>
+                <th>Gestión</th>
+            </tr>
+        </thead>
         <tbody>
         {% for comida in comida_principal %}
             <tr>
-                <td>{{ comida.id_plato }}</td>
-                <td>
+                <td class="celda-imagen">
                     {% if comida.imagen %}
-                    <img src="{{ comida.imagen }}" width="80" alt="{{ comida.nombre_plato }}">
+                        <img src="{{ comida.imagen }}" alt="{{ comida.nombre_plato }}" class="preview-imagen">
                     {% else %}
-                    <span class="text-white">Sin imagen</span>
+                        <span class="sin-imagen">Sin imagen</span>
                     {% endif %}
                 </td>
                 <td>{{ comida.nombre_plato }}</td>
-                <td>{{ comida.precio }}</td>
-                <td>{{ comida.descripcion}}</td>
-                <td>{{ comida.es_vegano }}</td>
-                <td>{{ comida.es_celiaco }}</td>
+                <td>${{ comida.precio }}</td>
+                <td>{{ comida.descripcion }}</td>
                 <td>
-                    <form action="/admin/eliminar_articulo" method="post">
-                        <input type="hidden" name="id_comida" value="{{ comida.id_plato }}">
-                        <input type="hidden" name="categoria" value="platos_principales"> <button type="submit" class="btn-icono eliminar">🗑️</button>
-                    </form>
-                    <form action="/admin/modificar_articulo" method="post">
+                    {% if comida.es_vegano %}
+                        <span class="etiqueta-estado etiqueta-si">Sí</span>
+                    {% else %}
+                        <span class="etiqueta-no">—</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if comida.es_celiaco %}
+                        <span class="etiqueta-estado etiqueta-si">Sí</span>
+                    {% else %}
+                        <span class="etiqueta-no">—</span>
+                    {% endif %}
+                </td>
+                <td class="admin-gestion">
+                    <form action="/admin/modificar_articulo" method="post" style="display:inline">
                         <input type="hidden" name="categoria" value="comida_principal">
                         <input type="hidden" name="id_plato" value="{{ comida.id_plato }}">
-                        <button type="submit">Modificar Articulo</button>
+                        <button type="submit" class="boton-editar">Editar</button>
                     </form>
-                </td>
-            <tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <h3>Postres</h3>
-    <table class="tabla-admin-menu">
-        <tr>
-            <th>Codigo</th>
-            <th>Imagen postres</th>
-            <th>Nombre comercial</th>
-            <th>Precio</th>
-            <th>Descripcion</th>
-            <th>Es vegano</th>
-            <th>Es celiaco</th>
-            <th>Acciones</th>
-        <tr>
-        <tbody>
-        {% for postre in postres %}
-            <tr>
-                <td>{{ postre.id_postre }}</td>
-                <td>
-                {% if postre.imagen %}
-                <img src="{{ postre.imagen }}" width="80" alt="{{ postre.nombre }}">
-                {% else %}
-                <span class="text-white">Sin imagen</span>
-                {% endif %}
-                </td>
-                <td>{{ postre.nombre }}</td>
-                <td>{{ postre.precio }}</td>
-                <td>{{ postre.descripcion}}</td>
-                <td>{{ postre.es_vegano }}</td>
-                <td>{{ postre.es_celiaco }}</td>
-                <td>
-                    <form action="/admin/eliminar_articulo" method="post">
-                        <input type="hidden" name="id_comida" value="{{ postre.id_postre }}">
-                        <input type="hidden" name="categoria" value="postres"> <button type="submit" class="btn-icono eliminar">🗑️</button>
-                    </form>
-                    <form action="/admin/modificar_articulo" method="post">
-                        <input type="hidden" name="categoria" value="postres">
-                        <input type="hidden" name="id_plato" value="{{ postre.id_postre }}">
-                        <button type="submit">Modificar Articulo</button>
+                    <form action="/admin/eliminar_articulo" method="post" style="display:inline">
+                        <input type="hidden" name="id_comida" value="{{ comida.id_plato }}">
+                        <input type="hidden" name="categoria" value="platos_principales">
+                        <button type="submit" class="boton-rojo">Eliminar</button>
                     </form>
                 </td>
             </tr>
@@ -106,42 +73,107 @@
         </tbody>
     </table>
 
-    <h3>Bebidas</h3>
-    <table class="tabla-admin-menu">
-        <tr>
-            <th>Codigo</th>
-            <th>Imagen bebidas</th>
-            <th>Nombre comercial</th>
-            <th>Precio</th>
-            <th>Descripcion</th>
-            <th>Es alcoholica</th>
-            <th>Acciones</th>
-        <tr>
+    <h3 class="menu-seccion-titulo">Postres</h3>
+    <table class="admin-tabla">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>Vegano</th>
+                <th>Celíaco</th>
+                <th>Gestión</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for postre in postres %}
+            <tr>
+                <td class="celda-imagen">
+                    {% if postre.imagen %}
+                        <img src="{{ postre.imagen }}" alt="{{ postre.nombre }}" class="preview-imagen">
+                    {% else %}
+                        <span class="sin-imagen">Sin imagen</span>
+                    {% endif %}
+                </td>
+                <td>{{ postre.nombre }}</td>
+                <td>${{ postre.precio }}</td>
+                <td>{{ postre.descripcion }}</td>
+                <td>
+                    {% if postre.es_vegano %}
+                        <span class="etiqueta-estado etiqueta-si">Sí</span>
+                    {% else %}
+                        <span class="etiqueta-no">—</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if postre.es_celiaco %}
+                        <span class="etiqueta-estado etiqueta-si">Sí</span>
+                    {% else %}
+                        <span class="etiqueta-no">—</span>
+                    {% endif %}
+                </td>
+                <td class="admin-gestion">
+                    <form action="/admin/modificar_articulo" method="post" style="display:inline">
+                        <input type="hidden" name="categoria" value="postres">
+                        <input type="hidden" name="id_plato" value="{{ postre.id_postre }}">
+                        <button type="submit" class="boton-editar">Editar</button>
+                    </form>
+                    <form action="/admin/eliminar_articulo" method="post" style="display:inline">
+                        <input type="hidden" name="id_comida" value="{{ postre.id_postre }}">
+                        <input type="hidden" name="categoria" value="postres">
+                        <button type="submit" class="boton-rojo">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 class="menu-seccion-titulo">Bebidas</h3>
+    <table class="admin-tabla">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>Alcohólica</th>
+                <th></th>
+                <th>Gestión</th>
+            </tr>
+        </thead>
         <tbody>
         {% for bebida in bebidas %}
             <tr>
-                <td>{{ bebida.id_bebidas }}</td>
-                <td>
-                {% if bebida.imagen %}
-                <img src="{{ bebida.imagen }}" width="80" alt="{{ bebida.nombre }}">
-                {% else %}
-                <span class="text-white">Sin imagen</span>
-                {% endif %}
+                <td class="celda-imagen">
+                    {% if bebida.imagen %}
+                        <img src="{{ bebida.imagen }}" alt="{{ bebida.nombre }}" class="preview-imagen">
+                    {% else %}
+                        <span class="sin-imagen">Sin imagen</span>
+                    {% endif %}
                 </td>
                 <td>{{ bebida.nombre }}</td>
-                <td>{{ bebida.precio }}</td>
-                <td>{{ bebida.descripcion}}</td>
-                <td>{{ bebida.es_alcoholica }}</td>
+                <td>${{ bebida.precio }}</td>
+                <td>{{ bebida.descripcion }}</td>
                 <td>
-                    <form action="/admin/eliminar_articulo" method="post">
-                        <input type="hidden" name="id_comida" value="{{ bebida.id_bebidas }}">
-                        <input type="hidden" name="categoria" value="bebidas"> 
-                        <button type="submit" class="btn-icono eliminar">🗑️</button>
-                    </form>
-                    <form action="/admin/modificar_articulo" method="post">
+                    {% if bebida.es_alcoholica %}
+                        <span class="etiqueta-estado etiqueta-si">Sí</span>
+                    {% else %}
+                        <span class="etiqueta-no">—</span>
+                    {% endif %}
+                </td>
+                <td></td>
+                <td class="admin-gestion">
+                    <form action="/admin/modificar_articulo" method="post" style="display:inline">
                         <input type="hidden" name="categoria" value="bebidas">
                         <input type="hidden" name="id_plato" value="{{ bebida.id_bebidas }}">
-                        <button type="submit">Modificar Articulo</button>
+                        <button type="submit" class="boton-editar">Editar</button>
+                    </form>
+                    <form action="/admin/eliminar_articulo" method="post" style="display:inline">
+                        <input type="hidden" name="id_comida" value="{{ bebida.id_bebidas }}">
+                        <input type="hidden" name="categoria" value="bebidas">
+                        <button type="submit" class="boton-rojo">Eliminar</button>
                     </form>
                 </td>
             </tr>
@@ -149,5 +181,5 @@
         </tbody>
     </table>
 </section>
-{% endblock %}
 
+{% endblock %}
