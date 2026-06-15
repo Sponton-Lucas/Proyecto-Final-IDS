@@ -33,6 +33,7 @@ def crear_comida():
         es_celiaco = datos.get("es_celiaco", False)
         descripcion = datos.get("descripcion")
         imagen_url = datos.get("imagen_url")
+        print(f"[DEBUG] imagen_url del request: {imagen_url}")
 
         if (not nombre_plato) or (nombre_plato.strip() == "") or (descripcion.strip() == "") or (not descripcion) or (precio.strip() == ""):
             return jsonify({"error": "El campo nombre_plato no puede estar vacío."}), 400

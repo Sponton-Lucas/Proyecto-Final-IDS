@@ -495,6 +495,7 @@ def get_comida_principal_id(id_plato):
         coneccion.close()
 
 def post_plato(nombre_plato, descripcion, precio=0, es_vegano=False, es_celiaco=False, imagen=None):
+    print(f"[DEBUG] imagen recibida: {imagen}")
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:

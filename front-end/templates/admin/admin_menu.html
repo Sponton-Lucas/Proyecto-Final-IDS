@@ -41,7 +41,11 @@
                 <td>{{ comida.es_celiaco }}</td>
 
                 <td>
-                    <img src="http://127.0.0.1:5000{{ url_for('static', filename='img/comida-principal/' + comida.imagen) }}" width="80">
+                    {% if comida.imagen %}
+                    <img src="{{ comida.imagen }}" width="80">
+                    {% else %}
+                    <span>Sin imagen</span>
+                    {% endif %}
                 </td>
 
                 <td>
