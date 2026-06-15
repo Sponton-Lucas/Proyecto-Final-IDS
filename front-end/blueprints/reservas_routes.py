@@ -69,10 +69,8 @@ def reservas():
 def cancelar_reserva(id_reservas):
     requests.patch(f'http://localhost:5000/reservas/{id_reservas}', json={'estado': 'cancelada'})
     
-    # Reemplazá la línea 72 que tenía el .json() directo por esto:
     respuesta_api = requests.get(f'http://localhost:5000/reservas/{id_reservas}')
 
-    # Intentamos parsear solo si la respuesta fue exitosa (200 OK)
     if respuesta_api.status_code == 200:
         reserva = respuesta_api.json()
     usuario = requests.get(f'http://localhost:5000/usuarios/{reserva["usuario_id"]}').json()
