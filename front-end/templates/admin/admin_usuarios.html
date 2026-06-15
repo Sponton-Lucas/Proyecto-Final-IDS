@@ -46,12 +46,14 @@
                 <td class="padron-gestion">
                     {% if usuario["id_usuario"] == 1 %}
                         <span class="padron-texto-bloqueado">Bloqueado por Seguridad</span>
-                    {% else %}                
+                    {% elif session.get('usuario_id') == 1 %}
                         {% if usuario["es_admin"] %}
                             <a href="/admin/usuario/{{ usuario['id_usuario'] }}/quitar-admin" class="padron-btn-gestion boton-rojo" title="Quitar Admin">✕</a>
                         {% else %}
                             <a href="/admin/usuario/{{ usuario['id_usuario'] }}/dar-admin" class="padron-btn-gestion boton-verde" title="Dar Admin">✓</a>
                         {% endif %}
+                    {% else %}
+                        <span class="padron-texto-bloqueado">Sin permisos</span>
                     {% endif %}
                 </td>
             </tr>
