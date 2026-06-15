@@ -1,86 +1,189 @@
-/* estilos seccion 20*/
+.resenas-seccion {
+    padding: 3rem 2rem;
+    max-width: 760px;
+    margin: 0 auto;
+}
 
-.titulo-resenas-criticos, .titulo-resenas-clientes {
-    font: 40px serif;
-    text-align: center;
+.resenas-titulo {
+    font: 2rem serif;
     color: var(--naranja-claro);
     font-weight: 600;
-
+    text-align: center;
+    margin-bottom: 0.3rem;
 }
 
-.enviar-resena{
-    color: white;
-    background-color: var(--naranja-oscuro) !important;
-    border: none !important;
-    letter-spacing: 0.1em;
-    margin-top: 8px;
-    padding: 8px;
-    
+.resenas-subtitulo {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #8fa0b0;
+    letter-spacing: 0.06em;
+    margin-bottom: 2.5rem;
 }
 
-.form-resena {
+.resenas-lista {
     display: flex;
     flex-direction: column;
+    border: 0.5px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+}
+
+.resena-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: #253040;
+    border-bottom: 0.5px solid rgba(255,255,255,0.07);
+}
+
+.resena-item:last-child {
+    border-bottom: none;
+}
+
+.resena-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--naranja-oscuro);
+    display: flex;
     align-items: center;
-    gap: 15px;
-}
-
-.container {
-  width: min(680px, 100%);
-  max-width: 680px;
-  height: auto;
-  background-color: var(--secundario);
-  background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 24px 24px;
-  padding: 40px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 20px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.822);
-}
-
-
-
-.sin-sesion{
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
     color: white;
-    font: 30px serif;
+    flex-shrink: 0;
+    margin-top: 2px;
 }
 
-
-.con-sesion{
-    color: white;
-    font: 30px serif;
+.resena-body {
+    flex: 1;
 }
 
-
-
-.contiene-resenas{
-    width:80%;
-    margin:auto;
-    display:flex;
-    flex-direction:column;
-    gap:20px;
+.resena-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 0.4rem;
 }
 
-.card-resena{
-    background:#42505C;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,.2);
+.resena-nombre {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #e8edf2;
 }
 
-.nombre-resena{
+.resena-comillas {
     color: var(--naranja-claro);
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 1.1rem;
 }
 
-.mensaje-resena{
-    color: white;
+.resena-mensaje {
+    font-size: 0.88rem;
+    color: #8fa0b0;
+    line-height: 1.65;
+}
+
+.resenas-separador {
+    border: none;
+    border-top: 0.5px solid rgba(255,255,255,0.07);
+    margin-bottom: 2.5rem;
+}
+
+.resena-form-cont {
+    background: #253040;
+    border: 0.5px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.resena-form-header {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 0.5px solid rgba(255,255,255,0.07);
+}
+
+.resena-form-titulo {
     font-size: 1rem;
-    margin: 0;
+    font-weight: 500;
+    color: #e8edf2;
+}
+
+.resena-form-subtitulo {
+    font-size: 0.82rem;
+    color: #8fa0b0;
+    margin-top: 0.2rem;
+}
+
+.resena-form-body {
+    padding: 1.5rem;
+}
+
+.resena-campo-label {
+    font-size: 0.75rem;
+    color: #8fa0b0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+
+.resena-form-body textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: #e8edf2;
+    font-size: 0.9rem;
+    resize: vertical;
+    min-height: 110px;
+    font-family: inherit;
+    line-height: 1.6;
+}
+
+.resena-form-body textarea::placeholder {
+    color: #4a5a6a;
+}
+
+.resena-form-footer {
+    padding: 1rem 1.5rem;
+    border-top: 0.5px solid rgba(255,255,255,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resena-form-nota {
+    font-size: 0.8rem;
+    color: #8fa0b0;
+}
+
+.resena-btn {
+    padding: 0.55rem 1.4rem;
+    background: var(--naranja-oscuro);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+}
+
+.resena-btn:hover {
+    background: var(--naranja-claro);
+}
+
+.resena-sin-sesion {
+    text-align: center;
+    font-size: 1rem;
+    color: #8fa0b0;
+}
+
+.resena-sin-sesion a {
+    color: var(--naranja-claro);
+    text-decoration: none;
+}
+
+.resena-sin-sesion a:hover {
+    text-decoration: underline;
 }
