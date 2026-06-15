@@ -5,62 +5,93 @@
 
 {% block content %}
 
-<form action="/admin/creacion_nuevo_articulo" method="post">
-    <div class="contenedor">
-        <div class="contenedor-header">
+<div class="modal-overlay">
+    <div class="modal-contenedor">
+        <div class="modal-header">
             <h3>Alta de Nuevo Artículo</h3>
-            <button class="cerrar"><a href="{{ url_for('admin_menu_bp.admin_menu') }}" class="cerrar">X</a></button>
+            <a href="{{ url_for('admin_menu_bp.admin_menu') }}" class="modal-cerrar-x">✕</a>
         </div>
-        <div class="contenedor-body">
-            <div class="fila">
-                <div class="grupo">
-                    <label>NOMBRE COMERCIAL</label>
-                    <input type="text" name="nombre">
-                </div>
-                <div class="grupo precio">
-                    <label>PRECIO ($)</label>
-                    <input type="number" name="precio">
-                </div>
-            </div>
-            <div class="grupo">
-                <label>CATEGORÍA</label>
-                <select id="categoria" name="categoria">
-                    <option value="comida">Comida principal</option>
-                    <option value="postre">Postre</option>
-                    <option value="bebida">Bebida</option>
-                </select>
-                <div id="campos-comida">
-                    <label>
-                        <input type="checkbox" name="vegano">
-                            Es vegano
-                    </label>
-                    <label>
-                        <input type="checkbox" name="celiaco">
-                            Es apto celíacos
-                    </label>
-                </div>
-                <div id="campos-bebida">
-                    <label>
-                        <input type="checkbox" name="alcoholica">
-                            Es alcohólica
-                    </label>
-                </div>
-            </div>
-            <div class="grupo">
-                <label>DESCRIPCIÓN</label>
-                <textarea rows="4" name="descripcion"></textarea>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn-cancelar"><a href="{{ url_for('admin_menu_bp.admin_menu') }}" class="cerrar">Cancelar</a></button>
-            <button type="submit" class="btn-guardar">Guardar Registro</button>
-        </div>
-        </div>
-    </div>
-</form>
 
-{% block scripts %}
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-{% endblock %}
+        {% set mensaje = get_flashed_messages() %}
+        {% if mensaje %}
+            <div class="menu-alerta">{{ mensaje[0] }}</div>
+        {% endif %}
+
+        <form action="/admin/creacion_nuevo_articulo" method="post">
+            <div class="modal-cuerpo">
+
+                <div class="menu-form-fila">
+                    <div class="menu-form-grupo">
+                        <label class="modal-seccion-titulo blue-text">NOMBRE COMERCIAL</label>
+                        <input class="menu-input" type="text" name="nombre" required>
+                    </div>
+                    <div class="menu-form-grupo menu-form-chico">
+                        <label class="modal-seccion-titulo blue-text">PRECIO ($)</label>
+                        <input class="menu-input" type="number" name="precio" required>
+                    </div>
+                </div>
+
+                <div class="menu-form-grupo">
+                    <label class="modal-seccion-titulo blue-text">CATEGORÍA</label>
+                    <select class="menu-input" id="categoria" name="categoria">
+                        <option value="comida">Comida principal</option>
+                        <option value="postre">Postre</option>
+                        <option value="bebida">Bebida</option>
+                    </select>
+                </div>
+
+                <div id="campos-comida" class="menu-checkboxes">
+                    <label class="menu-checkbox-label">
+                        <input type="checkbox" name="vegano"> Es vegano
+                    </label>
+                    <label class="menu-checkbox-label">
+                        <input type="checkbox" name="celiaco"> Es apto celíacos
+                    </label>
+                </div>
+
+                <div id="campos-bebida" class="menu-checkboxes" style="display:none">
+                    <label class="menu-checkbox-label">
+                        <input type="checkbox" name="alcoholica"> Es alcohólica
+                    </label>
+                </div>
+
+                <div class="menu-form-grupo">
+                    <label class="modal-seccion-titulo blue-text">URL DE IMAGEN</label>
+                    <input class="menu-input" type="text" name="imagen" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+
+                <div class="menu-form-grupo">
+                    <label class="modal-seccion-titulo blue-text">DESCRIPCIÓN</label>
+                    <textarea class="menu-input menu-textarea" rows="4" name="descripcion"></textarea>
+                </div>
+
+            </div>
+
+            <div class="modal-footer" style="display:flex; justify-content:flex-end; gap:0.5rem;">
+                <a href="{{ url_for('admin_menu_bp.admin_menu') }}" class="modal-btn-cerrar">Cancelar</a>
+                <button type="submit" class="boton-nuevo">Guardar Registro</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const categoria = document.getElementById('categoria');
+    const camposComida = document.getElementById('campos-comida');
+    const camposBebida = document.getElementById('campos-bebida');
+
+    function actualizarCampos() {
+        if (categoria.value === 'bebida') {
+            camposComida.style.display = 'none';
+            camposBebida.style.display = 'flex';
+        } else {
+            camposComida.style.display = 'flex';
+            camposBebida.style.display = 'none';
+        }
+    }
+
+    categoria.addEventListener('change', actualizarCampos);
+    actualizarCampos();
+</script>
 
 {% endblock %}
