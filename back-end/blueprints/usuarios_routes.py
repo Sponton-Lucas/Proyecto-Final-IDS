@@ -29,6 +29,8 @@ def crear_usuario():
         return jsonify({"error": "Datos no proporcionados"}), 400
     if 'nombre_apellido' not in datos or 'email' not in datos or 'contrasenia' not in datos or 'telefono' not in datos:
         return jsonify({"error": "Todos los campos son requeridos"}), 400
+    if not datos['telefono'].isdigit():
+        return jsonify({"error": "El teléfono solo puede contener números"}), 400
     password_plana = datos["contrasenia"]
     password_hasheada = bcrypt.hashpw(password_plana.encode('utf-8'), bcrypt.gensalt())
     datos["contrasenia"] = password_hasheada.decode('utf-8')

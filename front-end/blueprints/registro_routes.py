@@ -13,6 +13,15 @@ def registro():
 @registro_bp.route('/registrarse', methods=['POST'])
 def register_form():
     datos_usuario = request.form.to_dict()
+    
+    if not datos_usuario['telefono'].isdigit():
+        flash("El teléfono solo puede contener números", "error")
+        return redirect('/registro')
+    
+    if len(datos_usuario['contrasenia']) < 8:
+        flash("La contraseña debe tener al menos 8 caracteres", "error")
+        return redirect('/registro')
+
     respuesta = requests.post("http://localhost:5000/usuarios", json=datos_usuario)
     if respuesta.status_code == 201:
         usuario = respuesta.json()
@@ -20,5 +29,7 @@ def register_form():
         session["usuario_id"] = usuario["id_usuario"]
         session["email"] = usuario["email"]
         return redirect('/usuario')
+    
+    flash("Error al crear el usuario", "error")
     return redirect('/registro')
 

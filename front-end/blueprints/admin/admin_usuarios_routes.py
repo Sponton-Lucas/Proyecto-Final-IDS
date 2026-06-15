@@ -12,10 +12,15 @@ def admin_usuarios():
     usuarios = res.json()
     return render_template('admin/admin_usuarios.html', usuarios=usuarios)
 
+def es_super_admin():
+    return session.get('usuario_id') == 1
+
 @admin_usuarios_bp.route('/admin/usuario/<int:id>/dar-admin')
 def dar_admin(id):
     if not session.get('es_admin'):
         return redirect('/')
+    if not es_super_admin():
+        return redirect('/admin/usuarios')
     if id != 1:
         requests.patch(f'http://localhost:5000/usuarios/{id}', json={'es_admin': True})
     return redirect('/admin/usuarios')
@@ -24,6 +29,8 @@ def dar_admin(id):
 def quitar_admin(id):
     if not session.get('es_admin'):
         return redirect('/')
+    if not es_super_admin():
+        return redirect('/admin/usuarios')
     if id != 1:
         requests.patch(f'http://localhost:5000/usuarios/{id}', json={'es_admin': False})
     return redirect('/admin/usuarios')
