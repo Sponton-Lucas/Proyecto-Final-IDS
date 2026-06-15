@@ -32,12 +32,16 @@ def crear_comida():
         es_vegano = datos.get("es_vegano", False)
         es_celiaco = datos.get("es_celiaco", False)
         descripcion = datos.get("descripcion")
+        imagen_url = datos.get("imagen_url")
+        print(f"[DEBUG] imagen_url del request: {imagen_url}")
 
         if (not nombre_plato) or (nombre_plato.strip() == "") or (descripcion.strip() == "") or (not descripcion) or (precio.strip() == ""):
             return jsonify({"error": "El campo nombre_plato no puede estar vacío."}), 400
-        plato_nuevo = db.post_plato(nombre_plato, descripcion, precio, es_vegano, es_celiaco)
+
+        plato_nuevo = db.post_plato(nombre_plato, descripcion, precio, es_vegano, es_celiaco, imagen_url)
+        
         if plato_nuevo:
-            return '', 201
+            return jsonify({"mensaje": "Plato creado", "imagen_url": imagen_url}), 201
         else:
             return jsonify({"error": "No se pudo crear el plato."}), 400
 

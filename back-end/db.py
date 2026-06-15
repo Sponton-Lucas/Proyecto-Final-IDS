@@ -494,11 +494,12 @@ def get_comida_principal_id(id_plato):
         cursor.close()
         coneccion.close()
 
-def post_plato(nombre_plato, descripcion, precio=0, es_vegano=False, es_celiaco=False):
+def post_plato(nombre_plato, descripcion, precio=0, es_vegano=False, es_celiaco=False, imagen=None):
+    print(f"[DEBUG] imagen recibida: {imagen}")
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute('INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco, descripcion) VALUES (%s, %s, %s, %s, %s)', (nombre_plato, precio, es_vegano, es_celiaco, descripcion,))
+        cursor.execute('INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco, descripcion, imagen) VALUES (%s, %s, %s, %s, %s, %s)', (nombre_plato, precio, es_vegano, es_celiaco, descripcion, imagen))
         coneccion.commit()
         return True
     finally:
