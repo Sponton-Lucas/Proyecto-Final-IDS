@@ -12,6 +12,13 @@
             <h2 class="s24-titulo-principal">PASILLO COLÓN</h2>
             <p class="s24-subtitulo">CREAR CUENTA</p>
         </div>
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% if mensajes %}
+                {% for categoria, mensaje in mensajes %}
+                    <p class="s24-error">{{ mensaje }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <form action="/registrarse" method="POST" class="s24-formulario">
             <div class="s24-grupo-input">
                 <label for="nombre" class="s24-label">NOMBRE COMPLETO</label>
