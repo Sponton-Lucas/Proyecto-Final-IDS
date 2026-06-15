@@ -328,11 +328,11 @@ def get_postre_id(id_postre):
         cursor.close()
         coneccion.close()
 
-def post_postre(precio, nombre, descripcion, es_vegano=False, es_celiaco=False):
+def post_postre(precio, nombre, descripcion, es_vegano=False, es_celiaco=False, imagen=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute("INSERT INTO postres (precio, nombre, es_vegano, es_celiaco, descripcion) VALUES (%s, %s, %s, %s, %s)", (precio, nombre, es_vegano, es_celiaco, descripcion, ))
+        cursor.execute("INSERT INTO postres (precio, nombre, es_vegano, es_celiaco, descripcion, imagen) VALUES (%s, %s, %s, %s, %s, %s)", (precio, nombre, es_vegano, es_celiaco, descripcion, imagen,))
         coneccion.commit()
         return True
     finally:
@@ -356,7 +356,7 @@ def put_postre(id_postre, precio, nombre, es_vegano, es_celiaco):
         cursor.close()
         coneccion.close()  
 
-def patch_postre(id_postre, descripcion, precio=None, nombre=None, es_vegano=None, es_celiaco=None):
+def patch_postre(id_postre, descripcion, precio=None, nombre=None, es_vegano=None, es_celiaco=None, imagen=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
@@ -370,7 +370,8 @@ def patch_postre(id_postre, descripcion, precio=None, nombre=None, es_vegano=Non
             nuevo_es_vegano = es_vegano if es_vegano is not None else postre["es_vegano"]
             nuevo_es_celiaco = es_celiaco if es_celiaco is not None else postre["es_celiaco"]
             nueva_desc = descripcion if descripcion is not None else postre["descripcion"]
-            cursor.execute("UPDATE postres SET precio = %s, nombre = %s, es_vegano = %s, es_celiaco = %s, descripcion = %s WHERE id_postre = %s", (nuevo_precio, nuevo_nombre, nuevo_es_vegano, nuevo_es_celiaco, nueva_desc, id_postre,))
+            nueva_imagen= imagen if imagen is not None else postre["imagen"]
+            cursor.execute("UPDATE postres SET precio = %s, nombre = %s, es_vegano = %s, es_celiaco = %s, descripcion = %s, imagen = %s WHERE id_postre = %s", (nuevo_precio, nuevo_nombre, nuevo_es_vegano, nuevo_es_celiaco, nueva_desc, nueva_imagen, id_postre,))
             coneccion.commit()
             return True
     finally:
@@ -410,11 +411,11 @@ def get_bebida_id(id_bebidas):
         cursor.close()
         coneccion.close()
 
-def post_bebida(precio, nombre, descripcion, es_alcoholica=False):
+def post_bebida(precio, nombre, descripcion, es_alcoholica=False, imagen=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try: 
-        cursor.execute('INSERT INTO bebidas (precio, nombre, es_alcoholica, descripcion) VALUES (%s, %s, %s, %s)', (precio, nombre, es_alcoholica, descripcion,))
+        cursor.execute('INSERT INTO bebidas (precio, nombre, es_alcoholica, descripcion, imagen) VALUES (%s, %s, %s, %s, %s)', (precio, nombre, es_alcoholica, descripcion, imagen,))
         coneccion.commit()
         return True
     finally:
@@ -450,9 +451,10 @@ def patch_bebidas(id_bebidas, datos):
             nuevo_precio = datos.get('precio', bebida['precio'])
             nuevo_es_alcoholica = datos.get('es_alcoholica', bebida['es_alcoholica'])
             nueva_desc = datos.get('descripcion', bebida['descripcion'])
+            nueva_imagen = datos.get('imagen', bebida['imagen'])
             cursor.execute(
-                "UPDATE bebidas SET nombre = %s, precio = %s, es_alcoholica = %s, descripcion = %s WHERE id_bebidas = %s",
-                (nuevo_nombre, nuevo_precio, nuevo_es_alcoholica, nueva_desc, id_bebidas)
+                "UPDATE bebidas SET nombre = %s, precio = %s, es_alcoholica = %s, descripcion = %s, imagen = %s WHERE id_bebidas = %s",
+                (nuevo_nombre, nuevo_precio, nuevo_es_alcoholica, nueva_desc, nueva_imagen, id_bebidas)
             )
             coneccion.commit()
             return {"mensaje": "Bebida actualizada exitosamente"}
@@ -494,11 +496,11 @@ def get_comida_principal_id(id_plato):
         cursor.close()
         coneccion.close()
 
-def post_plato(nombre_plato, descripcion, precio=0, es_vegano=False, es_celiaco=False):
+def post_plato(nombre_plato, descripcion, precio=0, es_vegano=False, es_celiaco=False, imagen=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute('INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco, descripcion) VALUES (%s, %s, %s, %s, %s)', (nombre_plato, precio, es_vegano, es_celiaco, descripcion,))
+        cursor.execute('INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco, descripcion, imagen) VALUES (%s, %s, %s, %s, %s, %s)', (nombre_plato, precio, es_vegano, es_celiaco, descripcion, imagen,))
         coneccion.commit()
         return True
     finally:
@@ -535,9 +537,10 @@ def patch_comida_principal(id_plato, datos):
             nuevo_es_vegano = datos.get('es_vegano', plato['es_vegano'])
             nuevo_es_celiaco = datos.get('es_celiaco', plato['es_celiaco'])
             nueva_desc = datos.get('descripcion', plato['descripcion'])
+            nueva_imagen = datos.get('imagen', plato['imagen'])
             cursor.execute(
-                "UPDATE comida_principal SET nombre_plato = %s, precio = %s, es_vegano = %s, es_celiaco = %s, descripcion = %s WHERE id_plato = %s",
-                (nuevo_nombre, nuevo_precio, nuevo_es_vegano, nuevo_es_celiaco, nueva_desc, id_plato)
+                "UPDATE comida_principal SET nombre_plato = %s, precio = %s, es_vegano = %s, es_celiaco = %s, descripcion = %s, imagen = %s WHERE id_plato = %s",
+                (nuevo_nombre, nuevo_precio, nuevo_es_vegano, nuevo_es_celiaco, nueva_desc, nueva_imagen, id_plato)
             )
             coneccion.commit()
             return {"mensaje": "Plato actualizado exitosamente"}

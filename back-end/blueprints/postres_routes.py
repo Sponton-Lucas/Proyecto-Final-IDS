@@ -30,9 +30,10 @@ def crear_postre():
     es_vegano = datos.get("es_vegano", False)
     es_celiaco = datos.get("es_celiaco", False)
     descripcion = datos.get("descripcion")
+    imagen = datos.get("imagen")
     if (not precio) or (not nombre) or (not descripcion) or (nombre.strip() == "") or (descripcion.strip() == ""):
         return jsonify({'error': 'Precio y nombre no pueden estar vacios'}), 400
-    postre_nuevo = db.post_postre(precio, nombre, descripcion, es_vegano, es_celiaco)
+    postre_nuevo = db.post_postre(precio, nombre, descripcion, es_vegano, es_celiaco, imagen)
     if postre_nuevo:
         return jsonify({'message': 'Se creo correctamente el postre'}), 201
     else:
@@ -70,13 +71,14 @@ def modificar_postre(id_postre):
     es_vegano = datos.get("es_vegano")
     es_celiaco = datos.get("es_celiaco")
     descripcion = datos.get("descripcion")
+    imagen = datos.get("imagen")
 
     if int(precio) is not None and int(precio) < 0:
         return jsonify({"error": "El precio no puede ser negativo"}), 400
     if nombre is not None and nombre.strip() == "":
         return jsonify({"error": "El nombre no puede estar vacio"}), 400
     
-    actualizado = db.patch_postre(id_postre, descripcion, precio, nombre, es_vegano, es_celiaco)
+    actualizado = db.patch_postre(id_postre, descripcion, precio, nombre, es_vegano, es_celiaco, imagen)
     if actualizado:
         return ' ', 204
     else:

@@ -74,17 +74,19 @@ def cancelar_reserva(id_reservas):
 
     if respuesta_api.status_code == 200:
         reserva = respuesta_api.json()
-    usuario = requests.get(f'http://localhost:5000/usuarios/{reserva["usuario_id"]}').json()
-    email = usuario.get('email')
+        usuario = requests.get(f'http://localhost:5000/usuarios/{reserva["usuario_id"]}').json()
+        email = session.get('email') or usuario.get('email')
     
     if email:
         msg = Message(
             subject="Reserva cancelada - Pasillo Colón",
+            sender=current_app.config['MAIL_DEFAULT_SENDER'],
             recipients=[email]
         )
+        msg.body = "Tu reserva fue cancelada correctamente."
         msg.html = render_template('mail_cancelacion.html')
         current_app.extensions['mail'].send(msg)
-    
+
     return render_template('cancelar_reserva.html')
 
 @reservas_bp.route('/confirmar-reserva/<int:id_reservas>')

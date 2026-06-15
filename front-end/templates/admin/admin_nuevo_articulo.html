@@ -57,7 +57,7 @@
 
                 <div class="menu-form-grupo">
                     <label class="modal-seccion-titulo blue-text">URL DE IMAGEN</label>
-                    <input class="menu-input" type="text" name="imagen" placeholder="https://ejemplo.com/imagen.jpg">
+                    <input class="menu-input" type="url" name="imagen" placeholder="https://ejemplo.com/imagen.jpg">
                 </div>
 
                 <div class="menu-form-grupo">
@@ -67,7 +67,7 @@
 
             </div>
 
-            <div class="modal-footer" style="display:flex; justify-content:flex-end; gap:0.5rem;">
+            <div class="modal-footer">
                 <a href="{{ url_for('admin_menu_bp.admin_menu') }}" class="modal-btn-cerrar">Cancelar</a>
                 <button type="submit" class="boton-nuevo">Guardar Registro</button>
             </div>

@@ -44,7 +44,7 @@
 
                     <div class="menu-form-grupo">
                         <label class="modal-seccion-titulo blue-text">URL DE IMAGEN</label>
-                        <input class="menu-input" type="text" name="imagen" value="{{ articulo.imagen or '' }}" placeholder="https://ejemplo.com/imagen.jpg">
+                        <input class="menu-input" type="url" name="imagen" value="{{ articulo.imagen or '' }}" placeholder="https://ejemplo.com/imagen.jpg">
                         {% if articulo.imagen %}
                             <img src="{{ articulo.imagen }}" alt="Vista previa" class="preview-imagen" style="margin-top:6px">
                         {% endif %}
@@ -82,7 +82,7 @@
 
                     <div class="menu-form-grupo">
                         <label class="modal-seccion-titulo blue-text">URL DE IMAGEN</label>
-                        <input class="menu-input" type="text" name="imagen" value="{{ articulo.imagen or '' }}" placeholder="https://ejemplo.com/imagen.jpg">
+                        <input class="menu-input" type="url" name="imagen" value="{{ articulo.imagen or '' }}" placeholder="https://ejemplo.com/imagen.jpg">
                         {% if articulo.imagen %}
                             <img src="{{ articulo.imagen }}" alt="Vista previa" class="preview-imagen" style="margin-top:6px">
                         {% endif %}
