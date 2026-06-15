@@ -30,9 +30,10 @@ def crear_bebida():
     nombre = datos.get("nombre")
     descripcion = datos.get("descripcion")
     es_alcoholica = datos.get("es_alcoholica", False)
+    imagen = datos.get("imagen")
     if (not precio) or (not nombre) or (not descripcion) or (nombre.strip() == "") or (descripcion.strip() == ""):
         return jsonify({'error': 'Los campos precio y nombre no pueden estar vacios'}), 400
-    bebida_nueva = db.post_bebida(precio, nombre, descripcion, es_alcoholica)
+    bebida_nueva = db.post_bebida(precio, nombre, descripcion, es_alcoholica, imagen)
     if bebida_nueva:
         return jsonify({'message': 'se creo correctamente la nueva bebida'}), 201
     else:

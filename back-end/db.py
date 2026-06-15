@@ -328,11 +328,11 @@ def get_postre_id(id_postre):
         cursor.close()
         coneccion.close()
 
-def post_postre(precio, nombre, descripcion, es_vegano=False, es_celiaco=False):
+def post_postre(precio, nombre, descripcion, es_vegano=False, es_celiaco=False, imagen=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute("INSERT INTO postres (precio, nombre, es_vegano, es_celiaco, descripcion) VALUES (%s, %s, %s, %s, %s)", (precio, nombre, es_vegano, es_celiaco, descripcion, ))
+        cursor.execute("INSERT INTO postres (precio, nombre, es_vegano, es_celiaco, descripcion, imagen) VALUES (%s, %s, %s, %s, %s, %s)", (precio, nombre, es_vegano, es_celiaco, descripcion, imagen,))
         coneccion.commit()
         return True
     finally:
@@ -410,11 +410,11 @@ def get_bebida_id(id_bebidas):
         cursor.close()
         coneccion.close()
 
-def post_bebida(precio, nombre, descripcion, es_alcoholica=False):
+def post_bebida(precio, nombre, descripcion, es_alcoholica=False, imagen=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try: 
-        cursor.execute('INSERT INTO bebidas (precio, nombre, es_alcoholica, descripcion) VALUES (%s, %s, %s, %s)', (precio, nombre, es_alcoholica, descripcion,))
+        cursor.execute('INSERT INTO bebidas (precio, nombre, es_alcoholica, descripcion, imagen) VALUES (%s, %s, %s, %s, %s)', (precio, nombre, es_alcoholica, descripcion, imagen,))
         coneccion.commit()
         return True
     finally:
@@ -494,11 +494,11 @@ def get_comida_principal_id(id_plato):
         cursor.close()
         coneccion.close()
 
-def post_plato(nombre_plato, descripcion, precio=0, es_vegano=False, es_celiaco=False):
+def post_plato(nombre_plato, descripcion, precio=0, es_vegano=False, es_celiaco=False, imagen=None):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
     try:
-        cursor.execute('INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco, descripcion) VALUES (%s, %s, %s, %s, %s)', (nombre_plato, precio, es_vegano, es_celiaco, descripcion,))
+        cursor.execute('INSERT INTO comida_principal (nombre_plato, precio, es_vegano, es_celiaco, descripcion, imagen) VALUES (%s, %s, %s, %s, %s, %s)', (nombre_plato, precio, es_vegano, es_celiaco, descripcion, imagen,))
         coneccion.commit()
         return True
     finally:
