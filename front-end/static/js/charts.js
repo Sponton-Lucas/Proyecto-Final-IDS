@@ -49,7 +49,7 @@ new Chart(document.getElementById('estadoChart'), {
         labels: Object.keys(estados),
         datasets: [{
             data: Object.values(estados),
-            backgroundColor: ['#54a0ff', '#1dd1a1', '#ff6b6b']
+            backgroundColor: ['#54a0ff','#6c757d','#1dd1a1','#ff6b6b', '#feca57']
         }]
     },
     options: {
