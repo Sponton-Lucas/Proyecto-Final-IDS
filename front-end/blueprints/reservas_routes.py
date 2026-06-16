@@ -24,8 +24,8 @@ def reservas():
         respuesta = requests.post("http://localhost:5000/reservas", json=datos)
         if respuesta.status_code == 201:
             resultado = respuesta.json()
-            id_reservas = resultado['id_reservas']  # Obtener el ID de la reserva recién creada
-            cancel_url = f"http://localhost:3000/cancelar-reserva/{id_reservas}"
+            token_reservas = resultado['token']  # Obtener el token de la reserva recién creada
+            cancel_url = f"http://localhost:3000/cancelar-reserva/{token_reservas}"
             locale.setlocale(locale.LC_TIME, 'es_AR.UTF-8')
             fecha_formateada = datetime.strptime(datos['fecha'], '%Y-%m-%d').strftime(
                 '%-d de %B de %Y')  # Formatea la fecha a "(dia) de (mes) de (año)"
@@ -37,7 +37,7 @@ def reservas():
                 box_size=10,
                 border=4,
             )
-            qr.add_data(f"http://localhost:3000/confirmar-reserva/{id_reservas}")
+            qr.add_data(f"http://localhost:3000/confirmar-reserva/{token_reservas}")
             qr.make(fit=True)
 
             img = qr.make_image(fill='black', back_color='white')
@@ -56,7 +56,7 @@ def reservas():
                 cantidad_personas=datos['cantidad_personas'],
                 cancel_url=cancel_url
             )
-            msg.attach(f'qr_{id_reservas}.png', 'image/png', img_byte_arr.getvalue(), 'inline', headers={'Content-ID': '<qr_code>'})
+            msg.attach(f'qr_{token_reservas}.png', 'image/png', img_byte_arr.getvalue(), 'inline', headers={'Content-ID': '<qr_code>'})
             current_app.extensions['mail'].send(msg)
             flash('¡Reserva confirmada! Te esperamos.', 'exito')
         elif respuesta.status_code == 409:
@@ -66,11 +66,22 @@ def reservas():
         return redirect('/reservas')
     return render_template('reservas.html', fecha_minima=fecha_minima)
 
-@reservas_bp.route('/cancelar-reserva/<int:id_reservas>')
-def cancelar_reserva(id_reservas):
-    requests.patch(f'http://localhost:5000/reservas/{id_reservas}', json={'estado': 'cancelada'})
+@reservas_bp.route('/cancelar-reserva/<token>')
+def cancelar_reserva(token):
+
+    respuesta_api = requests.get(
+        f'http://localhost:5000/reservas/token/{token}'
+    )
+
+    if respuesta_api.status_code != 200:
+        flash('Reserva no encontrada.', 'error')
+        return redirect('/')
+
+    reserva = respuesta_api.json()
+
+    requests.patch(f'http://localhost:5000/reservas/{reserva["id_reservas"]}', json={'estado': 'cancelada'})
     
-    respuesta_api = requests.get(f'http://localhost:5000/reservas/{id_reservas}')
+    #respuesta_api = requests.get(f'http://localhost:5000/reservas/{reserva["id_reservas"]}')
 
     if respuesta_api.status_code == 200:
         reserva = respuesta_api.json()
@@ -89,8 +100,18 @@ def cancelar_reserva(id_reservas):
 
     return render_template('cancelar_reserva.html')
 
-@reservas_bp.route('/confirmar-reserva/<int:id_reservas>')
-def confirmar_reserva(id_reservas):
-    requests.patch(f'http://localhost:5000/reservas/{id_reservas}', json={'estado': 'confirmada'})
+@reservas_bp.route('/confirmar-reserva/<token>')
+def confirmar_reserva(token):
+    respuesta_api = requests.get(
+        f'http://localhost:5000/reservas/token/{token}'
+    )
+    if respuesta_api.status_code != 200:
+        flash('Reserva no encontrada.', 'error')
+        return redirect('/')
+    reserva = respuesta_api.json()
+    requests.patch(
+        f'http://localhost:5000/reservas/{reserva["id_reservas"]}',
+        json={'estado': 'confirmada'}
+    )
     flash('Reserva confirmada correctamente.', 'exito')
     return redirect('/')
