@@ -188,15 +188,16 @@
 }
 
 .menu-celda-imagen {
-    width: 70px;
+    width: 60px;
+    background-color: #233338b7;
+    border-radius: 4px;
+    border: 1px solid var(--gris-oscuro);
 }
 
 .menu-preview-imagen {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 4px;
-    border: 1px solid var(--gris-oscuro);
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
 }
 
 .menu-sin-imagen {
