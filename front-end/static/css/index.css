@@ -154,9 +154,11 @@
 }
 
 .seccion-2-img {
-    width: 470px;
-    height: 470px;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
     object-fit: cover;
+    display: block;
     border-radius: 12px;
 }
 
