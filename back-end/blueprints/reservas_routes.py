@@ -80,3 +80,33 @@ def borrar_reserva(id_reservas):
     if not eliminada:
         return jsonify({"error": "Reserva no encontrada"}), 404
     return ' ', 204
+
+#GET TOKEN
+@reservas_bp.route('/reservas/token/<token>', methods=['GET'])
+def obtener_reserva_token(token):
+
+    reserva = get_reserva_token(token)
+
+    if not reserva:
+        return {"error": "Reserva no encontrada"}, 404
+
+    return reserva, 200
+
+#PATCH TOKEN
+@reservas_bp.route('/reservas/token/<token>', methods=['PATCH'])
+def actualizar_reserva_token(token):
+
+    datos = request.json
+
+    resultado = patch_reserva_token(
+        token,
+        fecha=datos.get('fecha'),
+        hora=datos.get('hora'),
+        cantidad_personas=datos.get('cantidad_personas'),
+        estado=datos.get('estado')
+    )
+
+    if resultado is None:
+        return {"error": "Reserva no encontrada"}, 404
+
+    return {"mensaje": "Reserva actualizada"}, 200
