@@ -13,11 +13,11 @@
     <div class="comida-principal-plato">
         <div class="col-1">
             {% if comida["imagen"] %}
-            <div class="img-fluid text-center">
-                <img src="{{ comida['imagen'] }}" width="80" alt="{{ comida['nombre_plato'] }}">
+            <div class="menu-celda-imagen">
+                <img class="menu-preview-imagen" src="{{ comida['imagen'] }}" alt="{{ comida['nombre_plato'] }}">
             </div>
             {% else %}
-                <span class="text-white col-2">Sin imagen</span>
+                <span class="text-white col-2 menu-sin-imagen">Sin imagen</span>
             {% endif %}
         </div>
         <div class="col-8 offset-2">
@@ -46,9 +46,11 @@
     <div class="seccion-12-plato">
         <div class="col-1">
             {% if postre["imagen"] %}
-                <img src="{{ postre['imagen'] }}" width="80" alt="{{ postre['nombre'] }}">
+            <div class="menu-celda-imagen">
+                <img class="menu-preview-imagen" src="{{ postre['imagen'] }}" alt="{{ postre['nombre'] }}">
+            </div>
             {% else %}
-                <span class="text-white">Sin imagen</span>
+                <span class="text-white menu-sin-imagen">Sin imagen</span>
             {% endif %}
         </div>
         <div class="col-8 offset-2">
@@ -74,9 +76,11 @@
         <div class="seccion-13-bebida">
             <div class="col-1">
                 {% if bebida["imagen"] %}
-                    <img src="{{ bebida['imagen'] }}" width="80" alt="{{ bebida['nombre'] }}">
+                <div class="menu-celda-imagen">
+                    <img class="menu-preview-imagen" src="{{ bebida['imagen'] }}" alt="{{ bebida['nombre'] }}">
+                </div>
                 {% else %}
-                    <span class="text-white">Sin imagen</span>
+                    <span class="text-white menu-sin-imagen">Sin imagen</span>
                 {% endif %}
             </div>
             <div class="col-8 offset-2">

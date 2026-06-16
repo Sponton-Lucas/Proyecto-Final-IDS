@@ -65,8 +65,8 @@
 }
 
 .etiqueta-asistio {
-    background-color: #28a745;
-    color: white;
+    background-color: #54a0ff;
+    color: #333;
 }
 
 .etiqueta-no-asistio {
@@ -76,6 +76,11 @@
 
 .etiqueta-cancelada {
     background-color: #6c757d;
+    color: white;
+}
+
+.etiqueta-confirmada {
+    background-color: #28a745;
     color: white;
 }
 
