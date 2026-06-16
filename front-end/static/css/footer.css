@@ -1,0 +1,21 @@
+footer {
+    height: 70px;
+}
+
+.footer-redes {
+    display: flex;
+    align-items: center;
+}
+
+.footer-instagram, .footer-whatsapp, .footer-facebook {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--naranja-claro);
+}
+.footer-instagram p, .footer-whatsapp p, .footer-facebook p {
+    padding: 0;
+    margin: 0 1rem 0 1rem;
+    align-items: center;
+}
