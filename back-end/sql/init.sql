@@ -5,7 +5,7 @@ USE restaurante_db;
 #TABLAS
 CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_apellido VARCHAR(100) NOT NULL,
+    nombre_apellido VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     telefono VARCHAR(20) NOT NULL,
     contrasenia VARCHAR(100) NOT NULL,

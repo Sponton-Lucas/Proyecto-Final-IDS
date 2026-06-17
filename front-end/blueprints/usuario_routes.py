@@ -24,7 +24,7 @@ def user():
         for u in usuarios:
             if u["nombre_apellido"] == usuario:
                 id_usuario = u["id_usuario"]
-        return render_template('/usuario.html', usuario=usuario, resenas=resenas, id_usuario=id_usuario, reservas=reservas)
+        return render_template('usuario.html', usuario=usuario, resenas=resenas, id_usuario=id_usuario, reservas=reservas)
     else:
         return redirect('/login')
 
