@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS comida_principal (
 
 CREATE TABLE IF NOT EXISTS reservas (
     id_reservas INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) UNIQUE NOT NULL,
     usuario_id INT NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,

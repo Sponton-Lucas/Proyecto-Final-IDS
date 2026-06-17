@@ -1,6 +1,7 @@
 import mysql.connector
 from datetime import date, timedelta
 from mysql.connector import IntegrityError
+import secrets
 db_config = {
     'host':'localhost',
     'user':'caidaSiu',
@@ -241,7 +242,7 @@ def get_resena_id(id_resenas):
 
 def crear_resena_por_form(nombre, mensaje):
     coneccion = get_db_connection()
-    cursor = coneccion.cursor(dictionary=True)
+    cursor = coneccion.cursor(dictionary=True, buffered=True)
     try:
         cursor.execute("SELECT id_usuario FROM usuarios WHERE nombre_apellido = %s", (nombre,))
         id_us = cursor.fetchone()
@@ -595,13 +596,14 @@ def get_reserva_id(id_reserva):
 def post_reserva(datos):
     coneccion = get_db_connection()
     cursor = coneccion.cursor(dictionary=True)
+    tokengenerada = secrets.token_urlsafe(32)
     try:
         cursor.execute(
-            "INSERT INTO reservas (usuario_id, fecha, hora, cantidad_personas) VALUES (%s, %s, %s, %s)",
-            (datos['usuario_id'], datos['fecha'], datos['hora'], datos['cantidad_personas'],)
+            "INSERT INTO reservas (usuario_id, fecha, hora, cantidad_personas,token) VALUES (%s, %s, %s, %s,%s)",
+            (datos['usuario_id'], datos['fecha'], datos['hora'], datos['cantidad_personas'],tokengenerada,)
         )
         coneccion.commit()
-        return {"mensaje": "Reserva creada exitosamente", "id_reservas": cursor.lastrowid}
+        return {"mensaje": "Reserva creada exitosamente", "id_reservas": cursor.lastrowid,"token": tokengenerada}
     finally:
         cursor.close()
         coneccion.close()
@@ -766,6 +768,57 @@ def get_reserva_por_usuario_y_fecha(usuario_id, fecha):
             (usuario_id, fecha)
         )
         return cursor.fetchone()
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def get_reserva_token(token):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "SELECT * FROM reservas WHERE token = %s",
+            (token,)
+        )
+        reserva = cursor.fetchone()
+        if reserva and isinstance(reserva.get("hora"), timedelta):
+            reserva["hora"] = str(reserva["hora"])
+        return reserva
+    finally:
+        cursor.close()
+        coneccion.close()
+
+def patch_reserva_token(token, fecha=None, hora=None,cantidad_personas=None, estado=None):
+    coneccion = get_db_connection()
+    cursor = coneccion.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "SELECT * FROM reservas WHERE token = %s",
+            (token,)
+        )
+        reserva = cursor.fetchone()
+        if not reserva:
+            return None
+        cursor.execute(
+            """
+            UPDATE reservas
+            SET
+                fecha = COALESCE(%s, fecha),
+                hora = COALESCE(%s, hora),
+                cantidad_personas = COALESCE(%s, cantidad_personas),
+                estado = COALESCE(%s, estado)
+            WHERE token = %s
+            """,
+            (
+                fecha,
+                hora,
+                cantidad_personas,
+                estado,
+                token
+            )
+        )
+        coneccion.commit()
+        return True
     finally:
         cursor.close()
         coneccion.close()
