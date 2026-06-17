@@ -1,5 +1,4 @@
-CREATE DATABASE IF NOT EXISTS restaurante_db;
-USE restaurante_db;
+#COMPLETAR CREACION BASE DE DATOS
 
 
 #TABLAS
