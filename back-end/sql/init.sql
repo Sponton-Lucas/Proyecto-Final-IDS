@@ -5,7 +5,7 @@ USE restaurante_db;
 #TABLAS
 CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_apellido VARCHAR(100) NOT NULL,
+    nombre_apellido VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     telefono VARCHAR(20) NOT NULL,
     contrasenia VARCHAR(100) NOT NULL,
@@ -59,23 +59,6 @@ CREATE TABLE IF NOT EXISTS reservas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
-ALTER TABLE postres ADD COLUMN descripcion VARCHAR(200);
-ALTER TABLE bebidas ADD COLUMN descripcion VARCHAR(200);
-ALTER TABLE comida_principal ADD COLUMN descripcion VARCHAR(200);
+INSERT INTO usuarios (id_usuario, nombre_apellido, email, telefono, contrasenia, es_admin)
+VALUES (1, 'Admin', 'admin@gmail.com', '1234567890', '$2b$12$S.q7K65PcCVxJ3sztawZ6.8uOlwhHrhABAIGdpvFUXs1rBbu26aha', TRUE);
 
-ALTER TABLE  comida_principal ADD COLUMN imagen VARCHAR(350);
-ALTER TABLE bebidas ADD COLUMN imagen VARCHAR(350);
-ALTER TABLE postres ADD COLUMN imagen VARCHAR(350);
-
-INSERT INTO usuarios (id_usuario, nombre_apellido, email, telefono, contrasenia, es_admin) #se inserta el super admin predeterminado
-VALUES (1, 'Admin', 'admin@gmail.com', '1234567890', '1234', TRUE);
-UPDATE usuarios SET contrasenia = '$2b$12$S.q7K65PcCVxJ3sztawZ6.8uOlwhHrhABAIGdpvFUXs1rBbu26aha' WHERE id_usuario = 1; #contraseña hasheada (externamente mediante bcrypt) del super admin
-
-#USUARIO MYSQL
-CREATE USER IF NOT EXISTS'caidaSiu'@'localhost'
-IDENTIFIED BY '1234';
-
-GRANT ALL PRIVILEGES
-ON restaurante_db.*
-TO 'caidaSiu'@'localhost';
-FLUSH PRIVILEGES;
