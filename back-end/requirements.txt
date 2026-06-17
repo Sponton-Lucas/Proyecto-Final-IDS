@@ -12,6 +12,7 @@ MarkupSafe==3.0.3
 mysql-connector-python==9.7.0
 pillow==12.2.0
 python-dotenv==1.2.2
+qrcode==8.2
 reportlab==4.5.1
 requests==2.34.2
 urllib3==2.7.0
