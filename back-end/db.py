@@ -242,7 +242,7 @@ def get_resena_id(id_resenas):
 
 def crear_resena_por_form(nombre, mensaje):
     coneccion = get_db_connection()
-    cursor = coneccion.cursor(dictionary=True)
+    cursor = coneccion.cursor(dictionary=True, buffered=True)
     try:
         cursor.execute("SELECT id_usuario FROM usuarios WHERE nombre_apellido = %s", (nombre,))
         id_us = cursor.fetchone()
@@ -781,6 +781,8 @@ def get_reserva_token(token):
             (token,)
         )
         reserva = cursor.fetchone()
+        if reserva and isinstance(reserva.get("hora"), timedelta):
+            reserva["hora"] = str(reserva["hora"])
         return reserva
     finally:
         cursor.close()

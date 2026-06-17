@@ -85,7 +85,7 @@ def borrar_reserva(id_reservas):
 @reservas_bp.route('/reservas/token/<token>', methods=['GET'])
 def obtener_reserva_token(token):
 
-    reserva = get_reserva_token(token)
+    reserva = db.get_reserva_token(token)
 
     if not reserva:
         return {"error": "Reserva no encontrada"}, 404
@@ -98,7 +98,7 @@ def actualizar_reserva_token(token):
 
     datos = request.json
 
-    resultado = patch_reserva_token(
+    resultado = db.patch_reserva_token(
         token,
         fecha=datos.get('fecha'),
         hora=datos.get('hora'),
